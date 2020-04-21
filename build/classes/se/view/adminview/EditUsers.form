@@ -23,14 +23,21 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="btnClose" min="-2" pref="83" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnClose" alignment="1" min="-2" pref="83" max="-2" attributes="0"/>
+                          <Component id="jPanel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -39,10 +46,12 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jPanel1" min="-2" pref="410" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="25" max="32767" attributes="0"/>
               <Component id="btnClose" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -71,16 +80,8 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnGuests" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="btnChangeData" max="32767" attributes="0"/>
-                              <Component id="btnRemoveSelectedUser" alignment="1" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="txtSelectedData" min="-2" pref="163" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
-                  <EmptySpace pref="89" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -95,13 +96,7 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="308" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnChangeData" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtSelectedData" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnRemoveSelectedUser" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -149,21 +144,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuestsActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnChangeData">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&#xc4;ndra utvalda datan"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChangeDataActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnRemoveSelectedUser">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Ta bort utvalda anv&#xe4;ndare"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtSelectedData">
-        </Component>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JButton" name="btnClose">
@@ -174,5 +154,59 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCloseActionPerformed"/>
       </Events>
     </Component>
+    <Container class="javax.swing.JPanel" name="jPanel2">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Datahantering"/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="btnRemoveSelectedUser" max="32767" attributes="0"/>
+                      <Component id="btnChangeData" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="txtSelectedData" min="-2" pref="180" max="-2" attributes="0"/>
+                  <EmptySpace pref="94" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnChangeData" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtSelectedData" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnRemoveSelectedUser" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JButton" name="btnRemoveSelectedUser">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ta bort utvalda anv&#xe4;ndare"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnChangeData">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#xc4;ndra utvalda datan"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtSelectedData">
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>
