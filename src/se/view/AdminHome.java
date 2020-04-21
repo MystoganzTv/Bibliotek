@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package se.view.adminview;
+package se.view;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -154,13 +154,13 @@ public class AdminHome extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditUsersActionPerformed
-        EditUsers eu = new EditUsers();
+        AdminEditUsers eu = new AdminEditUsers();
         eu.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnEditUsersActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        Register r = new Register();
+        AdminRegister r = new AdminRegister();
         r.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnRegisterActionPerformed
@@ -205,26 +205,8 @@ public class AdminHome extends javax.swing.JFrame {
     private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnReport;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     // End of variables declaration//GEN-END:variables
 }
