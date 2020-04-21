@@ -9,6 +9,6 @@ package se.model;
  *
  * @author enriq
  */
-public class Myconnection {
+public class NewClass {
     
 }
