@@ -24,6 +24,12 @@ public class EditUsers extends javax.swing.JFrame {
         //basic setup
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        btnAdmins.setBackground(new java.awt.Color(142, 198, 197));
+        btnLibrarians.setBackground(new java.awt.Color(142, 198, 197));
+        btnGuests.setBackground(new java.awt.Color(142, 198, 197));
+        btnChangeData.setBackground(new java.awt.Color(142, 198, 197));
+        btnRemoveSelectedUser.setBackground(new java.awt.Color(142, 198, 197));
+        btnClose.setBackground(new java.awt.Color(142, 198, 197));
     }
 
     /**
@@ -35,21 +41,159 @@ public class EditUsers extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        userInfoTable = new javax.swing.JTable();
+        btnAdmins = new javax.swing.JButton();
+        btnLibrarians = new javax.swing.JButton();
+        btnGuests = new javax.swing.JButton();
+        btnChangeData = new javax.swing.JButton();
+        btnRemoveSelectedUser = new javax.swing.JButton();
+        txtSelectedData = new javax.swing.JTextField();
+        btnClose = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Användarinfo"));
+
+        userInfoTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        userInfoTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userInfoTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(userInfoTable);
+
+        btnAdmins.setText("Administratörer");
+
+        btnLibrarians.setText("Bibliotekarier");
+
+        btnGuests.setText("Medlemmar");
+        btnGuests.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuestsActionPerformed(evt);
+            }
+        });
+
+        btnChangeData.setText("Ändra utvalda datan");
+        btnChangeData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangeDataActionPerformed(evt);
+            }
+        });
+
+        btnRemoveSelectedUser.setText("Ta bort utvalda användare");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnAdmins)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLibrarians)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGuests))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnChangeData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRemoveSelectedUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSelectedData, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(89, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdmins)
+                    .addComponent(btnLibrarians)
+                    .addComponent(btnGuests))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnChangeData)
+                    .addComponent(txtSelectedData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRemoveSelectedUser))
+        );
+
+        btnClose.setText("Stäng");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnClose)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnChangeDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeDataActionPerformed
+        
+        //onClick function on the jTable
+        //when executed, it will find the highlited field and move the data to the
+        //editor textField
+        //there the admin can edit the data, and once this button is pressed it
+        //will automatically querry the new data
+    }//GEN-LAST:event_btnChangeDataActionPerformed
+
+    private void userInfoTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userInfoTableMouseClicked
+        
+        //onClick function on the jTable
+        //when executed, it will find the highlited field and move the data to the
+        //editor textField
+        //there the admin can edit the data, and once this button is pressed it
+        //will automatically querry the new data
+    }//GEN-LAST:event_userInfoTableMouseClicked
+
+    private void btnGuestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuestsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuestsActionPerformed
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        AdminHome ah = new AdminHome();
+        ah.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCloseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -87,5 +231,15 @@ public class EditUsers extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdmins;
+    private javax.swing.JButton btnChangeData;
+    private javax.swing.JButton btnClose;
+    private javax.swing.JButton btnGuests;
+    private javax.swing.JButton btnLibrarians;
+    private javax.swing.JButton btnRemoveSelectedUser;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtSelectedData;
+    private javax.swing.JTable userInfoTable;
     // End of variables declaration//GEN-END:variables
 }
