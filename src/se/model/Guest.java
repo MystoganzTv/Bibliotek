@@ -12,7 +12,7 @@ package se.model;
 
 /**
  * 
- * Log in with personId and password
+ * Log in with email and password
  */
 public class Guest {
     
@@ -25,13 +25,16 @@ public class Guest {
     private String personId;
     
     private String password;
+    
+    private String email;
 
-    public Guest(int id, String firstName, String lastName, String personId, String password) {
+    public Guest(int id, String firstName, String lastName, String personId, String password, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.personId = personId;
         this.password = password;
+        this.email = email;
     }
 
     public int getId() {
@@ -72,6 +75,14 @@ public class Guest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
     
    
