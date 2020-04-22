@@ -193,9 +193,12 @@ public class AdminAddUsers extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        Object item = boxUsers.getSelectedItem();
-        String value = ((ComboItem)item).getValue();
-        System.out.println(value);
+        
+        //Object item = boxUsers.getSelectedItem();
+        //String value = ((ComboItem)item).getValue();
+        
+        String userType = boxUsers.getSelectedItem().toString();
+        System.out.println(userType);
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**
