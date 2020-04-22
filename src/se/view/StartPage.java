@@ -195,9 +195,8 @@ public class StartPage extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel8)
-                        .addComponent(jLabel9))
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
                     .addComponent(jLabel5))
                 .addGap(41, 41, 41))
         );
