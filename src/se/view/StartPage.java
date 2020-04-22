@@ -316,15 +316,19 @@ public class StartPage extends javax.swing.JFrame {
             }
             if(jTextFieldUsername.getText().contains("@guest")){
                 if(!qm.loginChecker("guests",jTextFieldUsername.getText(),jPasswordField.getText()).equals("")){
-                System.out.println(" Du är inloggad");
                 jlblMessage.setText("");
+                NewUserView nuv = new NewUserView();
+                nuv.setVisible(true);
+                this.setVisible(false);
                 }
                
             }
             if(jTextFieldUsername.getText().contains("@librarian")){
                 if((!qm.loginChecker("librarians",jTextFieldUsername.getText(),jPasswordField.getText()).equals(""))){
-                System.out.println(" Du är inloggad");
                 jlblMessage.setText("");
+                LibrarianView lv = new LibrarianView();
+                lv.setVisible(true);
+                this.setVisible(false);
                 }
                
             }
