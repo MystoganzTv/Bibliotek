@@ -4,18 +4,18 @@ package se.database;
 import java.sql.*;
 
 
-public class Connection {
+public class MyConnection {
 
     
-    public static  Connection getConnection(){
+    public static  MyConnection getConnection(){
         
-        Connection myDbConn = null;
+        MyConnection myDbConn = null;
         
     
         try{
         // get connection to database
         String url ="jdbc:mysql://libsys.mysql.database.azure.com:3306/lib_db?useSSL=true&requireSSL=false"; 
-        myDbConn = (Connection) DriverManager.getConnection(url, "java@libsys", "Projekt!");
+        myDbConn = (MyConnection) DriverManager.getConnection(url, "java@libsys", "Projekt!");
         if(myDbConn != null)
         {
             System.out.println("connected to database");
