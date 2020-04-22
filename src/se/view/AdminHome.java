@@ -165,7 +165,7 @@ public class AdminHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditUsersActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        AdminRegister r = new AdminRegister();
+        AdminAddUsers r = new AdminAddUsers();
         r.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnRegisterActionPerformed
