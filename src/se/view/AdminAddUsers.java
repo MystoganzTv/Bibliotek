@@ -3,21 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package se.view;
 
 import se.view.AdminHome;
 import se.model.ComboItem;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 import se.database.QueryMethods;
+import se.main.Validation;
 
 /**
  *
  * @author Zsombor
  */
 public class AdminAddUsers extends javax.swing.JFrame {
-    
+
     private QueryMethods queryMethods;
 
     /**
@@ -25,15 +26,15 @@ public class AdminAddUsers extends javax.swing.JFrame {
      */
     public AdminAddUsers() {
         initComponents();
-        
+
         queryMethods = new QueryMethods();
-        
+
         //basic setup
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         btnRegister.setBackground(new java.awt.Color(142, 198, 197));
         btnClose.setBackground(new java.awt.Color(142, 198, 197));
-        
+
         boxUsers.addItem(new ComboItem("Administratör", "1"));
         boxUsers.addItem(new ComboItem("Bibliotekarie", "2"));
         boxUsers.addItem(new ComboItem("Gäst", "3"));
@@ -191,29 +192,48 @@ public class AdminAddUsers extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
-        
+
         AdminHome ah = new AdminHome();
         ah.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-       
+
         String userType = boxUsers.getSelectedItem().toString();
-        
-        switch(userType){
-            case "Administratör":
-                queryMethods.insertAdmin(txtFirstname.getText(), txtLastname.getText(), txtPN.getText(), txtPassword.getText(), txtEmail.getText());
-                break;
-            case "Bibliotikarie":
-                queryMethods.insertLibrarian(txtFirstname.getText(), txtLastname.getText(), txtPN.getText(), txtPassword.getText(), txtEmail.getText());
-                break;
-            case "Gäst":
-                queryMethods.insertGuest(txtFirstname.getText(), txtLastname.getText(), txtPN.getText(), txtPassword.getText(), txtEmail.getText());
-                break;
-        
-    }
-        
+
+        String firstName = txtFirstname.getText();
+        String lastName = txtLastname.getText();
+        String PN = txtPN.getText();
+        String password = txtPassword.getText();
+        String email = txtEmail.getText();
+
+        if (!Validation.isValidName(firstName)) {
+            JOptionPane.showMessageDialog(this, "Felaktig inmatning för förnamn");
+        } else if (!Validation.isValidName(lastName)) {
+            JOptionPane.showMessageDialog(this, "Felaktig inmatning för efternamn");
+        } else if (!Validation.isValidPN(PN)) {
+            JOptionPane.showMessageDialog(this, "Felaktig inamtning för personnummer");
+        } else if (!Validation.isValidPassword(password)) {
+            JOptionPane.showMessageDialog(this, "Felaktig inmatning för lösenord");
+        } else if (!Validation.isValidEmail(email)) {
+            JOptionPane.showMessageDialog(this, "Felaktig inmatning för email");
+        } else {
+            switch (userType) {
+                case "Administratör":
+                    queryMethods.insertAdmin(firstName, lastName, PN, password, email);
+                    break;
+                case "Bibliotikarie":
+                    queryMethods.insertLibrarian(firstName, lastName, PN, password, email);
+                    break;
+                case "Gäst":
+                    queryMethods.insertGuest(firstName, lastName, PN, password, email);
+                    break;
+            }
+
+        }
+
+
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**

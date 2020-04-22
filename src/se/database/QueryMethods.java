@@ -246,4 +246,25 @@ public class QueryMethods {
         
         return null;
     }
+    
+       public String loginChecker(String user, String username, String password) {
+        String exist = " select email, password from "+ user + " where email = '"+username +"'"
+                + "and password = '"+password+"';" ; 
+        PreparedStatement check ;
+        String email = "";
+        
+        try{
+        check = MyConnection.getConnection().prepareStatement(exist);
+        
+        
+        ResultSet rs = check.executeQuery();
+        if (rs.next()){
+        email = rs.getString("email");
+        } 
+        }catch(Exception e){
+        System.out.println(e.toString() + " loginChecker()");
+        }
+        return email;
+        
+            }
 }
