@@ -34,7 +34,7 @@ public class QueryMethods {
     
     public int insertGuest(String firstName, String lastName, String socialNumber, String password, String email){
         int idGuest = 0;
-        query = "INSERT INTO guest (first_name, last_name, person_id, password, email) VALUES (?,?,?,?,?)";
+        query = "INSERT INTO guests (first_name, last_name, person_id, password, email) VALUES (?,?,?,?,?)";
         
         try {
             ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -73,7 +73,7 @@ public class QueryMethods {
      public int insertAdmin(String firstName, String lastName, String socialNumber, String password, String email){
         
        int idAdmin = 0;
-        query = "INSERT INTO admin (first_name, last_name, person_id, password, email) VALUES (?,?,?,?,?)";
+        query = "INSERT INTO admins (first_name, last_name, person_id, password, email) VALUES (?,?,?,?,?)";
         
         try {
             ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -112,7 +112,7 @@ public class QueryMethods {
      public int insertLibrarian(String firstName, String lastName, String socialNumber, String password, String email){
        
         int idLibrarian = 0;
-        query = "INSERT INTO guest (first_name, last_name, person_id, password) VALUES (?,?,?,?,?)";
+        query = "INSERT INTO librarians (first_name, last_name, person_id, password) VALUES (?,?,?,?,?)";
         
         try {
             ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
