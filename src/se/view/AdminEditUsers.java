@@ -9,6 +9,8 @@ package se.view;
 import se.view.AdminHome;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -126,6 +128,11 @@ public class AdminEditUsers extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Datahantering"));
 
         btnRemoveSelectedUser.setText("Ta bort utvalda användare");
+        btnRemoveSelectedUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveSelectedUserActionPerformed(evt);
+            }
+        });
 
         btnChangeData.setText("Ändra utvalda datan");
 
@@ -204,6 +211,22 @@ public class AdminEditUsers extends javax.swing.JFrame {
         ah.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void btnRemoveSelectedUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveSelectedUserActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) userInfoTable.getModel();
+        
+        try{
+        int SelectedRowIndex = userInfoTable.getSelectedRow();
+        model.removeRow(SelectedRowIndex);
+        
+        }catch(Exception ex)
+        {
+        JOptionPane.showMessageDialog(null, ex);
+        }
+        
+        
+    }//GEN-LAST:event_btnRemoveSelectedUserActionPerformed
 
     /**
      * @param args the command line arguments
