@@ -7,15 +7,15 @@ import java.sql.*;
 public class MyConnection {
 
     
-    public static  MyConnection getConnection(){
+    public static  Connection getConnection(){
         
-        MyConnection myDbConn = null;
+        Connection myDbConn = null;
         
     
         try{
         // get connection to database
         String url ="jdbc:mysql://libsys.mysql.database.azure.com:3306/lib_db?useSSL=true&requireSSL=false"; 
-        myDbConn = (MyConnection) DriverManager.getConnection(url, "java@libsys", "Projekt!");
+        myDbConn = DriverManager.getConnection(url, "java@libsys", "Projekt!");
         if(myDbConn != null)
         {
             System.out.println("connected to database");
