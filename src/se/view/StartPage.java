@@ -5,6 +5,8 @@
  */
 package se.view;
 
+import se.database.QueryMethods;
+
 /**
  *
  * @author enriq
@@ -44,6 +46,7 @@ public class StartPage extends javax.swing.JFrame {
         jLabelUsername1 = new javax.swing.JLabel();
         jButtonLogin = new javax.swing.JButton();
         jPasswordField = new javax.swing.JPasswordField();
+        jlblMessage = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -126,6 +129,14 @@ public class StartPage extends javax.swing.JFrame {
         jLabelUsername1.setText("Användarnanm");
 
         jButtonLogin.setText("Logga in");
+        jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLoginActionPerformed(evt);
+            }
+        });
+
+        jlblMessage.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        jlblMessage.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -133,8 +144,11 @@ public class StartPage extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonLogin)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jlblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonLogin))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabelUsername1)
@@ -166,7 +180,9 @@ public class StartPage extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
-                .addComponent(jButtonLogin)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonLogin)
+                    .addComponent(jlblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41))
         );
 
@@ -293,6 +309,49 @@ public class StartPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
+        // TODO add your handling code here:
+            QueryMethods qm = new QueryMethods();
+            if (!jTextFieldUsername.getText().equals("") && !jPasswordField.getText().equals("")){
+            jlblMessage.setText("<html>Användarnamn och lösenord finns ej!</html>");
+            
+            if(jTextFieldUsername.getText().contains("@admin")){
+                if(!qm.loginChecker("admins",jTextFieldUsername.getText(),jPasswordField.getText()).equals("")){
+                jlblMessage.setText("");
+                Admin ah = new Admin();
+                ah.setVisible(true);
+                this.setVisible(false);
+
+                }
+                
+            }
+            if(jTextFieldUsername.getText().contains("@guest")){
+                if(!qm.loginChecker("guests",jTextFieldUsername.getText(),jPasswordField.getText()).equals("")){
+                jlblMessage.setText("");
+                NewUserView nuv = new NewUserView();
+                nuv.setVisible(true);
+                this.setVisible(false);
+                }
+               
+            }
+            if(jTextFieldUsername.getText().contains("@librarian")){
+                if((!qm.loginChecker("librarians",jTextFieldUsername.getText(),jPasswordField.getText()).equals(""))){
+                jlblMessage.setText("");
+                LibrarianView lv = new LibrarianView();
+                lv.setVisible(true);
+                this.setVisible(false);
+                }
+               
+            }
+             
+        
+        }
+        else{
+            jlblMessage.setText("Fyll i tomma fälten ");
+        }
+        
+    }//GEN-LAST:event_jButtonLoginActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -353,5 +412,6 @@ public class StartPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelbackground;
     private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JTextField jTextFieldUsername;
+    private javax.swing.JLabel jlblMessage;
     // End of variables declaration//GEN-END:variables
 }
