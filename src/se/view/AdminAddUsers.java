@@ -10,18 +10,23 @@ import se.view.AdminHome;
 import se.model.ComboItem;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import se.database.QueryMethods;
 
 /**
  *
  * @author Zsombor
  */
 public class AdminAddUsers extends javax.swing.JFrame {
+    
+    private QueryMethods queryMethods;
 
     /**
      * Creates new form Register
      */
     public AdminAddUsers() {
         initComponents();
+        
+        queryMethods = new QueryMethods();
         
         //basic setup
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -193,9 +198,22 @@ public class AdminAddUsers extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        Object item = boxUsers.getSelectedItem();
-        String value = ((ComboItem)item).getValue();
-        System.out.println(value);
+       
+        String userType = boxUsers.getSelectedItem().toString();
+        
+        switch(userType){
+            case "Administratör":
+                queryMethods.insertAdmin(txtFirstname.getText(), txtLastname.getText(), txtPN.getText(), txtPassword.getText(), txtEmail.getText());
+                break;
+            case "Bibliotikarie":
+                queryMethods.insertLibrarian(txtFirstname.getText(), txtLastname.getText(), txtPN.getText(), txtPassword.getText(), txtEmail.getText());
+                break;
+            case "Gäst":
+                queryMethods.insertGuest(txtFirstname.getText(), txtLastname.getText(), txtPN.getText(), txtPassword.getText(), txtEmail.getText());
+                break;
+        
+    }
+        
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**
