@@ -6,6 +6,7 @@
 package se.database;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +14,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -145,5 +147,103 @@ public class QueryMethods {
         return idLibrarian;
 
     }
-   
+     
+    public DefaultTableModel displayAdmins(String[] colNames) {
+        
+        try
+        {
+            DefaultTableModel model = new DefaultTableModel(colNames, 0);
+            
+            MyConnection tryConnect = new MyConnection();
+            
+            Connection conn = tryConnect.getConnection();
+            Statement stmt = conn.createStatement();
+            stmt.execute("SELECT * FROM admins");
+
+            ResultSet results = stmt.getResultSet();
+            
+            while(results.next())
+            {
+                model.addRow(new Object[] { results.getString("first_name"), results.getString("last_name"), results.getString("person_id"),
+                                            results.getString("password"), results.getString("email")});
+            }
+            
+            conn.close();
+            stmt.close();
+            
+            return model;
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Something went wrong: " + e);
+        }
+        
+        return null;
+    }
+    
+    public DefaultTableModel displayLibrarians(String[] colNames) {
+        
+        try
+        {
+            DefaultTableModel model = new DefaultTableModel(colNames, 0);
+            
+            MyConnection tryConnect = new MyConnection();
+            
+            Connection conn = tryConnect.getConnection();
+            Statement stmt = conn.createStatement();
+            stmt.execute("SELECT * FROM librarians");
+
+            ResultSet results = stmt.getResultSet();
+            
+            while(results.next())
+            {
+                model.addRow(new Object[] { results.getString("first_name"), results.getString("last_name"), results.getString("person_id"),
+                                            results.getString("password"), results.getString("email")});
+            }
+            
+            conn.close();
+            stmt.close();
+            
+            return model;
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Something went wrong: " + e);
+        }
+        
+        return null;
+    }
+    
+    public DefaultTableModel displayGuests(String[] colNames) {
+        
+        try
+        {
+            DefaultTableModel model = new DefaultTableModel(colNames, 0);
+            
+            MyConnection tryConnect = new MyConnection();
+            
+            Connection conn = tryConnect.getConnection();
+            Statement stmt = conn.createStatement();
+            stmt.execute("SELECT * FROM guests");
+
+            ResultSet results = stmt.getResultSet();
+            
+            while(results.next())
+            {
+                model.addRow(new Object[] { results.getString("first_name"), results.getString("last_name"), results.getString("person_id"),
+                                            results.getString("password"), results.getString("email")});
+            }
+            
+            conn.close();
+            stmt.close();
+            
+            return model;
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Something went wrong: " + e);
+        }
+        
+        return null;
+    }
 }
