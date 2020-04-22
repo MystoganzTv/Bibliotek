@@ -7,7 +7,7 @@ import java.sql.*;
 public class Connection {
 
     
-    public static void main(String[] args){
+    public static  Connection getConnection(){
         
         Connection myDbConn = null;
         
@@ -25,6 +25,7 @@ public class Connection {
         {
             System.out.println("connected");
         }
+        return myDbConn;
     }
 
 }
