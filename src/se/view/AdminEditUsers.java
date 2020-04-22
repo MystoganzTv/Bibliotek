@@ -217,6 +217,9 @@ public class AdminEditUsers extends javax.swing.JFrame {
         //editor textField
         //there the admin can edit the data, and once this button is pressed it
         //will automatically querry the new data
+        int row = userInfoTable.getSelectedRow();
+        int col = userInfoTable.getSelectedColumn();
+        txtSelectedData.setText(userInfoTable.getValueAt(row, col).toString());
     }//GEN-LAST:event_userInfoTableMouseClicked
 
     private void btnGuestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuestsActionPerformed
