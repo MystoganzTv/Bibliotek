@@ -6,9 +6,12 @@
 
 package se.view;
 
-import se.view.AdminHome;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import se.database.QueryMethods;
+import se.view.AdminHome;
 
 /**
  *
@@ -19,6 +22,10 @@ public class AdminEditUsers extends javax.swing.JFrame {
     /**
      * Creates new form EditUsers
      */
+    
+    private String[] colNames = {"Förnamn", "Efternamn", "Email", "PN", "Lösenord"};
+    private QueryMethods qMethods = new QueryMethods();
+    
     public AdminEditUsers() {
         initComponents();
         
@@ -31,6 +38,8 @@ public class AdminEditUsers extends javax.swing.JFrame {
         btnChangeData.setBackground(new java.awt.Color(142, 198, 197));
         btnRemoveSelectedUser.setBackground(new java.awt.Color(142, 198, 197));
         btnClose.setBackground(new java.awt.Color(142, 198, 197));
+        
+        userInfoTable.setModel(qMethods.displayAdmins(colNames));
     }
 
     /**
@@ -77,8 +86,18 @@ public class AdminEditUsers extends javax.swing.JFrame {
         jScrollPane1.setViewportView(userInfoTable);
 
         btnAdmins.setText("Administratörer");
+        btnAdmins.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminsActionPerformed(evt);
+            }
+        });
 
         btnLibrarians.setText("Bibliotekarier");
+        btnLibrarians.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLibrariansActionPerformed(evt);
+            }
+        });
 
         btnGuests.setText("Medlemmar");
         btnGuests.addActionListener(new java.awt.event.ActionListener() {
@@ -126,6 +145,11 @@ public class AdminEditUsers extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Datahantering"));
 
         btnRemoveSelectedUser.setText("Ta bort utvalda användare");
+        btnRemoveSelectedUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveSelectedUserActionPerformed(evt);
+            }
+        });
 
         btnChangeData.setText("Ändra utvalda datan");
 
@@ -193,10 +217,15 @@ public class AdminEditUsers extends javax.swing.JFrame {
         //editor textField
         //there the admin can edit the data, and once this button is pressed it
         //will automatically querry the new data
+        int row = userInfoTable.getSelectedRow();
+        int col = userInfoTable.getSelectedColumn();
+        txtSelectedData.setText(userInfoTable.getValueAt(row, col).toString());
     }//GEN-LAST:event_userInfoTableMouseClicked
 
     private void btnGuestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuestsActionPerformed
-        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) userInfoTable.getModel();
+        model.setRowCount(0);
+        userInfoTable.setModel(qMethods.displayGuests(colNames));                
     }//GEN-LAST:event_btnGuestsActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
@@ -204,6 +233,34 @@ public class AdminEditUsers extends javax.swing.JFrame {
         ah.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void btnRemoveSelectedUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveSelectedUserActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) userInfoTable.getModel();
+        
+        try{
+        int SelectedRowIndex = userInfoTable.getSelectedRow();
+        model.removeRow(SelectedRowIndex);
+        
+        }catch(Exception ex)
+        {
+        JOptionPane.showMessageDialog(null, ex);
+        }
+        
+        
+    }//GEN-LAST:event_btnRemoveSelectedUserActionPerformed
+
+    private void btnAdminsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminsActionPerformed
+        DefaultTableModel model = (DefaultTableModel) userInfoTable.getModel();
+        model.setRowCount(0);
+        userInfoTable.setModel(qMethods.displayAdmins(colNames));
+    }//GEN-LAST:event_btnAdminsActionPerformed
+
+    private void btnLibrariansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLibrariansActionPerformed
+        DefaultTableModel model = (DefaultTableModel) userInfoTable.getModel();
+        model.setRowCount(0);
+        userInfoTable.setModel(qMethods.displayLibrarians(colNames));
+    }//GEN-LAST:event_btnLibrariansActionPerformed
 
     /**
      * @param args the command line arguments
