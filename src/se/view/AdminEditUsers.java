@@ -8,10 +8,12 @@ package se.view;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import se.database.QueryMethods;
 import se.view.AdminHome;
+import se.model.Admin;
 
 /**
  *
@@ -25,6 +27,7 @@ public class AdminEditUsers extends javax.swing.JFrame {
     
     private String[] colNames = {"Förnamn", "Efternamn", "Email", "PN", "Lösenord"};
     private QueryMethods qMethods = new QueryMethods();
+    private DefaultTableModel model = new DefaultTableModel(colNames, 0);
     
     public AdminEditUsers() {
         initComponents();
@@ -39,7 +42,14 @@ public class AdminEditUsers extends javax.swing.JFrame {
         btnRemoveSelectedUser.setBackground(new java.awt.Color(142, 198, 197));
         btnClose.setBackground(new java.awt.Color(142, 198, 197));
         
-        userInfoTable.setModel(qMethods.displayAdmins(colNames));
+        ArrayList<Admin> admins = qMethods.findAdmins();
+
+        for(int i = 0; i < admins.size(); i++) 
+        {
+             model.addRow(new Object[] { admins.get(i).getId(), admins.get(i).getFirstName(), admins.get(i).getLastName(),
+                          admins.get(i).getPersonId(), admins.get(i).getEmail(), admins.get(i).getPassword()});
+        }
+        userInfoTable.setModel(model);
     }
 
     /**
@@ -253,13 +263,13 @@ public class AdminEditUsers extends javax.swing.JFrame {
     private void btnAdminsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminsActionPerformed
         DefaultTableModel model = (DefaultTableModel) userInfoTable.getModel();
         model.setRowCount(0);
-        userInfoTable.setModel(qMethods.displayAdmins(colNames));
+        //userInfoTable.setModel(qMethods.displayAdmins(colNames));
     }//GEN-LAST:event_btnAdminsActionPerformed
 
     private void btnLibrariansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLibrariansActionPerformed
         DefaultTableModel model = (DefaultTableModel) userInfoTable.getModel();
         model.setRowCount(0);
-        userInfoTable.setModel(qMethods.displayLibrarians(colNames));
+        userInfoTable.setModel(qMethods.findLibrarians(colNames));
     }//GEN-LAST:event_btnLibrariansActionPerformed
 
     /**
