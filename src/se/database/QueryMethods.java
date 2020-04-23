@@ -11,10 +11,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import se.model.Admin;
+import se.model.Guest;
+import se.model.Librarian;
 
 /**
  *
@@ -148,30 +152,35 @@ public class QueryMethods {
 
     }
      
-    public DefaultTableModel displayAdmins(String[] colNames) {
+    public ArrayList<Admin> findAdmins() {
         
         try
         {
-            DefaultTableModel model = new DefaultTableModel(colNames, 0);
-            
             MyConnection tryConnect = new MyConnection();
+            ArrayList<Admin> admins = new ArrayList<Admin>();
+            Admin currentAdmin;
             
             Connection conn = tryConnect.getConnection();
             Statement stmt = conn.createStatement();
             stmt.execute("SELECT * FROM admins");
 
             ResultSet results = stmt.getResultSet();
-            
             while(results.next())
             {
-                model.addRow(new Object[] { results.getString("first_name"), results.getString("last_name"), results.getString("person_id"),
-                                            results.getString("password"), results.getString("email")});
+                currentAdmin = new Admin(results.getString("first_name"),
+                                         results.getString("last_name"),
+                                         results.getString("person_id"),
+                                         results.getString("password"),
+                                         Integer.parseInt(results.getString("id")),
+                                         results.getString("email"));
+                admins.add(currentAdmin);
+                currentAdmin = null;
             }
             
             conn.close();
             stmt.close();
             
-            return model;
+            return admins;
         }
         catch(SQLException e)
         {
@@ -181,30 +190,35 @@ public class QueryMethods {
         return null;
     }
     
-    public DefaultTableModel displayLibrarians(String[] colNames) {
+    public ArrayList<Librarian> findLibrarians() {
         
         try
         {
-            DefaultTableModel model = new DefaultTableModel(colNames, 0);
-            
             MyConnection tryConnect = new MyConnection();
+            ArrayList<Librarian> librarians = new ArrayList<Librarian>();
+            Librarian currentLibrarian;
             
             Connection conn = tryConnect.getConnection();
             Statement stmt = conn.createStatement();
-            stmt.execute("SELECT * FROM librarians");
+            stmt.execute("SELECT * FROM admins");
 
             ResultSet results = stmt.getResultSet();
-            
             while(results.next())
             {
-                model.addRow(new Object[] { results.getString("first_name"), results.getString("last_name"), results.getString("person_id"),
-                                            results.getString("password"), results.getString("email")});
+                currentLibrarian = new Librarian(Integer.parseInt(results.getString("id")),
+                                                 results.getString("first_name"),
+                                                 results.getString("last_name"),
+                                                 results.getString("person_id"),
+                                                 results.getString("password"),
+                                                 results.getString("email"));
+                librarians.add(currentLibrarian);
+                currentLibrarian = null;
             }
             
             conn.close();
             stmt.close();
             
-            return model;
+            return librarians;
         }
         catch(SQLException e)
         {
@@ -214,30 +228,35 @@ public class QueryMethods {
         return null;
     }
     
-    public DefaultTableModel displayGuests(String[] colNames) {
+    public ArrayList<Guest> findGuests() {
         
         try
         {
-            DefaultTableModel model = new DefaultTableModel(colNames, 0);
-            
             MyConnection tryConnect = new MyConnection();
+            ArrayList<Guest> guests = new ArrayList<Guest>();
+            Guest currentGuest;
             
             Connection conn = tryConnect.getConnection();
             Statement stmt = conn.createStatement();
-            stmt.execute("SELECT * FROM guests");
+            stmt.execute("SELECT * FROM admins");
 
             ResultSet results = stmt.getResultSet();
-            
             while(results.next())
             {
-                model.addRow(new Object[] { results.getString("first_name"), results.getString("last_name"), results.getString("person_id"),
-                                            results.getString("password"), results.getString("email")});
+                currentGuest = new Guest(Integer.parseInt(results.getString("id")),
+                                                 results.getString("first_name"),
+                                                 results.getString("last_name"),
+                                                 results.getString("person_id"),
+                                                 results.getString("password"),
+                                                 results.getString("email"));
+                guests.add(currentGuest);
+                currentGuest = null;
             }
             
             conn.close();
             stmt.close();
             
-            return model;
+            return guests;
         }
         catch(SQLException e)
         {
