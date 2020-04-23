@@ -130,11 +130,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Administrat&#xf6;rer"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdminsActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnLibrarians">
           <Properties>
             <Property name="text" type="java.lang.String" value="Bibliotekarier"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLibrariansActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnGuests">
           <Properties>

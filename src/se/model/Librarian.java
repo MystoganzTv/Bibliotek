@@ -7,7 +7,7 @@ package se.model;
 
 /**
  *
- * Log in with personId and password
+ * Log in with email and password
  */
 public class Librarian {
     
@@ -20,13 +20,17 @@ public class Librarian {
     private String personId;
     
     private String password;
+    
+    private String email;
 
-    public Librarian(int id, String firstName, String lastName, String personId, String password) {
+    public Librarian(int id, String firstName, String lastName, String personId, String password, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.personId = personId;
         this.password = password;
+        this.email = email;
+               
     }
 
     public int getId() {
@@ -67,6 +71,14 @@ public class Librarian {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
     
     
