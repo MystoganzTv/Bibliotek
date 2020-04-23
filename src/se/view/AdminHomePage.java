@@ -225,6 +225,11 @@ public class AdminHomePage extends javax.swing.JFrame {
 
         jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Logo libro.png"))); // NOI18N
         jLabelLogo.setPreferredSize(new java.awt.Dimension(250, 134));
+        jLabelLogo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelLogoMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelTitleLayout = new javax.swing.GroupLayout(jPanelTitle);
         jPanelTitle.setLayout(jPanelTitleLayout);
@@ -1416,6 +1421,12 @@ public class AdminHomePage extends javax.swing.JFrame {
     private void jLabelRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelRegisterMouseClicked
         jPanelRegister.setVisible(true);
     }//GEN-LAST:event_jLabelRegisterMouseClicked
+
+    private void jLabelLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLogoMouseClicked
+        StartPage sp = new StartPage();
+        sp.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabelLogoMouseClicked
     /**
      * @param args the command line arguments
      */
