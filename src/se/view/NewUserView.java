@@ -5,19 +5,26 @@
  */
 package se.view;
 
+import javax.swing.JOptionPane;
+import se.database.QueryMethods;
+import se.main.Validation;
+
 /**
  *
  * @author enriq
  */
 public class NewUserView extends javax.swing.JFrame {
+    QueryMethods queryMethods;
 
     /**
      * Creates new form StartPage1
      */
     public NewUserView() {
+       
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        queryMethods = new QueryMethods();
     }
 
     /**
@@ -44,7 +51,7 @@ public class NewUserView extends javax.swing.JFrame {
         Maillbl = new javax.swing.JLabel();
         Nametxt = new javax.swing.JTextField();
         Lastnametxt = new javax.swing.JTextField();
-        Usernametxt = new javax.swing.JTextField();
+        PNTxt = new javax.swing.JTextField();
         Passwordtxt = new javax.swing.JTextField();
         Mailtxt = new javax.swing.JTextField();
         Savebtn = new javax.swing.JButton();
@@ -111,7 +118,7 @@ public class NewUserView extends javax.swing.JFrame {
         LastNamelbl.setText("Efternamn:");
 
         Usernamelbl.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        Usernamelbl.setText("Användarnamn:");
+        Usernamelbl.setText("Personnummer:");
 
         Passwordlbl.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         Passwordlbl.setText("Lösenord: ");
@@ -123,7 +130,7 @@ public class NewUserView extends javax.swing.JFrame {
 
         Lastnametxt.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
 
-        Usernametxt.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
+        PNTxt.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
 
         Passwordtxt.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
 
@@ -132,6 +139,11 @@ public class NewUserView extends javax.swing.JFrame {
         Savebtn.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         Savebtn.setText("Spara");
         Savebtn.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
+        Savebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SavebtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -167,7 +179,7 @@ public class NewUserView extends javax.swing.JFrame {
                                         .addGap(22, 22, 22)))
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(Usernametxt)
+                                        .addComponent(PNTxt)
                                         .addGap(4, 4, 4))
                                     .addComponent(Lastnametxt, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(212, 212, 212))
@@ -186,7 +198,7 @@ public class NewUserView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Usernamelbl, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Usernametxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PNTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -244,6 +256,29 @@ public class NewUserView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void SavebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SavebtnActionPerformed
+        
+        String firstName = Nametxt.getText();
+        String lastName = Lastnametxt.getText();
+        String PN = PNTxt.getText();
+        String password = Passwordtxt.getText();
+        String email = Mailtxt.getText();
+
+        if (!Validation.isValidName(firstName)) {
+            JOptionPane.showMessageDialog(this, "Felaktig inmatning för förnamn");
+        } else if (!Validation.isValidName(lastName)) {
+            JOptionPane.showMessageDialog(this, "Felaktig inmatning för efternamn");
+        } else if (!Validation.isValidPN(PN)) {
+            JOptionPane.showMessageDialog(this, "Felaktig inamtning för personnummer");
+        } else if (!Validation.isValidPassword(password)) {
+            JOptionPane.showMessageDialog(this, "Felaktig inmatning för lösenord");
+        } else if (!Validation.isValidEmail(email)) {
+            JOptionPane.showMessageDialog(this, "Felaktig inmatning för email");
+        } else {
+            queryMethods.insertGuest(firstName, lastName, PN, password, email);
+        }
+    }//GEN-LAST:event_SavebtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -293,13 +328,16 @@ public class NewUserView extends javax.swing.JFrame {
     private javax.swing.JTextField Mailtxt;
     private javax.swing.JLabel Namelbl;
     private javax.swing.JTextField Nametxt;
+    private javax.swing.JTextField PNTxt;
     private javax.swing.JLabel Passwordlbl;
     private javax.swing.JTextField Passwordtxt;
     private javax.swing.JButton Savebtn;
     private javax.swing.JLabel Usernamelbl;
+
     private javax.swing.JTextField Usernametxt;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+
     private javax.swing.JLabel jLabelBackgroundPhoto;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JPanel jPanel1;
