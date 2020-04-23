@@ -509,6 +509,7 @@ public class Admin extends javax.swing.JFrame {
         int row = userInfoTable.getSelectedRow();
         int col = userInfoTable.getSelectedColumn();
     //    txtSelectedData.setText(userInfoTable.getValueAt(row, col).toString());
+      
     }//GEN-LAST:event_userInfoTableMouseClicked
 
     /**
