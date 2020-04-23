@@ -78,7 +78,6 @@ public class Admin extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         userInfoTable = new javax.swing.JTable();
         jPanelTab2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jPanelTitle5 = new javax.swing.JPanel();
@@ -324,8 +323,6 @@ public class Admin extends javax.swing.JFrame {
 
         jPanelTab2.setBackground(new java.awt.Color(244, 244, 244));
 
-        jLabel1.setText("jLabel1");
-
         jLabel4.setText("jLabel4");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -334,10 +331,6 @@ public class Admin extends javax.swing.JFrame {
         jPanelTab2.setLayout(jPanelTab2Layout);
         jPanelTab2Layout.setHorizontalGroup(
             jPanelTab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTab2Layout.createSequentialGroup()
-                .addGap(204, 204, 204)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTab2Layout.createSequentialGroup()
                 .addGap(97, 97, 97)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -348,9 +341,7 @@ public class Admin extends javax.swing.JFrame {
         jPanelTab2Layout.setVerticalGroup(
             jPanelTab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTab2Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(jLabel1)
-                .addGap(118, 118, 118)
+                .addGap(197, 197, 197)
                 .addGroup(jPanelTab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -563,7 +554,6 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnRegister;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
