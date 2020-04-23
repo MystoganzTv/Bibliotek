@@ -16,6 +16,8 @@ public class AdminUpdate extends javax.swing.JFrame {
      */
     public AdminUpdate() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
     }
 
     /**
@@ -28,26 +30,87 @@ public class AdminUpdate extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanelBackground = new javax.swing.JPanel();
+        jPanelWorkingArea = new javax.swing.JPanel();
+        emailField = new javax.swing.JTextField();
+        UsernameField = new javax.swing.JTextField();
+        firstnameField = new javax.swing.JTextField();
+        lastnameField = new javax.swing.JTextField();
+        jLabelPw = new javax.swing.JLabel();
+        jLabelEmail = new javax.swing.JLabel();
+        jLabelLastname = new javax.swing.JLabel();
+        jLabelFirstname = new javax.swing.JLabel();
+        pwField = new javax.swing.JTextField();
+        jLabelUsername = new javax.swing.JLabel();
+        jLabelUpdateIcon = new javax.swing.JLabel();
+        jLabelCancelTxt = new javax.swing.JLabel();
+        jLabelUpdateTxt = new javax.swing.JLabel();
+        jLabelCancelIcon = new javax.swing.JLabel();
         jPanelTitle = new javax.swing.JPanel();
         jLabelTitle5 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        pwField = new javax.swing.JTextField();
-        mailField = new javax.swing.JTextField();
-        fNameField = new javax.swing.JTextField();
-        lNameField = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        uNameField = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabelEditUsersClose = new javax.swing.JLabel();
-        jLabelEditUsersUpdate1 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanelBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanelWorkingArea.setBackground(new java.awt.Color(255, 255, 255));
+
+        emailField.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+
+        UsernameField.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+
+        firstnameField.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+
+        lastnameField.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+
+        jLabelPw.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelPw.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelPw.setText("Lösenord");
+
+        jLabelEmail.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelEmail.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelEmail.setText("Email");
+
+        jLabelLastname.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelLastname.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelLastname.setText("Efternamn");
+
+        jLabelFirstname.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelFirstname.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelFirstname.setText("Förnamn");
+
+        pwField.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+        pwField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pwFieldActionPerformed(evt);
+            }
+        });
+
+        jLabelUsername.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelUsername.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelUsername.setText("Användarnamn");
+
+        jLabelUpdateIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_80px.png"))); // NOI18N
+
+        jLabelCancelTxt.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelCancelTxt.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelCancelTxt.setText("Abryt");
+        jLabelCancelTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelCancelTxtMouseClicked(evt);
+            }
+        });
+
+        jLabelUpdateTxt.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelUpdateTxt.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelUpdateTxt.setText("Uppdatera");
+        jLabelUpdateTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelUpdateTxtMouseClicked(evt);
+            }
+        });
+
+        jLabelCancelIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/cancel_80px.png"))); // NOI18N
 
         jPanelTitle.setBackground(new java.awt.Color(133, 102, 170));
 
@@ -62,178 +125,95 @@ public class AdminUpdate extends javax.swing.JFrame {
         jPanelTitle.setLayout(jPanelTitleLayout);
         jPanelTitleLayout.setHorizontalGroup(
             jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(jPanelTitleLayout.createSequentialGroup()
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelTitle5)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addGap(33, 33, 33))
         );
         jPanelTitleLayout.setVerticalGroup(
             jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTitleLayout.createSequentialGroup()
-                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelTitleLayout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(jLabelTitle5)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabelTitle5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
         );
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        pwField.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
-
-        mailField.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
-
-        fNameField.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
-
-        lNameField.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
-
-        jLabel7.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(105, 131, 170));
-        jLabel7.setText("Lösenord");
-
-        jLabel5.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(105, 131, 170));
-        jLabel5.setText("Email");
-
-        jLabel4.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(105, 131, 170));
-        jLabel4.setText("Efternamn");
-
-        jLabel3.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(105, 131, 170));
-        jLabel3.setText("Förnamn");
-
-        uNameField.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
-        uNameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                uNameFieldActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(105, 131, 170));
-        jLabel8.setText("Användarnamn");
-
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_80px.png"))); // NOI18N
-
-        jLabelEditUsersClose.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelEditUsersClose.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelEditUsersClose.setText("Abryt");
-        jLabelEditUsersClose.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditUsersCloseMouseClicked(evt);
-            }
-        });
-
-        jLabelEditUsersUpdate1.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelEditUsersUpdate1.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelEditUsersUpdate1.setText("Uppdatera");
-        jLabelEditUsersUpdate1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditUsersUpdate1MouseClicked(evt);
-            }
-        });
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/cancel_80px.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelWorkingAreaLayout = new javax.swing.GroupLayout(jPanelWorkingArea);
+        jPanelWorkingArea.setLayout(jPanelWorkingAreaLayout);
+        jPanelWorkingAreaLayout.setHorizontalGroup(
+            jPanelWorkingAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelWorkingAreaLayout.createSequentialGroup()
+                .addGroup(jPanelWorkingAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelWorkingAreaLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelEditUsersUpdate1)
-                            .addComponent(jLabel16))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanelWorkingAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelUpdateTxt)
+                            .addComponent(jLabelUpdateIcon))
+                        .addGroup(jPanelWorkingAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelWorkingAreaLayout.createSequentialGroup()
                                 .addGap(34, 34, 34)
-                                .addComponent(jLabelEditUsersClose))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabelCancelTxt))
+                            .addGroup(jPanelWorkingAreaLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel1))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabelCancelIcon))))
+                    .addGroup(jPanelWorkingAreaLayout.createSequentialGroup()
                         .addGap(76, 76, 76)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(pwField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
-                            .addComponent(mailField, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(fNameField, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lNameField, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(uNameField, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addGroup(jPanelWorkingAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelFirstname)
+                            .addComponent(jLabelEmail)
+                            .addComponent(jLabelUsername)
+                            .addComponent(jLabelLastname)
+                            .addComponent(jLabelPw))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                        .addGroup(jPanelWorkingAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(emailField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                            .addComponent(UsernameField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(firstnameField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lastnameField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(pwField, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addGap(72, 72, 72))
+            .addComponent(jPanelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(fNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3))
-                                .addGap(48, 48, 48)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(uNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel8))
-                                .addGap(7, 7, 7)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(mailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(lNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(32, 32, 32))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(pwField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+        jPanelWorkingAreaLayout.setVerticalGroup(
+            jPanelWorkingAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelWorkingAreaLayout.createSequentialGroup()
+                .addComponent(jPanelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addGroup(jPanelWorkingAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(firstnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelFirstname))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelWorkingAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lastnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelLastname))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelWorkingAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pwField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelPw))
+                .addGap(7, 7, 7)
+                .addGroup(jPanelWorkingAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(UsernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelUsername))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelWorkingAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEmail))
+                .addGap(46, 46, 46)
+                .addGroup(jPanelWorkingAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelUpdateIcon, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelCancelIcon, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(10, 10, 10)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelEditUsersUpdate1)
-                    .addComponent(jLabelEditUsersClose))
-                .addGap(88, 88, 88))
+                .addGroup(jPanelWorkingAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelUpdateTxt)
+                    .addComponent(jLabelCancelTxt))
+                .addGap(56, 56, 56))
         );
 
-        javax.swing.GroupLayout jPanelBackgroundLayout = new javax.swing.GroupLayout(jPanelBackground);
-        jPanelBackground.setLayout(jPanelBackgroundLayout);
-        jPanelBackgroundLayout.setHorizontalGroup(
-            jPanelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanelBackgroundLayout.createSequentialGroup()
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jPanelBackgroundLayout.setVerticalGroup(
-            jPanelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBackgroundLayout.createSequentialGroup()
-                .addComponent(jPanelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(466, Short.MAX_VALUE))
-            .addGroup(jPanelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBackgroundLayout.createSequentialGroup()
-                    .addContainerGap(103, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18)))
-        );
+        jPanelBackground.add(jPanelWorkingArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 630));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -241,27 +221,27 @@ public class AdminUpdate extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 136, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelBackground, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelBackground, javax.swing.GroupLayout.PREFERRED_SIZE, 624, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void uNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uNameFieldActionPerformed
+    private void pwFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_uNameFieldActionPerformed
+    }//GEN-LAST:event_pwFieldActionPerformed
 
-    private void jLabelEditUsersCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUsersCloseMouseClicked
+    private void jLabelCancelTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCancelTxtMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEditUsersCloseMouseClicked
+    }//GEN-LAST:event_jLabelCancelTxtMouseClicked
 
-    private void jLabelEditUsersUpdate1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUsersUpdate1MouseClicked
+    private void jLabelUpdateTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateTxtMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEditUsersUpdate1MouseClicked
+    }//GEN-LAST:event_jLabelUpdateTxtMouseClicked
 
     /**
      * @param args the command line arguments
@@ -299,24 +279,24 @@ public class AdminUpdate extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField fNameField;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    public javax.swing.JTextField UsernameField;
+    public javax.swing.JTextField emailField;
+    public javax.swing.JTextField firstnameField;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabelEditUsersClose;
-    private javax.swing.JLabel jLabelEditUsersUpdate1;
+    private javax.swing.JLabel jLabelCancelIcon;
+    private javax.swing.JLabel jLabelCancelTxt;
+    private javax.swing.JLabel jLabelEmail;
+    private javax.swing.JLabel jLabelFirstname;
+    private javax.swing.JLabel jLabelLastname;
+    private javax.swing.JLabel jLabelPw;
     private javax.swing.JLabel jLabelTitle5;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabelUpdateIcon;
+    private javax.swing.JLabel jLabelUpdateTxt;
+    private javax.swing.JLabel jLabelUsername;
     private javax.swing.JPanel jPanelBackground;
     private javax.swing.JPanel jPanelTitle;
-    private javax.swing.JTextField lNameField;
-    private javax.swing.JTextField mailField;
-    private javax.swing.JTextField pwField;
-    private javax.swing.JTextField uNameField;
+    public javax.swing.JPanel jPanelWorkingArea;
+    public javax.swing.JTextField lastnameField;
+    public javax.swing.JTextField pwField;
     // End of variables declaration//GEN-END:variables
 }

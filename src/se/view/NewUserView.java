@@ -14,13 +14,14 @@ import se.main.Validation;
  * @author enriq
  */
 public class NewUserView extends javax.swing.JFrame {
+
     QueryMethods queryMethods;
 
     /**
      * Creates new form StartPage1
      */
     public NewUserView() {
-       
+
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
@@ -51,7 +52,7 @@ public class NewUserView extends javax.swing.JFrame {
         Maillbl = new javax.swing.JLabel();
         Nametxt = new javax.swing.JTextField();
         Lastnametxt = new javax.swing.JTextField();
-        PNTxt = new javax.swing.JTextField();
+        Usernametxt = new javax.swing.JTextField();
         Passwordtxt = new javax.swing.JTextField();
         Mailtxt = new javax.swing.JTextField();
         Savebtn = new javax.swing.JButton();
@@ -78,9 +79,15 @@ public class NewUserView extends javax.swing.JFrame {
         jPanelTitle.setBackground(new java.awt.Color(105, 131, 170));
 
         jLabelTitle.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        jLabelTitle.setForeground(new java.awt.Color(48, 71, 94));
         jLabelTitle.setText("Registera Ny Användaren");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Logo libro.png"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Logo letras libro.png"))); // NOI18N
 
@@ -93,7 +100,7 @@ public class NewUserView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanelTitleLayout.setVerticalGroup(
@@ -102,10 +109,10 @@ public class NewUserView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
                         .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16))
-                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(17, 17, 17))))
         );
 
         jPanel2.setBackground(new java.awt.Color(244, 244, 244));
@@ -118,7 +125,7 @@ public class NewUserView extends javax.swing.JFrame {
         LastNamelbl.setText("Efternamn:");
 
         Usernamelbl.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        Usernamelbl.setText("Personnummer:");
+        Usernamelbl.setText("Användarnamn:");
 
         Passwordlbl.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         Passwordlbl.setText("Lösenord: ");
@@ -130,7 +137,7 @@ public class NewUserView extends javax.swing.JFrame {
 
         Lastnametxt.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
 
-        PNTxt.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
+        Usernametxt.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
 
         Passwordtxt.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
 
@@ -139,11 +146,6 @@ public class NewUserView extends javax.swing.JFrame {
         Savebtn.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         Savebtn.setText("Spara");
         Savebtn.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
-        Savebtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SavebtnActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -157,7 +159,7 @@ public class NewUserView extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(96, 96, 96)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(Namelbl, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(128, 128, 128)
                                 .addComponent(Nametxt, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -179,7 +181,7 @@ public class NewUserView extends javax.swing.JFrame {
                                         .addGap(22, 22, 22)))
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(PNTxt)
+                                        .addComponent(Usernametxt)
                                         .addGap(4, 4, 4))
                                     .addComponent(Lastnametxt, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(212, 212, 212))
@@ -187,18 +189,18 @@ public class NewUserView extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Namelbl, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Nametxt))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap(103, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Nametxt, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Namelbl, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LastNamelbl, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Lastnametxt, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Usernamelbl, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PNTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Usernametxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -238,7 +240,7 @@ public class NewUserView extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelBackgroundPhoto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabelBackgroundPhoto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 658, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -257,7 +259,7 @@ public class NewUserView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SavebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SavebtnActionPerformed
-        
+
         String firstName = Nametxt.getText();
         String lastName = Lastnametxt.getText();
         String PN = PNTxt.getText();
@@ -278,6 +280,12 @@ public class NewUserView extends javax.swing.JFrame {
             queryMethods.insertGuest(firstName, lastName, PN, password, email);
         }
     }//GEN-LAST:event_SavebtnActionPerformed
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        StartPage sp = new StartPage();
+        sp.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -328,16 +336,13 @@ public class NewUserView extends javax.swing.JFrame {
     private javax.swing.JTextField Mailtxt;
     private javax.swing.JLabel Namelbl;
     private javax.swing.JTextField Nametxt;
-    private javax.swing.JTextField PNTxt;
     private javax.swing.JLabel Passwordlbl;
     private javax.swing.JTextField Passwordtxt;
     private javax.swing.JButton Savebtn;
     private javax.swing.JLabel Usernamelbl;
-
     private javax.swing.JTextField Usernametxt;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-
     private javax.swing.JLabel jLabelBackgroundPhoto;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JPanel jPanel1;

@@ -132,6 +132,9 @@
                   <Dimension value="[250, 134]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelLogoMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
