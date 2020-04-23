@@ -235,7 +235,7 @@ public class AdminEditUsers extends javax.swing.JFrame {
     private void btnGuestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuestsActionPerformed
         DefaultTableModel model = (DefaultTableModel) userInfoTable.getModel();
         model.setRowCount(0);
-        userInfoTable.setModel(qMethods.displayGuests(colNames));                
+        
     }//GEN-LAST:event_btnGuestsActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
@@ -269,7 +269,7 @@ public class AdminEditUsers extends javax.swing.JFrame {
     private void btnLibrariansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLibrariansActionPerformed
         DefaultTableModel model = (DefaultTableModel) userInfoTable.getModel();
         model.setRowCount(0);
-        userInfoTable.setModel(qMethods.findLibrarians(colNames));
+        //userInfoTable.setModel(qMethods.findLibrarians(colNames));
     }//GEN-LAST:event_btnLibrariansActionPerformed
 
     /**
