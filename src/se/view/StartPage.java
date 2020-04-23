@@ -323,7 +323,7 @@ public class StartPage extends javax.swing.JFrame {
             if(jTextFieldUsername.getText().contains("@admin")){
                 if(!qm.loginChecker("admins",jTextFieldUsername.getText(),jPasswordField.getText()).equals("")){
                 jlblMessage.setText("");
-                Admin ah = new Admin();
+                AdminHomePage ah = new AdminHomePage();
                 ah.setVisible(true);
                 this.setVisible(false);
 
