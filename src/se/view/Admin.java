@@ -127,7 +127,7 @@ public class Admin extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(105, 131, 170));
-        jLabel3.setText("Repportering");
+        jLabel3.setText("Rapportering");
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel3MouseClicked(evt);
@@ -570,37 +570,21 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelBackgroundPhoto;
     private javax.swing.JLabel jLabelEditUsers;
     private javax.swing.JLabel jLabelEditUsersImg;
     private javax.swing.JLabel jLabelRegister;
     private javax.swing.JLabel jLabelReport;
-    private javax.swing.JLabel jLabelTitle;
-    private javax.swing.JLabel jLabelTitle1;
-    private javax.swing.JLabel jLabelTitle2;
-    private javax.swing.JLabel jLabelTitle3;
     private javax.swing.JLabel jLabelTitle5;
     private javax.swing.JPanel jPanelAdminTools;
     private javax.swing.JPanel jPanelRegister;
     private javax.swing.JPanel jPanelTab1;
     private javax.swing.JPanel jPanelTab2;
-    private javax.swing.JPanel jPanelTitle;
-    private javax.swing.JPanel jPanelTitle1;
-    private javax.swing.JPanel jPanelTitle2;
-    private javax.swing.JPanel jPanelTitle3;
     private javax.swing.JPanel jPanelTitle5;
     private javax.swing.JPanel jPanelWorkArea;
     private javax.swing.JPanel jPanelbackground;
