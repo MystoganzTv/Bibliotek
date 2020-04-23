@@ -77,9 +77,14 @@ public class Admin extends javax.swing.JFrame {
         jPanelTab1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         userInfoTable = new javax.swing.JTable();
+        jLabelEditUsersImg1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabelEditUsersTab = new javax.swing.JLabel();
+        jLabelEraseTab = new javax.swing.JLabel();
         jPanelTab2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        btnChangeData = new javax.swing.JButton();
         jPanelTitle5 = new javax.swing.JPanel();
         jLabelTitle5 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
@@ -298,25 +303,64 @@ public class Admin extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(userInfoTable);
 
+        jLabelEditUsersImg1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Redigera_80px.png"))); // NOI18N
+        jLabelEditUsersImg1.setAlignmentY(1.0F);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/trash_can_80px.png"))); // NOI18N
+
+        jLabelEditUsersTab.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelEditUsersTab.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelEditUsersTab.setText("Redigera");
+        jLabelEditUsersTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEditUsersTabMouseClicked(evt);
+            }
+        });
+
+        jLabelEraseTab.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelEraseTab.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelEraseTab.setText("Ta bort");
+        jLabelEraseTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEraseTabMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelTab1Layout = new javax.swing.GroupLayout(jPanelTab1);
         jPanelTab1.setLayout(jPanelTab1Layout);
         jPanelTab1Layout.setHorizontalGroup(
             jPanelTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 635, Short.MAX_VALUE)
-            .addGroup(jPanelTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanelTab1Layout.createSequentialGroup()
-                    .addContainerGap()
+            .addGroup(jPanelTab1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
-                    .addContainerGap()))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTab1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanelTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelEditUsersImg1)
+                            .addComponent(jLabelEditUsersTab))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTab1Layout.createSequentialGroup()
+                                .addComponent(jLabelEraseTab)
+                                .addGap(13, 13, 13)))))
+                .addContainerGap())
         );
         jPanelTab1Layout.setVerticalGroup(
             jPanelTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 527, Short.MAX_VALUE)
-            .addGroup(jPanelTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanelTab1Layout.createSequentialGroup()
-                    .addGap(112, 112, 112)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(107, Short.MAX_VALUE)))
+            .addGroup(jPanelTab1Layout.createSequentialGroup()
+                .addContainerGap(83, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelEditUsersImg1)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelTab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelEditUsersTab)
+                    .addComponent(jLabelEraseTab))
+                .addContainerGap())
         );
 
         jTabbedPane.addTab("Redigera Användare", jPanelTab1);
@@ -350,6 +394,8 @@ public class Admin extends javax.swing.JFrame {
 
         jTabbedPane.addTab("Admin Rapport", jPanelTab2);
 
+        btnChangeData.setText("Ändra utvalda datan");
+
         javax.swing.GroupLayout jPanelWorkAreaLayout = new javax.swing.GroupLayout(jPanelWorkArea);
         jPanelWorkArea.setLayout(jPanelWorkAreaLayout);
         jPanelWorkAreaLayout.setHorizontalGroup(
@@ -361,20 +407,29 @@ public class Admin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane)
                 .addContainerGap())
+            .addGroup(jPanelWorkAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelWorkAreaLayout.createSequentialGroup()
+                    .addGap(400, 400, 400)
+                    .addComponent(btnChangeData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(400, 400, 400)))
         );
         jPanelWorkAreaLayout.setVerticalGroup(
             jPanelWorkAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelWorkAreaLayout.createSequentialGroup()
-                .addGroup(jPanelWorkAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelWorkAreaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelWorkAreaLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanelAdminTools, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanelRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jPanelAdminTools, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 75, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelWorkAreaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(jPanelWorkAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelWorkAreaLayout.createSequentialGroup()
+                    .addGap(303, 303, 303)
+                    .addComponent(btnChangeData)
+                    .addContainerGap(303, Short.MAX_VALUE)))
         );
 
         jPanelTitle5.setBackground(new java.awt.Color(133, 102, 170));
@@ -512,6 +567,14 @@ public class Admin extends javax.swing.JFrame {
       
     }//GEN-LAST:event_userInfoTableMouseClicked
 
+    private void jLabelEditUsersTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUsersTabMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEditUsersTabMouseClicked
+
+    private void jLabelEraseTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseTabMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEraseTabMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -552,9 +615,11 @@ public class Admin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox boxUsers;
+    private javax.swing.JButton btnChangeData;
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnRegister;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -569,6 +634,9 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelBackgroundPhoto;
     private javax.swing.JLabel jLabelEditUsers;
     private javax.swing.JLabel jLabelEditUsersImg;
+    private javax.swing.JLabel jLabelEditUsersImg1;
+    private javax.swing.JLabel jLabelEditUsersTab;
+    private javax.swing.JLabel jLabelEraseTab;
     private javax.swing.JLabel jLabelRegister;
     private javax.swing.JLabel jLabelReport;
     private javax.swing.JLabel jLabelTitle5;
