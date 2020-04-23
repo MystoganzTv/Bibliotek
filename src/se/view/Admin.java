@@ -860,11 +860,17 @@ public class Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelEraseTab1MouseClicked
 
     private void jLabelEditUsersAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUsersAdminMouseClicked
-        // TODO add your handling code here:
+
+        AdminUpdate au = new AdminUpdate();
+        au.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jLabelEditUsersAdminMouseClicked
 
     private void jLabelEditUsersTab2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUsersTab2MouseClicked
-        // TODO add your handling code here:
+
+        AdminUpdate au = new AdminUpdate();
+        au.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jLabelEditUsersTab2MouseClicked
 
     private void jLabelEraseTab2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseTab2MouseClicked
