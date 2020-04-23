@@ -200,7 +200,7 @@ public class QueryMethods {
             
             Connection conn = tryConnect.getConnection();
             Statement stmt = conn.createStatement();
-            stmt.execute("SELECT * FROM admins");
+            stmt.execute("SELECT * FROM librarians");
 
             ResultSet results = stmt.getResultSet();
             while(results.next())
@@ -238,7 +238,7 @@ public class QueryMethods {
             
             Connection conn = tryConnect.getConnection();
             Statement stmt = conn.createStatement();
-            stmt.execute("SELECT * FROM admins");
+            stmt.execute("SELECT * FROM guests");
 
             ResultSet results = stmt.getResultSet();
             while(results.next())

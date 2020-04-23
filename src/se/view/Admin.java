@@ -7,8 +7,14 @@ package se.view;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import se.database.QueryMethods;
 import se.model.ComboItem;
+//import se.model.Admin;
+import se.model.Guest;
+import se.model.Librarian;
+import se.database.QueryMethods;
 
 /**
  *
@@ -17,7 +23,10 @@ import se.model.ComboItem;
 public class Admin extends javax.swing.JFrame {
 
     private QueryMethods queryMethods;
-
+    private String[] colNames = {"Förnamn", "Efternamn", "Email", "PN", "Lösenord"};
+    private DefaultTableModel model = new DefaultTableModel(colNames, 0);
+    private QueryMethods qMethods = new QueryMethods();
+    
     /**
      * Creates new form StartPage1
      */
@@ -37,6 +46,51 @@ public class Admin extends javax.swing.JFrame {
         btnRegister.setBackground(new java.awt.Color(142, 198, 197));
         btnClose.setBackground(new java.awt.Color(142, 198, 197));
 
+        fillGuestTable();
+        fillLibrarianTable();
+    }
+    
+    /* 
+    public void fillAdminTable()
+    {
+        ArrayList<Admins> admins = qMethods.findAdmins();
+        
+        model.setRowCount(0);
+        for(int i = 0; i < admins.size(); i++)
+        {
+             model.addRow(new Object[] { admins.get(i).getId(), admins.get(i).getFirstName(), admins.get(i).getLastName(),
+                          admins.get(i).getPersonId(), admins.get(i).getEmail(), admins.get(i).getPassword()});
+        }
+        adminTable.setModel(model);
+    }
+    */
+    
+    public void fillGuestTable() 
+    {
+        ArrayList<Guest> guests = qMethods.findGuests();
+        
+        model = (DefaultTableModel) guestTable.getModel();
+        model.setRowCount(0);
+        for(int i = 0; i < guests.size(); i++)
+        {
+             model.addRow(new Object[] { guests.get(i).getId(), guests.get(i).getFirstName(), guests.get(i).getLastName(),
+                          guests.get(i).getPersonId(), guests.get(i).getEmail(), guests.get(i).getPassword()});
+        }
+        guestTable.setModel(model);
+    }
+    
+    public void fillLibrarianTable()
+    {
+        ArrayList<Librarian> librarians = qMethods.findLibrarians();
+        
+        model = (DefaultTableModel) librarianTable.getModel();
+        model.setRowCount(0);
+        for(int i = 0; i < librarians.size(); i++)
+        {
+             model.addRow(new Object[] { librarians.get(i).getId(), librarians.get(i).getFirstName(), librarians.get(i).getLastName(),
+                          librarians.get(i).getPersonId(), librarians.get(i).getEmail(), librarians.get(i).getPassword()});
+        }
+        librarianTable.setModel(model);
     }
 
     /**
@@ -83,7 +137,7 @@ public class Admin extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jUserInfoTable = new javax.swing.JTable();
+        guestTable = new javax.swing.JTable();
         jLabel19 = new javax.swing.JLabel();
         jLabelEditUsersUpdate2 = new javax.swing.JLabel();
         jPanelTabLibrarian = new javax.swing.JPanel();
@@ -95,7 +149,7 @@ public class Admin extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabelEraseTab1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        librarianTable = new javax.swing.JTable();
         jLabel18 = new javax.swing.JLabel();
         jLabelEditUsersUpdate1 = new javax.swing.JLabel();
         jPanelTabAdmin = new javax.swing.JPanel();
@@ -107,7 +161,7 @@ public class Admin extends javax.swing.JFrame {
         jLabelEraseAdmin = new javax.swing.JLabel();
         jLabelEraseTab2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        adminTable = new javax.swing.JTable();
         jLabel16 = new javax.swing.JLabel();
         jLabelEditUsersUpdate = new javax.swing.JLabel();
         jPanelTitle5 = new javax.swing.JPanel();
@@ -129,6 +183,11 @@ public class Admin extends javax.swing.JFrame {
 
         jLabelEditUsersImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Redigera_80px.png"))); // NOI18N
         jLabelEditUsersImg.setAlignmentY(1.0F);
+        jLabelEditUsersImg.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEditUsersImgMouseClicked(evt);
+            }
+        });
 
         jLabelRegister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/add_user_80px.png"))); // NOI18N
         jLabelRegister.setAlignmentY(1.0F);
@@ -306,6 +365,11 @@ public class Admin extends javax.swing.JFrame {
 
         jTabbedPane.setBackground(new java.awt.Color(244, 244, 244));
         jTabbedPane.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jTabbedPane.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTabbedPaneKeyPressed(evt);
+            }
+        });
 
         jPanelTabUser.setBackground(new java.awt.Color(244, 244, 244));
 
@@ -343,7 +407,7 @@ public class Admin extends javax.swing.JFrame {
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
 
-        jUserInfoTable.setModel(new javax.swing.table.DefaultTableModel(
+        guestTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -354,7 +418,7 @@ public class Admin extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jUserInfoTable);
+        jScrollPane2.setViewportView(guestTable);
 
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_80px.png"))); // NOI18N
 
@@ -467,7 +531,7 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        librarianTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -478,7 +542,7 @@ public class Admin extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(librarianTable);
 
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_80px.png"))); // NOI18N
 
@@ -593,7 +657,7 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        adminTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -604,7 +668,7 @@ public class Admin extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
+        jScrollPane3.setViewportView(adminTable);
 
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_80px.png"))); // NOI18N
 
@@ -883,6 +947,16 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabelEditUsersUpdate2MouseClicked
 
+    private void jLabelEditUsersImgMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUsersImgMouseClicked
+        jTabbedPane.setVisible(true);
+        jPanelTabLibrarian.setEnabled(false);
+        jPanelTabLibrarian.setVisible(false);
+    }//GEN-LAST:event_jLabelEditUsersImgMouseClicked
+
+    private void jTabbedPaneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTabbedPaneKeyPressed
+
+    }//GEN-LAST:event_jTabbedPaneKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -922,9 +996,11 @@ public class Admin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable adminTable;
     private javax.swing.JComboBox boxUsers;
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnRegister;
+    private javax.swing.JTable guestTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -977,12 +1053,10 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTable jUserInfoTable;
+    private javax.swing.JTable librarianTable;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFirstname;
     private javax.swing.JTextField txtLastname;
