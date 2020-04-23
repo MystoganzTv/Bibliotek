@@ -508,7 +508,7 @@ public class Admin extends javax.swing.JFrame {
         //will automatically querry the new data
         int row = userInfoTable.getSelectedRow();
         int col = userInfoTable.getSelectedColumn();
-        txtSelectedData.setText(userInfoTable.getValueAt(row, col).toString());
+       // txtSelectedData.setText(userInfoTable.getValueAt(row, col).toString());
     }//GEN-LAST:event_userInfoTableMouseClicked
 
     /**
