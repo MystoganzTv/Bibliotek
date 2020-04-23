@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import se.database.QueryMethods;
 import se.model.ComboItem;
-//import se.model.Admin;
+import se.model.Admin;
 import se.model.Guest;
 import se.model.Librarian;
 import se.database.QueryMethods;
@@ -20,7 +20,7 @@ import se.database.QueryMethods;
  *
  * @author enriq
  */
-public class Admin extends javax.swing.JFrame {
+public class AdminHomePage extends javax.swing.JFrame {
 
     private QueryMethods queryMethods;
     private String[] colNames = {"Förnamn", "Efternamn", "Email", "PN", "Lösenord"};
@@ -30,7 +30,7 @@ public class Admin extends javax.swing.JFrame {
     /**
      * Creates new form StartPage1
      */
-    public Admin() {
+    public AdminHomePage() {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
@@ -48,13 +48,14 @@ public class Admin extends javax.swing.JFrame {
 
         fillGuestTable();
         fillLibrarianTable();
+        fillAdminTable();
     }
     
-    /* 
     public void fillAdminTable()
     {
-        ArrayList<Admins> admins = qMethods.findAdmins();
+        ArrayList<Admin> admins = qMethods.findAdmins();
         
+        model = (DefaultTableModel) adminTable.getModel();
         model.setRowCount(0);
         for(int i = 0; i < admins.size(); i++)
         {
@@ -63,7 +64,6 @@ public class Admin extends javax.swing.JFrame {
         }
         adminTable.setModel(model);
     }
-    */
     
     public void fillGuestTable() 
     {
@@ -974,13 +974,13 @@ public class Admin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -990,7 +990,7 @@ public class Admin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Admin().setVisible(true);
+                new AdminHomePage().setVisible(true);
             }
         });
     }
