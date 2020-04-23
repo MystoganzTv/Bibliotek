@@ -204,7 +204,7 @@
                                           </Group>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                               <Group type="102" attributes="0">
-                                                  <Component id="Usernametxt" max="32767" attributes="0"/>
+                                                  <Component id="PNTxt" max="32767" attributes="0"/>
                                                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                                               </Group>
                                               <Component id="Lastnametxt" min="-2" pref="212" max="-2" attributes="0"/>
@@ -233,7 +233,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="Usernamelbl" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                              <Component id="Usernametxt" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                              <Component id="PNTxt" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
@@ -279,7 +279,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Verdana" size="14" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Anv&#xe4;ndarnamn:"/>
+                    <Property name="text" type="java.lang.String" value="Personnummer:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="Passwordlbl">
@@ -320,7 +320,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="Usernametxt">
+                <Component class="javax.swing.JTextField" name="PNTxt">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
@@ -367,6 +367,9 @@
                       </Border>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SavebtnActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
