@@ -8,6 +8,8 @@ package se.view;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
 import se.database.QueryMethods;
 import se.model.ComboItem;
@@ -26,7 +28,7 @@ public class AdminHomePage extends javax.swing.JFrame {
     private String[] colNames = {"Förnamn", "Efternamn", "Email", "PN", "Lösenord"};
     private DefaultTableModel model = new DefaultTableModel(colNames, 0);
     private QueryMethods qMethods = new QueryMethods();
-    
+
     /**
      * Creates new form StartPage1
      */
@@ -34,8 +36,11 @@ public class AdminHomePage extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
-        jTabbedPane.setVisible(false);
+
+        jTabbedPaneEdit.setVisible(false);
+        jTabbedPaneReport.setVisible(false);
         jPanelRegister.setVisible(false);
+
         boxUsers.addItem(new ComboItem("Administratör", "1"));
         boxUsers.addItem(new ComboItem("Bibliotekarie", "2"));
         boxUsers.addItem(new ComboItem("Gäst", "3"));
@@ -50,45 +55,39 @@ public class AdminHomePage extends javax.swing.JFrame {
         fillLibrarianTable();
         fillAdminTable();
     }
-    
-    public void fillAdminTable()
-    {
+
+    public void fillAdminTable() {
         ArrayList<Admin> admins = qMethods.findAdmins();
-        
+
         model = (DefaultTableModel) adminTable.getModel();
         model.setRowCount(0);
-        for(int i = 0; i < admins.size(); i++)
-        {
-             model.addRow(new Object[] { admins.get(i).getId(), admins.get(i).getFirstName(), admins.get(i).getLastName(),
-                          admins.get(i).getPersonId(), admins.get(i).getEmail(), admins.get(i).getPassword()});
+        for (int i = 0; i < admins.size(); i++) {
+            model.addRow(new Object[]{admins.get(i).getId(), admins.get(i).getFirstName(), admins.get(i).getLastName(),
+                admins.get(i).getPersonId(), admins.get(i).getEmail(), admins.get(i).getPassword()});
         }
         adminTable.setModel(model);
     }
-    
-    public void fillGuestTable() 
-    {
+
+    public void fillGuestTable() {
         ArrayList<Guest> guests = qMethods.findGuests();
-        
+
         model = (DefaultTableModel) guestTable.getModel();
         model.setRowCount(0);
-        for(int i = 0; i < guests.size(); i++)
-        {
-             model.addRow(new Object[] { guests.get(i).getId(), guests.get(i).getFirstName(), guests.get(i).getLastName(),
-                          guests.get(i).getPersonId(), guests.get(i).getEmail(), guests.get(i).getPassword()});
+        for (int i = 0; i < guests.size(); i++) {
+            model.addRow(new Object[]{guests.get(i).getId(), guests.get(i).getFirstName(), guests.get(i).getLastName(),
+                guests.get(i).getPersonId(), guests.get(i).getEmail(), guests.get(i).getPassword()});
         }
         guestTable.setModel(model);
     }
-    
-    public void fillLibrarianTable()
-    {
+
+    public void fillLibrarianTable() {
         ArrayList<Librarian> librarians = qMethods.findLibrarians();
-        
+
         model = (DefaultTableModel) librarianTable.getModel();
         model.setRowCount(0);
-        for(int i = 0; i < librarians.size(); i++)
-        {
-             model.addRow(new Object[] { librarians.get(i).getId(), librarians.get(i).getFirstName(), librarians.get(i).getLastName(),
-                          librarians.get(i).getPersonId(), librarians.get(i).getEmail(), librarians.get(i).getPassword()});
+        for (int i = 0; i < librarians.size(); i++) {
+            model.addRow(new Object[]{librarians.get(i).getId(), librarians.get(i).getFirstName(), librarians.get(i).getLastName(),
+                librarians.get(i).getPersonId(), librarians.get(i).getEmail(), librarians.get(i).getPassword()});
         }
         librarianTable.setModel(model);
     }
@@ -101,10 +100,90 @@ public class AdminHomePage extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanelbackground = new javax.swing.JPanel();
         jLabelBackgroundPhoto = new javax.swing.JLabel();
-        jPanelWorkArea = new javax.swing.JPanel();
+        jPanelTitle = new javax.swing.JPanel();
+        jLabelTitle = new javax.swing.JLabel();
+        jLabelLogo1 = new javax.swing.JLabel();
+        jLabelLogo = new javax.swing.JLabel();
+        jLayeredPaneWorkArea = new javax.swing.JLayeredPane();
+        jTabbedPaneEdit = new javax.swing.JTabbedPane();
+        jPanelTabUser = new javax.swing.JPanel();
+        jLabelSearchUserText = new javax.swing.JLabel();
+        jTextFieldSearchUser = new javax.swing.JTextField();
+        jLabelSearchUserIcon = new javax.swing.JLabel();
+        jLabelEditUserIcon = new javax.swing.JLabel();
+        jLabelEditUserText = new javax.swing.JLabel();
+        jLabelEraseUserIcon = new javax.swing.JLabel();
+        jLabelEraseUserText = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        guestTable = new javax.swing.JTable();
+        jLabelUpdateUserIcon = new javax.swing.JLabel();
+        jLabelUpdateUserText = new javax.swing.JLabel();
+        jPanelTabLibrarian = new javax.swing.JPanel();
+        jLabelSearchLibrarianText = new javax.swing.JLabel();
+        jTextFieldSearchLibrarian = new javax.swing.JTextField();
+        jLabelSearchLibrarianIcon = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        librarianTable = new javax.swing.JTable();
+        jLabelUpdateLibrarianIcon = new javax.swing.JLabel();
+        jLabelEraseLibrarianIcon = new javax.swing.JLabel();
+        jLabelEraseLibrarianText = new javax.swing.JLabel();
+        jLabelUpdateLibrarianText = new javax.swing.JLabel();
+        jLabelEditLibrarianText = new javax.swing.JLabel();
+        jLabelEditLibrarianIcon = new javax.swing.JLabel();
+        jPanelTabAdmin = new javax.swing.JPanel();
+        jLabelSearchAdminText = new javax.swing.JLabel();
+        jTextFieldSearchAdmin = new javax.swing.JTextField();
+        jLabelSearchAdminIcon = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        adminTable = new javax.swing.JTable();
+        jLabelEraseAdminIcon = new javax.swing.JLabel();
+        jLabelEraseAdminText = new javax.swing.JLabel();
+        jLabelUpdateAdminText = new javax.swing.JLabel();
+        jLabelUpdateAdminIcon = new javax.swing.JLabel();
+        jLabelEditAdminIcon = new javax.swing.JLabel();
+        jLabelEditAdminText = new javax.swing.JLabel();
+        jTabbedPaneReport = new javax.swing.JTabbedPane();
+        jPanelTabBookings = new javax.swing.JPanel();
+        jLabelSearchBookingsText = new javax.swing.JLabel();
+        jTextFieldSearchBooking = new javax.swing.JTextField();
+        jLabelSearchBookingsIcon = new javax.swing.JLabel();
+        jLabelEditBookingsIcon = new javax.swing.JLabel();
+        jLabelEditBookingsText = new javax.swing.JLabel();
+        jLabelEraseBookingsIcon = new javax.swing.JLabel();
+        jLabelEraseBookingsText = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        BookingsTable = new javax.swing.JTable();
+        jLabelUpdateBookingsIcon = new javax.swing.JLabel();
+        jLabelUpdateBookingsText = new javax.swing.JLabel();
+        jPanelTabLendings = new javax.swing.JPanel();
+        jLabelSearchLendingText = new javax.swing.JLabel();
+        jTextFieldSearchLending = new javax.swing.JTextField();
+        jLabelSearchLendingIcon = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        LendingTable = new javax.swing.JTable();
+        jLabelUpdateLendingIcon = new javax.swing.JLabel();
+        jLabelEraseLendingIcon = new javax.swing.JLabel();
+        jLabelEraseLendingText = new javax.swing.JLabel();
+        jLabelUpdateLendingText = new javax.swing.JLabel();
+        jLabelEditLendingText = new javax.swing.JLabel();
+        jLabelEditLendingIcon = new javax.swing.JLabel();
+        jPanelTabStock = new javax.swing.JPanel();
+        jLabelSearchStockText = new javax.swing.JLabel();
+        jTextFieldSearchStock = new javax.swing.JTextField();
+        jLabelSearchStockIcon = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        StockTable = new javax.swing.JTable();
+        jLabelEraseStockIcon = new javax.swing.JLabel();
+        jLabelEraseStockText = new javax.swing.JLabel();
+        jLabelUpdateStockText = new javax.swing.JLabel();
+        jLabelUpdateStockIcon = new javax.swing.JLabel();
+        jLabelEditStockIcon = new javax.swing.JLabel();
+        jLabelEditStockText = new javax.swing.JLabel();
+        jPanelAdminToolRegister = new javax.swing.JPanel();
         jPanelAdminTools = new javax.swing.JPanel();
         jLabelEditUsersImg = new javax.swing.JLabel();
         jLabelRegister = new javax.swing.JLabel();
@@ -127,59 +206,819 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         btnRegister = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
-        jTabbedPane = new javax.swing.JTabbedPane();
-        jPanelTabUser = new javax.swing.JPanel();
-        jLabelEditUsersImg1 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabelEditUsersTab = new javax.swing.JLabel();
-        jLabelEraseTab = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        guestTable = new javax.swing.JTable();
-        jLabel19 = new javax.swing.JLabel();
-        jLabelEditUsersUpdate2 = new javax.swing.JLabel();
-        jPanelTabLibrarian = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jLabelEditUsersImg2 = new javax.swing.JLabel();
-        jLabelEditUsersTab1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabelEraseTab1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        librarianTable = new javax.swing.JTable();
-        jLabel18 = new javax.swing.JLabel();
-        jLabelEditUsersUpdate1 = new javax.swing.JLabel();
-        jPanelTabAdmin = new javax.swing.JPanel();
-        jLabelSearchAdmin = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
-        jLabelEditUsersAdmin = new javax.swing.JLabel();
-        jLabelEditUsersTab2 = new javax.swing.JLabel();
-        jLabelEraseAdmin = new javax.swing.JLabel();
-        jLabelEraseTab2 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        adminTable = new javax.swing.JTable();
-        jLabel16 = new javax.swing.JLabel();
-        jLabelEditUsersUpdate = new javax.swing.JLabel();
-        jPanelTitle5 = new javax.swing.JPanel();
-        jLabelTitle5 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanelbackground.setBackground(new java.awt.Color(244, 244, 244));
+        jPanelbackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelBackgroundPhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/AdminHome_small.jpg"))); // NOI18N
+        jPanelbackground.add(jLabelBackgroundPhoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, 590));
 
-        jPanelWorkArea.setBackground(new java.awt.Color(244, 244, 244));
+        jPanelTitle.setBackground(new java.awt.Color(133, 102, 170));
+
+        jLabelTitle.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        jLabelTitle.setForeground(new java.awt.Color(64, 186, 213));
+        jLabelTitle.setText("Admin  ");
+
+        jLabelLogo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Logo letras libro.png"))); // NOI18N
+
+        jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Logo libro.png"))); // NOI18N
+        jLabelLogo.setPreferredSize(new java.awt.Dimension(250, 134));
+
+        javax.swing.GroupLayout jPanelTitleLayout = new javax.swing.GroupLayout(jPanelTitle);
+        jPanelTitle.setLayout(jPanelTitleLayout);
+        jPanelTitleLayout.setHorizontalGroup(
+            jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelLogo1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1134, Short.MAX_VALUE)
+                .addComponent(jLabelTitle)
+                .addGap(49, 49, 49))
+        );
+        jPanelTitleLayout.setVerticalGroup(
+            jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTitleLayout.createSequentialGroup()
+                .addComponent(jLabelLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
+                        .addComponent(jLabelLogo1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
+                        .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33))))
+        );
+
+        jPanelbackground.add(jPanelTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1670, -1));
+
+        jTabbedPaneEdit.setForeground(new java.awt.Color(105, 131, 170));
+        jTabbedPaneEdit.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+
+        jLabelSearchUserText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelSearchUserText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelSearchUserText.setText("Sök");
+
+        jLabelSearchUserIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
+
+        jLabelEditUserIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Redigera_80px.png"))); // NOI18N
+        jLabelEditUserIcon.setAlignmentY(1.0F);
+        jLabelEditUserIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEditUserIconMouseClicked(evt);
+            }
+        });
+
+        jLabelEditUserText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelEditUserText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelEditUserText.setText("Redigera");
+        jLabelEditUserText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEditUserTextMouseClicked(evt);
+            }
+        });
+
+        jLabelEraseUserIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/trash_can_80px.png"))); // NOI18N
+
+        jLabelEraseUserText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelEraseUserText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelEraseUserText.setText("Ta bort");
+        jLabelEraseUserText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEraseUserTextMouseClicked(evt);
+            }
+        });
+
+        guestTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane7.setViewportView(guestTable);
+
+        jLabelUpdateUserIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_80px.png"))); // NOI18N
+
+        jLabelUpdateUserText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelUpdateUserText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelUpdateUserText.setText("Uppdatera");
+        jLabelUpdateUserText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelUpdateUserTextMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelTabUserLayout = new javax.swing.GroupLayout(jPanelTabUser);
+        jPanelTabUser.setLayout(jPanelTabUserLayout);
+        jPanelTabUserLayout.setHorizontalGroup(
+            jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTabUserLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelTabUserLayout.createSequentialGroup()
+                        .addGroup(jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelEditUserIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanelTabUserLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabelEditUserText, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanelTabUserLayout.createSequentialGroup()
+                                .addComponent(jLabelUpdateUserIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelEraseUserIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelTabUserLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabelUpdateUserText, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelEraseUserText, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12))))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabUserLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelSearchUserText, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldSearchUser, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelSearchUserIcon)
+                .addContainerGap())
+        );
+        jPanelTabUserLayout.setVerticalGroup(
+            jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabUserLayout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addGroup(jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelSearchUserIcon, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextFieldSearchUser, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelSearchUserText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelEraseUserIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEditUserIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelUpdateUserIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelUpdateUserText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEraseUserText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEditUserText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12))
+        );
+
+        jTabbedPaneEdit.addTab("Medlemmar", jPanelTabUser);
+
+        jLabelSearchLibrarianText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelSearchLibrarianText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelSearchLibrarianText.setText("Sök");
+
+        jLabelSearchLibrarianIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
+
+        librarianTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane8.setViewportView(librarianTable);
+
+        jLabelUpdateLibrarianIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_80px.png"))); // NOI18N
+
+        jLabelEraseLibrarianIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/trash_can_80px.png"))); // NOI18N
+
+        jLabelEraseLibrarianText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelEraseLibrarianText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelEraseLibrarianText.setText("Ta bort");
+        jLabelEraseLibrarianText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEraseLibrarianTextMouseClicked(evt);
+            }
+        });
+
+        jLabelUpdateLibrarianText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelUpdateLibrarianText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelUpdateLibrarianText.setText("Uppdatera");
+        jLabelUpdateLibrarianText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelUpdateLibrarianTextMouseClicked(evt);
+            }
+        });
+
+        jLabelEditLibrarianText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelEditLibrarianText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelEditLibrarianText.setText("Redigera");
+        jLabelEditLibrarianText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEditLibrarianTextMouseClicked(evt);
+            }
+        });
+
+        jLabelEditLibrarianIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Redigera_80px.png"))); // NOI18N
+        jLabelEditLibrarianIcon.setAlignmentY(1.0F);
+        jLabelEditLibrarianIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEditLibrarianIconMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelTabLibrarianLayout = new javax.swing.GroupLayout(jPanelTabLibrarian);
+        jPanelTabLibrarian.setLayout(jPanelTabLibrarianLayout);
+        jPanelTabLibrarianLayout.setHorizontalGroup(
+            jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTabLibrarianLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelTabLibrarianLayout.createSequentialGroup()
+                        .addGroup(jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelEditLibrarianIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanelTabLibrarianLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabelEditLibrarianText, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanelTabLibrarianLayout.createSequentialGroup()
+                                .addComponent(jLabelUpdateLibrarianIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelEraseLibrarianIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelTabLibrarianLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabelUpdateLibrarianText, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelEraseLibrarianText, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12))))
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLibrarianLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelSearchLibrarianText, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldSearchLibrarian, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelSearchLibrarianIcon)
+                .addContainerGap())
+        );
+        jPanelTabLibrarianLayout.setVerticalGroup(
+            jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLibrarianLayout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addGroup(jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelSearchLibrarianIcon, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextFieldSearchLibrarian, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelSearchLibrarianText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelEraseLibrarianIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEditLibrarianIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelUpdateLibrarianIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelUpdateLibrarianText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEraseLibrarianText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEditLibrarianText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12))
+        );
+
+        jTabbedPaneEdit.addTab("Bibliotekarier", jPanelTabLibrarian);
+
+        jLabelSearchAdminText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelSearchAdminText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelSearchAdminText.setText("Sök");
+
+        jLabelSearchAdminIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
+
+        adminTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane9.setViewportView(adminTable);
+
+        jLabelEraseAdminIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/trash_can_80px.png"))); // NOI18N
+
+        jLabelEraseAdminText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelEraseAdminText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelEraseAdminText.setText("Ta bort");
+        jLabelEraseAdminText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEraseAdminTextMouseClicked(evt);
+            }
+        });
+
+        jLabelUpdateAdminText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelUpdateAdminText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelUpdateAdminText.setText("Uppdatera");
+        jLabelUpdateAdminText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelUpdateAdminTextMouseClicked(evt);
+            }
+        });
+
+        jLabelUpdateAdminIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_80px.png"))); // NOI18N
+
+        jLabelEditAdminIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Redigera_80px.png"))); // NOI18N
+        jLabelEditAdminIcon.setAlignmentY(1.0F);
+        jLabelEditAdminIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEditAdminIconMouseClicked(evt);
+            }
+        });
+
+        jLabelEditAdminText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelEditAdminText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelEditAdminText.setText("Redigera");
+        jLabelEditAdminText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEditAdminTextMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelTabAdminLayout = new javax.swing.GroupLayout(jPanelTabAdmin);
+        jPanelTabAdmin.setLayout(jPanelTabAdminLayout);
+        jPanelTabAdminLayout.setHorizontalGroup(
+            jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTabAdminLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelTabAdminLayout.createSequentialGroup()
+                        .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelEditAdminIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanelTabAdminLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabelEditAdminText, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanelTabAdminLayout.createSequentialGroup()
+                                .addComponent(jLabelUpdateAdminIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelEraseAdminIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelTabAdminLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabelUpdateAdminText, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelEraseAdminText, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12))))
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabAdminLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelSearchAdminText, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldSearchAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelSearchAdminIcon)
+                .addContainerGap())
+        );
+        jPanelTabAdminLayout.setVerticalGroup(
+            jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabAdminLayout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelSearchAdminIcon, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextFieldSearchAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelSearchAdminText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelEraseAdminIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEditAdminIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelUpdateAdminIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelUpdateAdminText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEraseAdminText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEditAdminText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12))
+        );
+
+        jTabbedPaneEdit.addTab("Administratörer", jPanelTabAdmin);
+
+        jTabbedPaneReport.setForeground(new java.awt.Color(105, 131, 170));
+        jTabbedPaneReport.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+
+        jLabelSearchBookingsText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelSearchBookingsText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelSearchBookingsText.setText("Sök");
+
+        jLabelSearchBookingsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
+
+        jLabelEditBookingsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Redigera_80px.png"))); // NOI18N
+        jLabelEditBookingsIcon.setAlignmentY(1.0F);
+        jLabelEditBookingsIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEditBookingsIconMouseClicked(evt);
+            }
+        });
+
+        jLabelEditBookingsText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelEditBookingsText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelEditBookingsText.setText("Redigera");
+        jLabelEditBookingsText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEditBookingsTextMouseClicked(evt);
+            }
+        });
+
+        jLabelEraseBookingsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/trash_can_80px.png"))); // NOI18N
+
+        jLabelEraseBookingsText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelEraseBookingsText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelEraseBookingsText.setText("Ta bort");
+        jLabelEraseBookingsText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEraseBookingsTextMouseClicked(evt);
+            }
+        });
+
+        BookingsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(BookingsTable);
+
+        jLabelUpdateBookingsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_80px.png"))); // NOI18N
+
+        jLabelUpdateBookingsText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelUpdateBookingsText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelUpdateBookingsText.setText("Uppdatera");
+        jLabelUpdateBookingsText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelUpdateBookingsTextMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelTabBookingsLayout = new javax.swing.GroupLayout(jPanelTabBookings);
+        jPanelTabBookings.setLayout(jPanelTabBookingsLayout);
+        jPanelTabBookingsLayout.setHorizontalGroup(
+            jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
+                        .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelEditBookingsIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabelEditBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
+                                .addComponent(jLabelUpdateBookingsIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelEraseBookingsIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabelUpdateBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelEraseBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12))))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookingsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelSearchBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldSearchBooking, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelSearchBookingsIcon)
+                .addContainerGap())
+        );
+        jPanelTabBookingsLayout.setVerticalGroup(
+            jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookingsLayout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelSearchBookingsIcon, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextFieldSearchBooking, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelSearchBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelEraseBookingsIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEditBookingsIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelUpdateBookingsIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelUpdateBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEraseBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEditBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12))
+        );
+
+        jTabbedPaneReport.addTab("Bokningar", jPanelTabBookings);
+
+        jLabelSearchLendingText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelSearchLendingText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelSearchLendingText.setText("Sök");
+
+        jLabelSearchLendingIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
+
+        LendingTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane5.setViewportView(LendingTable);
+
+        jLabelUpdateLendingIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_80px.png"))); // NOI18N
+
+        jLabelEraseLendingIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/trash_can_80px.png"))); // NOI18N
+
+        jLabelEraseLendingText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelEraseLendingText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelEraseLendingText.setText("Ta bort");
+        jLabelEraseLendingText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEraseLendingTextMouseClicked(evt);
+            }
+        });
+
+        jLabelUpdateLendingText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelUpdateLendingText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelUpdateLendingText.setText("Uppdatera");
+        jLabelUpdateLendingText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelUpdateLendingTextMouseClicked(evt);
+            }
+        });
+
+        jLabelEditLendingText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelEditLendingText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelEditLendingText.setText("Redigera");
+        jLabelEditLendingText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEditLendingTextMouseClicked(evt);
+            }
+        });
+
+        jLabelEditLendingIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Redigera_80px.png"))); // NOI18N
+        jLabelEditLendingIcon.setAlignmentY(1.0F);
+        jLabelEditLendingIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEditLendingIconMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelTabLendingsLayout = new javax.swing.GroupLayout(jPanelTabLendings);
+        jPanelTabLendings.setLayout(jPanelTabLendingsLayout);
+        jPanelTabLendingsLayout.setHorizontalGroup(
+            jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
+                        .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelEditLendingIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabelEditLendingText, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
+                                .addComponent(jLabelUpdateLendingIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelEraseLendingIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabelUpdateLendingText, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelEraseLendingText, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12))))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLendingsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelSearchLendingText, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldSearchLending, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelSearchLendingIcon)
+                .addContainerGap())
+        );
+        jPanelTabLendingsLayout.setVerticalGroup(
+            jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLendingsLayout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelSearchLendingIcon, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextFieldSearchLending, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelSearchLendingText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelEraseLendingIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEditLendingIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelUpdateLendingIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelUpdateLendingText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEraseLendingText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEditLendingText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12))
+        );
+
+        jTabbedPaneReport.addTab("Utlåning", jPanelTabLendings);
+
+        jLabelSearchStockText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelSearchStockText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelSearchStockText.setText("Sök");
+
+        jLabelSearchStockIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
+
+        StockTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane6.setViewportView(StockTable);
+
+        jLabelEraseStockIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/trash_can_80px.png"))); // NOI18N
+
+        jLabelEraseStockText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelEraseStockText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelEraseStockText.setText("Ta bort");
+        jLabelEraseStockText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEraseStockTextMouseClicked(evt);
+            }
+        });
+
+        jLabelUpdateStockText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelUpdateStockText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelUpdateStockText.setText("Uppdatera");
+        jLabelUpdateStockText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelUpdateStockTextMouseClicked(evt);
+            }
+        });
+
+        jLabelUpdateStockIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_80px.png"))); // NOI18N
+
+        jLabelEditStockIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Redigera_80px.png"))); // NOI18N
+        jLabelEditStockIcon.setAlignmentY(1.0F);
+        jLabelEditStockIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEditStockIconMouseClicked(evt);
+            }
+        });
+
+        jLabelEditStockText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelEditStockText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelEditStockText.setText("Redigera");
+        jLabelEditStockText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEditStockTextMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelTabStockLayout = new javax.swing.GroupLayout(jPanelTabStock);
+        jPanelTabStock.setLayout(jPanelTabStockLayout);
+        jPanelTabStockLayout.setHorizontalGroup(
+            jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTabStockLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelTabStockLayout.createSequentialGroup()
+                        .addGroup(jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelEditStockIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanelTabStockLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabelEditStockText, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanelTabStockLayout.createSequentialGroup()
+                                .addComponent(jLabelUpdateStockIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelEraseStockIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelTabStockLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabelUpdateStockText, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelEraseStockText, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12))))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabStockLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelSearchStockText, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldSearchStock, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelSearchStockIcon)
+                .addContainerGap())
+        );
+        jPanelTabStockLayout.setVerticalGroup(
+            jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabStockLayout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addGroup(jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelSearchStockIcon, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextFieldSearchStock, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelSearchStockText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelEraseStockIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEditStockIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelUpdateStockIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelUpdateStockText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEraseStockText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEditStockText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12))
+        );
+
+        jTabbedPaneReport.addTab("Lager", jPanelTabStock);
+
+        jLayeredPaneWorkArea.setLayer(jTabbedPaneEdit, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPaneWorkArea.setLayer(jTabbedPaneReport, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPaneWorkAreaLayout = new javax.swing.GroupLayout(jLayeredPaneWorkArea);
+        jLayeredPaneWorkArea.setLayout(jLayeredPaneWorkAreaLayout);
+        jLayeredPaneWorkAreaLayout.setHorizontalGroup(
+            jLayeredPaneWorkAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 730, Short.MAX_VALUE)
+            .addGroup(jLayeredPaneWorkAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPaneWorkAreaLayout.createSequentialGroup()
+                    .addContainerGap(26, Short.MAX_VALUE)
+                    .addGroup(jLayeredPaneWorkAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jTabbedPaneReport, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTabbedPaneEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(33, Short.MAX_VALUE)))
+        );
+        jLayeredPaneWorkAreaLayout.setVerticalGroup(
+            jLayeredPaneWorkAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1216, Short.MAX_VALUE)
+            .addGroup(jLayeredPaneWorkAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPaneWorkAreaLayout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTabbedPaneReport, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTabbedPaneEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
+        );
+
+        jPanelbackground.add(jLayeredPaneWorkArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(937, 158, 730, 620));
+
+        jPanelAdminToolRegister.setLayout(new java.awt.BorderLayout());
 
         jPanelAdminTools.setBackground(new java.awt.Color(244, 244, 244));
         jPanelAdminTools.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Admin verktyg", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 1, 18), new java.awt.Color(105, 131, 170))); // NOI18N
         jPanelAdminTools.setAlignmentY(1.0F);
+        jPanelAdminTools.setLayout(new java.awt.GridBagLayout());
 
         jLabelEditUsersImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Redigera_80px.png"))); // NOI18N
         jLabelEditUsersImg.setAlignmentY(1.0F);
@@ -188,12 +1027,42 @@ public class AdminHomePage extends javax.swing.JFrame {
                 jLabelEditUsersImgMouseClicked(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(52, 18, 0, 0);
+        jPanelAdminTools.add(jLabelEditUsersImg, gridBagConstraints);
 
         jLabelRegister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/add_user_80px.png"))); // NOI18N
         jLabelRegister.setAlignmentY(1.0F);
+        jLabelRegister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelRegisterMouseClicked(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(52, 12, 0, 0);
+        jPanelAdminTools.add(jLabelRegister, gridBagConstraints);
 
         jLabelReport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/account_80px.png"))); // NOI18N
         jLabelReport.setAlignmentY(1.0F);
+        jLabelReport.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelReportMouseClicked(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(52, 18, 0, 0);
+        jPanelAdminTools.add(jLabelReport, gridBagConstraints);
 
         jLabelEditUsers.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabelEditUsers.setForeground(new java.awt.Color(105, 131, 170));
@@ -203,6 +1072,13 @@ public class AdminHomePage extends javax.swing.JFrame {
                 jLabelEditUsersMouseClicked(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 18, 35, 0);
+        jPanelAdminTools.add(jLabelEditUsers, gridBagConstraints);
 
         jLabel2.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(105, 131, 170));
@@ -212,6 +1088,12 @@ public class AdminHomePage extends javax.swing.JFrame {
                 jLabel2MouseClicked(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 17, 35, 0);
+        jPanelAdminTools.add(jLabel2, gridBagConstraints);
 
         jLabel3.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(105, 131, 170));
@@ -221,58 +1103,43 @@ public class AdminHomePage extends javax.swing.JFrame {
                 jLabel3MouseClicked(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 18, 35, 30);
+        jPanelAdminTools.add(jLabel3, gridBagConstraints);
 
-        javax.swing.GroupLayout jPanelAdminToolsLayout = new javax.swing.GroupLayout(jPanelAdminTools);
-        jPanelAdminTools.setLayout(jPanelAdminToolsLayout);
-        jPanelAdminToolsLayout.setHorizontalGroup(
-            jPanelAdminToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelAdminToolsLayout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addGroup(jPanelAdminToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabelRegister)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelAdminToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelEditUsersImg)
-                    .addComponent(jLabelEditUsers))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelAdminToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelReport)
-                    .addComponent(jLabel3))
-                .addContainerGap())
-        );
-
-        jPanelAdminToolsLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabelEditUsersImg, jLabelRegister, jLabelReport});
-
-        jPanelAdminToolsLayout.setVerticalGroup(
-            jPanelAdminToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelAdminToolsLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(jPanelAdminToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelReport)
-                    .addComponent(jLabelRegister)
-                    .addComponent(jLabelEditUsersImg))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelAdminToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelEditUsers)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
-                .addContainerGap(30, Short.MAX_VALUE))
-        );
+        jPanelAdminToolRegister.add(jPanelAdminTools, java.awt.BorderLayout.PAGE_START);
 
         jPanelRegister.setBackground(new java.awt.Color(244, 244, 244));
         jPanelRegister.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registreringsformulär", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 1, 18), new java.awt.Color(105, 131, 170))); // NOI18N
 
+        jLabel10.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(105, 131, 170));
         jLabel10.setText("Typ av användare:");
 
+        boxUsers.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        boxUsers.setForeground(new java.awt.Color(105, 131, 170));
+
+        jLabel11.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(105, 131, 170));
         jLabel11.setText("Lösenord:");
 
+        jLabel12.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(105, 131, 170));
         jLabel12.setText("PN:");
 
+        jLabel13.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(105, 131, 170));
         jLabel13.setText("Email:");
 
+        jLabel14.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(105, 131, 170));
         jLabel14.setText("Efternamn:");
 
+        jLabel15.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(105, 131, 170));
         jLabel15.setText("Förnamn:");
 
         btnRegister.setText("Registrera");
@@ -294,564 +1161,107 @@ public class AdminHomePage extends javax.swing.JFrame {
         jPanelRegisterLayout.setHorizontalGroup(
             jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRegisterLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelRegisterLayout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanelRegisterLayout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addGap(81, 81, 81)
+                                .addComponent(txtPN))
+                            .addGroup(jPanelRegisterLayout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addGap(38, 38, 38)
+                                .addComponent(txtLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelRegisterLayout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addGap(66, 66, 66)
+                                .addComponent(txtEmail))
+                            .addGroup(jPanelRegisterLayout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(43, 43, 43)
+                                .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanelRegisterLayout.createSequentialGroup()
+                                        .addComponent(btnRegister)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtPassword))))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanelRegisterLayout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtPN, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelRegisterLayout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelRegisterLayout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelRegisterLayout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegisterLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegisterLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel10)
                                 .addGap(18, 18, 18)
                                 .addComponent(boxUsers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegisterLayout.createSequentialGroup()
-                                .addComponent(btnRegister)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                            .addGroup(jPanelRegisterLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel15)
+                                .addGap(47, 47, 47)
+                                .addComponent(txtFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(28, 28, 28)))
+                .addGap(6, 6, 6))
         );
         jPanelRegisterLayout.setVerticalGroup(
             jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegisterLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(boxUsers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addGap(27, 27, 27)
-                .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
+            .addGroup(jPanelRegisterLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelRegisterLayout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel10))
+                    .addComponent(boxUsers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelRegisterLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel15))
                     .addComponent(txtFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(txtLastname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(txtPN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegister)
-                    .addComponent(btnClose))
-                .addContainerGap(39, Short.MAX_VALUE))
-        );
-
-        jTabbedPane.setBackground(new java.awt.Color(244, 244, 244));
-        jTabbedPane.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jTabbedPane.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTabbedPaneKeyPressed(evt);
-            }
-        });
-
-        jPanelTabUser.setBackground(new java.awt.Color(244, 244, 244));
-
-        jLabelEditUsersImg1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Redigera_80px.png"))); // NOI18N
-        jLabelEditUsersImg1.setAlignmentY(1.0F);
-        jLabelEditUsersImg1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditUsersImg1MouseClicked(evt);
-            }
-        });
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/trash_can_80px.png"))); // NOI18N
-
-        jLabelEditUsersTab.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelEditUsersTab.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelEditUsersTab.setText("Redigera");
-        jLabelEditUsersTab.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditUsersTabMouseClicked(evt);
-            }
-        });
-
-        jLabelEraseTab.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelEraseTab.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelEraseTab.setText("Ta bort");
-        jLabelEraseTab.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEraseTabMouseClicked(evt);
-            }
-        });
-
-        jLabel5.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(105, 131, 170));
-        jLabel5.setText("Sök");
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
-
-        guestTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(guestTable);
-
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_80px.png"))); // NOI18N
-
-        jLabelEditUsersUpdate2.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelEditUsersUpdate2.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelEditUsersUpdate2.setText("Uppdatera");
-        jLabelEditUsersUpdate2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditUsersUpdate2MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelTabUserLayout = new javax.swing.GroupLayout(jPanelTabUser);
-        jPanelTabUser.setLayout(jPanelTabUserLayout);
-        jPanelTabUserLayout.setHorizontalGroup(
-            jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTabUserLayout.createSequentialGroup()
-                .addGroup(jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelTabUserLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelEditUsersImg1)
-                            .addComponent(jLabelEditUsersTab))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel19)
-                            .addGroup(jPanelTabUserLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabelEditUsersUpdate2)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabUserLayout.createSequentialGroup()
-                                .addComponent(jLabelEraseTab)
-                                .addGap(13, 13, 13))))
-                    .addGroup(jPanelTabUserLayout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanelTabUserLayout.setVerticalGroup(
-            jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTabUserLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                .addGroup(jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelTabUserLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabelEraseTab))
-                    .addGroup(jPanelTabUserLayout.createSequentialGroup()
-                        .addComponent(jLabelEditUsersImg1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabelEditUsersTab))
-                    .addGroup(jPanelTabUserLayout.createSequentialGroup()
-                        .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabelEditUsersUpdate2)))
-                .addContainerGap())
-        );
-
-        jTabbedPane.addTab("Användare", jPanelTabUser);
-
-        jPanelTabLibrarian.setBackground(new java.awt.Color(244, 244, 244));
-
-        jLabel7.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(105, 131, 170));
-        jLabel7.setText("Sök");
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
-
-        jLabelEditUsersImg2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Redigera_80px.png"))); // NOI18N
-        jLabelEditUsersImg2.setAlignmentY(1.0F);
-        jLabelEditUsersImg2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditUsersImg2MouseClicked(evt);
-            }
-        });
-
-        jLabelEditUsersTab1.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelEditUsersTab1.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelEditUsersTab1.setText("Redigera");
-        jLabelEditUsersTab1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditUsersTab1MouseClicked(evt);
-            }
-        });
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/trash_can_80px.png"))); // NOI18N
-
-        jLabelEraseTab1.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelEraseTab1.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelEraseTab1.setText("Ta bort");
-        jLabelEraseTab1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEraseTab1MouseClicked(evt);
-            }
-        });
-
-        librarianTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(librarianTable);
-
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_80px.png"))); // NOI18N
-
-        jLabelEditUsersUpdate1.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelEditUsersUpdate1.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelEditUsersUpdate1.setText("Uppdatera");
-        jLabelEditUsersUpdate1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditUsersUpdate1MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelTabLibrarianLayout = new javax.swing.GroupLayout(jPanelTabLibrarian);
-        jPanelTabLibrarian.setLayout(jPanelTabLibrarianLayout);
-        jPanelTabLibrarianLayout.setHorizontalGroup(
-            jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLibrarianLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelEditUsersImg2)
-                    .addComponent(jLabelEditUsersTab1))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel18)
-                    .addGroup(jPanelTabLibrarianLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabelEditUsersUpdate1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLibrarianLayout.createSequentialGroup()
-                        .addComponent(jLabelEraseTab1)
-                        .addGap(13, 13, 13)))
-                .addContainerGap())
-            .addGroup(jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanelTabLibrarianLayout.createSequentialGroup()
-                    .addGap(42, 42, 42)
-                    .addComponent(jLabel7)
-                    .addGap(18, 18, 18)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jLabel8)
-                    .addContainerGap(369, Short.MAX_VALUE)))
-        );
-        jPanelTabLibrarianLayout.setVerticalGroup(
-            jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTabLibrarianLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
-                .addGroup(jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelTabLibrarianLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabelEraseTab1))
-                    .addGroup(jPanelTabLibrarianLayout.createSequentialGroup()
-                        .addComponent(jLabelEditUsersImg2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabelEditUsersTab1))
-                    .addGroup(jPanelTabLibrarianLayout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabelEditUsersUpdate1)))
-                .addContainerGap())
-            .addGroup(jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanelTabLibrarianLayout.createSequentialGroup()
-                    .addGap(17, 17, 17)
-                    .addGroup(jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)))
-                    .addContainerGap(629, Short.MAX_VALUE)))
-        );
-
-        jTabbedPane.addTab("Bibliotekarier", jPanelTabLibrarian);
-
-        jPanelTabAdmin.setBackground(new java.awt.Color(244, 244, 244));
-
-        jLabelSearchAdmin.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelSearchAdmin.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelSearchAdmin.setText("Sök");
-
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
-
-        jLabelEditUsersAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Redigera_80px.png"))); // NOI18N
-        jLabelEditUsersAdmin.setAlignmentY(1.0F);
-        jLabelEditUsersAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditUsersAdminMouseClicked(evt);
-            }
-        });
-
-        jLabelEditUsersTab2.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelEditUsersTab2.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelEditUsersTab2.setText("Redigera");
-        jLabelEditUsersTab2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditUsersTab2MouseClicked(evt);
-            }
-        });
-
-        jLabelEraseAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/trash_can_80px.png"))); // NOI18N
-
-        jLabelEraseTab2.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelEraseTab2.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelEraseTab2.setText("Ta bort");
-        jLabelEraseTab2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEraseTab2MouseClicked(evt);
-            }
-        });
-
-        adminTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane3.setViewportView(adminTable);
-
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_80px.png"))); // NOI18N
-
-        jLabelEditUsersUpdate.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelEditUsersUpdate.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelEditUsersUpdate.setText("Uppdatera");
-        jLabelEditUsersUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditUsersUpdateMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelTabAdminLayout = new javax.swing.GroupLayout(jPanelTabAdmin);
-        jPanelTabAdmin.setLayout(jPanelTabAdminLayout);
-        jPanelTabAdminLayout.setHorizontalGroup(
-            jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabAdminLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelEditUsersAdmin, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabAdminLayout.createSequentialGroup()
-                        .addComponent(jLabelEditUsersTab2)
-                        .addGap(13, 13, 13)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel16)
-                    .addGroup(jPanelTabAdminLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabelEditUsersUpdate)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabAdminLayout.createSequentialGroup()
-                        .addComponent(jLabelEraseTab2)
-                        .addGap(15, 15, 15))
-                    .addComponent(jLabelEraseAdmin, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
-            .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanelTabAdminLayout.createSequentialGroup()
-                    .addGap(42, 42, 42)
-                    .addComponent(jLabelSearchAdmin)
-                    .addGap(18, 18, 18)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jLabel17)
-                    .addContainerGap(369, Short.MAX_VALUE)))
-        );
-        jPanelTabAdminLayout.setVerticalGroup(
-            jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTabAdminLayout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-                .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelTabAdminLayout.createSequentialGroup()
-                        .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelEditUsersAdmin)
-                            .addComponent(jLabelEraseAdmin))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelEraseTab2)
-                            .addComponent(jLabelEditUsersTab2)))
-                    .addGroup(jPanelTabAdminLayout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabelEditUsersUpdate)))
-                .addContainerGap())
-            .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanelTabAdminLayout.createSequentialGroup()
-                    .addGap(17, 17, 17)
-                    .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelSearchAdmin)))
-                    .addContainerGap(629, Short.MAX_VALUE)))
-        );
-
-        jTabbedPane.addTab("Administratörer", jPanelTabAdmin);
-
-        javax.swing.GroupLayout jPanelWorkAreaLayout = new javax.swing.GroupLayout(jPanelWorkArea);
-        jPanelWorkArea.setLayout(jPanelWorkAreaLayout);
-        jPanelWorkAreaLayout.setHorizontalGroup(
-            jPanelWorkAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelWorkAreaLayout.createSequentialGroup()
-                .addGroup(jPanelWorkAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanelRegister, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelAdminTools, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane)
-                .addContainerGap())
-        );
-        jPanelWorkAreaLayout.setVerticalGroup(
-            jPanelWorkAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelWorkAreaLayout.createSequentialGroup()
-                .addGroup(jPanelWorkAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelWorkAreaLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanelAdminTools, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanelRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelWorkAreaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 106, Short.MAX_VALUE))
-        );
-
-        jPanelTitle5.setBackground(new java.awt.Color(133, 102, 170));
-
-        jLabelTitle5.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        jLabelTitle5.setForeground(new java.awt.Color(64, 186, 213));
-        jLabelTitle5.setText("Admin  ");
-
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Logo letras libro.png"))); // NOI18N
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Logo libro.png"))); // NOI18N
-        jLabel9.setPreferredSize(new java.awt.Dimension(250, 134));
-
-        javax.swing.GroupLayout jPanelTitle5Layout = new javax.swing.GroupLayout(jPanelTitle5);
-        jPanelTitle5.setLayout(jPanelTitle5Layout);
-        jPanelTitle5Layout.setHorizontalGroup(
-            jPanelTitle5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitle5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel20)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelTitle5)
-                .addContainerGap())
-        );
-        jPanelTitle5Layout.setVerticalGroup(
-            jPanelTitle5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTitle5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelTitle5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitle5Layout.createSequentialGroup()
-                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitle5Layout.createSequentialGroup()
-                        .addComponent(jLabelTitle5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))))
-            .addGroup(jPanelTitle5Layout.createSequentialGroup()
-                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout jPanelbackgroundLayout = new javax.swing.GroupLayout(jPanelbackground);
-        jPanelbackground.setLayout(jPanelbackgroundLayout);
-        jPanelbackgroundLayout.setHorizontalGroup(
-            jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelbackgroundLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(jLabelBackgroundPhoto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanelWorkArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(jPanelTitle5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelRegisterLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel14))
+                    .addComponent(txtLastname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelRegisterLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel13))
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelRegisterLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel12))
+                    .addComponent(txtPN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelRegisterLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel11))
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnClose)
+                    .addComponent(btnRegister))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
-        jPanelbackgroundLayout.setVerticalGroup(
-            jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelbackgroundLayout.createSequentialGroup()
-                .addComponent(jPanelTitle5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelbackgroundLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanelWorkArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(jPanelbackgroundLayout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabelBackgroundPhoto)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
+
+        jPanelAdminToolRegister.add(jPanelRegister, java.awt.BorderLayout.CENTER);
+
+        jPanelbackground.add(jPanelAdminToolRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 178, 360, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelbackground, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelbackground, javax.swing.GroupLayout.PREFERRED_SIZE, 1667, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelbackground, javax.swing.GroupLayout.PREFERRED_SIZE, 883, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanelbackground, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -887,82 +1297,125 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
 
-        AdminReporting ar = new AdminReporting();
-        ar.setVisible(true);
-        this.setVisible(false);
+        jTabbedPaneReport.setVisible(true);
+        jTabbedPaneEdit.setVisible(false);
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabelEditUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUsersMouseClicked
-        jTabbedPane.setVisible(true);
-        jPanelTabLibrarian.setEnabled(false);
-        jPanelTabLibrarian.setVisible(false);
-
+        jTabbedPaneEdit.setVisible(true);
+        jTabbedPaneReport.setVisible(false);
     }//GEN-LAST:event_jLabelEditUsersMouseClicked
 
-    private void jLabelEditUsersTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUsersTabMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEditUsersTabMouseClicked
-
-    private void jLabelEraseTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseTabMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEraseTabMouseClicked
-
-    private void jLabelEditUsersImg1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUsersImg1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEditUsersImg1MouseClicked
-
-    private void jLabelEditUsersImg2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUsersImg2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEditUsersImg2MouseClicked
-
-    private void jLabelEditUsersTab1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUsersTab1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEditUsersTab1MouseClicked
-
-    private void jLabelEraseTab1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseTab1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEraseTab1MouseClicked
-
-    private void jLabelEditUsersAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUsersAdminMouseClicked
-
-        AdminUpdate au = new AdminUpdate();
-        au.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jLabelEditUsersAdminMouseClicked
-
-    private void jLabelEditUsersTab2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUsersTab2MouseClicked
-
-        AdminUpdate au = new AdminUpdate();
-        au.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jLabelEditUsersTab2MouseClicked
-
-    private void jLabelEraseTab2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseTab2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEraseTab2MouseClicked
-
-    private void jLabelEditUsersUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUsersUpdateMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEditUsersUpdateMouseClicked
-
-    private void jLabelEditUsersUpdate1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUsersUpdate1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEditUsersUpdate1MouseClicked
-
-    private void jLabelEditUsersUpdate2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUsersUpdate2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEditUsersUpdate2MouseClicked
-
     private void jLabelEditUsersImgMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUsersImgMouseClicked
-        jTabbedPane.setVisible(true);
-        jPanelTabLibrarian.setEnabled(false);
-        jPanelTabLibrarian.setVisible(false);
+        jTabbedPaneEdit.setVisible(true);
+        jTabbedPaneReport.setVisible(false);
     }//GEN-LAST:event_jLabelEditUsersImgMouseClicked
 
-    private void jTabbedPaneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTabbedPaneKeyPressed
+    private void jLabelEditBookingsIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditBookingsIconMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEditBookingsIconMouseClicked
 
-    }//GEN-LAST:event_jTabbedPaneKeyPressed
+    private void jLabelEditBookingsTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditBookingsTextMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEditBookingsTextMouseClicked
 
+    private void jLabelEraseBookingsTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseBookingsTextMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEraseBookingsTextMouseClicked
+
+    private void jLabelUpdateBookingsTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateBookingsTextMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelUpdateBookingsTextMouseClicked
+
+    private void jLabelEraseLendingTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseLendingTextMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEraseLendingTextMouseClicked
+
+    private void jLabelUpdateLendingTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateLendingTextMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelUpdateLendingTextMouseClicked
+
+    private void jLabelEditLendingTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditLendingTextMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEditLendingTextMouseClicked
+
+    private void jLabelEditLendingIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditLendingIconMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEditLendingIconMouseClicked
+
+    private void jLabelEraseStockTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseStockTextMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEraseStockTextMouseClicked
+
+    private void jLabelUpdateStockTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateStockTextMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelUpdateStockTextMouseClicked
+
+    private void jLabelEditStockIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditStockIconMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEditStockIconMouseClicked
+
+    private void jLabelEditStockTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditStockTextMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEditStockTextMouseClicked
+
+    private void jLabelEditUserIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUserIconMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEditUserIconMouseClicked
+
+    private void jLabelEditUserTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUserTextMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEditUserTextMouseClicked
+
+    private void jLabelEraseUserTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseUserTextMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEraseUserTextMouseClicked
+
+    private void jLabelUpdateUserTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateUserTextMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelUpdateUserTextMouseClicked
+
+    private void jLabelEraseLibrarianTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseLibrarianTextMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEraseLibrarianTextMouseClicked
+
+    private void jLabelUpdateLibrarianTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateLibrarianTextMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelUpdateLibrarianTextMouseClicked
+
+    private void jLabelEditLibrarianTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditLibrarianTextMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEditLibrarianTextMouseClicked
+
+    private void jLabelEditLibrarianIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditLibrarianIconMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEditLibrarianIconMouseClicked
+
+    private void jLabelEraseAdminTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseAdminTextMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEraseAdminTextMouseClicked
+
+    private void jLabelUpdateAdminTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateAdminTextMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelUpdateAdminTextMouseClicked
+
+    private void jLabelEditAdminIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditAdminIconMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEditAdminIconMouseClicked
+
+    private void jLabelEditAdminTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditAdminTextMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEditAdminTextMouseClicked
+
+    private void jLabelReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelReportMouseClicked
+
+        jTabbedPaneReport.setVisible(true);
+        jTabbedPaneEdit.setVisible(false);
+    }//GEN-LAST:event_jLabelReportMouseClicked
+
+    private void jLabelRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelRegisterMouseClicked
+        jPanelRegister.setVisible(true);
+    }//GEN-LAST:event_jLabelRegisterMouseClicked
     /**
      * @param args the command line arguments
      */
@@ -1002,66 +1455,104 @@ public class AdminHomePage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable BookingsTable;
+    private javax.swing.JTable LendingTable;
+    private javax.swing.JTable StockTable;
     private javax.swing.JTable adminTable;
     private javax.swing.JComboBox boxUsers;
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnRegister;
     private javax.swing.JTable guestTable;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelBackgroundPhoto;
+    private javax.swing.JLabel jLabelEditAdminIcon;
+    private javax.swing.JLabel jLabelEditAdminText;
+    private javax.swing.JLabel jLabelEditBookingsIcon;
+    private javax.swing.JLabel jLabelEditBookingsText;
+    private javax.swing.JLabel jLabelEditLendingIcon;
+    private javax.swing.JLabel jLabelEditLendingText;
+    private javax.swing.JLabel jLabelEditLibrarianIcon;
+    private javax.swing.JLabel jLabelEditLibrarianText;
+    private javax.swing.JLabel jLabelEditStockIcon;
+    private javax.swing.JLabel jLabelEditStockText;
+    private javax.swing.JLabel jLabelEditUserIcon;
+    private javax.swing.JLabel jLabelEditUserText;
     private javax.swing.JLabel jLabelEditUsers;
-    private javax.swing.JLabel jLabelEditUsersAdmin;
     private javax.swing.JLabel jLabelEditUsersImg;
-    private javax.swing.JLabel jLabelEditUsersImg1;
-    private javax.swing.JLabel jLabelEditUsersImg2;
-    private javax.swing.JLabel jLabelEditUsersTab;
-    private javax.swing.JLabel jLabelEditUsersTab1;
-    private javax.swing.JLabel jLabelEditUsersTab2;
-    private javax.swing.JLabel jLabelEditUsersUpdate;
-    private javax.swing.JLabel jLabelEditUsersUpdate1;
-    private javax.swing.JLabel jLabelEditUsersUpdate2;
-    private javax.swing.JLabel jLabelEraseAdmin;
-    private javax.swing.JLabel jLabelEraseTab;
-    private javax.swing.JLabel jLabelEraseTab1;
-    private javax.swing.JLabel jLabelEraseTab2;
+    private javax.swing.JLabel jLabelEraseAdminIcon;
+    private javax.swing.JLabel jLabelEraseAdminText;
+    private javax.swing.JLabel jLabelEraseBookingsIcon;
+    private javax.swing.JLabel jLabelEraseBookingsText;
+    private javax.swing.JLabel jLabelEraseLendingIcon;
+    private javax.swing.JLabel jLabelEraseLendingText;
+    private javax.swing.JLabel jLabelEraseLibrarianIcon;
+    private javax.swing.JLabel jLabelEraseLibrarianText;
+    private javax.swing.JLabel jLabelEraseStockIcon;
+    private javax.swing.JLabel jLabelEraseStockText;
+    private javax.swing.JLabel jLabelEraseUserIcon;
+    private javax.swing.JLabel jLabelEraseUserText;
+    private javax.swing.JLabel jLabelLogo;
+    private javax.swing.JLabel jLabelLogo1;
     private javax.swing.JLabel jLabelRegister;
     private javax.swing.JLabel jLabelReport;
-    private javax.swing.JLabel jLabelSearchAdmin;
-    private javax.swing.JLabel jLabelTitle5;
+    private javax.swing.JLabel jLabelSearchAdminIcon;
+    private javax.swing.JLabel jLabelSearchAdminText;
+    private javax.swing.JLabel jLabelSearchBookingsIcon;
+    private javax.swing.JLabel jLabelSearchBookingsText;
+    private javax.swing.JLabel jLabelSearchLendingIcon;
+    private javax.swing.JLabel jLabelSearchLendingText;
+    private javax.swing.JLabel jLabelSearchLibrarianIcon;
+    private javax.swing.JLabel jLabelSearchLibrarianText;
+    private javax.swing.JLabel jLabelSearchStockIcon;
+    private javax.swing.JLabel jLabelSearchStockText;
+    private javax.swing.JLabel jLabelSearchUserIcon;
+    private javax.swing.JLabel jLabelSearchUserText;
+    private javax.swing.JLabel jLabelTitle;
+    private javax.swing.JLabel jLabelUpdateAdminIcon;
+    private javax.swing.JLabel jLabelUpdateAdminText;
+    private javax.swing.JLabel jLabelUpdateBookingsIcon;
+    private javax.swing.JLabel jLabelUpdateBookingsText;
+    private javax.swing.JLabel jLabelUpdateLendingIcon;
+    private javax.swing.JLabel jLabelUpdateLendingText;
+    private javax.swing.JLabel jLabelUpdateLibrarianIcon;
+    private javax.swing.JLabel jLabelUpdateLibrarianText;
+    private javax.swing.JLabel jLabelUpdateStockIcon;
+    private javax.swing.JLabel jLabelUpdateStockText;
+    private javax.swing.JLabel jLabelUpdateUserIcon;
+    private javax.swing.JLabel jLabelUpdateUserText;
+    private javax.swing.JLayeredPane jLayeredPaneWorkArea;
+    private javax.swing.JPanel jPanelAdminToolRegister;
     private javax.swing.JPanel jPanelAdminTools;
     private javax.swing.JPanel jPanelRegister;
     private javax.swing.JPanel jPanelTabAdmin;
+    private javax.swing.JPanel jPanelTabBookings;
+    private javax.swing.JPanel jPanelTabLendings;
     private javax.swing.JPanel jPanelTabLibrarian;
+    private javax.swing.JPanel jPanelTabStock;
     private javax.swing.JPanel jPanelTabUser;
-    private javax.swing.JPanel jPanelTitle5;
-    private javax.swing.JPanel jPanelWorkArea;
+    private javax.swing.JPanel jPanelTitle;
     private javax.swing.JPanel jPanelbackground;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTabbedPane jTabbedPane;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JTabbedPane jTabbedPaneEdit;
+    private javax.swing.JTabbedPane jTabbedPaneReport;
+    private javax.swing.JTextField jTextFieldSearchAdmin;
+    private javax.swing.JTextField jTextFieldSearchBooking;
+    private javax.swing.JTextField jTextFieldSearchLending;
+    private javax.swing.JTextField jTextFieldSearchLibrarian;
+    private javax.swing.JTextField jTextFieldSearchStock;
+    private javax.swing.JTextField jTextFieldSearchUser;
     private javax.swing.JTable librarianTable;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFirstname;
