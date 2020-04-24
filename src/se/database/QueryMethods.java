@@ -36,11 +36,60 @@ public class QueryMethods {
     }
 
     
+public void insertEmail(String email){
+    con = MyConnection.getConnection();
+    
+    query = "INSERT INTO emails (email) VALUES (?)";
+    try {
+        ps = con.prepareStatement(query);
+        ps.setString(1,email);
+        ps.execute();
+    }catch(SQLException e){
+        
+    }finally{
+        try {
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+}
 
+public boolean isEmailTaken(String email){
+    
+    con = MyConnection.getConnection();
+    boolean check = false;
+   
+    try {
+        Statement statement = con.createStatement();
+        System.out.println(email);
+        query = "SELECT email FROM emails WHERE email=" + "\"" + email +"\"";
+        rs = statement.executeQuery(query);
+        
+       while(rs.next()){
+        if(rs.getString(1).equals(email)){
+            check = true;
+        }else {
+            check = false;
+        }
+       }
+    }catch(SQLException e){
+        System.out.println(e.getMessage());
+    }finally{
+        try {
+            rs.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    return check;
+}
     
     public int insertGuest(String firstName, String lastName, String socialNumber, String password, String email){
         int idGuest = 0;
         
+        insertEmail(email);
         con = MyConnection.getConnection();
                 
         query = "INSERT INTO guests (first_name, last_name, person_id, password, email) VALUES (?,?,?,?,?)";
@@ -81,6 +130,7 @@ public class QueryMethods {
     
      public int insertAdmin(String firstName, String lastName, String socialNumber, String password, String email){
         
+        insertEmail(email);
        int idAdmin = 0;
        con = MyConnection.getConnection();
         query = "INSERT INTO admins (first_name, last_name, person_id, password, email) VALUES (?,?,?,?,?)";
@@ -121,6 +171,7 @@ public class QueryMethods {
      
      public int insertLibrarian(String firstName, String lastName, String socialNumber, String password, String email){
        
+         insertEmail(email);
         int idLibrarian = 0;
         con = MyConnection.getConnection();
         query = "INSERT INTO librarians (first_name, last_name, person_id, password) VALUES (?,?,?,?,?)";
