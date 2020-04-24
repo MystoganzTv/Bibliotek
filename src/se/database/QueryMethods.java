@@ -416,17 +416,17 @@ public class QueryMethods {
 
         con = MyConnection.getConnection();
         
-        System.out.println(guest.getFirstName() + "från deletemetod");
+        System.out.println(guest.getFirstName() + " från deletemetod");
 
-        String deleteEmailQuery = "DELETE FROM emails WHERE email='?'";
+        String deleteEmailQuery = "DELETE FROM emails WHERE email=" + "'" + guest.getEmail() +"'";
 
-        String deleteLibraryCard = "DELETE FROM librarycards WHERE guest_id='?'";
+        String deleteLibraryCard = "DELETE FROM librarycards WHERE guests_id=?";
 
-        String deleteGuest = "DELETE FROM guests WHERE id='?'";
+        String deleteGuest = "DELETE FROM guests WHERE id=?";
 
         try {
             ps = con.prepareStatement(deleteEmailQuery);
-            ps.setString(1, guest.getEmail());
+            System.out.println(guest.getEmail());
             ps.executeUpdate();
         } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -451,9 +451,12 @@ public class QueryMethods {
                 Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-       
+        }
+    }
 
-    public static void addBook(Books b) {
+
+
+    public void addBook(Books b) {
         
         MyConnection tryConnect = new MyConnection();
         con = MyConnection.getConnection();
@@ -473,7 +476,7 @@ public class QueryMethods {
         }
     }
     
-    public static void addEBook(E_Books b) {
+    public void addEBook(E_Books b) {
         
         MyConnection tryConnect = new MyConnection();
         con = MyConnection.getConnection();
@@ -492,6 +495,7 @@ public class QueryMethods {
             System.out.println("Something went wrong while trying to add a book: " + e.getMessage());
         }
     }
+
 
        public List<Books> getAllBooks(){
            
@@ -572,5 +576,6 @@ public class QueryMethods {
            return null;
                
        } 
+
 
 }
