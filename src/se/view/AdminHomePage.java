@@ -8,6 +8,7 @@ package se.view;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import javafx.scene.control.SelectionMode;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -30,6 +31,7 @@ public class AdminHomePage extends javax.swing.JFrame {
     private String[] colNames = {"Förnamn", "Efternamn", "Email", "PN", "Lösenord"};
     private DefaultTableModel model = new DefaultTableModel(colNames, 0);
     private QueryMethods qMethods = new QueryMethods();
+    private ArrayList<Guest> guests;
 
     /**
      * Creates new form StartPage1
@@ -39,6 +41,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         queryMethods = new QueryMethods();
+         guests = qMethods.findGuests();
 
         jTabbedPaneEdit.setVisible(false);
         jTabbedPaneReport.setVisible(false);
@@ -69,10 +72,12 @@ public class AdminHomePage extends javax.swing.JFrame {
                 admins.get(i).getPersonId(), admins.get(i).getEmail(), admins.get(i).getPassword()});
         }
         adminTable.setModel(model);
+        adminTable.setRowSelectionAllowed(true);
+        
     }
 
     public void fillGuestTable() {
-        ArrayList<Guest> guests = qMethods.findGuests();
+       
 
         model = (DefaultTableModel) guestTable.getModel();
         model.setRowCount(0);
@@ -81,7 +86,13 @@ public class AdminHomePage extends javax.swing.JFrame {
                 guests.get(i).getPersonId(), guests.get(i).getEmail(), guests.get(i).getPassword()});
         }
         guestTable.setModel(model);
+        guestTable.setRowSelectionAllowed(true);
+        
+      
+        
     }
+    
+    
 
     public void fillLibrarianTable() {
         ArrayList<Librarian> librarians = qMethods.findLibrarians();
@@ -93,6 +104,7 @@ public class AdminHomePage extends javax.swing.JFrame {
                 librarians.get(i).getPersonId(), librarians.get(i).getEmail(), librarians.get(i).getPassword()});
         }
         librarianTable.setModel(model);
+        librarianTable.setRowSelectionAllowed(true);
     }
 
     /**
@@ -288,6 +300,11 @@ public class AdminHomePage extends javax.swing.JFrame {
         });
 
         jLabelEraseUserIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/trash_can_80px.png"))); // NOI18N
+        jLabelEraseUserIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEraseUserIconMouseClicked(evt);
+            }
+        });
 
         jLabelEraseUserText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabelEraseUserText.setForeground(new java.awt.Color(105, 131, 170));
@@ -651,6 +668,11 @@ public class AdminHomePage extends javax.swing.JFrame {
         });
 
         jLabelEraseBookingsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/trash_can_80px.png"))); // NOI18N
+        jLabelEraseBookingsIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEraseBookingsIconMouseClicked(evt);
+            }
+        });
 
         jLabelEraseBookingsText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabelEraseBookingsText.setForeground(new java.awt.Color(105, 131, 170));
@@ -1472,6 +1494,30 @@ public class AdminHomePage extends javax.swing.JFrame {
         sp.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabelLogoMouseClicked
+
+    private void jLabelEraseBookingsIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseBookingsIconMouseClicked
+        // TODO add your handling code here:
+     
+    }//GEN-LAST:event_jLabelEraseBookingsIconMouseClicked
+
+    private void jLabelEraseUserIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseUserIconMouseClicked
+        // TODO add your handling code here:
+        
+        int selection = guestTable.getSelectedRow();
+        System.out.println("HELLO");
+        String stringId = guestTable.getModel().getValueAt(selection, 0).toString();
+        System.out.println(stringId);
+        int id = Integer.parseInt(stringId);
+    
+        for(Guest g : guests){
+            if(g.getId() == id){
+                System.out.println(g.getFirstName());
+                queryMethods.deleteGuest(g);
+                
+            }
+        }
+        
+    }//GEN-LAST:event_jLabelEraseUserIconMouseClicked
     /**
      * @param args the command line arguments
      */

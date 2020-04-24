@@ -29,75 +29,74 @@ import se.model.Librarian;
  * @author Erik Ringblom
  */
 public class QueryMethods {
-    
+
     Connection con = null;
     String query = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
 
     public QueryMethods() {
-      
+
     }
 
-    
-public void insertEmail(String email){
-    con = MyConnection.getConnection();
-    
-    query = "INSERT INTO emails (email) VALUES (?)";
-    try {
-        ps = con.prepareStatement(query);
-        ps.setString(1,email);
-        ps.execute();
-    }catch(SQLException e){
-        
-    }finally{
-        try {
-            con.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-}
+    public void insertEmail(String email) {
+        con = MyConnection.getConnection();
 
-public boolean isEmailTaken(String email){
-    
-    con = MyConnection.getConnection();
-    boolean check = false;
-   
-    try {
-        Statement statement = con.createStatement();
-        System.out.println(email);
-        query = "SELECT email FROM emails WHERE email=" + "\"" + email +"\"";
-        rs = statement.executeQuery(query);
-        
-       while(rs.next()){
-        if(rs.getString(1).equals(email)){
-            check = true;
-        }else {
-            check = false;
-        }
-       }
-    }catch(SQLException e){
-        System.out.println(e.getMessage());
-    }finally{
+        query = "INSERT INTO emails (email) VALUES (?)";
         try {
-            rs.close();
-            con.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+            ps = con.prepareStatement(query);
+            ps.setString(1, email);
+            ps.execute();
+        } catch (SQLException e) {
+
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
-    return check;
-}
-    
-    public int insertGuest(String firstName, String lastName, String socialNumber, String password, String email){
+
+    public boolean isEmailTaken(String email) {
+
+        con = MyConnection.getConnection();
+        boolean check = false;
+
+        try {
+            Statement statement = con.createStatement();
+            System.out.println(email);
+            query = "SELECT email FROM emails WHERE email=" + "\"" + email + "\"";
+            rs = statement.executeQuery(query);
+
+            while (rs.next()) {
+                if (rs.getString(1).equals(email)) {
+                    check = true;
+                } else {
+                    check = false;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                rs.close();
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return check;
+    }
+
+    public int insertGuest(String firstName, String lastName, String socialNumber, String password, String email) {
         int idGuest = 0;
-        
+
         insertEmail(email);
         con = MyConnection.getConnection();
-                
+
         query = "INSERT INTO guests (first_name, last_name, person_id, password, email) VALUES (?,?,?,?,?)";
-        
+
         try {
             ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, firstName);
@@ -105,7 +104,7 @@ public boolean isEmailTaken(String email){
             ps.setString(3, socialNumber);
             ps.setString(4, password);
             ps.setString(5, email);
-            
+
             int update = ps.executeUpdate();
             if (update == 1) {
                 rs = ps.getGeneratedKeys();
@@ -115,7 +114,7 @@ public boolean isEmailTaken(String email){
                 }
             }
 
-      } catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
@@ -130,15 +129,14 @@ public boolean isEmailTaken(String email){
         return idGuest;
 
     }
-   
-    
-     public int insertAdmin(String firstName, String lastName, String socialNumber, String password, String email){
-        
+
+    public int insertAdmin(String firstName, String lastName, String socialNumber, String password, String email) {
+
         insertEmail(email);
-       int idAdmin = 0;
-       con = MyConnection.getConnection();
+        int idAdmin = 0;
+        con = MyConnection.getConnection();
         query = "INSERT INTO admins (first_name, last_name, person_id, password, email) VALUES (?,?,?,?,?)";
-        
+
         try {
             ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, firstName);
@@ -146,7 +144,7 @@ public boolean isEmailTaken(String email){
             ps.setString(3, socialNumber);
             ps.setString(4, password);
             ps.setString(5, email);
-            
+
             int update = ps.executeUpdate();
             if (update == 1) {
                 rs = ps.getGeneratedKeys();
@@ -156,7 +154,7 @@ public boolean isEmailTaken(String email){
                 }
             }
 
-      } catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
@@ -171,15 +169,14 @@ public boolean isEmailTaken(String email){
         return idAdmin;
 
     }
-   
-     
-     public int insertLibrarian(String firstName, String lastName, String socialNumber, String password, String email){
-       
-         insertEmail(email);
+
+    public int insertLibrarian(String firstName, String lastName, String socialNumber, String password, String email) {
+
+        insertEmail(email);
         int idLibrarian = 0;
         con = MyConnection.getConnection();
         query = "INSERT INTO librarians (first_name, last_name, person_id, password) VALUES (?,?,?,?,?)";
-        
+
         try {
             ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, firstName);
@@ -196,7 +193,7 @@ public boolean isEmailTaken(String email){
                 }
             }
 
-      } catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
@@ -211,221 +208,248 @@ public boolean isEmailTaken(String email){
         return idLibrarian;
 
     }
-     
+
     public ArrayList<Admin> findAdmins() {
-        
-        try
-        {
+
+        try {
             MyConnection tryConnect = new MyConnection();
             ArrayList<Admin> admins = new ArrayList<Admin>();
             Admin currentAdmin;
-            
+
             Connection conn = tryConnect.getConnection();
             Statement stmt = conn.createStatement();
             stmt.execute("SELECT * FROM admins");
 
             ResultSet results = stmt.getResultSet();
-            while(results.next())
-            {
+            while (results.next()) {
                 currentAdmin = new Admin(results.getString("first_name"),
-                                         results.getString("last_name"),
-                                         results.getString("person_id"),
-                                         results.getString("password"),
-                                         Integer.parseInt(results.getString("id")),
-                                         results.getString("email"));
+                        results.getString("last_name"),
+                        results.getString("person_id"),
+                        results.getString("password"),
+                        Integer.parseInt(results.getString("id")),
+                        results.getString("email"));
                 admins.add(currentAdmin);
                 currentAdmin = null;
             }
-            
+
             conn.close();
             stmt.close();
-            
+
             return admins;
-        }
-        catch(SQLException e)
-        {
+        } catch (SQLException e) {
             System.out.println("Something went wrong: " + e);
         }
-        
+
         return null;
     }
-    
+
     public ArrayList<Librarian> findLibrarians() {
-        
-        try
-        {
-           
+
+        try {
+
             ArrayList<Librarian> librarians = new ArrayList<Librarian>();
             Librarian currentLibrarian;
-            
-             con = MyConnection.getConnection();
+
+            con = MyConnection.getConnection();
             Statement stmt = con.createStatement();
             stmt.execute("SELECT * FROM librarians");
 
             ResultSet results = stmt.getResultSet();
-            while(results.next())
-            {
+            while (results.next()) {
                 currentLibrarian = new Librarian(Integer.parseInt(results.getString("id")),
-                                                 results.getString("first_name"),
-                                                 results.getString("last_name"),
-                                                 results.getString("person_id"),
-                                                 results.getString("password"),
-                                                 results.getString("email"));
+                        results.getString("first_name"),
+                        results.getString("last_name"),
+                        results.getString("person_id"),
+                        results.getString("password"),
+                        results.getString("email"));
                 librarians.add(currentLibrarian);
                 currentLibrarian = null;
             }
-            
+
             con.close();
             stmt.close();
-            
+
             return librarians;
-        }
-        catch(SQLException e)
-        {
+        } catch (SQLException e) {
             System.out.println("Something went wrong: " + e);
         }
-        
+
         return null;
     }
-    
+
     public ArrayList<Guest> findGuests() {
-        
-        try
-        {
-            
+
+        try {
+
             ArrayList<Guest> guests = new ArrayList<Guest>();
             Guest currentGuest;
-            
+
             con = MyConnection.getConnection();
             Statement stmt = con.createStatement();
             stmt.execute("SELECT * FROM guests");
 
             ResultSet results = stmt.getResultSet();
-            while(results.next())
-            {
+            while (results.next()) {
                 currentGuest = new Guest(Integer.parseInt(results.getString("id")),
-                                                 results.getString("first_name"),
-                                                 results.getString("last_name"),
-                                                 results.getString("person_id"),
-                                                 results.getString("password"),
-                                                 results.getString("email"));
+                        results.getString("first_name"),
+                        results.getString("last_name"),
+                        results.getString("person_id"),
+                        results.getString("password"),
+                        results.getString("email"));
                 guests.add(currentGuest);
                 currentGuest = null;
             }
-            
+
             con.close();
             stmt.close();
-            
+
             return guests;
-        }
-        catch(SQLException e)
-        {
+        } catch (SQLException e) {
             System.out.println("Something went wrong: " + e);
         }
-        
+
         return null;
     }
-    
-       public String loginChecker(String user, String username, String password) {
-        String exist = " select email, password from "+ user + " where email = '"+username +"'"
-                + "and password = '"+password+"';" ; 
-        PreparedStatement check ;
+
+    public String loginChecker(String user, String username, String password) {
+        String exist = " select email, password from " + user + " where email = '" + username + "'"
+                + "and password = '" + password + "';";
+        PreparedStatement check;
         String email = "";
-        
-        try{
-        check = MyConnection.getConnection().prepareStatement(exist);
-        
-        
-        ResultSet rs = check.executeQuery();
-        if (rs.next()){
-        email = rs.getString("email");
-        } 
-        }catch(Exception e){
-        System.out.println(e.toString() + " loginChecker()");
+
+        try {
+            check = MyConnection.getConnection().prepareStatement(exist);
+
+            ResultSet rs = check.executeQuery();
+            if (rs.next()) {
+                email = rs.getString("email");
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString() + " loginChecker()");
         }
         return email;
-        
+
+    }
+
+    public List<Books> getAllBooks() {
+
+        try {
+            List<Books> books = new ArrayList<>();
+
+            String bookQuery = "SELECT id, title, author, isbn, publisher, purchase_price, name FROM books INNER JOIN kategori ON books.books_kategori_id = kategori.id_kategori";
+
+            con = MyConnection.getConnection();
+            ps = con.prepareStatement(bookQuery);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Books book = new Books();
+                book.setId(rs.getInt(1));
+                book.setTitle(rs.getString(2));
+                book.setAuthor(rs.getString(3));
+                book.setIsbn(rs.getString(4));
+                book.setPublisher(rs.getString(5));
+                book.setPurchase_price(rs.getDouble(6));
+                book.setCategory(rs.getString(7));
+                books.add(book);
+
             }
-       
-       public List<Books> getAllBooks(){
-           
-           try{
-           List<Books> books = new ArrayList<>();
-           
-           String bookQuery = "SELECT id, title, author, isbn, publisher, purchase_price, name FROM books INNER JOIN kategori ON books.books_kategori_id = kategori.id_kategori";
-           
-           con = MyConnection.getConnection();
-           ps = con.prepareStatement(bookQuery);
-           rs = ps.executeQuery();
-           
-           while(rs.next()){
-               Books book = new Books();
-               book.setId(rs.getInt(1));
-               book.setTitle(rs.getString(2));
-               book.setAuthor(rs.getString(3));
-               book.setIsbn(rs.getString(4));
-               book.setPublisher(rs.getString(5));
-               book.setPurchase_price(rs.getDouble(6));
-               book.setCategory(rs.getString(7));
-               books.add(book);
-               
-           }
-           return books;
-           
-           }catch(SQLException e){
-               System.out.println(e.getMessage());
-           }finally{
-               try {
-                   rs.close();
-                   con.close();
-               } catch (SQLException ex) {
-                   Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
-               }
-           }
-           return null;
-               
-       } 
-       
-        public List<E_Books> getAllEBooks(){
-           
-           try{
-           List<E_Books> e_books = new ArrayList<>();
-           
-           String bookQuery = "SELECT id, title, author, isbn, publisher, purchase_price, name FROM e-books INNER JOIN kategori ON books.books_kategori_id = kategori.id_kategori";
-           
-           con = MyConnection.getConnection();
-           ps = con.prepareStatement(bookQuery);
-           rs = ps.executeQuery();
-           
-           while(rs.next()){
-               E_Books book = new E_Books();
-               book.setId(rs.getInt(1));
-               book.setTitle(rs.getString(2));
-               book.setAuthor(rs.getString(3));
-               book.setIsbn(rs.getString(4));
-               book.setPublisher(rs.getString(5));
-               book.setPurchase_price(rs.getDouble(6));
-               book.setCategory(rs.getString(7));
-               e_books.add(book);
-               
-           }
-               
-           return e_books;
-           
-           
-           }catch(SQLException e){
-               System.out.println(e.getMessage());
-           }finally{
-               try {
-                   rs.close();
-                   con.close();
-               } catch (SQLException ex) {
-                   Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
-               }
-           }
-           return null;
-               
-       } 
-   
-       
+            return books;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                rs.close();
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return null;
+
+    }
+
+    public List<E_Books> getAllEBooks() {
+
+        try {
+            List<E_Books> e_books = new ArrayList<>();
+
+            String bookQuery = "SELECT id, title, author, isbn, publisher, purchase_price, name FROM e_books INNER JOIN kategori ON e_books.ebooks_kategori_id = kategori.id_kategori";
+
+            con = MyConnection.getConnection();
+            ps = con.prepareStatement(bookQuery);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                E_Books book = new E_Books();
+                book.setId(rs.getInt(1));
+                book.setTitle(rs.getString(2));
+                book.setAuthor(rs.getString(3));
+                book.setIsbn(rs.getString(4));
+                book.setPublisher(rs.getString(5));
+                book.setPurchase_price(rs.getDouble(6));
+                book.setCategory(rs.getString(7));
+                e_books.add(book);
+
+            }
+
+            return e_books;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                rs.close();
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return null;
+
+    }
+
+    public void deleteGuest(Guest guest) {
+
+        con = MyConnection.getConnection();
+        
+        System.out.println(guest.getFirstName() + "från deletemetod");
+
+        String deleteEmailQuery = "DELETE FROM emails WHERE email='?'";
+
+        String deleteLibraryCard = "DELETE FROM librarycards WHERE guest_id='?'";
+
+        String deleteGuest = "DELETE FROM guests WHERE id='?'";
+
+        try {
+            ps = con.prepareStatement(deleteEmailQuery);
+            ps.setString(1, guest.getEmail());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+                System.out.println(e.getMessage());
+        }
+        try {
+            ps = con.prepareStatement(deleteLibraryCard);
+            ps.setInt(1, guest.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+                System.out.println(e.getMessage());
+        }
+        try {
+            ps = con.prepareStatement(deleteGuest);
+            ps.setInt(1, guest.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }
+
 }
