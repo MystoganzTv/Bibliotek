@@ -215,7 +215,7 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jTextFieldUsername" pref="156" max="32767" attributes="0"/>
+                                  <Component id="jTextFieldEmail" pref="156" max="32767" attributes="0"/>
                                   <Component id="jPasswordField" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -240,7 +240,7 @@
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldUsername" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldEmail" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelUsername1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
@@ -280,12 +280,12 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldUsername">
+            <Component class="javax.swing.JTextField" name="jTextFieldEmail">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldUsernameActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldEmailActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelPassword1">
@@ -307,7 +307,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="aa" green="83" red="69" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Anv&#xe4;ndarnanm"/>
+                <Property name="text" type="java.lang.String" value="Email"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonLogin">
@@ -329,9 +329,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JPasswordField" name="jPasswordField">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jPasswordField1"/>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>

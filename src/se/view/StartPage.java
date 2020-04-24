@@ -41,7 +41,7 @@ public class StartPage extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextFieldUsername = new javax.swing.JTextField();
+        jTextFieldEmail = new javax.swing.JTextField();
         jLabelPassword1 = new javax.swing.JLabel();
         jLabelUsername1 = new javax.swing.JLabel();
         jButtonLogin = new javax.swing.JButton();
@@ -118,10 +118,10 @@ public class StartPage extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/lock_24px.png"))); // NOI18N
 
-        jTextFieldUsername.setToolTipText("");
-        jTextFieldUsername.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldEmail.setToolTipText("");
+        jTextFieldEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldUsernameActionPerformed(evt);
+                jTextFieldEmailActionPerformed(evt);
             }
         });
 
@@ -131,7 +131,7 @@ public class StartPage extends javax.swing.JFrame {
 
         jLabelUsername1.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabelUsername1.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelUsername1.setText("Användarnanm");
+        jLabelUsername1.setText("Email");
 
         jButtonLogin.setText("Logga in");
         jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -142,8 +142,6 @@ public class StartPage extends javax.swing.JFrame {
 
         jlblMessage.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jlblMessage.setForeground(new java.awt.Color(255, 0, 0));
-
-        jPasswordField.setText("jPasswordField1");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -162,7 +160,7 @@ public class StartPage extends javax.swing.JFrame {
                             .addComponent(jLabelPassword1))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                             .addComponent(jPasswordField))))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -179,7 +177,7 @@ public class StartPage extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
-                    .addComponent(jTextFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelUsername1))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -323,11 +321,11 @@ public class StartPage extends javax.swing.JFrame {
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
         // TODO add your handling code here:
             QueryMethods qm = new QueryMethods();
-            if (!jTextFieldUsername.getText().equals("") && !jPasswordField.getText().equals("")){
+            if (!jTextFieldEmail.getText().equals("") && !jPasswordField.getText().equals("")){
             jlblMessage.setText("<html>Användarnamn och lösenord finns ej!</html>");
             
-            if(jTextFieldUsername.getText().contains("@admin")){
-                if(!qm.loginChecker("admins",jTextFieldUsername.getText(),jPasswordField.getText()).equals("")){
+            if(jTextFieldEmail.getText().contains("@admin")){
+                if(!qm.loginChecker("admins",jTextFieldEmail.getText(),jPasswordField.getText()).equals("")){
                 jlblMessage.setText("");
                 AdminHomePage ah = new AdminHomePage();
                 ah.setVisible(true);
@@ -336,8 +334,8 @@ public class StartPage extends javax.swing.JFrame {
                 }
                 
             }
-            if(jTextFieldUsername.getText().contains("@guest")){
-                if(!qm.loginChecker("guests",jTextFieldUsername.getText(),jPasswordField.getText()).equals("")){
+            if(jTextFieldEmail.getText().contains("@guest")){
+                if(!qm.loginChecker("guests",jTextFieldEmail.getText(),jPasswordField.getText()).equals("")){
                 jlblMessage.setText("");
                 NewUserView nuv = new NewUserView();
                 nuv.setVisible(true);
@@ -345,8 +343,8 @@ public class StartPage extends javax.swing.JFrame {
                 }
                
             }
-            if(jTextFieldUsername.getText().contains("@librarian")){
-                if((!qm.loginChecker("librarians",jTextFieldUsername.getText(),jPasswordField.getText()).equals(""))){
+            if(jTextFieldEmail.getText().contains("@librarian")){
+                if((!qm.loginChecker("librarians",jTextFieldEmail.getText(),jPasswordField.getText()).equals(""))){
                 jlblMessage.setText("");
                 LibrarianView lv = new LibrarianView();
                 lv.setVisible(true);
@@ -363,9 +361,9 @@ public class StartPage extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
-    private void jTextFieldUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsernameActionPerformed
+    private void jTextFieldEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldUsernameActionPerformed
+    }//GEN-LAST:event_jTextFieldEmailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -426,7 +424,7 @@ public class StartPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelTitle;
     private javax.swing.JPanel jPanelbackground;
     private javax.swing.JPasswordField jPasswordField;
-    private javax.swing.JTextField jTextFieldUsername;
+    private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JLabel jlblMessage;
     // End of variables declaration//GEN-END:variables
 }
