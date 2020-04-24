@@ -32,7 +32,7 @@ public class QueryMethods {
     ResultSet rs = null;
 
     public QueryMethods() {
-        con = MyConnection.getConnection();
+      
     }
 
     
@@ -40,6 +40,9 @@ public class QueryMethods {
     
     public int insertGuest(String firstName, String lastName, String socialNumber, String password, String email){
         int idGuest = 0;
+        
+        con = MyConnection.getConnection();
+                
         query = "INSERT INTO guests (first_name, last_name, person_id, password, email) VALUES (?,?,?,?,?)";
         
         try {
@@ -65,7 +68,7 @@ public class QueryMethods {
             try {
                 if (rs != null) {
                     rs.close();
-                    
+                    con.close();
                 }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -79,6 +82,7 @@ public class QueryMethods {
      public int insertAdmin(String firstName, String lastName, String socialNumber, String password, String email){
         
        int idAdmin = 0;
+       con = MyConnection.getConnection();
         query = "INSERT INTO admins (first_name, last_name, person_id, password, email) VALUES (?,?,?,?,?)";
         
         try {
@@ -104,7 +108,7 @@ public class QueryMethods {
             try {
                 if (rs != null) {
                     rs.close();
-                    
+                    con.close();
                 }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -118,6 +122,7 @@ public class QueryMethods {
      public int insertLibrarian(String firstName, String lastName, String socialNumber, String password, String email){
        
         int idLibrarian = 0;
+        con = MyConnection.getConnection();
         query = "INSERT INTO librarians (first_name, last_name, person_id, password) VALUES (?,?,?,?,?)";
         
         try {
@@ -142,7 +147,7 @@ public class QueryMethods {
             try {
                 if (rs != null) {
                     rs.close();
-                    
+                    con.close();
                 }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -194,12 +199,12 @@ public class QueryMethods {
         
         try
         {
-            MyConnection tryConnect = new MyConnection();
+           
             ArrayList<Librarian> librarians = new ArrayList<Librarian>();
             Librarian currentLibrarian;
             
-            Connection conn = tryConnect.getConnection();
-            Statement stmt = conn.createStatement();
+             con = MyConnection.getConnection();
+            Statement stmt = con.createStatement();
             stmt.execute("SELECT * FROM librarians");
 
             ResultSet results = stmt.getResultSet();
@@ -215,7 +220,7 @@ public class QueryMethods {
                 currentLibrarian = null;
             }
             
-            conn.close();
+            con.close();
             stmt.close();
             
             return librarians;
@@ -232,12 +237,12 @@ public class QueryMethods {
         
         try
         {
-            MyConnection tryConnect = new MyConnection();
+            
             ArrayList<Guest> guests = new ArrayList<Guest>();
             Guest currentGuest;
             
-            Connection conn = tryConnect.getConnection();
-            Statement stmt = conn.createStatement();
+            con = MyConnection.getConnection();
+            Statement stmt = con.createStatement();
             stmt.execute("SELECT * FROM guests");
 
             ResultSet results = stmt.getResultSet();
@@ -253,7 +258,7 @@ public class QueryMethods {
                 currentGuest = null;
             }
             
-            conn.close();
+            con.close();
             stmt.close();
             
             return guests;
