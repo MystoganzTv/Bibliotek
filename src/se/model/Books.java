@@ -22,15 +22,26 @@ public class Books {
     private String publisher;
     
     private double purchase_price;
+    
+    private String category;
 
    
+<<<<<<< HEAD
     public Books(int id, String title, String author, String isbn, String publisher, double purchase_price) {
+=======
+    public Books(int id, String title, String author, String isbn, String publisher, double purchase_price, String category) {
+>>>>>>> master
         this.id = id;
         this.title = title;
         this.author = author;
         this.isbn = isbn;
         this.publisher = publisher;
         this.purchase_price = purchase_price;
+        this.category = category;
+    }
+
+    public Books() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getId() {
@@ -79,6 +90,14 @@ public class Books {
 
     public void setPurchase_price(double purchase_price) {
         this.purchase_price = purchase_price;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
     
     

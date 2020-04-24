@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -345,6 +347,7 @@ public boolean isEmailTaken(String email){
         
             }
        
+<<<<<<< HEAD
     public static void addBook(Books b, int category) {
         
         MyConnection tryConnect = new MyConnection();
@@ -384,4 +387,87 @@ public boolean isEmailTaken(String email){
             System.out.println("Something went wrong while trying to add a book: " + e.getMessage());
         }
     }
+=======
+       public List<Books> getAllBooks(){
+           
+           try{
+           List<Books> books = new ArrayList<>();
+           
+           String bookQuery = "SELECT id, title, author, isbn, publisher, purchase_price, name FROM books INNER JOIN kategori ON books.books_kategori_id = kategori.id_kategori";
+           
+           con = MyConnection.getConnection();
+           ps = con.prepareStatement(bookQuery);
+           rs = ps.executeQuery();
+           
+           while(rs.next()){
+               Books book = new Books();
+               book.setId(rs.getInt(1));
+               book.setTitle(rs.getString(2));
+               book.setAuthor(rs.getString(3));
+               book.setIsbn(rs.getString(4));
+               book.setPublisher(rs.getString(5));
+               book.setPurchase_price(rs.getDouble(6));
+               book.setCategory(rs.getString(7));
+               books.add(book);
+               
+           }
+           return books;
+           
+           }catch(SQLException e){
+               System.out.println(e.getMessage());
+           }finally{
+               try {
+                   rs.close();
+                   con.close();
+               } catch (SQLException ex) {
+                   Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+               }
+           }
+           return null;
+               
+       } 
+       
+        public List<E_Books> getAllEBooks(){
+           
+           try{
+           List<E_Books> e_books = new ArrayList<>();
+           
+           String bookQuery = "SELECT id, title, author, isbn, publisher, purchase_price, name FROM e-books INNER JOIN kategori ON books.books_kategori_id = kategori.id_kategori";
+           
+           con = MyConnection.getConnection();
+           ps = con.prepareStatement(bookQuery);
+           rs = ps.executeQuery();
+           
+           while(rs.next()){
+               E_Books book = new E_Books();
+               book.setId(rs.getInt(1));
+               book.setTitle(rs.getString(2));
+               book.setAuthor(rs.getString(3));
+               book.setIsbn(rs.getString(4));
+               book.setPublisher(rs.getString(5));
+               book.setPurchase_price(rs.getDouble(6));
+               book.setCategory(rs.getString(7));
+               e_books.add(book);
+               
+           }
+               
+           return e_books;
+           
+           
+           }catch(SQLException e){
+               System.out.println(e.getMessage());
+           }finally{
+               try {
+                   rs.close();
+                   con.close();
+               } catch (SQLException ex) {
+                   Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+               }
+           }
+           return null;
+               
+       } 
+   
+       
+>>>>>>> master
 }
