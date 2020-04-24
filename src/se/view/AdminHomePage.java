@@ -201,7 +201,6 @@ public class AdminHomePage extends javax.swing.JFrame {
         txtLastname = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         txtPN = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -209,6 +208,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         btnRegister = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
+        txtPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1158,6 +1158,8 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
         });
 
+        txtPassword.setText("jPasswordField1");
+
         javax.swing.GroupLayout jPanelRegisterLayout = new javax.swing.GroupLayout(jPanelRegister);
         jPanelRegister.setLayout(jPanelRegisterLayout);
         jPanelRegisterLayout.setHorizontalGroup(
@@ -1181,13 +1183,15 @@ public class AdminHomePage extends javax.swing.JFrame {
                                 .addComponent(txtEmail))
                             .addGroup(jPanelRegisterLayout.createSequentialGroup()
                                 .addComponent(jLabel11)
-                                .addGap(43, 43, 43)
                                 .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanelRegisterLayout.createSequentialGroup()
+                                        .addGap(43, 43, 43)
                                         .addComponent(btnRegister)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtPassword))))
+                                    .addGroup(jPanelRegisterLayout.createSequentialGroup()
+                                        .addGap(39, 39, 39)
+                                        .addComponent(txtPassword)))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanelRegisterLayout.createSequentialGroup()
                         .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1238,12 +1242,10 @@ public class AdminHomePage extends javax.swing.JFrame {
                         .addGap(4, 4, 4)
                         .addComponent(jLabel12))
                     .addComponent(txtPN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelRegisterLayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabel11))
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel11)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRegister)
@@ -1285,7 +1287,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelbackground, javax.swing.GroupLayout.PREFERRED_SIZE, 1667, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanelbackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1614,6 +1616,6 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JTextField txtFirstname;
     private javax.swing.JTextField txtLastname;
     private javax.swing.JTextField txtPN;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 }
