@@ -384,9 +384,4 @@ public boolean isEmailTaken(String email){
             System.out.println("Something went wrong while trying to add a book: " + e.getMessage());
         }
     }
-    
-    public static void main(String[] args) {
-        E_Books b = new E_Books(2, "Tarzan of the Apes", "Edgar Rice Burroughs", "9789871596898", "A. C. McClurg", 223);
-        addEBook(b, 2);
-    }
 }
