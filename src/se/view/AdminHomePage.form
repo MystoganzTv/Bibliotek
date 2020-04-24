@@ -23,7 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanelbackground" min="-2" pref="1667" max="-2" attributes="0"/>
+          <Component id="jPanelbackground" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -1572,14 +1572,17 @@
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" attributes="0">
+                                                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                                                   <Component id="btnRegister" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="32767" attributes="0"/>
                                                   <Component id="btnClose" min="-2" pref="91" max="-2" attributes="0"/>
                                               </Group>
-                                              <Component id="txtPassword" max="32767" attributes="0"/>
+                                              <Group type="102" attributes="0">
+                                                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                                  <Component id="txtPassword" max="32767" attributes="0"/>
+                                              </Group>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -1651,15 +1654,12 @@
                               </Group>
                               <Component id="txtPN" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                                  <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="txtPassword" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtPassword" min="-2" pref="24" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="btnRegister" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="btnClose" min="-2" max="-2" attributes="0"/>
@@ -1701,8 +1701,6 @@
                 <Component class="javax.swing.JTextField" name="txtEmail">
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtPN">
-                </Component>
-                <Component class="javax.swing.JTextField" name="txtPassword">
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel11">
                   <Properties>
@@ -1774,6 +1772,11 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCloseActionPerformed"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JPasswordField" name="txtPassword">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="jPasswordField1"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>

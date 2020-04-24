@@ -201,24 +201,23 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jlblMessage" min="-2" pref="177" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButtonLogin" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="jLabelUsername1" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabelPassword1" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jTextFieldUsername" pref="156" max="32767" attributes="0"/>
                                   <Component id="jPasswordField" max="32767" attributes="0"/>
-                                  <Component id="jTextFieldUsername" min="-2" pref="156" max="-2" attributes="0"/>
                               </Group>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="jlblMessage" max="32767" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jButtonLogin" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -238,7 +237,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="45" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldUsername" min="-2" max="-2" attributes="0"/>
@@ -248,16 +247,16 @@
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="jLabelPassword1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" max="32767" attributes="0"/>
-                          <Component id="jPasswordField" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="jPasswordField" max="32767" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                               <Component id="jButtonLogin" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="jlblMessage" min="-2" pref="45" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                           </Group>
@@ -319,8 +318,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonLoginActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JPasswordField" name="jPasswordField">
-            </Component>
             <Component class="javax.swing.JLabel" name="jlblMessage">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -329,6 +326,11 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="ff" type="rgb"/>
                 </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JPasswordField" name="jPasswordField">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jPasswordField1"/>
               </Properties>
             </Component>
           </SubComponents>
