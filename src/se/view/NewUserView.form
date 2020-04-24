@@ -64,7 +64,7 @@
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                           <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabelBackgroundPhoto" alignment="0" pref="658" max="32767" attributes="0"/>
+                          <Component id="jLabelBackgroundPhoto" alignment="0" pref="661" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -204,10 +204,10 @@
                                           <Component id="Passwordlbl" alignment="0" min="-2" pref="118" max="-2" attributes="0"/>
                                           <Component id="Maillbl" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                                      <EmptySpace min="78" pref="78" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="Passwordtxt" max="32767" attributes="0"/>
                                           <Component id="Mailtxt" max="32767" attributes="0"/>
+                                          <Component id="passwordField" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
@@ -223,7 +223,7 @@
                                       </Group>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Group type="102" attributes="0">
-                                              <Component id="Usernametxt" max="32767" attributes="0"/>
+                                              <Component id="PNTxt" max="32767" attributes="0"/>
                                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="Lastnametxt" min="-2" pref="212" max="-2" attributes="0"/>
@@ -252,16 +252,14 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="Usernamelbl" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                          <Component id="Usernametxt" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="PNTxt" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="Passwordlbl" min="-2" pref="39" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Component id="Passwordlbl" min="-2" pref="39" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="Passwordtxt" min="-2" pref="29" max="-2" attributes="0"/>
+                              <Component id="passwordField" min="-2" pref="31" max="-2" attributes="0"/>
+                              <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -298,7 +296,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Verdana" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Anv&#xe4;ndarnamn:"/>
+                <Property name="text" type="java.lang.String" value="Personnummer:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="Passwordlbl">
@@ -339,18 +337,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="Usernametxt">
-              <Properties>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                    <MatteColorBorder>
-                      <Color PropertyName="color" blue="c5" green="c6" red="8e" type="rgb"/>
-                    </MatteColorBorder>
-                  </Border>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="Passwordtxt">
+            <Component class="javax.swing.JTextField" name="PNTxt">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
@@ -385,6 +372,11 @@
                     </MatteColorBorder>
                   </Border>
                 </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JPasswordField" name="passwordField">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jPasswordField1"/>
               </Properties>
             </Component>
           </SubComponents>
