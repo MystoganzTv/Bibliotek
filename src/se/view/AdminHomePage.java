@@ -212,10 +212,8 @@ public class AdminHomePage extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanelbackground.setBackground(new java.awt.Color(244, 244, 244));
-        jPanelbackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelBackgroundPhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/AdminHome_small.jpg"))); // NOI18N
-        jPanelbackground.add(jLabelBackgroundPhoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, 590));
 
         jPanelTitle.setBackground(new java.awt.Color(133, 102, 170));
 
@@ -242,7 +240,7 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addComponent(jLabelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelLogo1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1134, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1130, Short.MAX_VALUE)
                 .addComponent(jLabelTitle)
                 .addGap(49, 49, 49))
         );
@@ -261,8 +259,6 @@ public class AdminHomePage extends javax.swing.JFrame {
                         .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33))))
         );
-
-        jPanelbackground.add(jPanelTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1670, -1));
 
         jTabbedPaneEdit.setForeground(new java.awt.Color(105, 131, 170));
         jTabbedPaneEdit.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
@@ -1008,7 +1004,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         );
         jLayeredPaneWorkAreaLayout.setVerticalGroup(
             jLayeredPaneWorkAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1216, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
             .addGroup(jLayeredPaneWorkAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPaneWorkAreaLayout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1017,8 +1013,6 @@ public class AdminHomePage extends javax.swing.JFrame {
                     .addComponent(jTabbedPaneEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
         );
-
-        jPanelbackground.add(jLayeredPaneWorkArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(937, 158, 730, 620));
 
         jPanelAdminToolRegister.setLayout(new java.awt.BorderLayout());
 
@@ -1258,7 +1252,33 @@ public class AdminHomePage extends javax.swing.JFrame {
 
         jPanelAdminToolRegister.add(jPanelRegister, java.awt.BorderLayout.CENTER);
 
-        jPanelbackground.add(jPanelAdminToolRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 178, 360, 600));
+        javax.swing.GroupLayout jPanelbackgroundLayout = new javax.swing.GroupLayout(jPanelbackground);
+        jPanelbackground.setLayout(jPanelbackgroundLayout);
+        jPanelbackgroundLayout.setHorizontalGroup(
+            jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanelbackgroundLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabelBackgroundPhoto)
+                .addGap(7, 7, 7)
+                .addComponent(jPanelAdminToolRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addComponent(jLayeredPaneWorkArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanelbackgroundLayout.setVerticalGroup(
+            jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelbackgroundLayout.createSequentialGroup()
+                .addComponent(jPanelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelbackgroundLayout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jLabelBackgroundPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelbackgroundLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jPanelAdminToolRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLayeredPaneWorkArea, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1268,7 +1288,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelbackground, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanelbackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
