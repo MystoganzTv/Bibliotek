@@ -324,7 +324,7 @@ public class StartPage extends javax.swing.JFrame {
             if (!jTextFieldEmail.getText().equals("") && !jPasswordField.getText().equals("")){
             jlblMessage.setText("<html>Användarnamn och lösenord finns ej!</html>");
             
-            if(!qm.loginChecker("admins",jTextFieldUsername.getText(),jPasswordField.getText()).equals("")){
+            if(!qm.loginChecker("admins",jTextFieldEmail.getText(),jPasswordField.getText()).equals("")){
 
                 jlblMessage.setText("");
                 AdminHomePage ah = new AdminHomePage();
@@ -334,7 +334,7 @@ public class StartPage extends javax.swing.JFrame {
                 
                 
             }
-            if(!qm.loginChecker("guests",jTextFieldUsername.getText(),jPasswordField.getText()).equals("")){
+            if(!qm.loginChecker("guests",jTextFieldEmail.getText(),jPasswordField.getText()).equals("")){
 
                 jlblMessage.setText("");
                 NewUserView nuv = new NewUserView();
@@ -343,7 +343,7 @@ public class StartPage extends javax.swing.JFrame {
                 
                
             }
-            if(!qm.loginChecker("librarians",jTextFieldUsername.getText(),jPasswordField.getText()).equals("")){
+            if(!qm.loginChecker("librarians",jTextFieldEmail.getText(),jPasswordField.getText()).equals("")){
 
                 jlblMessage.setText("");
                 LibrarianView lv = new LibrarianView();
