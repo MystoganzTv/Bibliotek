@@ -30,7 +30,7 @@ import se.model.Librarian;
  */
 public class QueryMethods {
     
-    Connection con = null;
+    static Connection con = null;
     String query = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
@@ -347,6 +347,47 @@ public boolean isEmailTaken(String email){
         
             }
        
+
+    public static void addBook(Books b) {
+        
+        MyConnection tryConnect = new MyConnection();
+        con = MyConnection.getConnection();
+        
+        try
+        {
+            Statement stmt = con.createStatement();
+            stmt.execute("INSERT INTO books(title, author, isbn, publisher, purchase_price, books_kategori_id)" + 
+                         " VALUES ('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
+                         + b.getPublisher() + "', " + b.getPurchase_price() + ", " + b.getCategory() + ")");
+            stmt.close();
+            con.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Something went wrong while trying to add a book: " + e.getMessage());
+        }
+    }
+    
+    public static void addEBook(E_Books b) {
+        
+        MyConnection tryConnect = new MyConnection();
+        con = MyConnection.getConnection();
+        
+        try
+        {
+            Statement stmt = con.createStatement();
+            stmt.execute("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, ebooks_kategori_id) "
+                         + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
+                         + b.getPublisher() + "', " + b.getPurchase_price() + ", " + b.getCategory() + ")");
+            stmt.close();
+            con.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Something went wrong while trying to add a book: " + e.getMessage());
+        }
+    }
+
        public List<Books> getAllBooks(){
            
            try{
@@ -426,6 +467,4 @@ public boolean isEmailTaken(String email){
            return null;
                
        } 
-   
-       
 }
