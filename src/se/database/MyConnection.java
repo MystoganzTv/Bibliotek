@@ -18,7 +18,7 @@ public class MyConnection {
         myDbConn = DriverManager.getConnection(url, "java@libsys", "Projekt!");
         if(myDbConn != null)
         {
-            System.out.println("connected to database");
+            
         }
          return myDbConn;
         
