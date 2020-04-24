@@ -8,6 +8,7 @@ package se.view;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
@@ -17,6 +18,7 @@ import se.model.Admin;
 import se.model.Guest;
 import se.model.Librarian;
 import se.database.QueryMethods;
+import se.main.Validation;
 
 /**
  *
@@ -1248,9 +1250,9 @@ public class AdminHomePage extends javax.swing.JFrame {
                         .addComponent(jLabel11))
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
-                .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnClose)
-                    .addComponent(btnRegister))
+                .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRegister)
+                    .addComponent(btnClose))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
@@ -1274,19 +1276,38 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
 
-        String userType = boxUsers.getSelectedItem().toString();
+         String userType = boxUsers.getSelectedItem().toString();
 
-        switch (userType) {
-            case "Administratör":
-                queryMethods.insertAdmin(txtFirstname.getText(), txtLastname.getText(), txtPN.getText(), txtPassword.getText(), txtEmail.getText());
-                break;
-            case "Bibliotikarie":
-                queryMethods.insertLibrarian(txtFirstname.getText(), txtLastname.getText(), txtPN.getText(), txtPassword.getText(), txtEmail.getText());
-                break;
-            case "Gäst":
-                queryMethods.insertGuest(txtFirstname.getText(), txtLastname.getText(), txtPN.getText(), txtPassword.getText(), txtEmail.getText());
-                break;
+        String firstName = txtFirstname.getText();
+        String lastName = txtLastname.getText();
+        String PN = txtPN.getText();
+        String password = txtPassword.getText();
+        String email = txtEmail.getText();
 
+        if (!Validation.isValidName(firstName)) {
+            JOptionPane.showMessageDialog(this, "Felaktig inmatning för förnamn");
+        } else if (!Validation.isValidName(lastName)) {
+            JOptionPane.showMessageDialog(this, "Felaktig inmatning för efternamn");
+        } else if (!Validation.isValidPN(PN)) {
+            JOptionPane.showMessageDialog(this, "Felaktig inamtning för personnummer");
+        } else if (!Validation.isValidPassword(password)) {
+            JOptionPane.showMessageDialog(this, "Felaktig inmatning för lösenord");
+        } else if (!Validation.isValidEmail(email)) {
+            JOptionPane.showMessageDialog(this, "Felaktig inmatning för email");
+        } else {
+            switch (userType) {
+                case "Administratör":
+                    queryMethods.insertAdmin(firstName, lastName, PN, password, email);
+                    break;
+                case "Bibliotikarie":
+                    queryMethods.insertLibrarian(firstName, lastName, PN, password, email);
+                    break;
+                case "Gäst":
+                    queryMethods.insertGuest(firstName, lastName, PN, password, email);
+                    break;
+            }
+
+        
         }
 
     }//GEN-LAST:event_btnRegisterActionPerformed
