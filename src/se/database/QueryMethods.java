@@ -363,7 +363,7 @@ public boolean isEmailTaken(String email){
                book.setId(rs.getInt(1));
                book.setTitle(rs.getString(2));
                book.setAuthor(rs.getString(3));
-               book.setIsbn(rs.getInt(4));
+               book.setIsbn(rs.getString(4));
                book.setPublisher(rs.getString(5));
                book.setPurchase_price(rs.getDouble(6));
                book.setCategory(rs.getString(7));
@@ -402,7 +402,7 @@ public boolean isEmailTaken(String email){
                book.setId(rs.getInt(1));
                book.setTitle(rs.getString(2));
                book.setAuthor(rs.getString(3));
-               book.setIsbn(rs.getInt(4));
+               book.setIsbn(rs.getString(4));
                book.setPublisher(rs.getString(5));
                book.setPurchase_price(rs.getDouble(6));
                book.setCategory(rs.getString(7));
@@ -426,7 +426,6 @@ public boolean isEmailTaken(String email){
            return null;
                
        } 
-       
-       
+   
        
 }
