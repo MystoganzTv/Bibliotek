@@ -119,6 +119,11 @@ public class StartPage extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/lock_24px.png"))); // NOI18N
 
         jTextFieldUsername.setToolTipText("");
+        jTextFieldUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldUsernameActionPerformed(evt);
+            }
+        });
 
         jLabelPassword1.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabelPassword1.setForeground(new java.awt.Color(105, 131, 170));
@@ -356,6 +361,10 @@ public class StartPage extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButtonLoginActionPerformed
+
+    private void jTextFieldUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldUsernameActionPerformed
 
     /**
      * @param args the command line arguments

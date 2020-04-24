@@ -38,6 +38,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        queryMethods = new QueryMethods();
 
         jTabbedPaneEdit.setVisible(false);
         jTabbedPaneReport.setVisible(false);
@@ -1296,6 +1297,7 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
 
+        
          String userType = boxUsers.getSelectedItem().toString();
 
         String firstName = txtFirstname.getText();
@@ -1303,8 +1305,10 @@ public class AdminHomePage extends javax.swing.JFrame {
         String PN = txtPN.getText();
         String password = txtPassword.getText();
         String email = txtEmail.getText();
-
-        if (!Validation.isValidName(firstName)) {
+        
+        if(queryMethods.isEmailTaken(email)){
+            JOptionPane.showMessageDialog(this, "Upptagen Email");
+        }else if (!Validation.isValidName(firstName)) {
             JOptionPane.showMessageDialog(this, "Felaktig inmatning för förnamn");
         } else if (!Validation.isValidName(lastName)) {
             JOptionPane.showMessageDialog(this, "Felaktig inmatning för efternamn");

@@ -265,7 +265,10 @@ public class NewUserView extends javax.swing.JFrame {
         String password = passwordField.getText();
         String email = Mailtxt.getText();
 
-        if (!Validation.isValidName(firstName)) {
+        if(queryMethods.isEmailTaken(email)){
+            JOptionPane.showMessageDialog(this, "Upptagen Email");
+        }
+        else if (!Validation.isValidName(firstName)) {
             JOptionPane.showMessageDialog(this, "Felaktig inmatning för förnamn");
         } else if (!Validation.isValidName(lastName)) {
             JOptionPane.showMessageDialog(this, "Felaktig inmatning för efternamn");
