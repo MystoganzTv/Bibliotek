@@ -33,6 +33,10 @@ public class Books {
         this.purchase_price = purchase_price;
     }
 
+    public Books() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getId() {
         return id;
     }
