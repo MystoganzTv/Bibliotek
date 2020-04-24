@@ -6,11 +6,14 @@
 
 package se.view;
 
-import se.view.AdminHome;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import se.database.QueryMethods;
+import se.view.AdminHome;
+import se.model.Admin;
 
 /**
  *
@@ -21,6 +24,11 @@ public class AdminEditUsers extends javax.swing.JFrame {
     /**
      * Creates new form EditUsers
      */
+    
+    private String[] colNames = {"Förnamn", "Efternamn", "Email", "PN", "Lösenord"};
+    private QueryMethods qMethods = new QueryMethods();
+    private DefaultTableModel model = new DefaultTableModel(colNames, 0);
+    
     public AdminEditUsers() {
         initComponents();
         
@@ -33,6 +41,15 @@ public class AdminEditUsers extends javax.swing.JFrame {
         btnChangeData.setBackground(new java.awt.Color(142, 198, 197));
         btnRemoveSelectedUser.setBackground(new java.awt.Color(142, 198, 197));
         btnClose.setBackground(new java.awt.Color(142, 198, 197));
+        
+        ArrayList<Admin> admins = qMethods.findAdmins();
+
+        for(int i = 0; i < admins.size(); i++) 
+        {
+             model.addRow(new Object[] { admins.get(i).getId(), admins.get(i).getFirstName(), admins.get(i).getLastName(),
+                          admins.get(i).getPersonId(), admins.get(i).getEmail(), admins.get(i).getPassword()});
+        }
+        userInfoTable.setModel(model);
     }
 
     /**
@@ -79,8 +96,18 @@ public class AdminEditUsers extends javax.swing.JFrame {
         jScrollPane1.setViewportView(userInfoTable);
 
         btnAdmins.setText("Administratörer");
+        btnAdmins.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminsActionPerformed(evt);
+            }
+        });
 
         btnLibrarians.setText("Bibliotekarier");
+        btnLibrarians.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLibrariansActionPerformed(evt);
+            }
+        });
 
         btnGuests.setText("Medlemmar");
         btnGuests.addActionListener(new java.awt.event.ActionListener() {
@@ -200,10 +227,15 @@ public class AdminEditUsers extends javax.swing.JFrame {
         //editor textField
         //there the admin can edit the data, and once this button is pressed it
         //will automatically querry the new data
+        int row = userInfoTable.getSelectedRow();
+        int col = userInfoTable.getSelectedColumn();
+        txtSelectedData.setText(userInfoTable.getValueAt(row, col).toString());
     }//GEN-LAST:event_userInfoTableMouseClicked
 
     private void btnGuestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuestsActionPerformed
-        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) userInfoTable.getModel();
+        model.setRowCount(0);
+       // userInfoTable.setModel(qMethods.displayGuests(colNames));                
     }//GEN-LAST:event_btnGuestsActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
@@ -227,6 +259,18 @@ public class AdminEditUsers extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnRemoveSelectedUserActionPerformed
+
+    private void btnAdminsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminsActionPerformed
+        DefaultTableModel model = (DefaultTableModel) userInfoTable.getModel();
+        model.setRowCount(0);
+        //userInfoTable.setModel(qMethods.displayAdmins(colNames));
+    }//GEN-LAST:event_btnAdminsActionPerformed
+
+    private void btnLibrariansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLibrariansActionPerformed
+        DefaultTableModel model = (DefaultTableModel) userInfoTable.getModel();
+        model.setRowCount(0);
+    //    userInfoTable.setModel(qMethods.findLibrarians(colNames));
+    }//GEN-LAST:event_btnLibrariansActionPerformed
 
     /**
      * @param args the command line arguments

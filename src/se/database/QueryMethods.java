@@ -6,13 +6,19 @@
 package se.database;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import se.model.Admin;
+import se.model.Guest;
+import se.model.Librarian;
 
 /**
  *
@@ -145,5 +151,139 @@ public class QueryMethods {
         return idLibrarian;
 
     }
-   
+     
+    public ArrayList<Admin> findAdmins() {
+        
+        try
+        {
+            MyConnection tryConnect = new MyConnection();
+            ArrayList<Admin> admins = new ArrayList<Admin>();
+            Admin currentAdmin;
+            
+            Connection conn = tryConnect.getConnection();
+            Statement stmt = conn.createStatement();
+            stmt.execute("SELECT * FROM admins");
+
+            ResultSet results = stmt.getResultSet();
+            while(results.next())
+            {
+                currentAdmin = new Admin(results.getString("first_name"),
+                                         results.getString("last_name"),
+                                         results.getString("person_id"),
+                                         results.getString("password"),
+                                         Integer.parseInt(results.getString("id")),
+                                         results.getString("email"));
+                admins.add(currentAdmin);
+                currentAdmin = null;
+            }
+            
+            conn.close();
+            stmt.close();
+            
+            return admins;
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Something went wrong: " + e);
+        }
+        
+        return null;
+    }
+    
+    public ArrayList<Librarian> findLibrarians() {
+        
+        try
+        {
+            MyConnection tryConnect = new MyConnection();
+            ArrayList<Librarian> librarians = new ArrayList<Librarian>();
+            Librarian currentLibrarian;
+            
+            Connection conn = tryConnect.getConnection();
+            Statement stmt = conn.createStatement();
+            stmt.execute("SELECT * FROM librarians");
+
+            ResultSet results = stmt.getResultSet();
+            while(results.next())
+            {
+                currentLibrarian = new Librarian(Integer.parseInt(results.getString("id")),
+                                                 results.getString("first_name"),
+                                                 results.getString("last_name"),
+                                                 results.getString("person_id"),
+                                                 results.getString("password"),
+                                                 results.getString("email"));
+                librarians.add(currentLibrarian);
+                currentLibrarian = null;
+            }
+            
+            conn.close();
+            stmt.close();
+            
+            return librarians;
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Something went wrong: " + e);
+        }
+        
+        return null;
+    }
+    
+    public ArrayList<Guest> findGuests() {
+        
+        try
+        {
+            MyConnection tryConnect = new MyConnection();
+            ArrayList<Guest> guests = new ArrayList<Guest>();
+            Guest currentGuest;
+            
+            Connection conn = tryConnect.getConnection();
+            Statement stmt = conn.createStatement();
+            stmt.execute("SELECT * FROM guests");
+
+            ResultSet results = stmt.getResultSet();
+            while(results.next())
+            {
+                currentGuest = new Guest(Integer.parseInt(results.getString("id")),
+                                                 results.getString("first_name"),
+                                                 results.getString("last_name"),
+                                                 results.getString("person_id"),
+                                                 results.getString("password"),
+                                                 results.getString("email"));
+                guests.add(currentGuest);
+                currentGuest = null;
+            }
+            
+            conn.close();
+            stmt.close();
+            
+            return guests;
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Something went wrong: " + e);
+        }
+        
+        return null;
+    }
+    
+       public String loginChecker(String user, String username, String password) {
+        String exist = " select email, password from "+ user + " where email = '"+username +"'"
+                + "and password = '"+password+"';" ; 
+        PreparedStatement check ;
+        String email = "";
+        
+        try{
+        check = MyConnection.getConnection().prepareStatement(exist);
+        
+        
+        ResultSet rs = check.executeQuery();
+        if (rs.next()){
+        email = rs.getString("email");
+        } 
+        }catch(Exception e){
+        System.out.println(e.toString() + " loginChecker()");
+        }
+        return email;
+        
+            }
 }
