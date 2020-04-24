@@ -23,7 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanelbackground" max="32767" attributes="0"/>
+          <Component id="jPanelbackground" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -42,7 +42,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabelBackgroundPhoto" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jPanel2" max="32767" attributes="0"/>
+                  <Component id="jPanelAddBook" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Component id="jPanelTitle" alignment="0" max="32767" attributes="0"/>
@@ -52,17 +52,12 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <Component id="jPanelTitle" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="jLabelBackgroundPhoto" min="-2" pref="543" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLabelBackgroundPhoto" min="-2" max="-2" attributes="0"/>
+                      <Component id="jPanelAddBook" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -70,19 +65,22 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabelBackgroundPhoto">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="f4" green="f4" red="f4" type="rgb"/>
+            </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/se/image/AddBook.jpg"/>
+              <Image iconType="3" name="/se/image/AddBook1.jpg"/>
             </Property>
           </Properties>
         </Component>
-        <Container class="javax.swing.JPanel" name="jPanel2">
+        <Container class="javax.swing.JPanel" name="jPanelAddBook">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f4" green="f4" red="f4" type="rgb"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Logga in">
+                <TitledBorder title="L&#xe4;gg till bok">
                   <Font PropertyName="font" name="Verdana" size="18" style="1"/>
                   <Color PropertyName="color" blue="aa" green="83" red="69" type="rgb"/>
                 </TitledBorder>
@@ -94,96 +92,105 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <EmptySpace pref="95" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabel1" min="-2" pref="64" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jLabel3" min="-2" pref="64" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabelISBN" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelTitel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelPublisher" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelPurchaseprice" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelPassword4" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelPassword5" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelPassword6" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabelDescription" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                                      <Component id="jFieldDescription" linkSize="3" min="-2" pref="314" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabelISBN" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabelPublisher" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabelPurchaseprice" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabelLocation" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabelTitel" min="-2" pref="29" max="-2" attributes="0"/>
+                                          <Component id="jLabelDescription1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabelAuthor" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jFieldTitle" linkSize="3" alignment="1" pref="156" max="32767" attributes="0"/>
+                                          <Component id="jFieldLocation" linkSize="3" alignment="1" pref="156" max="32767" attributes="0"/>
+                                          <Component id="jFieldPurchasePrice" linkSize="3" alignment="1" pref="156" max="32767" attributes="0"/>
+                                          <Component id="jFieldPublisher" linkSize="3" alignment="1" pref="156" max="32767" attributes="0"/>
+                                          <Component id="jFieldPasswordField" linkSize="3" alignment="1" pref="156" max="32767" attributes="0"/>
+                                          <Component id="jFieldDescription1" linkSize="3" alignment="1" pref="156" max="32767" attributes="0"/>
+                                          <Component id="jFieldAuthor" alignment="1" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
-                          </Group>
-                          <Group type="102" alignment="2" attributes="0">
-                              <EmptySpace min="88" pref="88" max="-2" attributes="0"/>
-                              <Component id="jlblMessage" min="-2" pref="151" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jTextFieldUsername" linkSize="1" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
-                          <Component id="jPasswordField5" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
-                          <Component id="jPasswordField4" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
-                          <Component id="jPasswordField3" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
-                          <Component id="jPasswordField2" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
-                          <Component id="jPasswordField1" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
-                          <Component id="jPasswordField" linkSize="1" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="250" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jTextFieldUsername" linkSize="2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jPasswordField" linkSize="2" min="-2" pref="24" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                              <Component id="jPasswordField1" min="-2" pref="24" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jPasswordField2" min="-2" pref="24" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jPasswordField3" min="-2" pref="24" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                              <Component id="jPasswordField4" min="-2" pref="24" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jPasswordField5" min="-2" pref="24" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="jLabelTitel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabelISBN" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabelPublisher" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabelPurchaseprice" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jLabelPassword4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jlblMessage" min="-2" pref="45" max="-2" attributes="0"/>
-                                  <Component id="jLabelPassword5" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabelPassword6" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <EmptySpace pref="23" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jFieldTitle" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelTitel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="196" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jFieldPasswordField" linkSize="2" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="jLabelISBN" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jFieldPublisher" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="jLabelPublisher" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabelPurchaseprice" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFieldPurchasePrice" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jFieldLocation" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="jLabelLocation" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jFieldDescription1" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="jLabelDescription1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jFieldAuthor" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="jLabelAuthor" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabelDescription" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFieldDescription" min="-2" pref="105" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jLabel1" min="-2" pref="76" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="1" min="-2" pref="76" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JPasswordField" name="jPasswordField">
+            <Component class="javax.swing.JPasswordField" name="jFieldPasswordField">
             </Component>
-            <Component class="javax.swing.JLabel" name="jlblMessage">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Gadugi" size="14" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" red="ff" type="rgb"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldUsername">
+            <Component class="javax.swing.JTextField" name="jFieldTitle">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
@@ -218,10 +225,10 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="aa" green="83" red="69" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Publisher"/>
+                <Property name="text" type="java.lang.String" value="F&#xf6;rlag"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+            <Component class="javax.swing.JPasswordField" name="jFieldPublisher">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelPurchaseprice">
               <Properties>
@@ -231,12 +238,12 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="aa" green="83" red="69" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Purchase price"/>
+                <Property name="text" type="java.lang.String" value="Ink&#xf6;pspris"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JPasswordField" name="jPasswordField2">
+            <Component class="javax.swing.JPasswordField" name="jFieldPurchasePrice">
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelPassword4">
+            <Component class="javax.swing.JLabel" name="jLabelDescription">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Gadugi" size="14" style="1"/>
@@ -244,12 +251,12 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="aa" green="83" red="69" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="L&#xf6;senord"/>
+                <Property name="text" type="java.lang.String" value="Beskrivning"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JPasswordField" name="jPasswordField3">
+            <Component class="javax.swing.JPasswordField" name="jFieldDescription">
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelPassword5">
+            <Component class="javax.swing.JLabel" name="jLabelLocation">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Gadugi" size="14" style="1"/>
@@ -257,12 +264,12 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="aa" green="83" red="69" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="L&#xf6;senord"/>
+                <Property name="text" type="java.lang.String" value="Placering"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JPasswordField" name="jPasswordField4">
+            <Component class="javax.swing.JPasswordField" name="jFieldLocation">
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelPassword6">
+            <Component class="javax.swing.JLabel" name="jLabelDescription1">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Gadugi" size="14" style="1"/>
@@ -270,10 +277,37 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="aa" green="83" red="69" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="L&#xf6;senord"/>
+                <Property name="text" type="java.lang.String" value="Kategori"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JPasswordField" name="jPasswordField5">
+            <Component class="javax.swing.JPasswordField" name="jFieldDescription1">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/se/image/ok_64px.png"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel3">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/se/image/cancel_64px.png"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabelAuthor">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Gadugi" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="aa" green="83" red="69" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="F&#xf6;rfattare"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JPasswordField" name="jFieldAuthor">
             </Component>
           </SubComponents>
         </Container>

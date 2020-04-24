@@ -324,35 +324,34 @@ public class StartPage extends javax.swing.JFrame {
             if (!jTextFieldEmail.getText().equals("") && !jPasswordField.getText().equals("")){
             jlblMessage.setText("<html>Användarnamn och lösenord finns ej!</html>");
             
-            if(jTextFieldEmail.getText().contains("@admin")){
-                if(!qm.loginChecker("admins",jTextFieldEmail.getText(),jPasswordField.getText()).equals("")){
+            if(!qm.loginChecker("admins",jTextFieldEmail.getText(),jPasswordField.getText()).equals("")){
+
                 jlblMessage.setText("");
                 AdminHomePage ah = new AdminHomePage();
                 ah.setVisible(true);
                 this.setVisible(false);
 
-                }
+                
                 
             }
-            if(jTextFieldEmail.getText().contains("@guest")){
-                if(!qm.loginChecker("guests",jTextFieldEmail.getText(),jPasswordField.getText()).equals("")){
+            if(!qm.loginChecker("guests",jTextFieldEmail.getText(),jPasswordField.getText()).equals("")){
+
                 jlblMessage.setText("");
                 NewUserView nuv = new NewUserView();
                 nuv.setVisible(true);
                 this.setVisible(false);
-                }
+                
                
             }
-            if(jTextFieldEmail.getText().contains("@librarian")){
-                if((!qm.loginChecker("librarians",jTextFieldEmail.getText(),jPasswordField.getText()).equals(""))){
+            if(!qm.loginChecker("librarians",jTextFieldEmail.getText(),jPasswordField.getText()).equals("")){
+
                 jlblMessage.setText("");
                 LibrarianView lv = new LibrarianView();
                 lv.setVisible(true);
                 this.setVisible(false);
                 }
                
-            }
-             
+                 
         
         }
         else{
