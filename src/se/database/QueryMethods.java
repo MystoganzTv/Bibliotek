@@ -17,6 +17,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import se.model.Admin;
+import se.model.Books;
+import se.model.E_Books;
 import se.model.Guest;
 import se.model.Librarian;
 
@@ -26,7 +28,7 @@ import se.model.Librarian;
  */
 public class QueryMethods {
     
-    Connection con = null;
+    static Connection con = null;
     String query = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
@@ -342,4 +344,49 @@ public boolean isEmailTaken(String email){
         return email;
         
             }
+       
+    public static void addBook(Books b, int category) {
+        
+        MyConnection tryConnect = new MyConnection();
+        con = MyConnection.getConnection();
+        
+        try
+        {
+            Statement stmt = con.createStatement();
+            stmt.execute("INSERT INTO books(title, author, isbn, publisher, purchase_price, books_kategori_id)" + 
+                         " VALUES ('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
+                         + b.getPublisher() + "', " + b.getPurchase_price() + ", " + category + ")");
+            stmt.close();
+            con.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Something went wrong while trying to add a book: " + e.getMessage());
+        }
+    }
+    
+    public static void addEBook(E_Books b, int category) {
+        
+        MyConnection tryConnect = new MyConnection();
+        con = MyConnection.getConnection();
+        
+        try
+        {
+            Statement stmt = con.createStatement();
+            stmt.execute("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, ebooks_kategori_id) "
+                         + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
+                         + b.getPublisher() + "', " + b.getPurchase_price() + ", " + category + ")");
+            stmt.close();
+            con.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Something went wrong while trying to add a book: " + e.getMessage());
+        }
+    }
+    
+    public static void main(String[] args) {
+        E_Books b = new E_Books(2, "Tarzan of the Apes", "Edgar Rice Burroughs", "9789871596898", "A. C. McClurg", 223);
+        addEBook(b, 2);
+    }
 }

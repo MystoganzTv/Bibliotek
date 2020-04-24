@@ -17,13 +17,13 @@ public class E_Books {
     
     private String author;
     
-    private int isbn;
+    private String isbn;
     
     private String publisher;
     
     private double purchase_price;
     
-    public E_Books(int id, String title, String author, int isbn, String publisher, double purchase_price) {
+    public E_Books(int id, String title, String author, String isbn, String publisher, double purchase_price) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -56,11 +56,11 @@ public class E_Books {
         this.author = author;
     }
 
-    public int getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(int isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
