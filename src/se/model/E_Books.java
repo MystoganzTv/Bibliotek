@@ -23,13 +23,10 @@ public class E_Books {
     
     private double purchase_price;
     
-<<<<<<< HEAD
-    public E_Books(int id, String title, String author, String isbn, String publisher, double purchase_price) {
-=======
     private String category;
     
     public E_Books(int id, String title, String author, String isbn, String publisher, double purchase_price, String category) {
->>>>>>> master
+
         this.id = id;
         this.title = title;
         this.author = author;

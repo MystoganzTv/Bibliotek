@@ -347,8 +347,8 @@ public boolean isEmailTaken(String email){
         
             }
        
-<<<<<<< HEAD
-    public static void addBook(Books b, int category) {
+
+    public static void addBook(Books b) {
         
         MyConnection tryConnect = new MyConnection();
         con = MyConnection.getConnection();
@@ -358,7 +358,7 @@ public boolean isEmailTaken(String email){
             Statement stmt = con.createStatement();
             stmt.execute("INSERT INTO books(title, author, isbn, publisher, purchase_price, books_kategori_id)" + 
                          " VALUES ('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
-                         + b.getPublisher() + "', " + b.getPurchase_price() + ", " + category + ")");
+                         + b.getPublisher() + "', " + b.getPurchase_price() + ", " + b.getCategory() + ")");
             stmt.close();
             con.close();
         }
@@ -368,7 +368,7 @@ public boolean isEmailTaken(String email){
         }
     }
     
-    public static void addEBook(E_Books b, int category) {
+    public static void addEBook(E_Books b) {
         
         MyConnection tryConnect = new MyConnection();
         con = MyConnection.getConnection();
@@ -378,7 +378,7 @@ public boolean isEmailTaken(String email){
             Statement stmt = con.createStatement();
             stmt.execute("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, ebooks_kategori_id) "
                          + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
-                         + b.getPublisher() + "', " + b.getPurchase_price() + ", " + category + ")");
+                         + b.getPublisher() + "', " + b.getPurchase_price() + ", " + b.getCategory() + ")");
             stmt.close();
             con.close();
         }
@@ -387,7 +387,7 @@ public boolean isEmailTaken(String email){
             System.out.println("Something went wrong while trying to add a book: " + e.getMessage());
         }
     }
-=======
+
        public List<Books> getAllBooks(){
            
            try{
@@ -467,7 +467,4 @@ public boolean isEmailTaken(String email){
            return null;
                
        } 
-   
-       
->>>>>>> master
 }

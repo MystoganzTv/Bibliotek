@@ -26,11 +26,7 @@ public class Books {
     private String category;
 
    
-<<<<<<< HEAD
-    public Books(int id, String title, String author, String isbn, String publisher, double purchase_price) {
-=======
     public Books(int id, String title, String author, String isbn, String publisher, double purchase_price, String category) {
->>>>>>> master
         this.id = id;
         this.title = title;
         this.author = author;
