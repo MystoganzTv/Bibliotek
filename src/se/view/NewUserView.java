@@ -52,10 +52,10 @@ public class NewUserView extends javax.swing.JFrame {
         Maillbl = new javax.swing.JLabel();
         Nametxt = new javax.swing.JTextField();
         Lastnametxt = new javax.swing.JTextField();
-        Usernametxt = new javax.swing.JTextField();
-        Passwordtxt = new javax.swing.JTextField();
+        PNTxt = new javax.swing.JTextField();
         Mailtxt = new javax.swing.JTextField();
         Savebtn = new javax.swing.JButton();
+        passwordField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -125,7 +125,7 @@ public class NewUserView extends javax.swing.JFrame {
         LastNamelbl.setText("Efternamn:");
 
         Usernamelbl.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        Usernamelbl.setText("Användarnamn:");
+        Usernamelbl.setText("Personnummer:");
 
         Passwordlbl.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         Passwordlbl.setText("Lösenord: ");
@@ -137,15 +137,15 @@ public class NewUserView extends javax.swing.JFrame {
 
         Lastnametxt.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
 
-        Usernametxt.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
-
-        Passwordtxt.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
+        PNTxt.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
 
         Mailtxt.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
 
         Savebtn.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         Savebtn.setText("Spara");
         Savebtn.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
+
+        passwordField.setText("jPasswordField1");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -169,8 +169,8 @@ public class NewUserView extends javax.swing.JFrame {
                                     .addComponent(Maillbl, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(78, 78, 78)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Passwordtxt)
-                                    .addComponent(Mailtxt)))
+                                    .addComponent(Mailtxt)
+                                    .addComponent(passwordField)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -181,7 +181,7 @@ public class NewUserView extends javax.swing.JFrame {
                                         .addGap(22, 22, 22)))
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(Usernametxt)
+                                        .addComponent(PNTxt)
                                         .addGap(4, 4, 4))
                                     .addComponent(Lastnametxt, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(212, 212, 212))
@@ -200,14 +200,13 @@ public class NewUserView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Usernamelbl, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Usernametxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PNTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Passwordlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(Passwordlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(Passwordtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Maillbl, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -240,7 +239,7 @@ public class NewUserView extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelBackgroundPhoto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 658, Short.MAX_VALUE)))
+                        .addComponent(jLabelBackgroundPhoto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -263,7 +262,7 @@ public class NewUserView extends javax.swing.JFrame {
         String firstName = Nametxt.getText();
         String lastName = Lastnametxt.getText();
         String PN = PNTxt.getText();
-        String password = Passwordtxt.getText();
+        String password = passwordField.getText();
         String email = Mailtxt.getText();
 
         if (!Validation.isValidName(firstName)) {
@@ -336,11 +335,10 @@ public class NewUserView extends javax.swing.JFrame {
     private javax.swing.JTextField Mailtxt;
     private javax.swing.JLabel Namelbl;
     private javax.swing.JTextField Nametxt;
+    private javax.swing.JTextField PNTxt;
     private javax.swing.JLabel Passwordlbl;
-    private javax.swing.JTextField Passwordtxt;
     private javax.swing.JButton Savebtn;
     private javax.swing.JLabel Usernamelbl;
-    private javax.swing.JTextField Usernametxt;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelBackgroundPhoto;
@@ -349,5 +347,6 @@ public class NewUserView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelTitle;
     private javax.swing.JPanel jPanelbackground;
+    private javax.swing.JPasswordField passwordField;
     // End of variables declaration//GEN-END:variables
 }
