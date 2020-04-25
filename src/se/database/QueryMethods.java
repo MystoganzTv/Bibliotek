@@ -23,6 +23,7 @@ import se.model.Books;
 import se.model.E_Books;
 import se.model.Guest;
 import se.model.Librarian;
+import se.model.LibraryCards;
 
 /**
  *
@@ -495,8 +496,45 @@ public class QueryMethods {
             System.out.println("Something went wrong while trying to add a book: " + e.getMessage());
         }
     }
-
-
+    
+    
+    
+     public ArrayList<LibraryCards> blockedCards(){
+         
+         String blockedListQuery = "select concat( first_name,\" \", last_name)as fullname, "
+                                 + "guests.id from guests join \n" +
+                                   "librarycards on guests.id = librarycards.guests_id\n" +
+                                   "where entry = 1;";
+         
+         ArrayList<LibraryCards> blockedCards = new ArrayList<LibraryCards>();
+         LibraryCards currentList;
+         String fullname = "";
+         int id = 0;
+         
+         con = MyConnection.getConnection();
+         PreparedStatement check ;
+         
+         try{
+             
+         check = con.prepareStatement(blockedListQuery);
+         ResultSet rs = check.executeQuery();
+         System.out.println();
+         while (rs.next()){
+          currentList = new LibraryCards(rs.getString("fullname"), 
+                                        rs.getInt("guests.id"));
+          
+          blockedCards.add(currentList);
+         }
+           con.close();
+           check.close();
+           rs.close();
+         }catch(Exception e){
+         System.out.println(e.toString());
+         }
+         
+         return blockedCards;
+     
+     }
       
 
 }
