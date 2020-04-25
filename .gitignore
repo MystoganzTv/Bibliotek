@@ -22,6 +22,7 @@
 
 # Ignored files
 /build
+/RawBilder
 /nbproject
 /test
 /build.xml
