@@ -123,7 +123,7 @@
                                           <Component id="jFieldLocation" linkSize="3" alignment="1" pref="156" max="32767" attributes="0"/>
                                           <Component id="jFieldPurchasePrice" linkSize="3" alignment="1" pref="156" max="32767" attributes="0"/>
                                           <Component id="jFieldPublisher" linkSize="3" alignment="1" pref="156" max="32767" attributes="0"/>
-                                          <Component id="jFieldPasswordField" linkSize="3" alignment="1" pref="156" max="32767" attributes="0"/>
+                                          <Component id="txtISBN" linkSize="3" alignment="1" pref="156" max="32767" attributes="0"/>
                                           <Component id="jFieldDescription1" linkSize="3" alignment="1" pref="156" max="32767" attributes="0"/>
                                           <Component id="jFieldAuthor" alignment="1" max="32767" attributes="0"/>
                                       </Group>
@@ -145,7 +145,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jFieldPasswordField" linkSize="2" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="txtISBN" linkSize="2" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                           <Component id="jLabelISBN" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -188,7 +188,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JPasswordField" name="jFieldPasswordField">
+            <Component class="javax.swing.JPasswordField" name="txtISBN">
             </Component>
             <Component class="javax.swing.JTextField" name="jFieldTitle">
               <Properties>
@@ -288,6 +288,9 @@
                   <Image iconType="3" name="/se/image/ok_64px.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel1MouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
