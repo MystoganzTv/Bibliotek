@@ -36,6 +36,15 @@ public class Books {
         this.category = category;
     }
 
+    public Books(String title, String author, String isbn, String publisher, double purchase_price, String category) {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.publisher = publisher;
+        this.purchase_price = purchase_price;
+        this.category = category;
+    }
+    
     public Books() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
