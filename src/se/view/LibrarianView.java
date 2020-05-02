@@ -5,11 +5,24 @@
  */
 package se.view;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import se.database.QueryMethods;
+import se.model.Admin;
+import se.model.Guest;
+import se.model.Books;
+
 /**
  *
  * @author enriq
  */
 public class LibrarianView extends javax.swing.JFrame {
+    
+    private QueryMethods queryMethods;
+    private String[] colNames = {"title", "author", "isbn", "publisher", "purchase_price", "category"};
+    private DefaultTableModel model = new DefaultTableModel(colNames, 0);
+    private QueryMethods qMethods = new QueryMethods();
+    private ArrayList<Books> books;
 
     /**
      * Creates new form StartPage1
@@ -18,6 +31,24 @@ public class LibrarianView extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        queryMethods = new QueryMethods();
+        books = qMethods.findBooks();
+         
+         fillBooksTable();
+    }
+    
+    public void fillBooksTable() {
+        ArrayList<Books> books = qMethods.findBooks();
+
+        model = (DefaultTableModel) BooksTable.getModel();
+        model.setRowCount(0);
+        for (int i = 0; i < books.size(); i++) {
+            model.addRow(new Object[]{books.get(i).getId(), books.get(i).getTitle(), books.get(i).getAuthor(),
+                books.get(i).getIsbn(), books.get(i).getPublisher(), books.get(i).getPurchase_price(), books.get(i).getCategory()});
+        }
+        BooksTable.setModel(model);
+        BooksTable.setRowSelectionAllowed(true);
+        
     }
 
     /**
@@ -179,6 +210,11 @@ public class LibrarianView extends javax.swing.JFrame {
         DeleteBookbtn.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         DeleteBookbtn.setText("Radera Bok");
         DeleteBookbtn.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
+        DeleteBookbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteBookbtnActionPerformed(evt);
+            }
+        });
 
         BooksTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -352,6 +388,24 @@ public class LibrarianView extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jLabel2MouseClicked
 
+    private void DeleteBookbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBookbtnActionPerformed
+       
+        int selection = BooksTable.getSelectedRow();
+        System.out.println("HELLO");
+        String stringId = BooksTable.getModel().getValueAt(selection, 0).toString();
+        System.out.println(stringId);
+        int id = Integer.parseInt(stringId);
+    
+        for(Books b : books){
+            if(b.getId() == id){
+                System.out.println(b.getTitle());
+                queryMethods.deleteBook(b);
+                
+            }
+        }
+    }//GEN-LAST:event_DeleteBookbtnActionPerformed
+
+      
     /**
      * @param args the command line arguments
      */

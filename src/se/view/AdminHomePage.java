@@ -1515,6 +1515,7 @@ public class AdminHomePage extends javax.swing.JFrame {
                 queryMethods.deleteGuest(g);
                 
             }
+            fillGuestTable();
         }
         
     }//GEN-LAST:event_jLabelEraseUserIconMouseClicked

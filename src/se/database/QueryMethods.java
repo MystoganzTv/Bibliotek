@@ -313,6 +313,41 @@ public class QueryMethods {
 
         return null;
     }
+    
+   public ArrayList<Books> findBooks() {
+
+        try {
+
+            ArrayList<Books> books = new ArrayList<Books>();
+            Books currentBooks;
+
+            con = MyConnection.getConnection();
+            Statement stmt = con.createStatement();
+            stmt.execute("SELECT * FROM books");
+
+            ResultSet results = stmt.getResultSet();
+            while (results.next()) {
+                currentBooks = new Books(Integer.parseInt(results.getString("id")),
+                        results.getString("title"),
+                        results.getString("author"),
+                        results.getString("isbn"),
+                        results.getString("publisher"),
+                        results.getDouble("purchase_price"),
+                        results.getString("category"));
+                books.add(currentBooks);
+                currentBooks = null;
+            }
+
+            con.close();
+            stmt.close();
+
+            return books;
+        } catch (SQLException e) {
+            System.out.println("Något gick fel: " + e.getMessage());
+        }
+
+        return null;
+    }
 
     public String loginChecker(String user, String username, String password) {
         String exist = " select email, password from " + user + " where email = '" + username + "'"
@@ -459,7 +494,6 @@ public class QueryMethods {
 
     public void addBook(Books b) {
         
-        MyConnection tryConnect = new MyConnection();
         con = MyConnection.getConnection();
         
         try
@@ -477,6 +511,27 @@ public class QueryMethods {
         }
     }
     
+    public void deleteBook(Books b){
+        
+        con = MyConnection.getConnection();
+        
+        String deleteBookQuery = "DELETE FROM books WHERE id=" + "'" + b.getId() +"'";
+        
+        try
+        {
+            ps = con.prepareStatement(deleteBookQuery);
+            ps.setInt(1, b.getId());
+            ps.executeUpdate();
+        }
+        catch(Exception e)
+        {
+          System.out.println("Något gick fel när du har försökt att radera den bok: " + e.getMessage());  
+        }
+        
+    
+    }
+    
+        
     public void addEBook(E_Books b) {
         
         MyConnection tryConnect = new MyConnection();
@@ -497,7 +552,25 @@ public class QueryMethods {
         }
     }
     
+    public void deleteE_Book(E_Books b){
+               
+        con = MyConnection.getConnection();
+        
+        String deleteE_BookQuery = "DELETE FROM e-books WHERE id=" + "'" + b.getId() +"'";
+        
+        try
+        {
+            ps = con.prepareStatement(deleteE_BookQuery);
+            ps.setInt(1, b.getId());
+            ps.executeUpdate();
+        }
+        catch(Exception e)
+        {
+          System.out.println("Något gick fel när du har försökt att radera denna e-bok: " + e.getMessage());  
+        }
+        
     
+    }
     
      public ArrayList<LibraryCards> blockedCards(){
          
