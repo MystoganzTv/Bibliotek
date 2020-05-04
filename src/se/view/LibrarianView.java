@@ -405,8 +405,7 @@ public class LibrarianView extends javax.swing.JFrame {
 
     private void DeleteBookbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBookbtnActionPerformed
        
-        int selection = BooksTable.getSelectedRow();
-        System.out.println("HELLO");
+        int selection = BooksTable.getSelectedRow();        
         String stringId = BooksTable.getModel().getValueAt(selection, 0).toString();
         System.out.println(stringId);
         int id = Integer.parseInt(stringId);
@@ -417,6 +416,7 @@ public class LibrarianView extends javax.swing.JFrame {
                 queryMethods.deleteBook(b);
                 
             }
+            fillBooksTable();
         }
     }//GEN-LAST:event_DeleteBookbtnActionPerformed
 
