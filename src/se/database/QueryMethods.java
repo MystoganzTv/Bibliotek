@@ -575,14 +575,12 @@ public class QueryMethods {
      public ArrayList<LibraryCards> blockedCards(){
          
          String blockedListQuery = "select concat( first_name,\" \", last_name)as fullname, "
-                                 + "guests.id from guests join \n" +
+                                 + "guests.id, category from guests join \n" +
                                    "librarycards on guests.id = librarycards.guests_id\n" +
                                    "where entry = 1;";
          
          ArrayList<LibraryCards> blockedCards = new ArrayList<LibraryCards>();
          LibraryCards currentList;
-         String fullname = "";
-         int id = 0;
          
          con = MyConnection.getConnection();
          PreparedStatement check ;
@@ -594,7 +592,8 @@ public class QueryMethods {
          System.out.println();
          while (rs.next()){
           currentList = new LibraryCards(rs.getString("fullname"), 
-                                        rs.getInt("guests.id"));
+                                         rs.getInt("guests.id"),
+                                         rs.getString("category"));
           
           blockedCards.add(currentList);
          }
