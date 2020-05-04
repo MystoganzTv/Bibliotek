@@ -27,9 +27,10 @@ public class LibraryCards {
         this.entry = entry;
     }
     
-    public LibraryCards(String fullname, int guestId) {
-        this.id = id;
+    public LibraryCards(String fullname, int guestId, String category) {
+        this.guestId = guestId;
         this.fullname = fullname;
+        this.category = category;
     }
 
     public String getFullname() {
