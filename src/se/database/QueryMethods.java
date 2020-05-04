@@ -515,7 +515,7 @@ public class QueryMethods {
         
         con = MyConnection.getConnection();
         
-        String deleteBookQuery = "DELETE FROM books WHERE id=" + "'" + b.getId() +"'";
+        String deleteBookQuery = "DELETE FROM books WHERE id=?" ;
         
         try
         {
@@ -556,7 +556,7 @@ public class QueryMethods {
                
         con = MyConnection.getConnection();
         
-        String deleteE_BookQuery = "DELETE FROM e-books WHERE id=" + "'" + b.getId() +"'";
+        String deleteE_BookQuery = "DELETE FROM e-books WHERE id=?";
         
         try
         {
