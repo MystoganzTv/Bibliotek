@@ -1541,7 +1541,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         for(Librarian l : librarians){
             if(l.getId() == id){
                 System.out.println(l.getFirstName());
-              //  queryMethods.deleteLibrarian(l);
+               // queryMethods.deleteLibrarian(l);
                 
             }
             fillLibrarianTable();
