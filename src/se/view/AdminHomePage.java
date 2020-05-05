@@ -22,7 +22,6 @@ import se.database.QueryMethods;
 import se.main.Validation;
 
 //tadevos test
-
 /**
  *
  * @author enriq
@@ -44,7 +43,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         queryMethods = new QueryMethods();
-         guests = qMethods.findGuests();
+        guests = qMethods.findGuests();
 
         jTabbedPaneEdit.setVisible(false);
         jTabbedPaneReport.setVisible(false);
@@ -66,10 +65,10 @@ public class AdminHomePage extends javax.swing.JFrame {
     }
 
     public void fillAdminTable() {
-         admins = qMethods.findAdmins();
+        admins = qMethods.findAdmins();
 
         DefaultTableModel defaultModel = new DefaultTableModel(colNames, 0);
-        
+
         defaultModel.setRowCount(0);
         for (int i = 0; i < admins.size(); i++) {
             defaultModel.addRow(new Object[]{admins.get(i).getId(), admins.get(i).getFirstName(), admins.get(i).getLastName(),
@@ -77,14 +76,14 @@ public class AdminHomePage extends javax.swing.JFrame {
         }
         adminTable.setModel(defaultModel);
         adminTable.setRowSelectionAllowed(true);
-        
+
     }
 
     public void fillGuestTable() {
-       
+
         guests = queryMethods.findGuests();
         DefaultTableModel model = new DefaultTableModel(colNames, 0);
-      
+
         model.setRowCount(0);
         for (int i = 0; i < guests.size(); i++) {
             model.addRow(new Object[]{guests.get(i).getId(), guests.get(i).getFirstName(), guests.get(i).getLastName(),
@@ -92,17 +91,13 @@ public class AdminHomePage extends javax.swing.JFrame {
         }
         guestTable.setModel(model);
         guestTable.setRowSelectionAllowed(true);
-        
-      
-        
+
     }
-    
-    
 
     public void fillLibrarianTable() {
         librarians = qMethods.findLibrarians();
 
-       DefaultTableModel model = new DefaultTableModel(colNames, 0);
+        DefaultTableModel model = new DefaultTableModel(colNames, 0);
         model.setRowCount(0);
         for (int i = 0; i < librarians.size(); i++) {
             model.addRow(new Object[]{librarians.get(i).getId(), librarians.get(i).getFirstName(), librarians.get(i).getLastName(),
@@ -796,6 +791,11 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabelUpdateLendingIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_80px.png"))); // NOI18N
 
         jLabelEraseLendingIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/trash_can_80px.png"))); // NOI18N
+        jLabelEraseLendingIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEraseLendingIconMouseClicked(evt);
+            }
+        });
 
         jLabelEraseLendingText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabelEraseLendingText.setForeground(new java.awt.Color(105, 131, 170));
@@ -914,6 +914,11 @@ public class AdminHomePage extends javax.swing.JFrame {
         jScrollPane6.setViewportView(StockTable);
 
         jLabelEraseStockIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/trash_can_80px.png"))); // NOI18N
+        jLabelEraseStockIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEraseStockIconMouseClicked(evt);
+            }
+        });
 
         jLabelEraseStockText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabelEraseStockText.setForeground(new java.awt.Color(105, 131, 170));
@@ -1316,7 +1321,9 @@ public class AdminHomePage extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelbackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanelbackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -1324,18 +1331,17 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
 
-        
-         String userType = boxUsers.getSelectedItem().toString();
+        String userType = boxUsers.getSelectedItem().toString();
 
         String firstName = txtFirstname.getText();
         String lastName = txtLastname.getText();
         String PN = txtPN.getText();
         String password = jPasswordField1.getText();
         String email = txtEmail.getText();
-        
-        if(queryMethods.isEmailTaken(email)){
+
+        if (queryMethods.isEmailTaken(email)) {
             JOptionPane.showMessageDialog(this, "Upptagen Email");
-        }else if (!Validation.isValidName(firstName)) {
+        } else if (!Validation.isValidName(firstName)) {
             JOptionPane.showMessageDialog(this, "Felaktig inmatning för förnamn");
         } else if (!Validation.isValidName(lastName)) {
             JOptionPane.showMessageDialog(this, "Felaktig inmatning för efternamn");
@@ -1358,7 +1364,6 @@ public class AdminHomePage extends javax.swing.JFrame {
                     break;
             }
 
-        
         }
         fillGuestTable();
         fillLibrarianTable();
@@ -1387,7 +1392,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         fillGuestTable();
         fillLibrarianTable();
         fillAdminTable();
-        
+
     }//GEN-LAST:event_jLabelEditUsersMouseClicked
 
     private void jLabelEditUsersImgMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUsersImgMouseClicked
@@ -1463,7 +1468,20 @@ public class AdminHomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelUpdateUserTextMouseClicked
 
     private void jLabelEraseLibrarianTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseLibrarianTextMouseClicked
-        // TODO add your handling code here:
+        int selection = librarianTable.getSelectedRow();
+
+        String stringId = librarianTable.getModel().getValueAt(selection, 0).toString();
+
+        int id = Integer.parseInt(stringId);
+
+        for (Librarian l : librarians) {
+            if (l.getId() == id) {
+                System.out.println(l.getFirstName());
+                queryMethods.deleteLibrarian(l);
+
+            }
+            fillLibrarianTable();
+        }
     }//GEN-LAST:event_jLabelEraseLibrarianTextMouseClicked
 
     private void jLabelUpdateLibrarianTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateLibrarianTextMouseClicked
@@ -1477,9 +1495,23 @@ public class AdminHomePage extends javax.swing.JFrame {
     private void jLabelEditLibrarianIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditLibrarianIconMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabelEditLibrarianIconMouseClicked
-
+    
     private void jLabelEraseAdminTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseAdminTextMouseClicked
-        // TODO add your handling code here:
+
+        int selection = adminTable.getSelectedRow();
+
+        String stringId = adminTable.getModel().getValueAt(selection, 0).toString();
+
+        int id = Integer.parseInt(stringId);
+
+        for (Admin a : admins) {
+            if (a.getId() == id) {
+                System.out.println(a.getFirstName());
+                queryMethods.deleteAdmin(a);
+
+            }
+            fillAdminTable();
+        }
     }//GEN-LAST:event_jLabelEraseAdminTextMouseClicked
 
     private void jLabelUpdateAdminTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateAdminTextMouseClicked
@@ -1512,61 +1544,38 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void jLabelEraseBookingsIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseBookingsIconMouseClicked
         // TODO add your handling code here:
-     
+
     }//GEN-LAST:event_jLabelEraseBookingsIconMouseClicked
 
     private void jLabelEraseUserIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseUserIconMouseClicked
         // TODO add your handling code here:
-        
-        if(jTabbedPaneEdit.isEnabledAt(0)){
+
+        if (jTabbedPaneEdit.isEnabledAt(0)) {
             int selection = guestTable.getSelectedRow();
-        
-        String stringId = guestTable.getModel().getValueAt(selection, 0).toString();
-        
-        int id = Integer.parseInt(stringId);
-    
-        for(Guest g : guests){
-            if(g.getId() == id){
-                System.out.println(g.getFirstName());
-                queryMethods.deleteGuest(g);
-                
+
+            String stringId = guestTable.getModel().getValueAt(selection, 0).toString();
+
+            int id = Integer.parseInt(stringId);
+
+            for (Guest g : guests) {
+                if (g.getId() == id) {
+                    System.out.println(g.getFirstName());
+                    queryMethods.deleteGuest(g);
+
+                }
+                fillGuestTable();
             }
-            fillGuestTable();
         }
-        }else if(jTabbedPaneEdit.isEnabledAt(1)){
-            int selection = librarianTable.getSelectedRow();
-        
-        String stringId = librarianTable.getModel().getValueAt(selection, 0).toString();
-        
-        int id = Integer.parseInt(stringId);
-    
-        for(Librarian l : librarians){
-            if(l.getId() == id){
-                System.out.println(l.getFirstName());
-               // queryMethods.deleteLibrarian(l);
-                
-            }
-            fillLibrarianTable();
-        }
-        }else if(jTabbedPaneEdit.isEnabledAt(2)){
-            int selection = adminTable.getSelectedRow();
-        
-        String stringId = adminTable.getModel().getValueAt(selection, 0).toString();
-        
-        int id = Integer.parseInt(stringId);
-    
-        for(Admin a : admins){
-            if(a.getId() == id){
-                System.out.println(a.getFirstName());
-               // queryMethods.deleteAdmin(a);
-                
-            }
-            fillAdminTable();
-        }
-        }
-        
-        
+
     }//GEN-LAST:event_jLabelEraseUserIconMouseClicked
+
+    private void jLabelEraseLendingIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseLendingIconMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEraseLendingIconMouseClicked
+
+    private void jLabelEraseStockIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseStockIconMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEraseStockIconMouseClicked
     /**
      * @param args the command line arguments
      */
