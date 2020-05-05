@@ -17,18 +17,17 @@ public class MyConnectionTest {
 
     @Test
     public void testGetConnection() {
-        System.out.println("getConnection");
         
         try {
             Connection conn = MyConnection.getConnection();
             Statement stmt = conn.createStatement();
             
-            assertTrue("MyConnectionTest failed: Invalid database name returned from current connection.", stmt.execute("SELECT DATABASE()"));
+            assertTrue("MyConnectionTest failed.", stmt.execute("SELECT 1 FROM admins"));
             
             stmt.close();
             conn.close();
         } catch(Exception e) {
-            System.out.println("Something went wrong in MyConnectionTest.java.");
+            fail("MyConnectionTest failed.");
         }
     }
     
