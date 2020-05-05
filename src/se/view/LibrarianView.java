@@ -6,7 +6,11 @@
 package se.view;
 
 import java.util.ArrayList;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 import se.database.QueryMethods;
 import se.model.Admin;
 import se.model.Guest;
@@ -34,7 +38,11 @@ public class LibrarianView extends javax.swing.JFrame {
         queryMethods = new QueryMethods();
         books = qMethods.findBooks();
          
-         fillBooksTable();
+        fillBooksTable();
+        fillUsersTable();
+        
+        jbtnManageCards.setToolTipText("Tryck här för att redigera lånekort");
+        
     }
     
     public void fillBooksTable() {
@@ -48,6 +56,36 @@ public class LibrarianView extends javax.swing.JFrame {
         }
         BooksTable.setModel(model);
         BooksTable.setRowSelectionAllowed(true);
+        
+    }
+    
+    public void fillUsersTable(){
+        model = (DefaultTableModel) UsersTable.getModel();
+        model.setRowCount(0);
+        model.setColumnCount(4);
+        
+        for (int i = 0; i < qMethods.getAllCards().size() ; i++){
+            model.addRow(new Object[] {qMethods.getAllCards().get(i).getGuestId() , qMethods.getAllCards().get(i).getFullname(),
+            qMethods.getAllCards().get(i).getEntry(), qMethods.getAllCards().get(i).getCategory()});
+            
+            if (qMethods.getAllCards().get(i).getEntry() == 1){
+                UsersTable.setValueAt("Ja", i, 2);
+            }else{
+                UsersTable.setValueAt("Nej", i, 2);
+            }
+        }
+        
+        
+        UsersTable.getColumnModel().getColumn(0).setHeaderValue("Id");
+        UsersTable.getColumnModel().getColumn(1).setHeaderValue("Namn");
+        UsersTable.getColumnModel().getColumn(2).setHeaderValue("Spärrad");
+        UsersTable.getColumnModel().getColumn(3).setHeaderValue("Kategori");
+        
+        UsersTable.getColumn("Id").setPreferredWidth(25);
+        UsersTable.getColumn("Namn").setPreferredWidth(100);
+        UsersTable.getColumn("Spärrad").setPreferredWidth(60);
+        UsersTable.getColumn("Kategori").setPreferredWidth(150);
+        
         
     }
 
@@ -71,8 +109,9 @@ public class LibrarianView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         UsersTable = new javax.swing.JTable();
         NewUserbtn = new javax.swing.JButton();
-        DeleteUserbtn = new javax.swing.JButton();
+        jbtnManageCards = new javax.swing.JButton();
         jbtnBlockedCards = new javax.swing.JButton();
+        jbtnSave = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         TitleBooks = new javax.swing.JLabel();
         Bookstxt = new javax.swing.JTextField();
@@ -133,10 +172,15 @@ public class LibrarianView extends javax.swing.JFrame {
             }
         });
 
-        DeleteUserbtn.setBackground(new java.awt.Color(244, 244, 244));
-        DeleteUserbtn.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        DeleteUserbtn.setText("Radera Användaren");
-        DeleteUserbtn.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
+        jbtnManageCards.setBackground(new java.awt.Color(244, 244, 244));
+        jbtnManageCards.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jbtnManageCards.setText("Handera Lånekort");
+        jbtnManageCards.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
+        jbtnManageCards.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnManageCardsActionPerformed(evt);
+            }
+        });
 
         jbtnBlockedCards.setBackground(new java.awt.Color(244, 244, 244));
         jbtnBlockedCards.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -148,31 +192,49 @@ public class LibrarianView extends javax.swing.JFrame {
             }
         });
 
+        jbtnSave.setBackground(new java.awt.Color(244, 244, 244));
+        jbtnSave.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jbtnSave.setText("Spara Ändring");
+        jbtnSave.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
+        jbtnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnSaveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbtnBlockedCards, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(TitleUser)
+                        .addGap(26, 26, 26)
+                        .addComponent(Usertxt, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(TitleUser)
-                                .addGap(26, 26, 26)
-                                .addComponent(Usertxt, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(NewUserbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(DeleteUserbtn)))
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel3)))))
+                                .addContainerGap()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jbtnBlockedCards, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jbtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(NewUserbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jbtnManageCards, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(18, 18, 18)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -197,9 +259,11 @@ public class LibrarianView extends javax.swing.JFrame {
                         .addGap(19, 19, 19)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(NewUserbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(DeleteUserbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jbtnManageCards, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addComponent(jbtnBlockedCards, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtnBlockedCards, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28))
         );
 
@@ -290,8 +354,8 @@ public class LibrarianView extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
@@ -424,6 +488,7 @@ public class LibrarianView extends javax.swing.JFrame {
         // TODO add your handling code here:
         model = (DefaultTableModel) UsersTable.getModel();
         model.setRowCount(0);
+        model.setColumnCount(3);
         for (int i = 0; i < qMethods.blockedCards().size(); i++) {
             model.addRow(new Object[]{qMethods.blockedCards().get(i).getGuestId() , qMethods.blockedCards().get(i).getFullname(),
             qMethods.blockedCards().get(i).getCategory()}); }
@@ -431,11 +496,54 @@ public class LibrarianView extends javax.swing.JFrame {
         
         UsersTable.setRowSelectionAllowed(true);
         
-        model.setColumnCount(3);
         UsersTable.getColumnModel().getColumn(0).setHeaderValue("Id");
         UsersTable.getColumnModel().getColumn(1).setHeaderValue("Namn");
         UsersTable.getColumnModel().getColumn(2).setHeaderValue("Kategori");
     }//GEN-LAST:event_jbtnBlockedCardsActionPerformed
+    
+   
+    private void jbtnManageCardsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnManageCardsActionPerformed
+        // TODO add your handling code here:
+        fillUsersTable();
+        UsersTable.setToolTipText("Du kan nu redigera kolumnera Spärrad och Kategori");
+        String[] blocked = {"Ja", "Nej"}; 
+        String[] category = {"","Många sena böcker", "Många försvunna böcker", "Stöld"};
+        JComboBox blockedBox = new JComboBox(blocked);
+        JComboBox categoryBox = new JComboBox(category);
+        UsersTable.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(blockedBox));
+        UsersTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(categoryBox));
+        
+      
+        
+        
+     
+    }//GEN-LAST:event_jbtnManageCardsActionPerformed
+
+    private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
+        // TODO add your handling code here:
+        for(int i = 0 ; i < UsersTable.getRowCount(); i++){
+            if(UsersTable.getValueAt(i, 2) == "Ja"){
+                if(UsersTable.getValueAt(i, 3).equals("")){
+                JOptionPane.showMessageDialog(this, "Välj kategori för användare Id: "+ UsersTable.getValueAt(i, 0)
+                                                + " för att kunna spara");
+                } else{
+                qMethods.updateLibraryCards(1 , (int) UsersTable.getValueAt(i, 0), UsersTable.getValueAt(i, 3).toString());
+                
+                        } 
+            }
+            else if(UsersTable.getValueAt(i, 2) == "Nej"){
+            qMethods.updateLibraryCards(0 , (int) UsersTable.getValueAt(i, 0), UsersTable.getValueAt(i, 3).toString());
+            UsersTable.setValueAt("", i, 3);
+            
+            }
+            
+        }
+        
+     
+        
+        
+        
+    }//GEN-LAST:event_jbtnSaveActionPerformed
 
       
     /**
@@ -480,7 +588,6 @@ public class LibrarianView extends javax.swing.JFrame {
     private javax.swing.JTable BooksTable;
     private javax.swing.JTextField Bookstxt;
     private javax.swing.JButton DeleteBookbtn;
-    private javax.swing.JButton DeleteUserbtn;
     private javax.swing.JButton NewBookbtn;
     private javax.swing.JButton NewUserbtn;
     private javax.swing.JLabel TitleBooks;
@@ -501,5 +608,7 @@ public class LibrarianView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbtnBlockedCards;
+    private javax.swing.JButton jbtnManageCards;
+    private javax.swing.JButton jbtnSave;
     // End of variables declaration//GEN-END:variables
 }

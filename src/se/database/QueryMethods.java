@@ -572,7 +572,7 @@ public class QueryMethods {
     
     }
     
-     public ArrayList<LibraryCards> blockedCards(){
+    public ArrayList<LibraryCards> blockedCards(){
          
          String blockedListQuery = "select concat( first_name,\" \", last_name)as fullname, "
                                  + "guests.id, category from guests join \n" +
@@ -607,6 +607,55 @@ public class QueryMethods {
          return blockedCards;
      
      }
+    
+    public ArrayList<LibraryCards> getAllCards(){
+        String query = "select guests_id, concat(first_name, ' ', last_name)as fullname,\n" +
+                        "entry, category from librarycards join guests on guests_id = guests.id;";
+        
+        ArrayList<LibraryCards> allCardsList = new  ArrayList<LibraryCards>();
+        LibraryCards list ;
+        
+        con = MyConnection.getConnection();
+        PreparedStatement ps;
+        
+        try{
+        ps = con.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            list = new LibraryCards(rs.getInt("guests_id"),
+                                    rs.getString("fullname"),
+                                    rs.getInt("entry"),
+                                    rs.getString("category"));
+            allCardsList.add(list);
+        }
+        
+        }catch(Exception e ){
+        System.out.println(e.toString() + " getAllCards()");
+        }
+        return allCardsList;
+    }
+    
+    // entry is a boolean type in database, 0 = false 1 = true
+    public void updateLibraryCards(int entry, int userId, String category){
+        String query ="";
+        if (entry == 1){
+            query = "UPDATE librarycards SET entry = 1, category = '"+category+"' WHERE id = "+userId+";";
+        }
+        else if (entry == 0){
+            query = "UPDATE librarycards SET entry = 0, category = '' WHERE id = "+userId+";";
+        }
+        
+        con = MyConnection.getConnection();
+        PreparedStatement ps;
+        try{
+        ps = con.prepareStatement(query);
+        ps.execute();
+        
+        }catch(Exception e){
+        System.out.println(e.toString() + " updateLibraryCards()");
+        }
+    
+    }
+     
       
-
 }
