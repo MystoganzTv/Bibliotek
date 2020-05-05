@@ -78,7 +78,7 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     public void fillGuestTable() {
        
-
+        guests = queryMethods.findGuests();
         model = (DefaultTableModel) guestTable.getModel();
         model.setRowCount(0);
         for (int i = 0; i < guests.size(); i++) {
@@ -1355,6 +1355,9 @@ public class AdminHomePage extends javax.swing.JFrame {
 
         
         }
+        fillGuestTable();
+        fillLibrarianTable();
+        fillAdminTable();
 
     }//GEN-LAST:event_btnRegisterActionPerformed
 
@@ -1376,11 +1379,18 @@ public class AdminHomePage extends javax.swing.JFrame {
     private void jLabelEditUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUsersMouseClicked
         jTabbedPaneEdit.setVisible(true);
         jTabbedPaneReport.setVisible(false);
+        fillGuestTable();
+        fillLibrarianTable();
+        fillAdminTable();
+        
     }//GEN-LAST:event_jLabelEditUsersMouseClicked
 
     private void jLabelEditUsersImgMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUsersImgMouseClicked
         jTabbedPaneEdit.setVisible(true);
         jTabbedPaneReport.setVisible(false);
+        fillGuestTable();
+        fillLibrarianTable();
+        fillAdminTable();
     }//GEN-LAST:event_jLabelEditUsersImgMouseClicked
 
     private void jLabelEditBookingsIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditBookingsIconMouseClicked

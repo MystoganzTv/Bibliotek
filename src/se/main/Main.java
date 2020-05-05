@@ -5,10 +5,16 @@
  */
 package se.main;
 
+import se.view.StartPage;
+
 /**
  *
  * @author tadev
  */
 public class Main {
+    public static void main(String[] args) {
+        StartPage startPage = new StartPage();
+        startPage.setVisible(true);
+    }
     
 }
