@@ -5,11 +5,24 @@
  */
 package se.view;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import se.database.QueryMethods;
+import se.model.Admin;
+import se.model.Guest;
+import se.model.Books;
+
 /**
  *
  * @author enriq
  */
 public class LibrarianView extends javax.swing.JFrame {
+    
+    private QueryMethods queryMethods;
+    private String[] colNames = {"title", "author", "isbn", "publisher", "purchase_price", "category"};
+    private DefaultTableModel model = new DefaultTableModel(colNames, 0);
+    private QueryMethods qMethods = new QueryMethods();
+    private ArrayList<Books> books;
 
     /**
      * Creates new form StartPage1
@@ -18,6 +31,24 @@ public class LibrarianView extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        queryMethods = new QueryMethods();
+        books = qMethods.findBooks();
+         
+         fillBooksTable();
+    }
+    
+    public void fillBooksTable() {
+        ArrayList<Books> books = qMethods.findBooks();
+
+        model = (DefaultTableModel) BooksTable.getModel();
+        model.setRowCount(0);
+        for (int i = 0; i < books.size(); i++) {
+            model.addRow(new Object[]{books.get(i).getId(), books.get(i).getTitle(), books.get(i).getAuthor(),
+                books.get(i).getIsbn(), books.get(i).getPublisher(), books.get(i).getPurchase_price(), books.get(i).getCategory()});
+        }
+        BooksTable.setModel(model);
+        BooksTable.setRowSelectionAllowed(true);
+        
     }
 
     /**
@@ -41,6 +72,7 @@ public class LibrarianView extends javax.swing.JFrame {
         UsersTable = new javax.swing.JTable();
         NewUserbtn = new javax.swing.JButton();
         DeleteUserbtn = new javax.swing.JButton();
+        jbtnBlockedCards = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         TitleBooks = new javax.swing.JLabel();
         Bookstxt = new javax.swing.JTextField();
@@ -106,6 +138,16 @@ public class LibrarianView extends javax.swing.JFrame {
         DeleteUserbtn.setText("Radera Användaren");
         DeleteUserbtn.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
 
+        jbtnBlockedCards.setBackground(new java.awt.Color(244, 244, 244));
+        jbtnBlockedCards.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jbtnBlockedCards.setText("Spärrade Lånekort");
+        jbtnBlockedCards.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
+        jbtnBlockedCards.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnBlockedCardsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -113,24 +155,24 @@ public class LibrarianView extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbtnBlockedCards, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(TitleUser)
                                 .addGap(26, 26, 26)
                                 .addComponent(Usertxt, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(NewUserbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(DeleteUserbtn)))
                         .addGap(10, 10, 10)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel3))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(NewUserbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(DeleteUserbtn)))
+                                .addComponent(jLabel3)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -149,12 +191,16 @@ public class LibrarianView extends javax.swing.JFrame {
                         .addGap(55, 55, 55)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jLabel3)
-                .addGap(33, 33, 33)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NewUserbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DeleteUserbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(NewUserbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(DeleteUserbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addComponent(jbtnBlockedCards, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
 
         jPanel4.setBackground(new java.awt.Color(244, 244, 244));
@@ -179,6 +225,11 @@ public class LibrarianView extends javax.swing.JFrame {
         DeleteBookbtn.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         DeleteBookbtn.setText("Radera Bok");
         DeleteBookbtn.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
+        DeleteBookbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteBookbtnActionPerformed(evt);
+            }
+        });
 
         BooksTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -352,6 +403,41 @@ public class LibrarianView extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jLabel2MouseClicked
 
+    private void DeleteBookbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBookbtnActionPerformed
+       
+        int selection = BooksTable.getSelectedRow();        
+        String stringId = BooksTable.getModel().getValueAt(selection, 0).toString();
+        System.out.println(stringId);
+        int id = Integer.parseInt(stringId);
+    
+        for(Books b : books){
+            if(b.getId() == id){
+                System.out.println(b.getTitle());
+                queryMethods.deleteBook(b);
+                
+            }
+            fillBooksTable();
+        }
+    }//GEN-LAST:event_DeleteBookbtnActionPerformed
+
+    private void jbtnBlockedCardsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBlockedCardsActionPerformed
+        // TODO add your handling code here:
+        model = (DefaultTableModel) UsersTable.getModel();
+        model.setRowCount(0);
+        for (int i = 0; i < qMethods.blockedCards().size(); i++) {
+            model.addRow(new Object[]{qMethods.blockedCards().get(i).getGuestId() , qMethods.blockedCards().get(i).getFullname(),
+            qMethods.blockedCards().get(i).getCategory()}); }
+        
+        
+        UsersTable.setRowSelectionAllowed(true);
+        
+        model.setColumnCount(3);
+        UsersTable.getColumnModel().getColumn(0).setHeaderValue("Id");
+        UsersTable.getColumnModel().getColumn(1).setHeaderValue("Namn");
+        UsersTable.getColumnModel().getColumn(2).setHeaderValue("Kategori");
+    }//GEN-LAST:event_jbtnBlockedCardsActionPerformed
+
+      
     /**
      * @param args the command line arguments
      */
@@ -414,5 +500,6 @@ public class LibrarianView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelbackground;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton jbtnBlockedCards;
     // End of variables declaration//GEN-END:variables
 }
