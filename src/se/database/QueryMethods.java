@@ -499,7 +499,7 @@ public class QueryMethods {
         try
         {
             Statement stmt = con.createStatement();
-            stmt.execute("INSERT INTO books(title, author, isbn, publisher, purchase_price, books_kategori_id)" + 
+            stmt.execute("INSERT INTO books(title, author, isbn, publisher, purchase_price, category)" + 
                          " VALUES ('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
                          + b.getPublisher() + "', " + b.getPurchase_price() + ", " + b.getCategory() + ")");
             stmt.close();
