@@ -374,7 +374,7 @@ public class QueryMethods {
         try {
             List<Books> books = new ArrayList<>();
 
-            String bookQuery = "SELECT id, title, author, isbn, publisher, purchase_price, name FROM books INNER JOIN kategori ON books.books_kategori_id = kategori.id_kategori";
+            String bookQuery = "SELECT id, title, author, isbn, publisher, purchase_price, category FROM books";
 
             con = MyConnection.getConnection();
             ps = con.prepareStatement(bookQuery);
@@ -413,7 +413,7 @@ public class QueryMethods {
         try {
             List<E_Books> e_books = new ArrayList<>();
 
-            String bookQuery = "SELECT id, title, author, isbn, publisher, purchase_price, name FROM e_books INNER JOIN kategori ON e_books.ebooks_kategori_id = kategori.id_kategori";
+            String bookQuery = "SELECT id, title, author, isbn, publisher, purchase_price, category FROM e_books";
 
             con = MyConnection.getConnection();
             ps = con.prepareStatement(bookQuery);
@@ -540,7 +540,7 @@ public class QueryMethods {
         try
         {
             Statement stmt = con.createStatement();
-            stmt.execute("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, ebooks_kategori_id) "
+            stmt.execute("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category) "
                          + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
                          + b.getPublisher() + "', " + b.getPurchase_price() + ", " + b.getCategory() + ")");
             stmt.close();
