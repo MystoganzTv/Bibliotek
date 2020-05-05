@@ -452,7 +452,7 @@ public class QueryMethods {
 
         con = MyConnection.getConnection();
         
-        System.out.println(guest.getFirstName() + " från deletemetod");
+        
 
         String deleteEmailQuery = "DELETE FROM emails WHERE email=" + "'" + guest.getEmail() +"'";
 
@@ -462,7 +462,7 @@ public class QueryMethods {
 
         try {
             ps = con.prepareStatement(deleteEmailQuery);
-            System.out.println(guest.getEmail());
+            
             ps.executeUpdate();
         } catch (SQLException e) {
                 System.out.println(e.getMessage());
