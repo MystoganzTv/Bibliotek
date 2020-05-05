@@ -201,11 +201,21 @@ public class StartPage extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/about_80px.png"))); // NOI18N
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/course_80px.png"))); // NOI18N
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(105, 131, 170));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Böcker");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Seminarie_80px.png"))); // NOI18N
 
@@ -364,6 +374,20 @@ public class StartPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldEmailActionPerformed
 
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        ViewBooks vb = new ViewBooks();
+        vb.setVisible(true);
+    }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        ViewBooks vb = new ViewBooks();
+        vb.setVisible(true);
+    }//GEN-LAST:event_jLabel5MouseClicked
+   
     /**
      * @param args the command line arguments
      */
