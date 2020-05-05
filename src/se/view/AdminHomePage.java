@@ -28,8 +28,7 @@ import se.main.Validation;
 public class AdminHomePage extends javax.swing.JFrame {
 
     private QueryMethods queryMethods;
-    private String[] colNames = {"Förnamn", "Efternamn", "Email", "PN", "Lösenord"};
-    private DefaultTableModel model = new DefaultTableModel(colNames, 0);
+    private String[] colNames = {"ID", "Förnamn", "Efternamn", "Personnummer", "Email"};
     private QueryMethods qMethods = new QueryMethods();
     private ArrayList<Guest> guests;
 
@@ -65,13 +64,14 @@ public class AdminHomePage extends javax.swing.JFrame {
     public void fillAdminTable() {
         ArrayList<Admin> admins = qMethods.findAdmins();
 
-        model = (DefaultTableModel) adminTable.getModel();
-        model.setRowCount(0);
+        DefaultTableModel defaultModel = new DefaultTableModel(colNames, 0);
+        
+        defaultModel.setRowCount(0);
         for (int i = 0; i < admins.size(); i++) {
-            model.addRow(new Object[]{admins.get(i).getId(), admins.get(i).getFirstName(), admins.get(i).getLastName(),
+            defaultModel.addRow(new Object[]{admins.get(i).getId(), admins.get(i).getFirstName(), admins.get(i).getLastName(),
                 admins.get(i).getPersonId(), admins.get(i).getEmail(), admins.get(i).getPassword()});
         }
-        adminTable.setModel(model);
+        adminTable.setModel(defaultModel);
         adminTable.setRowSelectionAllowed(true);
         
     }
@@ -79,7 +79,8 @@ public class AdminHomePage extends javax.swing.JFrame {
     public void fillGuestTable() {
        
         guests = queryMethods.findGuests();
-        model = (DefaultTableModel) guestTable.getModel();
+        DefaultTableModel model = new DefaultTableModel(colNames, 0);
+      
         model.setRowCount(0);
         for (int i = 0; i < guests.size(); i++) {
             model.addRow(new Object[]{guests.get(i).getId(), guests.get(i).getFirstName(), guests.get(i).getLastName(),
@@ -97,7 +98,7 @@ public class AdminHomePage extends javax.swing.JFrame {
     public void fillLibrarianTable() {
         ArrayList<Librarian> librarians = qMethods.findLibrarians();
 
-        model = (DefaultTableModel) librarianTable.getModel();
+       DefaultTableModel model = new DefaultTableModel(colNames, 0);
         model.setRowCount(0);
         for (int i = 0; i < librarians.size(); i++) {
             model.addRow(new Object[]{librarians.get(i).getId(), librarians.get(i).getFirstName(), librarians.get(i).getLastName(),
