@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import se.model.Admin;
 import se.model.Books;
+import se.model.Category;
 import se.model.E_Books;
 import se.model.Guest;
 import se.model.Librarian;
@@ -350,6 +351,35 @@ public class QueryMethods {
 
         return null;
     }
+   
+   public ArrayList<Category> findCategories() {
+       
+        try {
+
+            ArrayList<Category> categories = new ArrayList<Category>();
+            Category currentCat;
+
+            con = MyConnection.getConnection();
+            Statement stmt = con.createStatement();
+            stmt.execute("SELECT * FROM categories");
+
+            ResultSet results = stmt.getResultSet();
+            while (results.next()) {
+                currentCat = new Category(results.getString("category"));
+                categories.add(currentCat);
+                currentCat = null;
+            }
+
+            con.close();
+            stmt.close();
+
+            return categories;
+        } catch (SQLException e) {
+            System.out.println("Något gick fel: " + e.getMessage());
+        }
+
+        return null;
+   }
 
     public String loginChecker(String user, String username, String password) {
         String exist = " select email, password from " + user + " where email = '" + username + "'"
@@ -573,7 +603,7 @@ public class QueryMethods {
             Statement stmt = con.createStatement();
             stmt.execute("INSERT INTO books(title, author, isbn, publisher, purchase_price, category)" + 
                          " VALUES ('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
-                         + b.getPublisher() + "', " + b.getPurchase_price() + ", " + b.getCategory() + ")");
+                         + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "')");
             stmt.close();
             con.close();
         }
@@ -614,7 +644,7 @@ public class QueryMethods {
             Statement stmt = con.createStatement();
             stmt.execute("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category) "
                          + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
-                         + b.getPublisher() + "', " + b.getPurchase_price() + ", " + b.getCategory() + ")");
+                         + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "')");
             stmt.close();
             con.close();
         }

@@ -102,33 +102,30 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jLabelDescription" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
-                                      <Component id="jFieldDescription" linkSize="3" min="-2" pref="314" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jLabelISBN" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelPublisher" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelPurchaseprice" max="32767" attributes="0"/>
+                                      <Component id="jLabelLocation" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelTitel" min="-2" pref="29" max="-2" attributes="0"/>
+                                      <Component id="jLabelAuthor" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelTitel1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jLabelTitel2" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jLabelISBN" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabelPublisher" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabelPurchaseprice" max="32767" attributes="0"/>
-                                          <Component id="jLabelLocation" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabelTitel" min="-2" pref="29" max="-2" attributes="0"/>
-                                          <Component id="jLabelAuthor" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabelTitel1" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jLabelTitel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jFieldTitle" linkSize="3" alignment="1" pref="156" max="32767" attributes="0"/>
-                                          <Component id="jFieldLocation" linkSize="3" alignment="1" pref="156" max="32767" attributes="0"/>
-                                          <Component id="jFieldPurchasePrice" linkSize="3" alignment="1" pref="156" max="32767" attributes="0"/>
-                                          <Component id="jFieldPublisher" linkSize="3" alignment="1" pref="156" max="32767" attributes="0"/>
-                                          <Component id="txtISBN" linkSize="3" alignment="1" pref="156" max="32767" attributes="0"/>
-                                          <Component id="jFieldAuthor" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="boxType" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                                          <Component id="boxCategory" min="-2" pref="120" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Component id="jLabelDescription" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jFieldDescription" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jFieldTitle" alignment="0" pref="314" max="32767" attributes="0"/>
+                                      <Component id="boxType" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                      <Component id="boxCategory" min="-2" pref="120" max="-2" attributes="0"/>
+                                      <Component id="txtISBN" max="32767" attributes="0"/>
+                                      <Component id="jFieldPublisher" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jFieldPurchasePrice" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jFieldLocation" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="jFieldAuthor" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
@@ -152,33 +149,33 @@
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jFieldTitle" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFieldTitle" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelTitel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtISBN" linkSize="2" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                           <Component id="jLabelISBN" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtISBN" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jFieldPublisher" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                           <Component id="jLabelPublisher" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFieldPublisher" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelPurchaseprice" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFieldPurchasePrice" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="jFieldPurchasePrice" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jFieldLocation" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                           <Component id="jLabelLocation" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFieldLocation" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jFieldAuthor" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                           <Component id="jLabelAuthor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFieldAuthor" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -196,8 +193,6 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JPasswordField" name="txtISBN">
-            </Component>
             <Component class="javax.swing.JTextField" name="jFieldTitle">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -236,8 +231,6 @@
                 <Property name="text" type="java.lang.String" value="F&#xf6;rlag"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JPasswordField" name="jFieldPublisher">
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabelPurchaseprice">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -248,8 +241,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ink&#xf6;pspris"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JPasswordField" name="jFieldPurchasePrice">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelDescription">
               <Properties>
@@ -262,8 +253,6 @@
                 <Property name="text" type="java.lang.String" value="Beskrivning"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JPasswordField" name="jFieldDescription">
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabelLocation">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -274,8 +263,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Placering"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JPasswordField" name="jFieldLocation">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
@@ -304,8 +291,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="F&#xf6;rfattare"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JPasswordField" name="jFieldAuthor">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelTitel1">
               <Properties>
@@ -341,6 +326,36 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
                 </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtISBN">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jFieldPublisher">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jFieldPurchasePrice">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jFieldLocation">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jFieldAuthor">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jFieldDescription">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
           </SubComponents>
