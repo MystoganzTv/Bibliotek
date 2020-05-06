@@ -374,7 +374,7 @@ public class QueryMethods {
         try {
             List<Books> books = new ArrayList<>();
 
-            String bookQuery = "SELECT id, title, author, isbn, publisher, purchase_price, name FROM books INNER JOIN kategori ON books.books_kategori_id = kategori.id_kategori";
+            String bookQuery = "SELECT id, title, author, isbn, publisher, purchase_price, category FROM books";
 
             con = MyConnection.getConnection();
             ps = con.prepareStatement(bookQuery);
@@ -413,7 +413,7 @@ public class QueryMethods {
         try {
             List<E_Books> e_books = new ArrayList<>();
 
-            String bookQuery = "SELECT id, title, author, isbn, publisher, purchase_price, name FROM e_books INNER JOIN kategori ON e_books.ebooks_kategori_id = kategori.id_kategori";
+            String bookQuery = "SELECT id, title, author, isbn, publisher, purchase_price, category FROM e_books";
 
             con = MyConnection.getConnection();
             ps = con.prepareStatement(bookQuery);
@@ -489,6 +489,90 @@ public class QueryMethods {
 
         }
     }
+    public void deleteAdmin(Admin admin) {
+
+        con = MyConnection.getConnection();
+        
+        
+
+        String deleteEmailQuery = "DELETE FROM emails WHERE email=" + "'" + admin.getEmail() +"'";
+
+        String deleteLibraryCard = "DELETE FROM librarycards WHERE admins_id=?";
+
+        String deleteAdmin = "DELETE FROM admins WHERE id=?";
+
+        try {
+            ps = con.prepareStatement(deleteEmailQuery);
+            
+            ps.executeUpdate();
+        } catch (SQLException e) {
+                System.out.println(e.getMessage());
+        }
+        try {
+            ps = con.prepareStatement(deleteLibraryCard);
+            ps.setInt(1, admin.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+                System.out.println(e.getMessage());
+        }
+        try {
+            ps = con.prepareStatement(deleteAdmin);
+            ps.setInt(1, admin.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }
+    public void deleteLibrarian(Librarian librarian) {
+
+        con = MyConnection.getConnection();
+        
+        
+
+        String deleteEmailQuery = "DELETE FROM emails WHERE email=" + "'" + librarian.getEmail() +"'";
+
+        String deleteLibraryCard = "DELETE FROM librarycards WHERE librarians_id=?";
+
+        String deleteLibrarian = "DELETE FROM librarians WHERE id=?";
+
+        try {
+            ps = con.prepareStatement(deleteEmailQuery);
+            
+            ps.executeUpdate();
+        } catch (SQLException e) {
+                System.out.println(e.getMessage());
+        }
+        try {
+            ps = con.prepareStatement(deleteLibraryCard);
+            ps.setInt(1, librarian.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+                System.out.println(e.getMessage());
+        }
+        try {
+            ps = con.prepareStatement(deleteLibrarian);
+            ps.setInt(1, librarian.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }
+
+
 
 
 
@@ -499,7 +583,7 @@ public class QueryMethods {
         try
         {
             Statement stmt = con.createStatement();
-            stmt.execute("INSERT INTO books(title, author, isbn, publisher, purchase_price, books_kategori_id)" + 
+            stmt.execute("INSERT INTO books(title, author, isbn, publisher, purchase_price, category)" + 
                          " VALUES ('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
                          + b.getPublisher() + "', " + b.getPurchase_price() + ", " + b.getCategory() + ")");
             stmt.close();
@@ -540,7 +624,7 @@ public class QueryMethods {
         try
         {
             Statement stmt = con.createStatement();
-            stmt.execute("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, ebooks_kategori_id) "
+            stmt.execute("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category) "
                          + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
                          + b.getPublisher() + "', " + b.getPurchase_price() + ", " + b.getCategory() + ")");
             stmt.close();
@@ -572,7 +656,7 @@ public class QueryMethods {
     
     }
     
-     public ArrayList<LibraryCards> blockedCards(){
+    public ArrayList<LibraryCards> blockedCards(){
          
          String blockedListQuery = "select concat( first_name,\" \", last_name)as fullname, "
                                  + "guests.id, category from guests join \n" +
@@ -607,6 +691,55 @@ public class QueryMethods {
          return blockedCards;
      
      }
+    
+    public ArrayList<LibraryCards> getAllCards(){
+        String query = "select guests_id, concat(first_name, ' ', last_name)as fullname,\n" +
+                        "entry, category from librarycards join guests on guests_id = guests.id;";
+        
+        ArrayList<LibraryCards> allCardsList = new  ArrayList<LibraryCards>();
+        LibraryCards list ;
+        
+        con = MyConnection.getConnection();
+        PreparedStatement ps;
+        
+        try{
+        ps = con.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            list = new LibraryCards(rs.getInt("guests_id"),
+                                    rs.getString("fullname"),
+                                    rs.getInt("entry"),
+                                    rs.getString("category"));
+            allCardsList.add(list);
+        }
+        
+        }catch(Exception e ){
+        System.out.println(e.toString() + " getAllCards()");
+        }
+        return allCardsList;
+    }
+    
+    // entry is a boolean type in database, 0 = false 1 = true
+    public void updateLibraryCards(int entry, int userId, String category){
+        String query ="";
+        if (entry == 1){
+            query = "UPDATE librarycards SET entry = 1, category = '"+category+"' WHERE id = "+userId+";";
+        }
+        else if (entry == 0){
+            query = "UPDATE librarycards SET entry = 0, category = '' WHERE id = "+userId+";";
+        }
+        
+        con = MyConnection.getConnection();
+        PreparedStatement ps;
+        try{
+        ps = con.prepareStatement(query);
+        ps.execute();
+        
+        }catch(Exception e){
+        System.out.println(e.toString() + " updateLibraryCards()");
+        }
+    
+    }
+     
       
-
 }

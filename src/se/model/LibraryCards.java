@@ -32,6 +32,13 @@ public class LibraryCards {
         this.fullname = fullname;
         this.category = category;
     }
+    
+    public LibraryCards(int guestId, String fullname, int entry, String category){
+        this.guestId = guestId;
+        this.fullname = fullname;
+        this.entry = entry;
+        this.category = category;
+    }
 
     public String getFullname() {
         return fullname;

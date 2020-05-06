@@ -29,3 +29,4 @@
 /manifest.mf
 /dist/
 .DS_Store
+!/test/
