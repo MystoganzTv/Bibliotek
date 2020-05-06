@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -333,7 +334,8 @@ public class QueryMethods {
                         results.getString("isbn"),
                         results.getString("publisher"),
                         results.getDouble("purchase_price"),
-                        results.getString("category"));
+                        results.getString("category"),
+                        results.getString("placement"));
                 books.add(currentBooks);
                 currentBooks = null;
             }
@@ -726,6 +728,254 @@ public class QueryMethods {
         }
     
     }
+    
+    //returning Arraylist of books, might be empty if no match!
+    public ArrayList<Books> findBooksByTitle(String title){
+        ArrayList<Books> foundBooks = new ArrayList<>();
+        
+        String query = "SELECT * FROM books WHERE title LIKE '%" + title +"%'";
+        
+        con = MyConnection.getConnection();
+        
+        try {
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Books book = new Books();
+                book.setId(rs.getInt(1));
+                book.setTitle(rs.getString(2));
+                book.setAuthor(rs.getString(3));
+                book.setIsbn(rs.getString(4));
+                book.setPublisher(rs.getString(5));
+                book.setPurchase_price(rs.getDouble(6));
+                book.setCategory(rs.getString(7));
+                book.setPlacement(rs.getString(8));
+                foundBooks.add(book);
+                
+            }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }finally {
+            
+            try {
+                con.close();
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return foundBooks;
+    }
+    
+    //returning Arraylist of books, might be empty if no match!
+    public ArrayList<Books> findBooksByCategory(String category){
+        ArrayList<Books> foundBooks = new ArrayList<>();
+        String query = "SELECT * FROM books WHERE category = '" +category + "'";
+        
+        con = MyConnection.getConnection();
+        
+        try {
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                Books book = new Books();
+                book.setId(rs.getInt(1));
+                book.setTitle(rs.getString(2));
+                book.setAuthor(rs.getString(3));
+                book.setIsbn(rs.getString(4));
+                book.setPublisher(rs.getString(5));
+                book.setPurchase_price(rs.getDouble(6));
+                book.setCategory(rs.getString(7));
+                book.setPlacement(rs.getString(8));
+                foundBooks.add(book);
+                
+            }
+            
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }finally{
+            try{
+                con.close();
+                rs.close();
+            }catch(SQLException ex){
+                System.out.println(ex.getMessage());
+            }
+        }
+        return foundBooks;
+    }
+    
+    
+    //returning Arraylist of books, might be empty if no match!
+    public ArrayList<Books> findBooksByAuthor(String author){
+        ArrayList<Books> foundBooks = new ArrayList<>();
+        
+        con = MyConnection.getConnection();
+        String query = "SELECT * FROM books WHERE author LIKE '%" + author +"%'";
+        
+        try{
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Books book = new Books();
+                book.setId(rs.getInt(1));
+                book.setTitle(rs.getString(2));
+                book.setAuthor(rs.getString(3));
+                book.setIsbn(rs.getString(4));
+                book.setPublisher(rs.getString(5));
+                book.setPurchase_price(rs.getDouble(6));
+                book.setCategory(rs.getString(7));
+                book.setPlacement(rs.getString(8));
+                foundBooks.add(book);
+                
+            }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }finally{
+            try {
+                con.close();
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return foundBooks;
+    }
+    
+    
+    // Returning NULL if no book found, Catch nullpointer when trying to find book!
+    public Books findBookByIsbn(String isbn){
+        String query = "SELECT * FROM books WHERE isbn = '" + isbn + "'";
+        
+        con = MyConnection.getConnection();
+        try {
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+               Books book = new Books();
+                book.setId(rs.getInt(1));
+                book.setTitle(rs.getString(2));
+                book.setAuthor(rs.getString(3));
+                book.setIsbn(rs.getString(4));
+                book.setPublisher(rs.getString(5));
+                book.setPurchase_price(rs.getDouble(6));
+                book.setCategory(rs.getString(7));
+                book.setPlacement(rs.getString(8));
+                return book;
+            }
+            
+        }catch(SQLException e){
+            
+            System.out.println(e.getMessage());
+            
+        }
+        return null;
+        
+    }
+        
+public ArrayList<E_Books> findEBooksByTitle(String title){
+    
+    ArrayList<E_Books> foundEBooks = new ArrayList<>();
+    con = MyConnection.getConnection();
+    String query = "SELECT * FROM e_books WHERE title LIKE '%" + title + "%'";
+    
+    try{
+        ps = con.prepareStatement(query);
+        rs = ps.executeQuery();
+        
+        while(rs.next()){
+            E_Books eBook = new E_Books();
+            eBook.setId(rs.getInt(1));
+            eBook.setTitle(rs.getString(2));
+            eBook.setAuthor(rs.getString(3));
+            eBook.setIsbn(rs.getString(4));
+            eBook.setPublisher(rs.getString(5));
+            eBook.setPurchase_price(rs.getDouble(6));
+            eBook.setCategory(rs.getString(7));
+            foundEBooks.add(eBook);
+        }
+    }catch(SQLException e ){
+        System.out.println(e.getMessage());
+    }finally{
+        try {
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    return foundEBooks;
+}    
+
+public ArrayList<E_Books> findEBooksByAuthor(String author){
+    
+    ArrayList<E_Books> foundEBooks = new ArrayList<>();
+    con = MyConnection.getConnection();
+    String query = "SELECT * FROM e_books WHERE author LIKE '%" +author +"%'";
+    
+    try{
+        ps = con.prepareStatement(query);
+        rs = ps.executeQuery();
+       
+        while(rs.next()){
+            E_Books eBook = new E_Books();
+            eBook.setId(rs.getInt(1));
+            eBook.setTitle(rs.getString(2));
+            eBook.setAuthor(rs.getString(3));
+            eBook.setIsbn(rs.getString(4));
+            eBook.setPublisher(rs.getString(5));
+            eBook.setPurchase_price(rs.getDouble(6));
+            eBook.setCategory(rs.getString(7));
+            foundEBooks.add(eBook);
+        }
+        
+    }catch(SQLException e){
+        System.out.println(e.getMessage());
+    }finally {
+        try {
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    return foundEBooks;
+}
+
+public ArrayList<E_Books> findEBooksByCategory(String category){
+    ArrayList<E_Books> foundEBooks = new ArrayList<>();
+    
+    con = MyConnection.getConnection();
+    
+    String query = "SELECT * FROM e_books WHERE category = '" +category +"'";
+    
+    try{
+        ps = con.prepareStatement(query);
+        rs = ps.executeQuery();
+        
+        while(rs.next()){
+            E_Books eBook = new E_Books();
+            eBook.setId(rs.getInt(1));
+            eBook.setTitle(rs.getString(2));
+            eBook.setAuthor(rs.getString(3));
+            eBook.setIsbn(rs.getString(4));
+            eBook.setPublisher(rs.getString(5));
+            eBook.setPurchase_price(rs.getDouble(6));
+            eBook.setCategory(rs.getString(7));
+            foundEBooks.add(eBook);
+        }
+        
+    }catch(SQLException e){
+        System.out.println(e.getMessage());
+    }finally {
+        try {
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    return foundEBooks;
+}
      
       
 }
