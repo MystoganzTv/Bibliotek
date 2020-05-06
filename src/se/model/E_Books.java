@@ -48,7 +48,7 @@ public class E_Books {
     }
     
     public E_Books() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     public int getId() {
