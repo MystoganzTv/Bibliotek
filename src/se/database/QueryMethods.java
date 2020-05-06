@@ -497,7 +497,6 @@ public class QueryMethods {
 
         String deleteEmailQuery = "DELETE FROM emails WHERE email=" + "'" + admin.getEmail() +"'";
 
-        String deleteLibraryCard = "DELETE FROM librarycards WHERE admins_id=?";
 
         String deleteAdmin = "DELETE FROM admins WHERE id=?";
 
@@ -508,13 +507,7 @@ public class QueryMethods {
         } catch (SQLException e) {
                 System.out.println(e.getMessage());
         }
-        try {
-            ps = con.prepareStatement(deleteLibraryCard);
-            ps.setInt(1, admin.getId());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-                System.out.println(e.getMessage());
-        }
+
         try {
             ps = con.prepareStatement(deleteAdmin);
             ps.setInt(1, admin.getId());
@@ -538,7 +531,6 @@ public class QueryMethods {
 
         String deleteEmailQuery = "DELETE FROM emails WHERE email=" + "'" + librarian.getEmail() +"'";
 
-        String deleteLibraryCard = "DELETE FROM librarycards WHERE librarians_id=?";
 
         String deleteLibrarian = "DELETE FROM librarians WHERE id=?";
 
@@ -549,13 +541,7 @@ public class QueryMethods {
         } catch (SQLException e) {
                 System.out.println(e.getMessage());
         }
-        try {
-            ps = con.prepareStatement(deleteLibraryCard);
-            ps.setInt(1, librarian.getId());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-                System.out.println(e.getMessage());
-        }
+
         try {
             ps = con.prepareStatement(deleteLibrarian);
             ps.setInt(1, librarian.getId());

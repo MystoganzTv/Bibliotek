@@ -545,6 +545,9 @@
                           <Image iconType="3" name="/se/image/trash_can_80px.png"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelEraseLibrarianIconMouseClicked"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabelEraseLibrarianText">
                       <Properties>
@@ -733,6 +736,9 @@
                           <Image iconType="3" name="/se/image/trash_can_80px.png"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelEraseAdminIconMouseClicked"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabelEraseAdminText">
                       <Properties>
