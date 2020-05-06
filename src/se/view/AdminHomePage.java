@@ -1478,6 +1478,7 @@ public class AdminHomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelUpdateUserTextMouseClicked
 
     private void jLabelEraseLibrarianTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseLibrarianTextMouseClicked
+
             int selection = librarianTable.getSelectedRow();
 
             String stringId = librarianTable.getModel().getValueAt(selection, 0).toString();
@@ -1574,6 +1575,7 @@ public class AdminHomePage extends javax.swing.JFrame {
 
                 }
                 fillGuestTable();
+
             }
         }
 
