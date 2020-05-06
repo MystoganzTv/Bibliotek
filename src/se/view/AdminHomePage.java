@@ -423,6 +423,11 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabelUpdateLibrarianIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_80px.png"))); // NOI18N
 
         jLabelEraseLibrarianIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/trash_can_80px.png"))); // NOI18N
+        jLabelEraseLibrarianIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEraseLibrarianIconMouseClicked(evt);
+            }
+        });
 
         jLabelEraseLibrarianText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabelEraseLibrarianText.setForeground(new java.awt.Color(105, 131, 170));
@@ -541,6 +546,11 @@ public class AdminHomePage extends javax.swing.JFrame {
         jScrollPane9.setViewportView(adminTable);
 
         jLabelEraseAdminIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/trash_can_80px.png"))); // NOI18N
+        jLabelEraseAdminIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEraseAdminIconMouseClicked(evt);
+            }
+        });
 
         jLabelEraseAdminText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabelEraseAdminText.setForeground(new java.awt.Color(105, 131, 170));
@@ -1576,6 +1586,43 @@ public class AdminHomePage extends javax.swing.JFrame {
     private void jLabelEraseStockIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseStockIconMouseClicked
         //TODO add your handling code here:
     }//GEN-LAST:event_jLabelEraseStockIconMouseClicked
+
+    private void jLabelEraseLibrarianIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseLibrarianIconMouseClicked
+        // TODO add your handling code here:
+         int selection = librarianTable.getSelectedRow();
+
+            String stringId = librarianTable.getModel().getValueAt(selection, 0).toString();
+
+            int id = Integer.parseInt(stringId);
+
+            for (Librarian l : librarians) {
+                if (l.getId() == id) {
+                    System.out.println(l.getFirstName());
+                    queryMethods.deleteLibrarian(l);
+
+                }
+                fillLibrarianTable();
+            }
+        
+    }//GEN-LAST:event_jLabelEraseLibrarianIconMouseClicked
+
+    private void jLabelEraseAdminIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseAdminIconMouseClicked
+        // TODO add your handling code here:
+        int selection = adminTable.getSelectedRow();
+
+        String stringId = adminTable.getModel().getValueAt(selection, 0).toString();
+
+        int id = Integer.parseInt(stringId);
+
+        for (Admin a : admins) {
+            if (a.getId() == id) {
+                System.out.println(a.getFirstName());
+                queryMethods.deleteAdmin(a);
+
+            }
+            fillAdminTable();
+        }
+    }//GEN-LAST:event_jLabelEraseAdminIconMouseClicked
     /**
      * @param args the command line arguments
      */
