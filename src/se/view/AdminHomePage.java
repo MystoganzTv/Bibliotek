@@ -1468,20 +1468,20 @@ public class AdminHomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelUpdateUserTextMouseClicked
 
     private void jLabelEraseLibrarianTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseLibrarianTextMouseClicked
-        int selection = librarianTable.getSelectedRow();
+            int selection = librarianTable.getSelectedRow();
 
-        String stringId = librarianTable.getModel().getValueAt(selection, 0).toString();
+            String stringId = librarianTable.getModel().getValueAt(selection, 0).toString();
 
-        int id = Integer.parseInt(stringId);
+            int id = Integer.parseInt(stringId);
 
-        for (Librarian l : librarians) {
-            if (l.getId() == id) {
-                System.out.println(l.getFirstName());
-                queryMethods.deleteLibrarian(l);
+            for (Librarian l : librarians) {
+                if (l.getId() == id) {
+                    System.out.println(l.getFirstName());
+                    queryMethods.deleteLibrarian(l);
 
+                }
+                fillLibrarianTable();
             }
-            fillLibrarianTable();
-        }
     }//GEN-LAST:event_jLabelEraseLibrarianTextMouseClicked
 
     private void jLabelUpdateLibrarianTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateLibrarianTextMouseClicked
@@ -1574,7 +1574,7 @@ public class AdminHomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelEraseLendingIconMouseClicked
 
     private void jLabelEraseStockIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseStockIconMouseClicked
-        // TODO add your handling code here:
+        //TODO add your handling code here:
     }//GEN-LAST:event_jLabelEraseStockIconMouseClicked
     /**
      * @param args the command line arguments
