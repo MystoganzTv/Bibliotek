@@ -5,6 +5,7 @@
  */
 package se.view;
 
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
@@ -477,6 +478,13 @@ public class LibrarianView extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jLabel2MouseClicked
 
+    
+    private void jLabel5MouseClicked(MouseEvent evt){
+         StartPage sp = new StartPage();
+        sp.setVisible(true);
+        this.setVisible(false);
+        
+    }
     private void DeleteBookbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBookbtnActionPerformed
 
         int selection = BooksTable.getSelectedRow();
