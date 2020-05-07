@@ -558,6 +558,14 @@ public class LibrarianView extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnSaveActionPerformed
 
 
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        StartPage sp = new StartPage();
+        sp.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+
+
     /**
      * @param args the command line arguments
      */
