@@ -40,9 +40,9 @@ public class ViewBooksTest {
     @Before
     public void setUp() {
         
-        books.add(new Books(3, "Be polite", "Andreas", "isbn", "A publisher", 0.0, "Music"));
-        books.add(new Books(1, "Hello World", "J.R.R Tolkien", "isbn", "B publisher", 0.0, "History"));
-        books.add(new Books(2, "A is first", "Zlatan", "isbn", "Z publisher", 0.0, "Sports"));
+        books.add(new Books(3, "Be polite", "Andreas", "isbn", "A publisher", 0.0, "Music","shit"));
+        books.add(new Books(1, "Hello World", "J.R.R Tolkien", "isbn", "B publisher", 0.0, "History","shit"));
+        books.add(new Books(2, "A is first", "Zlatan", "isbn", "Z publisher", 0.0, "Sports","shit"));
         
         eBooks.add(new E_Books(3, "Be polite", "Andreas", "isbn", "A publisher", 0.0, "Music"));
         eBooks.add(new E_Books(1, "Hello World", "J.R.R Tolkien", "isbn", "B publisher", 0.0, "History"));
