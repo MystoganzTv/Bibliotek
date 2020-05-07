@@ -168,12 +168,12 @@ public class AddBook extends javax.swing.JFrame {
                             .addGroup(jPanelAddBookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jFieldTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
                                 .addComponent(boxType, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(boxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtISBN)
                                 .addComponent(jFieldPublisher)
                                 .addComponent(jFieldPurchasePrice)
                                 .addComponent(jFieldLocation, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jFieldAuthor)))
+                                .addComponent(jFieldAuthor)
+                                .addComponent(boxCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(35, 35, 35))))
         );
         jPanelAddBookLayout.setVerticalGroup(
@@ -318,10 +318,36 @@ public class AddBook extends javax.swing.JFrame {
         String title = jFieldTitle.getText();
         String author = jFieldAuthor.getText();
         String isbn = txtISBN.getText();
+        String placering = jFieldLocation.getText();
+        String description = jFieldDescription.getText();
         String publisher = jFieldPublisher.getText();
         double purchasePrice = Double.parseDouble(jFieldPurchasePrice.getText());
         String bookType = boxType.getSelectedItem().toString().toLowerCase();
-        String category = boxCategory.getSelectedItem().toString();
+        String selectedCategory = boxCategory.getSelectedItem().toString();
+        String category = "";
+        
+        switch(selectedCategory) {
+            case "Datavetenskap, information och allmänna verk":
+                category = "000";
+            case "Filosofi och psykologi":
+                category = "100";
+            case "Religion":
+                category = "200";
+            case "Samhällsvetenskaperna":
+                category = "300";
+            case "Språk och Språkvetenskap":
+                category = "400";
+            case "Naturvetenskap":
+                category = "500";
+            case "Teknologi, medicin, teknik (tillämpade vetenskaper)":
+                category = "600";
+            case "Konst, musik och fritid":
+                category = "700";
+            case "Litteratur":
+                category = "800";
+            case "Geografi och historia":
+                category = "900";
+        }
         
         if(bookType.equals("bok"))
         {
@@ -333,8 +359,22 @@ public class AddBook extends javax.swing.JFrame {
             E_Books b = new E_Books(title, author, isbn, publisher, purchasePrice, category);
             qMethods.addEBook(b);
         }
+        
+        clearMenu();
     }//GEN-LAST:event_jLabel1MouseClicked
 
+    public void clearMenu() {
+        jFieldTitle.setText("");
+        jFieldAuthor.setText("");
+        txtISBN.setText("");
+        jFieldPublisher.setText("");
+        jFieldPurchasePrice.setText("");
+        jFieldLocation.setText("");
+        jFieldDescription.setText("");
+        boxType.setSelectedIndex(0);
+        boxCategory.setSelectedIndex(0);
+    }
+    
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         StartPage sp = new StartPage();
         sp.setVisible(true);
