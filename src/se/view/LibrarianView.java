@@ -21,9 +21,9 @@ import se.model.Books;
  * @author enriq
  */
 public class LibrarianView extends javax.swing.JFrame {
-    
+
     private QueryMethods queryMethods;
-    private String[] colNames = {"title", "author", "isbn", "publisher", "purchase_price", "category"};
+    private String[] colNames = {"Titel", "Författare", "ISBN", "Förlag", "Inköp Pris", "Kategori", "Placering"};
     private DefaultTableModel model = new DefaultTableModel(colNames, 0);
     private QueryMethods qMethods = new QueryMethods();
     private ArrayList<Books> books;
@@ -37,56 +37,55 @@ public class LibrarianView extends javax.swing.JFrame {
         setResizable(false);
         queryMethods = new QueryMethods();
         books = qMethods.findBooks();
-         
+
         fillBooksTable();
         fillUsersTable();
-        
-        jbtnManageCards.setToolTipText("Tryck här för att redigera lånekort");
-        
-    }
-    
-    public void fillBooksTable() {
-        ArrayList<Books> books = qMethods.findBooks();
 
-        model = (DefaultTableModel) BooksTable.getModel();
+        jbtnManageCards.setToolTipText("Tryck här för att redigera lånekort");
+
+    }
+
+    public void fillBooksTable() {
+        //ArrayList<Books> books = qMethods.findBooks();
+        books = queryMethods.findBooks();
+        DefaultTableModel model = new DefaultTableModel(colNames, 0);
+        //model = (DefaultTableModel) BooksTable.getModel();
         model.setRowCount(0);
         for (int i = 0; i < books.size(); i++) {
-            model.addRow(new Object[]{books.get(i).getId(), books.get(i).getTitle(), books.get(i).getAuthor(),
-                books.get(i).getIsbn(), books.get(i).getPublisher(), books.get(i).getPurchase_price(), books.get(i).getCategory()});
+            model.addRow(new Object[]{books.get(i).getTitle(), books.get(i).getAuthor(),
+                books.get(i).getIsbn(), books.get(i).getPublisher(), books.get(i).getPurchase_price(), books.get(i).getCategory(),books.get(i).getPlacement()});
         }
         BooksTable.setModel(model);
         BooksTable.setRowSelectionAllowed(true);
-        
+
     }
-    
-    public void fillUsersTable(){
+
+    public void fillUsersTable() {
         model = (DefaultTableModel) UsersTable.getModel();
         model.setRowCount(0);
         model.setColumnCount(4);
-        
-        for (int i = 0; i < qMethods.getAllCards().size() ; i++){
-            model.addRow(new Object[] {qMethods.getAllCards().get(i).getGuestId() , qMethods.getAllCards().get(i).getFullname(),
-            qMethods.getAllCards().get(i).getEntry(), qMethods.getAllCards().get(i).getCategory()});
-            
-            if (qMethods.getAllCards().get(i).getEntry() == 1){
+
+        for (int i = 0; i < qMethods.getAllCards().size(); i++) {
+            model.addRow(new Object[]{qMethods.getAllCards().get(i).getGuestId(), qMethods.getAllCards().get(i).getFullname(),
+                qMethods.getAllCards().get(i).getEntry(), qMethods.getAllCards().get(i).getCategory()});
+
+            if (qMethods.getAllCards().get(i).getEntry() == 1) {
                 UsersTable.setValueAt("Ja", i, 2);
-            }else{
+            } else {
                 UsersTable.setValueAt("Nej", i, 2);
             }
         }
-        
-        
+
         UsersTable.getColumnModel().getColumn(0).setHeaderValue("Id");
         UsersTable.getColumnModel().getColumn(1).setHeaderValue("Namn");
         UsersTable.getColumnModel().getColumn(2).setHeaderValue("Spärrad");
         UsersTable.getColumnModel().getColumn(3).setHeaderValue("Kategori");
-        
+
         UsersTable.getColumn("Id").setPreferredWidth(25);
         UsersTable.getColumn("Namn").setPreferredWidth(100);
         UsersTable.getColumn("Spärrad").setPreferredWidth(60);
         UsersTable.getColumn("Kategori").setPreferredWidth(150);
-        
-        
+
     }
 
     /**
@@ -123,6 +122,7 @@ public class LibrarianView extends javax.swing.JFrame {
         jLabelTitle = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -385,6 +385,13 @@ public class LibrarianView extends javax.swing.JFrame {
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Logo letras libro.png"))); // NOI18N
 
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/home_80px.png"))); // NOI18N
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelTitleLayout = new javax.swing.GroupLayout(jPanelTitle);
         jPanelTitle.setLayout(jPanelTitleLayout);
         jPanelTitleLayout.setHorizontalGroup(
@@ -395,20 +402,23 @@ public class LibrarianView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelTitle)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
                 .addContainerGap())
         );
         jPanelTitleLayout.setVerticalGroup(
             jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
-            .addGroup(jPanelTitleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                    .addGroup(jPanelTitleLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
 
@@ -468,17 +478,17 @@ public class LibrarianView extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void DeleteBookbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBookbtnActionPerformed
-       
-        int selection = BooksTable.getSelectedRow();        
+
+        int selection = BooksTable.getSelectedRow();
         String stringId = BooksTable.getModel().getValueAt(selection, 0).toString();
         System.out.println(stringId);
         int id = Integer.parseInt(stringId);
-    
-        for(Books b : books){
-            if(b.getId() == id){
+
+        for (Books b : books) {
+            if (b.getId() == id) {
                 System.out.println(b.getTitle());
                 queryMethods.deleteBook(b);
-                
+
             }
             fillBooksTable();
         }
@@ -490,62 +500,64 @@ public class LibrarianView extends javax.swing.JFrame {
         model.setRowCount(0);
         model.setColumnCount(3);
         for (int i = 0; i < qMethods.blockedCards().size(); i++) {
-            model.addRow(new Object[]{qMethods.blockedCards().get(i).getGuestId() , qMethods.blockedCards().get(i).getFullname(),
-            qMethods.blockedCards().get(i).getCategory()}); }
-        
-        
+            model.addRow(new Object[]{qMethods.blockedCards().get(i).getGuestId(), qMethods.blockedCards().get(i).getFullname(),
+                qMethods.blockedCards().get(i).getCategory()});
+        }
+
         UsersTable.setRowSelectionAllowed(true);
-        
+
         UsersTable.getColumnModel().getColumn(0).setHeaderValue("Id");
         UsersTable.getColumnModel().getColumn(1).setHeaderValue("Namn");
         UsersTable.getColumnModel().getColumn(2).setHeaderValue("Kategori");
     }//GEN-LAST:event_jbtnBlockedCardsActionPerformed
-    
-   
+
+
     private void jbtnManageCardsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnManageCardsActionPerformed
         // TODO add your handling code here:
         fillUsersTable();
         UsersTable.setToolTipText("Du kan nu redigera kolumnera Spärrad och Kategori");
-        String[] blocked = {"Ja", "Nej"}; 
-        String[] category = {"","Många sena böcker", "Många försvunna böcker", "Stöld"};
+        String[] blocked = {"Ja", "Nej"};
+        String[] category = {"", "Många sena böcker", "Många försvunna böcker", "Stöld"};
         JComboBox blockedBox = new JComboBox(blocked);
         JComboBox categoryBox = new JComboBox(category);
         UsersTable.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(blockedBox));
         UsersTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(categoryBox));
-        
-      
-        
-        
-     
+
+
     }//GEN-LAST:event_jbtnManageCardsActionPerformed
 
     private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
         // TODO add your handling code here:
-        for(int i = 0 ; i < UsersTable.getRowCount(); i++){
-            if(UsersTable.getValueAt(i, 2) == "Ja"){
-                if(UsersTable.getValueAt(i, 3).equals("")){
-                JOptionPane.showMessageDialog(this, "Välj kategori för användare Id: "+ UsersTable.getValueAt(i, 0)
-                                                + " för att kunna spara");
-                } else{
-                qMethods.updateLibraryCards(1 , (int) UsersTable.getValueAt(i, 0), UsersTable.getValueAt(i, 3).toString());
-                
-                        } 
+        boolean saved = false;
+
+        for (int i = 0; i < UsersTable.getRowCount(); i++) {
+            System.out.println(i + " " + UsersTable.getValueAt(i, 2));
+            if (UsersTable.getValueAt(i, 2).equals("Ja")) {
+                if (UsersTable.getValueAt(i, 3).equals("")) {
+                    JOptionPane.showMessageDialog(this, "Välj kategori för användare Id: " + UsersTable.getValueAt(i, 0)
+                            + " för att kunna spara");
+                    return;
+
+                } else {
+                    qMethods.updateLibraryCards(1, (int) UsersTable.getValueAt(i, 0), UsersTable.getValueAt(i, 3).toString());
+                    saved = true;
+                }
+            } else if (UsersTable.getValueAt(i, 2).equals("Nej")) {
+                qMethods.updateLibraryCards(0, (int) UsersTable.getValueAt(i, 0), UsersTable.getValueAt(i, 3).toString());
+                UsersTable.setValueAt("", i, 3);
+                saved = true;
+
             }
-            else if(UsersTable.getValueAt(i, 2) == "Nej"){
-            qMethods.updateLibraryCards(0 , (int) UsersTable.getValueAt(i, 0), UsersTable.getValueAt(i, 3).toString());
-            UsersTable.setValueAt("", i, 3);
-            
-            }
-            
         }
-        
-        JOptionPane.showMessageDialog(this, "Ändringarna har sparats");
-        
-        
-        
+
+        if (saved == true) {
+            JOptionPane.showMessageDialog(this, "Ändringarna har sparats");
+        }
+
+
     }//GEN-LAST:event_jbtnSaveActionPerformed
 
-      
+
     /**
      * @param args the command line arguments
      */
@@ -598,6 +610,7 @@ public class LibrarianView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelBackgroundPhoto;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JPanel jPanel1;
