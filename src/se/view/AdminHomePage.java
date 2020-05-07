@@ -123,6 +123,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabelTitle = new javax.swing.JLabel();
         jLabelLogo1 = new javax.swing.JLabel();
         jLabelLogo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jLayeredPaneWorkArea = new javax.swing.JLayeredPane();
         jTabbedPaneEdit = new javax.swing.JTabbedPane();
         jPanelTabUser = new javax.swing.JPanel();
@@ -244,6 +245,13 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/home_80px.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelTitleLayout = new javax.swing.GroupLayout(jPanelTitle);
         jPanelTitle.setLayout(jPanelTitleLayout);
         jPanelTitleLayout.setHorizontalGroup(
@@ -253,24 +261,26 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addComponent(jLabelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelLogo1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1130, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1126, Short.MAX_VALUE)
                 .addComponent(jLabelTitle)
-                .addGap(49, 49, 49))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addContainerGap())
         );
         jPanelTitleLayout.setVerticalGroup(
             jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTitleLayout.createSequentialGroup()
-                .addComponent(jLabelLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
-                        .addComponent(jLabelLogo1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
-                        .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33))))
+                .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelTitleLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelLogo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                    .addGroup(jPanelTitleLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabelLogo1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
 
         jTabbedPaneEdit.setForeground(new java.awt.Color(105, 131, 170));
@@ -1479,20 +1489,20 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void jLabelEraseLibrarianTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseLibrarianTextMouseClicked
 
-            int selection = librarianTable.getSelectedRow();
+        int selection = librarianTable.getSelectedRow();
 
-            String stringId = librarianTable.getModel().getValueAt(selection, 0).toString();
+        String stringId = librarianTable.getModel().getValueAt(selection, 0).toString();
 
-            int id = Integer.parseInt(stringId);
+        int id = Integer.parseInt(stringId);
 
-            for (Librarian l : librarians) {
-                if (l.getId() == id) {
-                    System.out.println(l.getFirstName());
-                    queryMethods.deleteLibrarian(l);
+        for (Librarian l : librarians) {
+            if (l.getId() == id) {
+                System.out.println(l.getFirstName());
+                queryMethods.deleteLibrarian(l);
 
-                }
-                fillLibrarianTable();
             }
+            fillLibrarianTable();
+        }
     }//GEN-LAST:event_jLabelEraseLibrarianTextMouseClicked
 
     private void jLabelUpdateLibrarianTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateLibrarianTextMouseClicked
@@ -1506,7 +1516,7 @@ public class AdminHomePage extends javax.swing.JFrame {
     private void jLabelEditLibrarianIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditLibrarianIconMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabelEditLibrarianIconMouseClicked
-    
+
     private void jLabelEraseAdminTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseAdminTextMouseClicked
 
         int selection = adminTable.getSelectedRow();
@@ -1591,21 +1601,21 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void jLabelEraseLibrarianIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseLibrarianIconMouseClicked
         // TODO add your handling code here:
-         int selection = librarianTable.getSelectedRow();
+        int selection = librarianTable.getSelectedRow();
 
-            String stringId = librarianTable.getModel().getValueAt(selection, 0).toString();
+        String stringId = librarianTable.getModel().getValueAt(selection, 0).toString();
 
-            int id = Integer.parseInt(stringId);
+        int id = Integer.parseInt(stringId);
 
-            for (Librarian l : librarians) {
-                if (l.getId() == id) {
-                    System.out.println(l.getFirstName());
-                    queryMethods.deleteLibrarian(l);
+        for (Librarian l : librarians) {
+            if (l.getId() == id) {
+                System.out.println(l.getFirstName());
+                queryMethods.deleteLibrarian(l);
 
-                }
-                fillLibrarianTable();
             }
-        
+            fillLibrarianTable();
+        }
+
     }//GEN-LAST:event_jLabelEraseLibrarianIconMouseClicked
 
     private void jLabelEraseAdminIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseAdminIconMouseClicked
@@ -1625,6 +1635,12 @@ public class AdminHomePage extends javax.swing.JFrame {
             fillAdminTable();
         }
     }//GEN-LAST:event_jLabelEraseAdminIconMouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        StartPage sp = new StartPage();
+        sp.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabel1MouseClicked
     /**
      * @param args the command line arguments
      */
@@ -1672,6 +1688,7 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnRegister;
     private javax.swing.JTable guestTable;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
