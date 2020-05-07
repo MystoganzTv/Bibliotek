@@ -475,11 +475,7 @@ public class LibrarianView extends javax.swing.JFrame {
         sp.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel2MouseClicked
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {                                     
-        StartPage sp = new StartPage();
-        sp.setVisible(true);
-        this.setVisible(false);
-    }  
+
     private void DeleteBookbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBookbtnActionPerformed
 
         int selection = BooksTable.getSelectedRow();
