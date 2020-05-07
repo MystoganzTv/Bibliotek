@@ -47,6 +47,8 @@ public class StartPage extends javax.swing.JFrame {
         jButtonLogin = new javax.swing.JButton();
         jlblMessage = new javax.swing.JLabel();
         jPasswordField = new javax.swing.JPasswordField();
+        jbtnRegister = new javax.swing.JButton();
+        jLabelPassword2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -143,6 +145,17 @@ public class StartPage extends javax.swing.JFrame {
         jlblMessage.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jlblMessage.setForeground(new java.awt.Color(255, 0, 0));
 
+        jbtnRegister.setText("Register");
+        jbtnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnRegisterActionPerformed(evt);
+            }
+        });
+
+        jLabelPassword2.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelPassword2.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelPassword2.setText("Eller skapa konto");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -151,9 +164,15 @@ public class StartPage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jlblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabelPassword2)))
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonLogin))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonLogin)
+                            .addComponent(jbtnRegister)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabelUsername1)
@@ -184,15 +203,16 @@ public class StartPage extends javax.swing.JFrame {
                     .addComponent(jLabelPassword1)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPasswordField))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonLogin)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jButtonLogin)
-                        .addGap(41, 41, 41))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jlblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelPassword2)
+                            .addComponent(jbtnRegister))))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(244, 244, 244));
@@ -347,9 +367,7 @@ public class StartPage extends javax.swing.JFrame {
             if(!qm.loginChecker("guests",jTextFieldEmail.getText(),jPasswordField.getText()).equals("")){
 
                 jlblMessage.setText("");
-                NewUserView nuv = new NewUserView();
-                nuv.setVisible(true);
-                this.setVisible(false);
+                
                 
                
             }
@@ -387,6 +405,13 @@ public class StartPage extends javax.swing.JFrame {
         ViewBooks vb = new ViewBooks();
         vb.setVisible(true);
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jbtnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRegisterActionPerformed
+        // TODO add your handling code here:
+        NewUserView nuv = new NewUserView();
+        nuv.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jbtnRegisterActionPerformed
    
     /**
      * @param args the command line arguments
@@ -438,6 +463,7 @@ public class StartPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelBackgroundPhoto;
     private javax.swing.JLabel jLabelPassword1;
+    private javax.swing.JLabel jLabelPassword2;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JLabel jLabelUsername1;
     private javax.swing.JPanel jPanel1;
@@ -448,6 +474,7 @@ public class StartPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelbackground;
     private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JTextField jTextFieldEmail;
+    private javax.swing.JButton jbtnRegister;
     private javax.swing.JLabel jlblMessage;
     // End of variables declaration//GEN-END:variables
 }
