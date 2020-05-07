@@ -23,7 +23,7 @@ import se.model.Books;
 public class LibrarianView extends javax.swing.JFrame {
 
     private QueryMethods queryMethods;
-    private String[] colNames = {"title", "author", "isbn", "publisher", "purchase_price", "category"};
+    private String[] colNames = {"Titel", "Författare", "ISBN", "Förlag", "Inköp Pris", "Kategori", "Placering"};
     private DefaultTableModel model = new DefaultTableModel(colNames, 0);
     private QueryMethods qMethods = new QueryMethods();
     private ArrayList<Books> books;
@@ -46,13 +46,14 @@ public class LibrarianView extends javax.swing.JFrame {
     }
 
     public void fillBooksTable() {
-        ArrayList<Books> books = qMethods.findBooks();
-
-        model = (DefaultTableModel) BooksTable.getModel();
+        //ArrayList<Books> books = qMethods.findBooks();
+        books = queryMethods.findBooks();
+        DefaultTableModel model = new DefaultTableModel(colNames, 0);
+        //model = (DefaultTableModel) BooksTable.getModel();
         model.setRowCount(0);
         for (int i = 0; i < books.size(); i++) {
-            model.addRow(new Object[]{books.get(i).getId(), books.get(i).getTitle(), books.get(i).getAuthor(),
-                books.get(i).getIsbn(), books.get(i).getPublisher(), books.get(i).getPurchase_price(), books.get(i).getCategory()});
+            model.addRow(new Object[]{books.get(i).getTitle(), books.get(i).getAuthor(),
+                books.get(i).getIsbn(), books.get(i).getPublisher(), books.get(i).getPurchase_price(), books.get(i).getCategory(),books.get(i).getPlacement()});
         }
         BooksTable.setModel(model);
         BooksTable.setRowSelectionAllowed(true);
@@ -562,6 +563,7 @@ public class LibrarianView extends javax.swing.JFrame {
         sp.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel5MouseClicked
+
 
 
     /**
