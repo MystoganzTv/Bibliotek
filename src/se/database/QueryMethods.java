@@ -606,6 +606,8 @@ public class QueryMethods {
                          + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "')");
             stmt.close();
             con.close();
+            
+            JOptionPane.showMessageDialog(null, "Boken har sparats!");
         }
         catch(Exception e)
         {
@@ -647,6 +649,8 @@ public class QueryMethods {
                          + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "')");
             stmt.close();
             con.close();
+            
+            JOptionPane.showMessageDialog(null, "E-Boken har sparats!");
         }
         catch(Exception e)
         {
