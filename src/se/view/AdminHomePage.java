@@ -113,7 +113,7 @@ public class AdminHomePage extends javax.swing.JFrame {
             try {
                 con.close();
             } catch (SQLException ex) {
-                Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AdminHomePage.class.getName()).log(Level.SEVERE, null, ex);
             }
 
     }
