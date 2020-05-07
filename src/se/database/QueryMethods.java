@@ -595,8 +595,11 @@ public class QueryMethods {
                     + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "')");
             stmt.close();
             con.close();
+
         } catch (Exception e) {
-            System.out.println("Something went wrong while trying to add a book: " + e.getMessage());
+
+            
+            JOptionPane.showMessageDialog(null, "Boken har sparats!");
         }
     }
 
@@ -628,8 +631,11 @@ public class QueryMethods {
                     + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "')");
             stmt.close();
             con.close();
+
         } catch (Exception e) {
-            System.out.println("Something went wrong while trying to add a book: " + e.getMessage());
+
+            
+            JOptionPane.showMessageDialog(null, "E-Boken har sparats!");
         }
     }
 
