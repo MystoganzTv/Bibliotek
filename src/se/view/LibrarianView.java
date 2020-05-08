@@ -89,6 +89,29 @@ public class LibrarianView extends javax.swing.JFrame {
         UsersTable.getColumn("Kategori").setPreferredWidth(150);
 
     }
+    
+    public void searchBooksResult(String searchWord){
+        String wordToMatch = searchWord.toLowerCase();
+        ArrayList<Books> foundBooks = new ArrayList<>();
+        
+        books.stream().filter((b) -> b.getTitle().toLowerCase().contains(wordToMatch)).forEach(foundBooks::add);
+        books.stream().filter((b)-> b.getAuthor().toLowerCase().equals(wordToMatch)).forEach(foundBooks::add);
+        books.stream().filter((b)-> b.getCategory().toLowerCase().equals(wordToMatch)).forEach(foundBooks::add);
+        
+        if(!foundBooks.isEmpty()){
+        DefaultTableModel model = new DefaultTableModel(colNames, 0);
+        
+        for(Books b : foundBooks){
+            model.addRow(new Object[]{b.getTitle(),b.getAuthor(), b.getIsbn(),b.getPublisher(),b.getPurchase_price(),b.getCategory(),b.getPlacement()});
+        }
+        BooksTable.setModel(model);
+        
+        }else{
+            JOptionPane.showMessageDialog(this,"Kunde inte hitta bok");
+            
+        }
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
