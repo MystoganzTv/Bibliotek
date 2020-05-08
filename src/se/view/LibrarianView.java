@@ -94,9 +94,9 @@ public class LibrarianView extends javax.swing.JFrame {
         String wordToMatch = searchWord.toLowerCase();
         ArrayList<Books> foundBooks = new ArrayList<>();
         
-        books.stream().filter((b) -> b.getTitle().toLowerCase().contains(wordToMatch)).forEach(foundBooks::add);
-        books.stream().filter((b)-> b.getAuthor().toLowerCase().equals(wordToMatch)).forEach(foundBooks::add);
-        books.stream().filter((b)-> b.getCategory().toLowerCase().equals(wordToMatch)).forEach(foundBooks::add);
+        books.stream().filter((b) -> b.getTitle().toLowerCase().contains(wordToMatch) || b.getAuthor().toLowerCase().equals(wordToMatch)
+                                || b.getCategory().toLowerCase().equals(wordToMatch)).forEach(foundBooks::add);
+        
         
         if(!foundBooks.isEmpty()){
         DefaultTableModel model = new DefaultTableModel(colNames, 0);

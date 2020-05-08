@@ -1574,6 +1574,12 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
 
         }
+        txtFirstname.setText("");
+        txtLastname.setText("");
+        txtPN.setText("");
+        jPasswordField1.setText("");
+        txtEmail.setText("");
+        
         fillGuestTable();
         fillLibrarianTable();
         fillAdminTable();
@@ -1834,12 +1840,9 @@ public class AdminHomePage extends javax.swing.JFrame {
         ArrayList<Guest> foundGuests = new ArrayList<>();
         
         guests.stream().filter((g)-> g.getLastName().toLowerCase().contains(userToFind) 
-                || g.getFirstName().toLowerCase().contains(userToFind)).forEach(foundGuests::add);
-        
-        guests.stream().filter((g)-> g.getEmail().equalsIgnoreCase(userToFind)).forEach(foundGuests::add);
-        guests.stream().filter((g)-> g.getPersonId().equals(userToFind)).forEach(foundGuests::add);
-        
-        
+                || g.getFirstName().toLowerCase().contains(userToFind) ||g.getEmail().equalsIgnoreCase(userToFind) 
+                || g.getPersonId().equals(userToFind)).forEach(foundGuests::add);
+       
         
         if(!foundGuests.isEmpty()){
         DefaultTableModel model = new DefaultTableModel(colNames, 0);
@@ -1865,11 +1868,9 @@ public class AdminHomePage extends javax.swing.JFrame {
             ArrayList<Librarian> foundLibrarians = new ArrayList<>();
             
             librarians.stream().filter( (l)-> l.getLastName().toLowerCase().contains(librarianToFind) 
-                    || l.getFirstName().toLowerCase().contains(librarianToFind)).forEach(foundLibrarians::add);
-            
-            librarians.stream().filter((l) -> l.getPersonId().equals(librarianToFind)).forEach(foundLibrarians::add);
-            librarians.stream().filter((l) -> l.getEmail().toLowerCase().equals(librarianToFind)).forEach(foundLibrarians::add);
-            
+                    || l.getFirstName().toLowerCase().contains(librarianToFind) ||l.getPersonId().equals(librarianToFind)
+                    || l.getEmail().toLowerCase().equals(librarianToFind)).forEach(foundLibrarians::add);
+       
             if(!foundLibrarians.isEmpty()){
                 DefaultTableModel model = new DefaultTableModel(colNames, 0);
                 
@@ -1893,11 +1894,10 @@ public class AdminHomePage extends javax.swing.JFrame {
             ArrayList<Admin> foundAdmins = new ArrayList<>();
             
             admins.stream().filter((a) -> a.getFirstName().toLowerCase().contains(adminToFind)
-                                    || a.getLastName().toLowerCase().contains(adminToFind)).forEach(foundAdmins::add);
-            
-            admins.stream().filter((a) -> a.getPersonId().equals(adminToFind)).forEach(foundAdmins::add);
-            admins.stream().filter((a) -> a.getEmail().toLowerCase().equals(adminToFind)).forEach(foundAdmins::add);
-            
+                                    || a.getLastName().toLowerCase().contains(adminToFind)
+                                    || a.getPersonId().equals(adminToFind)
+                                    || a.getEmail().toLowerCase().equals(adminToFind)).forEach(foundAdmins::add);
+     
             if(!foundAdmins.isEmpty()){
                 DefaultTableModel model = new DefaultTableModel(colNames,0);
                 
