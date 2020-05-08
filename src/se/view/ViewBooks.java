@@ -8,6 +8,8 @@ package se.view;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import se.database.MyConnection;
 import se.database.QueryMethods;
 import se.model.Books;
@@ -22,6 +24,7 @@ public class ViewBooks extends javax.swing.JFrame {
     private List<Books> books = new ArrayList<>();
     private List<E_Books> eBooks = new ArrayList<>();
     private QueryMethods queryMethods;
+    private String[] colNames = {"Titel", "Författare", "ISBN", "Förlag", "Inköp Pris", "Kategori", "Placering"};
 
     /**
      * Creates new form ViewBooks
@@ -30,8 +33,8 @@ public class ViewBooks extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         queryMethods = new QueryMethods();
-        //books = queryMethods.getAllBooks();
-        //eBooks = queryMethods.getAllEBooks();
+        books = queryMethods.getAllBooks();
+        eBooks = queryMethods.getAllEBooks();
     }
     
     public void sortBooksByTitle(List<Books> books){
@@ -220,6 +223,11 @@ public class ViewBooks extends javax.swing.JFrame {
         jScrollPane2.setViewportView(BooksTable);
 
         jLabelSearchBookingsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
+        jLabelSearchBookingsIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelSearchBookingsIconMouseClicked(evt);
+            }
+        });
 
         jLabelSearchBookingsText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabelSearchBookingsText.setForeground(new java.awt.Color(105, 131, 170));
@@ -321,6 +329,30 @@ public class ViewBooks extends javax.swing.JFrame {
         sp.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabelSearchBookingsIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchBookingsIconMouseClicked
+        
+        ArrayList<Books> foundBooks = new ArrayList<>();
+        String searchWord = Bookstxt.getText().toLowerCase();
+    
+         books.stream().filter((b)-> b.getTitle().toLowerCase().contains(searchWord) || b.getAuthor().toLowerCase().contains(searchWord)
+                                || b.getCategory().toLowerCase().equals(searchWord) || b.getIsbn().equals(searchWord)).forEach(foundBooks::add);
+                 
+                 
+        if(!foundBooks.isEmpty()){
+            DefaultTableModel model = new DefaultTableModel(colNames, 0);
+            
+            for(Books b : foundBooks){
+                model.addRow(new Object[]{b.getTitle(),b.getAuthor(), b.getIsbn(),b.getPublisher(),b.getPurchase_price(),b.getCategory(),b.getPlacement()});
+            }
+            BooksTable.setModel(model);
+            Bookstxt.setText("");
+        }else {
+            JOptionPane.showMessageDialog(this, "Ingen bok matchade din sökning");
+        }
+        
+        
+    }//GEN-LAST:event_jLabelSearchBookingsIconMouseClicked
 
     /**
      * @param args the command line arguments

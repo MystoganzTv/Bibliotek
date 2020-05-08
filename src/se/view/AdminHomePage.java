@@ -12,8 +12,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import java.util.function.Predicate;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javafx.scene.control.SelectionMode;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -358,6 +362,11 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabelSearchUserText.setText("Sök");
 
         jLabelSearchUserIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
+        jLabelSearchUserIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelSearchUserIconMouseClicked(evt);
+            }
+        });
 
         jLabelEditUserIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Redigera_80px.png"))); // NOI18N
         jLabelEditUserIcon.setAlignmentY(1.0F);
@@ -483,6 +492,11 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabelSearchLibrarianText.setText("Sök");
 
         jLabelSearchLibrarianIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
+        jLabelSearchLibrarianIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelSearchLibrarianIconMouseClicked(evt);
+            }
+        });
 
         librarianTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -608,6 +622,11 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabelSearchAdminText.setText("Sök");
 
         jLabelSearchAdminIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
+        jLabelSearchAdminIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelSearchAdminIconMouseClicked(evt);
+            }
+        });
 
         adminTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1555,6 +1574,12 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
 
         }
+        txtFirstname.setText("");
+        txtLastname.setText("");
+        txtPN.setText("");
+        jPasswordField1.setText("");
+        txtEmail.setText("");
+        
         fillGuestTable();
         fillLibrarianTable();
         fillAdminTable();
@@ -1806,11 +1831,93 @@ public class AdminHomePage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabelEraseAdminIconMouseClicked
 
+
+    private void jLabelSearchUserIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchUserIconMouseClicked
+        // TODO add your handling code here:
+        String userToFind = jTextFieldSearchUser.getText().toLowerCase().trim();
+        
+        if(!userToFind.isEmpty()){
+        ArrayList<Guest> foundGuests = new ArrayList<>();
+        
+        guests.stream().filter((g)-> g.getLastName().toLowerCase().contains(userToFind) 
+                || g.getFirstName().toLowerCase().contains(userToFind) ||g.getEmail().equalsIgnoreCase(userToFind) 
+                || g.getPersonId().equals(userToFind)).forEach(foundGuests::add);
+       
+        
+        if(!foundGuests.isEmpty()){
+        DefaultTableModel model = new DefaultTableModel(colNames, 0);
+        
+        for(Guest g : foundGuests){
+            model.addRow(new Object[]{g.getId(), g.getFirstName(), g.getLastName(), g.getPersonId(), g.getEmail()});
+        }
+        guestTable.setModel(model);
+        jTextFieldSearchUser.setText("");
+        }else{
+            JOptionPane.showMessageDialog(this,"Ingen användare kunde hittas");
+            
+        }
+        }
+    }//GEN-LAST:event_jLabelSearchUserIconMouseClicked
+
+    private void jLabelSearchLibrarianIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchLibrarianIconMouseClicked
+        // TODO add your handling code here:
+        
+        String librarianToFind = jTextFieldSearchLibrarian.getText().toLowerCase();
+        
+        if(!librarianToFind.isEmpty()){
+            ArrayList<Librarian> foundLibrarians = new ArrayList<>();
+            
+            librarians.stream().filter( (l)-> l.getLastName().toLowerCase().contains(librarianToFind) 
+                    || l.getFirstName().toLowerCase().contains(librarianToFind) ||l.getPersonId().equals(librarianToFind)
+                    || l.getEmail().toLowerCase().equals(librarianToFind)).forEach(foundLibrarians::add);
+       
+            if(!foundLibrarians.isEmpty()){
+                DefaultTableModel model = new DefaultTableModel(colNames, 0);
+                
+                for(Librarian l : foundLibrarians){
+                    model.addRow(new Object[]{l.getId(),l.getFirstName(),l.getLastName(),l.getPersonId(), l.getEmail()});
+                }
+                librarianTable.setModel(model);
+                jTextFieldSearchLibrarian.setText("");
+            }else {
+                JOptionPane.showMessageDialog(this, "Ingen användare kunde hittas");
+            }
+        }
+    }//GEN-LAST:event_jLabelSearchLibrarianIconMouseClicked
+
+    private void jLabelSearchAdminIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchAdminIconMouseClicked
+        // TODO add your handling code here:
+        
+        String adminToFind = jTextFieldSearchAdmin.getText().toLowerCase();
+        
+        if(!adminToFind.isEmpty()){
+            ArrayList<Admin> foundAdmins = new ArrayList<>();
+            
+            admins.stream().filter((a) -> a.getFirstName().toLowerCase().contains(adminToFind)
+                                    || a.getLastName().toLowerCase().contains(adminToFind)
+                                    || a.getPersonId().equals(adminToFind)
+                                    || a.getEmail().toLowerCase().equals(adminToFind)).forEach(foundAdmins::add);
+     
+            if(!foundAdmins.isEmpty()){
+                DefaultTableModel model = new DefaultTableModel(colNames,0);
+                
+                for(Admin a : foundAdmins){
+                    model.addRow(new Object[]{a.getId(),a.getFirstName(), a.getLastName(), a.getPersonId(),a.getEmail()});
+                }
+                adminTable.setModel(model);
+                jTextFieldSearchAdmin.setText("");
+            }else{
+                JOptionPane.showMessageDialog(this, "Ingen användare kunde hittas");
+            }
+        }
+    }//GEN-LAST:event_jLabelSearchAdminIconMouseClicked
+
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         StartPage sp = new StartPage();
         sp.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel1MouseClicked
+
 
     private void jLabelRecoveryIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelRecoveryIconMouseClicked
         // TODO add your handling code here:
@@ -1823,6 +1930,7 @@ public class AdminHomePage extends javax.swing.JFrame {
     private void jLabelRecoveryTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelRecoveryTextMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabelRecoveryTextMouseClicked
+
     /**
      * @param args the command line arguments
      */

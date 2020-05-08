@@ -324,6 +324,9 @@
                           <Image iconType="3" name="/se/image/search_24px.png"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelSearchUserIconMouseClicked"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabelEditUserIcon">
                       <Properties>
@@ -522,6 +525,9 @@
                           <Image iconType="3" name="/se/image/search_24px.png"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelSearchLibrarianIconMouseClicked"/>
+                      </Events>
                     </Component>
                     <Container class="javax.swing.JScrollPane" name="jScrollPane8">
                       <AuxValues>
@@ -720,6 +726,9 @@
                           <Image iconType="3" name="/se/image/search_24px.png"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelSearchAdminIconMouseClicked"/>
+                      </Events>
                     </Component>
                     <Container class="javax.swing.JScrollPane" name="jScrollPane9">
                       <AuxValues>
