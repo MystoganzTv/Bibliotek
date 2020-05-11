@@ -18,6 +18,10 @@ public class LibraryCards {
     
     
     private String fullname;
+    
+    public LibraryCards(){
+    
+    }
 
     public LibraryCards(int id, int guestId, String notes, String category, int entry) {
         this.id = id;

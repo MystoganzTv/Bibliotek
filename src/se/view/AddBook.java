@@ -69,6 +69,7 @@ public class AddBook extends javax.swing.JFrame {
         jLabelTitle = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -163,16 +164,16 @@ public class AddBook extends javax.swing.JFrame {
                             .addComponent(jLabelDescription))
                         .addGap(64, 64, 64)
                         .addGroup(jPanelAddBookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jFieldDescription)
+                            .addComponent(jFieldDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
                             .addGroup(jPanelAddBookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jFieldTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
                                 .addComponent(boxType, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(boxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtISBN)
                                 .addComponent(jFieldPublisher)
                                 .addComponent(jFieldPurchasePrice)
                                 .addComponent(jFieldLocation, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jFieldAuthor)))
+                                .addComponent(jFieldAuthor)
+                                .addComponent(boxCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(35, 35, 35))))
         );
         jPanelAddBookLayout.setVerticalGroup(
@@ -231,6 +232,13 @@ public class AddBook extends javax.swing.JFrame {
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Logo letras libro.png"))); // NOI18N
 
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/home_80px.png"))); // NOI18N
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelTitleLayout = new javax.swing.GroupLayout(jPanelTitle);
         jPanelTitle.setLayout(jPanelTitleLayout);
         jPanelTitleLayout.setHorizontalGroup(
@@ -241,20 +249,20 @@ public class AddBook extends javax.swing.JFrame {
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
                 .addContainerGap())
         );
         jPanelTitleLayout.setVerticalGroup(
             jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
-                        .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanelbackgroundLayout = new javax.swing.GroupLayout(jPanelbackground);
@@ -310,10 +318,36 @@ public class AddBook extends javax.swing.JFrame {
         String title = jFieldTitle.getText();
         String author = jFieldAuthor.getText();
         String isbn = txtISBN.getText();
+        String placering = jFieldLocation.getText();
+        String description = jFieldDescription.getText();
         String publisher = jFieldPublisher.getText();
         double purchasePrice = Double.parseDouble(jFieldPurchasePrice.getText());
         String bookType = boxType.getSelectedItem().toString().toLowerCase();
-        String category = boxCategory.getSelectedItem().toString();
+        String selectedCategory = boxCategory.getSelectedItem().toString();
+        String category = "";
+        
+        switch(selectedCategory) {
+            case "Datavetenskap, information och allmänna verk":
+                category = "000";
+            case "Filosofi och psykologi":
+                category = "100";
+            case "Religion":
+                category = "200";
+            case "Samhällsvetenskaperna":
+                category = "300";
+            case "Språk och Språkvetenskap":
+                category = "400";
+            case "Naturvetenskap":
+                category = "500";
+            case "Teknologi, medicin, teknik (tillämpade vetenskaper)":
+                category = "600";
+            case "Konst, musik och fritid":
+                category = "700";
+            case "Litteratur":
+                category = "800";
+            case "Geografi och historia":
+                category = "900";
+        }
         
         if(bookType.equals("bok"))
         {
@@ -325,7 +359,27 @@ public class AddBook extends javax.swing.JFrame {
             E_Books b = new E_Books(title, author, isbn, publisher, purchasePrice, category);
             qMethods.addEBook(b);
         }
+        
+        clearMenu();
     }//GEN-LAST:event_jLabel1MouseClicked
+
+    public void clearMenu() {
+        jFieldTitle.setText("");
+        jFieldAuthor.setText("");
+        txtISBN.setText("");
+        jFieldPublisher.setText("");
+        jFieldPurchasePrice.setText("");
+        jFieldLocation.setText("");
+        jFieldDescription.setText("");
+        boxType.setSelectedIndex(0);
+        boxCategory.setSelectedIndex(0);
+    }
+    
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        StartPage sp = new StartPage();
+        sp.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabel4MouseClicked
     
     /**
      * @param args the command line arguments
@@ -375,6 +429,7 @@ public class AddBook extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelAuthor;
     private javax.swing.JLabel jLabelBackgroundPhoto;
     private javax.swing.JLabel jLabelDescription;

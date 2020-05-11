@@ -27,6 +27,8 @@ public class Guest {
     private String password;
     
     private String email;
+    
+    
 
     public Guest(int id, String firstName, String lastName, String personId, String password, String email) {
         this.id = id;
@@ -35,6 +37,11 @@ public class Guest {
         this.personId = personId;
         this.password = password;
         this.email = email;
+       
+    }
+    
+    public Guest(){
+       
     }
 
     public int getId() {

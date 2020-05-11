@@ -21,7 +21,7 @@ public class MyConnection {
         //connection tilll lokalt databas
         Class.forName("com.mysql.jdbc.Driver");
 
-        String url = "jdbc:mysql://localhost/libsys";
+        String url = "jdbc:mysql://localhost/libsys?autoReconnect=true&useSSL=false";
         myDbConn = DriverManager.getConnection(url, "root", "root");
          return myDbConn;
         
