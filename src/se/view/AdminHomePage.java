@@ -1944,6 +1944,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabelSearchStockIconMouseClicked
 
+
     private void jLabelSearchBookingsIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchBookingsIconMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabelSearchBookingsIconMouseClicked
