@@ -293,6 +293,9 @@
                   <Image iconType="3" name="/se/image/search_24px.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelSearchBookingsIconMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelSearchBookingsText">
               <Properties>
