@@ -213,7 +213,6 @@ public class LibrarianView extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -236,7 +235,6 @@ public class LibrarianView extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)))
-
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -252,9 +250,7 @@ public class LibrarianView extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(TitleUser)
                             .addComponent(Usertxt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-
                         .addGap(18, 18, 18)
-
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -288,6 +284,11 @@ public class LibrarianView extends javax.swing.JFrame {
         NewBookbtn.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         NewBookbtn.setText("Lägga till");
         NewBookbtn.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
+        NewBookbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NewBookbtnActionPerformed(evt);
+            }
+        });
 
         DeleteBookbtn.setBackground(new java.awt.Color(244, 244, 244));
         DeleteBookbtn.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -564,6 +565,10 @@ public class LibrarianView extends javax.swing.JFrame {
         sp.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void NewBookbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewBookbtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NewBookbtnActionPerformed
 
 
 

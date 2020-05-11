@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import se.model.Admin;
 import se.model.Books;
+import se.model.BorrowedBooks;
 import se.model.Category;
 import se.model.DeletedBook;
 import se.model.E_Books;
@@ -684,12 +685,48 @@ public class QueryMethods {
             check.close();
             rs.close();
         } catch (Exception e) {
-            System.out.println(e.toString());
+            System.out.println(e.toString() + " blockedCards()");
         }
 
         return blockedCards;
 
     }
+    // All elements of librarycards table in database are included 
+    public ArrayList<LibraryCards> getBlockedCards() {
+
+        String blockedListQuery = "select * from librarycards where entry = 1;";
+
+        ArrayList<LibraryCards> blockedCards = new ArrayList<LibraryCards>();
+        LibraryCards currentList;
+
+        con = MyConnection.getConnection();
+        PreparedStatement check;
+
+        try {
+
+            check = con.prepareStatement(blockedListQuery);
+            ResultSet rs = check.executeQuery();
+            System.out.println();
+            while (rs.next()) {
+                currentList = new LibraryCards(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5));
+
+                blockedCards.add(currentList);
+            }
+            con.close();
+            check.close();
+            rs.close();
+        } catch (Exception e) {
+            System.out.println(e.toString() + " getBlockedCards()");
+        }
+
+        return blockedCards;
+
+    }
+
 
     public ArrayList<LibraryCards> getAllCards() {
         String query = "select guests_id, concat(first_name, ' ', last_name)as fullname,\n"
@@ -718,7 +755,8 @@ public class QueryMethods {
         return allCardsList;
     }
 
-    // entry is a boolean type in database, 0 = false 1 = true
+    // entry is a boolean type in database,where 0 = false which means unblocked card 
+    // and 1 = true which is blocked card
     public void updateLibraryCards(int entry, int userId, String category) {
         String query = "";
         if (entry == 1) {
@@ -1012,5 +1050,109 @@ public class QueryMethods {
             Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    public void borrowBooks(int bookId, int libraryCardId){
+        
+        String query = "insert into borrowed_books(book_id, librarycard_id,"
+                + " return_date) values(? , ? , date_add(curdate(), interval 31 day));";
+        con = MyConnection.getConnection();
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setInt(1, bookId);
+            ps.setInt(2, libraryCardId);
+            ps.execute();
+        } catch (SQLException e) {
+
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+    }
+    
+    public void borrowEBooks(int eBookId, int libraryCardId){
+        
+        String query = "insert into borrowed_ebooks(ebook_id, librarycard_id) values(? , ?);";
+        con = MyConnection.getConnection();
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setInt(1, eBookId);
+            ps.setInt(2, libraryCardId);
+            ps.execute();
+        } catch (SQLException e) {
+
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+    }
+    
+    // Returning NULL if no book found, Catch nullpointer when trying to find book!
+    public LibraryCards findLibrarycardByEmail(String guestEmail) {
+        String query = "select librarycards.id, librarycards.guests_id, librarycards.notes, "
+                + "librarycards.category, librarycards.entry from librarycards join " 
+                      +  "guests on guests.id = librarycards.guests_id " 
+                       + "where guests.email = '"+guestEmail +"' ;";
+
+        con = MyConnection.getConnection();
+        try {
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                LibraryCards libraryCard = new LibraryCards();
+                libraryCard.setId(rs.getInt(1));
+                libraryCard.setGuestId(rs.getInt(2));
+                libraryCard.setNotes(rs.getString(3));
+                libraryCard.setCategory(rs.getString(4));
+                libraryCard.setEntry(rs.getInt(5));
+              
+                return libraryCard;
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage() + " finLibraryCardByEmail()");
+
+        }
+        return null;
+
+    }
+    
+    public ArrayList<BorrowedBooks> getAllBorrowedBooks() {
+        String query = "select * from borrowed_books;";
+
+        ArrayList<BorrowedBooks> borrowedBooks = new ArrayList<BorrowedBooks>();
+        BorrowedBooks list;
+
+        con = MyConnection.getConnection();
+        PreparedStatement ps;
+
+        try {
+            ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list = new BorrowedBooks(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getDate(4),
+                        rs.getDate(5));
+                borrowedBooks.add(list);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.toString() + " getAllBorrowedBooks()");
+        }
+        return borrowedBooks;
     }
 }

@@ -20,6 +20,8 @@ public class StartPage extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        
+        
     }
 
     /**
@@ -367,7 +369,9 @@ public class StartPage extends javax.swing.JFrame {
             if(!qm.loginChecker("guests",jTextFieldEmail.getText(),jPasswordField.getText()).equals("")){
 
                 jlblMessage.setText("");
-                
+                UserView uv = new UserView(jTextFieldEmail.getText().trim());
+                uv.setVisible(true);
+                this.setVisible(false);
                 
                
             }

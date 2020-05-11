@@ -736,6 +736,11 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabelSearchBookingsText.setText("Sök");
 
         jLabelSearchBookingsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
+        jLabelSearchBookingsIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelSearchBookingsIconMouseClicked(evt);
+            }
+        });
 
         jLabelEditBookingsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/edit_50px.png"))); // NOI18N
         jLabelEditBookingsIcon.setAlignmentY(1.0F);
@@ -800,36 +805,35 @@ public class AdminHomePage extends javax.swing.JFrame {
             jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
                 .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
-                            .addGap(445, 445, 445)
-                            .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookingsLayout.createSequentialGroup()
-                                    .addComponent(jLabelEditBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18))
-                                .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
-                                    .addComponent(jLabelEditBookingsIcon)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
-                                    .addComponent(jLabelUpdateBookingsIcon)
-                                    .addGap(27, 27, 27)
-                                    .addComponent(jLabelEraseBookingsIcon))
-                                .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
-                                    .addComponent(jLabelUpdateBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabelEraseBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(12, 12, 12))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookingsLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
+                        .addGap(445, 445, 445)
+                        .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookingsLayout.createSequentialGroup()
+                                .addComponent(jLabelEditBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18))
+                            .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
+                                .addComponent(jLabelEditBookingsIcon)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
+                                .addComponent(jLabelUpdateBookingsIcon)
+                                .addGap(27, 27, 27)
+                                .addComponent(jLabelEraseBookingsIcon))
+                            .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
+                                .addComponent(jLabelUpdateBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelEraseBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(12, 12, 12))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookingsLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelSearchBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldSearchBooking, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelSearchBookingsIcon)))
+                        .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookingsLayout.createSequentialGroup()
+                                .addComponent(jLabelSearchBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextFieldSearchBooking, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelSearchBookingsIcon)))))
                 .addContainerGap())
         );
         jPanelTabBookingsLayout.setVerticalGroup(
@@ -988,6 +992,11 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabelSearchStockText.setText("Sök");
 
         jLabelSearchStockIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
+        jLabelSearchStockIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelSearchStockIconMouseClicked(evt);
+            }
+        });
 
         StockTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1823,6 +1832,14 @@ public class AdminHomePage extends javax.swing.JFrame {
     private void jLabelRecoveryTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelRecoveryTextMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabelRecoveryTextMouseClicked
+
+    private void jLabelSearchStockIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchStockIconMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelSearchStockIconMouseClicked
+
+    private void jLabelSearchBookingsIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchBookingsIconMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelSearchBookingsIconMouseClicked
     /**
      * @param args the command line arguments
      */
