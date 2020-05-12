@@ -28,6 +28,7 @@ import se.model.E_Books;
 import se.model.Guest;
 import se.model.Librarian;
 import se.model.LibraryCards;
+    
 
 /**
  *
@@ -607,15 +608,31 @@ public class QueryMethods {
     public void deleteBook(Books b) {
 
         con = MyConnection.getConnection();
-
-        String deleteBookQuery = "DELETE FROM books WHERE id=?";
-
-        try {
+        
+        String deleteBookQuery = "DELETE * FROM books WHERE id=?" ;
+        String deleteBookQuery1 = "INSERT INTO deleted_books (id, title, author, isbn, publisher, purchase_price, category, placement) "
+                    + " VALUES('" +b.getId() + "', '" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
+                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + ", '" + b.getPlacement() + "')";
+                
+        Statement stmt;
+        try
+        {
+           /* ps1 = con.prepareStatement(deleteBookQuery1);
+            ps=ps1;
             ps = con.prepareStatement(deleteBookQuery);
             ps.setInt(1, b.getId());
-            ps.executeUpdate();
-        } catch (Exception e) {
-            System.out.println("Något gick fel när du har försökt att radera den bok: " + e.getMessage());
+            ps.executeUpdate();*/
+            stmt= con.createStatement();
+            stmt.executeQuery(deleteBookQuery1);
+            stmt.executeQuery(deleteBookQuery);
+            stmt.close();
+            con.close();
+             
+        }
+        catch(Exception e)
+        {
+          System.out.println("Något gick fel när du har försökt att radera den bok: " + e.getMessage());
+          e.printStackTrace();
         }
 
     }

@@ -16,6 +16,7 @@ import se.database.QueryMethods;
 import se.model.Admin;
 import se.model.Guest;
 import se.model.Books;
+import se.model.DeletedBook;
 
 /**
  *
