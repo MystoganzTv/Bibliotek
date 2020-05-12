@@ -8,7 +8,10 @@ package se.view;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
@@ -152,8 +155,8 @@ public class LibrarianView extends javax.swing.JFrame {
         DeleteBookbtn = new javax.swing.JButton();
         jPanelInvisible = new javax.swing.JPanel();
         btnClose = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtxtAreaBorrowedList = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jListBorrowedBooks = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1719, 795));
@@ -263,7 +266,7 @@ public class LibrarianView extends javax.swing.JFrame {
 
         jbtnManageCards.setBackground(new java.awt.Color(244, 244, 244));
         jbtnManageCards.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jbtnManageCards.setText("Handera Lånekort");
+        jbtnManageCards.setText("Hantera Lånekort");
         jbtnManageCards.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
         jbtnManageCards.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -427,9 +430,12 @@ public class LibrarianView extends javax.swing.JFrame {
             }
         });
 
-        jtxtAreaBorrowedList.setColumns(20);
-        jtxtAreaBorrowedList.setRows(5);
-        jScrollPane1.setViewportView(jtxtAreaBorrowedList);
+        jListBorrowedBooks.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(jListBorrowedBooks);
 
         javax.swing.GroupLayout jPanelInvisibleLayout = new javax.swing.GroupLayout(jPanelInvisible);
         jPanelInvisible.setLayout(jPanelInvisibleLayout);
@@ -441,14 +447,14 @@ public class LibrarianView extends javax.swing.JFrame {
                     .addGroup(jPanelInvisibleLayout.createSequentialGroup()
                         .addGap(0, 78, Short.MAX_VALUE)
                         .addComponent(btnClose))
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane2))
                 .addContainerGap())
         );
         jPanelInvisibleLayout.setVerticalGroup(
             jPanelInvisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInvisibleLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(btnClose)
                 .addGap(68, 68, 68))
@@ -594,23 +600,33 @@ public class LibrarianView extends javax.swing.JFrame {
         UsersTable.getColumnModel().getColumn(2).setHeaderValue("Kategori");
         UsersTable.setToolTipText(null);
     }//GEN-LAST:event_jbtnBlockedCardsActionPerformed
-
+    
+   
     private void jbtnShowBorrowedBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnShowBorrowedBooksActionPerformed
         // TODO add your handling code here:
         if(UsersTable.getSelectedRow() == -1){
         JOptionPane.showMessageDialog(this, "Du har inte valt användare");
         }else{
         jPanelInvisible.setVisible(true);
-        jtxtAreaBorrowedList.setText("");
+        DefaultListModel list = new DefaultListModel();
+        jListBorrowedBooks.setModel(list);
+        String lineDivision = "";
+        
         int cardID = (int) UsersTable.getValueAt(UsersTable.getSelectedRow(), 0);
         
         for (int i = 0; i < qMethods.getAllBorrowedBooks().size(); i++) {
+            
             if(qMethods.getAllBorrowedBooks().get(i).getLibraryCardId() == cardID){
-            jtxtAreaBorrowedList.append(qMethods.getAllBooks().get(i).getTitle() + 
-                    "\n"+ qMethods.getAllBooks().get(i).getAuthor()
-                   + "\nISBN: "+ qMethods.getAllBooks().get(i).getIsbn()+ 
-                    "\nÅterlämning: "+qMethods.getAllBorrowedBooks().get(i).getReturnDate().toString()+"\n\n");
+                
+                lineDivision = "<html>"+qMethods.getAllBooks().get(i).getTitle() +  "<br>" +
+                     qMethods.getAllBooks().get(i).getAuthor() + "<br>" +
+                     "ISBN: "+ qMethods.getAllBooks().get(i).getIsbn()+ "<br>" +
+                     "Återlämning: "+qMethods.getAllBorrowedBooks().get(i).getReturnDate().toString()+"<br/>" ;
+                
+            list.addElement(lineDivision) ;
+            
             }
+            
         }
         }
     }//GEN-LAST:event_jbtnShowBorrowedBooksActionPerformed
@@ -666,9 +682,6 @@ public class LibrarianView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable BookingsTable;
-    private javax.swing.JTable BookingsTable1;
-    private javax.swing.JTable BookingsTable2;
     private javax.swing.JTable BooksTable;
     private javax.swing.JTextField Bookstxt;
     private javax.swing.JButton DeleteBookbtn;
@@ -680,60 +693,24 @@ public class LibrarianView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelBackgroundPhoto;
-    private javax.swing.JLabel jLabelEditBookingsIcon;
-    private javax.swing.JLabel jLabelEditBookingsIcon1;
-    private javax.swing.JLabel jLabelEditBookingsIcon2;
-    private javax.swing.JLabel jLabelEditBookingsText;
-    private javax.swing.JLabel jLabelEditBookingsText1;
-    private javax.swing.JLabel jLabelEditBookingsText2;
-    private javax.swing.JLabel jLabelEraseBookingsIcon;
-    private javax.swing.JLabel jLabelEraseBookingsIcon1;
-    private javax.swing.JLabel jLabelEraseBookingsIcon2;
-    private javax.swing.JLabel jLabelEraseBookingsText;
-    private javax.swing.JLabel jLabelEraseBookingsText1;
-    private javax.swing.JLabel jLabelEraseBookingsText2;
-    private javax.swing.JLabel jLabelSearchBookingsIcon;
-    private javax.swing.JLabel jLabelSearchBookingsIcon1;
-    private javax.swing.JLabel jLabelSearchBookingsIcon2;
-    private javax.swing.JLabel jLabelSearchBookingsText;
-    private javax.swing.JLabel jLabelSearchBookingsText1;
-    private javax.swing.JLabel jLabelSearchBookingsText2;
     private javax.swing.JLabel jLabelSearchBookingsText3;
     private javax.swing.JLabel jLabelSearchBooksIcon;
     private javax.swing.JLabel jLabelSearchLendingText;
     private javax.swing.JLabel jLabelSearchUsersIcon3;
     private javax.swing.JLabel jLabelTitle;
-    private javax.swing.JLabel jLabelUpdateBookingsIcon;
-    private javax.swing.JLabel jLabelUpdateBookingsIcon1;
-    private javax.swing.JLabel jLabelUpdateBookingsIcon2;
-    private javax.swing.JLabel jLabelUpdateBookingsText;
-    private javax.swing.JLabel jLabelUpdateBookingsText1;
-    private javax.swing.JLabel jLabelUpdateBookingsText2;
+    private javax.swing.JList<String> jListBorrowedBooks;
     private javax.swing.JPanel jPanelInvisible;
-    private javax.swing.JPanel jPanelTabBookings;
-    private javax.swing.JPanel jPanelTabBookings1;
-    private javax.swing.JPanel jPanelTabBookings2;
     private javax.swing.JPanel jPanelTabBookings3;
     private javax.swing.JPanel jPanelTabLendings;
     private javax.swing.JPanel jPanelTitle;
     private javax.swing.JPanel jPanelbackground;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JTabbedPane jTabbedPaneReport;
-    private javax.swing.JTabbedPane jTabbedPaneReport1;
-    private javax.swing.JTabbedPane jTabbedPaneReport2;
     private javax.swing.JTabbedPane jTabbedPaneReport3;
-    private javax.swing.JTextField jTextFieldSearchBooking;
-    private javax.swing.JTextField jTextFieldSearchBooking1;
-    private javax.swing.JTextField jTextFieldSearchBooking2;
     private javax.swing.JButton jbtnBlockedCards;
     private javax.swing.JButton jbtnManageCards;
     private javax.swing.JButton jbtnSave;
     private javax.swing.JButton jbtnShowBorrowedBooks;
-    private javax.swing.JTextArea jtxtAreaBorrowedList;
     // End of variables declaration//GEN-END:variables
 }
