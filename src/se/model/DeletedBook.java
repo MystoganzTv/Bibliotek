@@ -16,20 +16,18 @@ public class DeletedBook {
     private String title;
     private String author;
     private String bookType;
-    private String bookName;
+
     private String isbn;
     private String purchasePrice;
     private String publisher;
     private String category;
     private String notes;
-    
 
-    public DeletedBook(int id, String title, String author, String bookType, String bookName, String isbn, String purchasePrice, String category, String publisher, String notes) {
+    public DeletedBook(int id, String title, String author, String bookType, String isbn, String purchasePrice, String category, String publisher, String notes) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.bookType = bookType;
-        this.bookName = bookName;
         this.isbn = isbn;
         this.purchasePrice = purchasePrice;
         this.category = category;
@@ -86,14 +84,6 @@ public class DeletedBook {
 
     public void setBookType(String bookType) {
         this.bookType = bookType;
-    }
-
-    public String getBookName() {
-        return bookName;
-    }
-
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
     }
 
     public String getIsbn() {

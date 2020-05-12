@@ -216,9 +216,7 @@ public class QueryMethods {
     }
 
     public ArrayList<DeletedBook> findDeletedBooks() {
-        
- 
-        
+
         try {
             MyConnection tryConnect = new MyConnection();
             ArrayList<DeletedBook> deletedBooks = new ArrayList<DeletedBook>();
@@ -226,21 +224,59 @@ public class QueryMethods {
 
             Connection conn = tryConnect.getConnection();
             Statement stmt = conn.createStatement();
-       //     stmt.execute("SELECT * FROM deleted_books");
 
+            stmt.executeQuery("SELECT * FROM deleted_books WHERE bookType = 'Book'");
             ResultSet results = stmt.getResultSet();
+
             while (results.next()) {
-                   stmt.executeQuery("SELECT * FROM deleted_books"  );
-                   
-                currentDeletedBooks = new DeletedBook  (Integer.parseInt(results.getString("id")),
+
+                currentDeletedBooks = new DeletedBook(Integer.parseInt(results.getString("id")),
                         results.getString("title"),
                         results.getString("author"),
-                        results.getString("bookType"),
-                        results.getString("bookName"),
-                        results.getString("isbn"),
-                        results.getString("purchasePrice"),
-                        results.getString("category"),
                         results.getString("publisher"),
+                        results.getString("isbn"),
+                        results.getString("bookType"),
+                        results.getString("purchase_price"),
+                        results.getString("category"),
+                        results.getString("notes"));
+                deletedBooks.add(currentDeletedBooks);
+                currentDeletedBooks = null;
+            }
+
+            conn.close();
+            stmt.close();
+
+            return deletedBooks;
+        } catch (SQLException e) {
+            System.out.println("Something went wrong: " + e);
+        }
+        return null;
+    }
+
+    public ArrayList<DeletedBook> findDeletedEBooks() {
+
+        try {
+            MyConnection tryConnect = new MyConnection();
+            ArrayList<DeletedBook> deletedBooks = new ArrayList<DeletedBook>();
+            DeletedBook currentDeletedBooks;
+
+            Connection conn = tryConnect.getConnection();
+            Statement stmt = conn.createStatement();
+            //     stmt.execute("SELECT * FROM deleted_books");
+
+            stmt.executeQuery("SELECT * FROM deleted_books WHERE bookType = 'EBook'");
+            ResultSet results = stmt.getResultSet();
+
+            while (results.next()) {
+
+                currentDeletedBooks = new DeletedBook(Integer.parseInt(results.getString("id")),
+                        results.getString("title"),
+                        results.getString("author"),
+                        results.getString("publisher"),
+                        results.getString("isbn"),
+                        results.getString("bookType"),
+                        results.getString("purchase_price"),
+                        results.getString("category"),
                         results.getString("notes"));
                 deletedBooks.add(currentDeletedBooks);
                 currentDeletedBooks = null;

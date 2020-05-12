@@ -48,10 +48,9 @@ public class AdminHomePage extends javax.swing.JFrame {
     private ArrayList<Guest> guests;
     private ArrayList<Librarian> librarians;
     private ArrayList<Admin> admins;
-    
- 
+
     private ArrayList<String> choiceList;
-    private ArrayList<DeletedBook> deletedBook;
+    private ArrayList<DeletedBook> deletedEBook;
     private PreparedStatement ps;
     Connection con;
 
@@ -75,7 +74,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         boxUsers.addItem(new ComboItem("Gäst", "3"));
 
         this.choiceList = new ArrayList<>();
-        this.deletedBook = new ArrayList<>();
+        this.deletedEBook = new ArrayList<>();
 
         //basic setup
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -87,11 +86,12 @@ public class AdminHomePage extends javax.swing.JFrame {
         fillLibrarianTable();
         fillAdminTable();
         showBookType();
+        fillBookLogTable();
     }
 
     public void showBookType() {
 
-        deletedBook = qMethods.getRemovedBooks();
+        deletedEBook = qMethods.getRemovedBooks();
 
         con = MyConnection.getConnection();
         query = "SELECT bookType FROM deleted_books GROUP BY bookType";
@@ -124,18 +124,47 @@ public class AdminHomePage extends javax.swing.JFrame {
         }
 
     }
-    
+
     public void fillBookLogTable() {
-        deletedBook = qMethods.findDeletedBooks();
+        deletedEBook = qMethods.findDeletedBooks();
 
         DefaultTableModel defaultModel = new DefaultTableModel(colNames, 0);
-        
+
         defaultModel.setRowCount(0);
-        for (int i = 0; i < deletedBook.size(); i++) {
-            defaultModel.addRow(new Object[]{deletedBook.get(i).getId(), deletedBook.get(i).getTitle(), deletedBook.get(i).getAuthor(),
-                deletedBook.get(i).getBookType(), deletedBook.get(i).getBookName(), deletedBook.get(i).getIsbn(), deletedBook.get(i).getPurchasePrice(), deletedBook.get(i).getCategory(), deletedBook.get(i).getPublisher(), deletedBook.get(i).getNotes()});
+        for (int i = 0; i < deletedEBook.size(); i++) {
+            defaultModel.addRow(new Object[]{deletedEBook.get(i).getId(),
+                deletedEBook.get(i).getTitle(),
+                deletedEBook.get(i).getAuthor(),
+                deletedEBook.get(i).getBookType(),
+                deletedEBook.get(i).getIsbn(),
+                deletedEBook.get(i).getPurchasePrice(),
+                deletedEBook.get(i).getCategory(),
+                deletedEBook.get(i).getPublisher(),
+                deletedEBook.get(i).getNotes()});
         }
-        
+
+        BookLogTable.setModel(defaultModel);
+        BookLogTable.setRowSelectionAllowed(true);
+    }
+
+    public void fillEBookLogTable() {
+        deletedEBook = qMethods.findDeletedBooks();
+
+        DefaultTableModel defaultModel = new DefaultTableModel(colNames, 0);
+
+        defaultModel.setRowCount(0);
+        for (int i = 0; i < deletedEBook.size(); i++) {
+            defaultModel.addRow(new Object[]{deletedEBook.get(i).getId(),
+                deletedEBook.get(i).getTitle(),
+                deletedEBook.get(i).getAuthor(),
+                deletedEBook.get(i).getBookType(),
+                deletedEBook.get(i).getIsbn(),
+                deletedEBook.get(i).getPurchasePrice(),
+                deletedEBook.get(i).getCategory(),
+                deletedEBook.get(i).getPublisher(),
+                deletedEBook.get(i).getNotes()});
+        }
+
         BookLogTable.setModel(defaultModel);
         BookLogTable.setRowSelectionAllowed(true);
     }
@@ -1153,11 +1182,6 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabelSearchText.setText("Sök");
 
         jLabelSearchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
-        jLabelSearchIcon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelSearchIconMouseClicked(evt);
-            }
-        });
 
         jLabelRecoveryIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/reset_50px.png"))); // NOI18N
         jLabelRecoveryIcon.setAlignmentY(1.0F);
@@ -1197,6 +1221,17 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabelRecoveryText.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelRecoveryTextMouseClicked(evt);
+            }
+        });
+
+        jComboBoxType.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxTypeItemStateChanged(evt);
+            }
+        });
+        jComboBoxType.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBoxTypeMouseClicked(evt);
             }
         });
 
@@ -1969,9 +2004,19 @@ public class AdminHomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabelSearchBookingsIconMouseClicked
 
-    private void jLabelSearchIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchIconMouseClicked
-      fillBookLogTable();
-    }//GEN-LAST:event_jLabelSearchIconMouseClicked
+    private void jComboBoxTypeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxTypeMouseClicked
+
+    }//GEN-LAST:event_jComboBoxTypeMouseClicked
+
+    private void jComboBoxTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTypeItemStateChanged
+        if (jComboBoxType.getSelectedItem().toString().equals("Book")) {
+            System.out.println("Book received");
+            fillBookLogTable();
+        } else {
+            System.out.println("Ebook received");
+            fillEBookLogTable();
+        }
+    }//GEN-LAST:event_jComboBoxTypeItemStateChanged
 
     /**
      * @param args the command line arguments
