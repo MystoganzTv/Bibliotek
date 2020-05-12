@@ -215,6 +215,47 @@ public class QueryMethods {
 
     }
 
+    public ArrayList<DeletedBook> findDeletedBooks() {
+        
+ 
+        
+        try {
+            MyConnection tryConnect = new MyConnection();
+            ArrayList<DeletedBook> deletedBooks = new ArrayList<DeletedBook>();
+            DeletedBook currentDeletedBooks;
+
+            Connection conn = tryConnect.getConnection();
+            Statement stmt = conn.createStatement();
+       //     stmt.execute("SELECT * FROM deleted_books");
+
+            ResultSet results = stmt.getResultSet();
+            while (results.next()) {
+                   stmt.executeQuery("SELECT * FROM deleted_books"  );
+                   
+                currentDeletedBooks = new DeletedBook  (Integer.parseInt(results.getString("id")),
+                        results.getString("title"),
+                        results.getString("author"),
+                        results.getString("bookType"),
+                        results.getString("bookName"),
+                        results.getString("isbn"),
+                        results.getString("purchasePrice"),
+                        results.getString("category"),
+                        results.getString("publisher"),
+                        results.getString("notes"));
+                deletedBooks.add(currentDeletedBooks);
+                currentDeletedBooks = null;
+            }
+
+            conn.close();
+            stmt.close();
+
+            return deletedBooks;
+        } catch (SQLException e) {
+            System.out.println("Something went wrong: " + e);
+        }
+        return null;
+    }
+
     public ArrayList<Admin> findAdmins() {
 
         try {
@@ -599,7 +640,6 @@ public class QueryMethods {
 
         } catch (Exception e) {
 
-            
             JOptionPane.showMessageDialog(null, "Boken har sparats!");
         }
     }
@@ -635,7 +675,6 @@ public class QueryMethods {
 
         } catch (Exception e) {
 
-            
             JOptionPane.showMessageDialog(null, "E-Boken har sparats!");
         }
     }
@@ -691,6 +730,7 @@ public class QueryMethods {
         return blockedCards;
 
     }
+
     // All elements of librarycards table in database are included 
     public ArrayList<LibraryCards> getBlockedCards() {
 
@@ -726,7 +766,6 @@ public class QueryMethods {
         return blockedCards;
 
     }
-
 
     public ArrayList<LibraryCards> getAllCards() {
         String query = "select guests_id, concat(first_name, ' ', last_name)as fullname,\n"
@@ -1051,9 +1090,9 @@ public class QueryMethods {
         }
         return null;
     }
-    
-    public void borrowBooks(int bookId, int libraryCardId){
-        
+
+    public void borrowBooks(int bookId, int libraryCardId) {
+
         String query = "insert into borrowed_books(book_id, librarycard_id,"
                 + " return_date) values(? , ? , date_add(curdate(), interval 31 day));";
         con = MyConnection.getConnection();
@@ -1072,11 +1111,11 @@ public class QueryMethods {
                 Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
     }
-    
-    public void borrowEBooks(int eBookId, int libraryCardId){
-        
+
+    public void borrowEBooks(int eBookId, int libraryCardId) {
+
         String query = "insert into borrowed_ebooks(ebook_id, librarycard_id) values(? , ?);";
         con = MyConnection.getConnection();
 
@@ -1094,15 +1133,15 @@ public class QueryMethods {
                 Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
     }
-    
+
     // Returning NULL if no book found, Catch nullpointer when trying to find book!
     public LibraryCards findLibrarycardByEmail(String guestEmail) {
         String query = "select librarycards.id, librarycards.guests_id, librarycards.notes, "
-                + "librarycards.category, librarycards.entry from librarycards join " 
-                      +  "guests on guests.id = librarycards.guests_id " 
-                       + "where guests.email = '"+guestEmail +"' ;";
+                + "librarycards.category, librarycards.entry from librarycards join "
+                + "guests on guests.id = librarycards.guests_id "
+                + "where guests.email = '" + guestEmail + "' ;";
 
         con = MyConnection.getConnection();
         try {
@@ -1116,7 +1155,7 @@ public class QueryMethods {
                 libraryCard.setNotes(rs.getString(3));
                 libraryCard.setCategory(rs.getString(4));
                 libraryCard.setEntry(rs.getInt(5));
-              
+
                 return libraryCard;
             }
 
@@ -1128,7 +1167,7 @@ public class QueryMethods {
         return null;
 
     }
-    
+
     public ArrayList<BorrowedBooks> getAllBorrowedBooks() {
         String query = "select * from borrowed_books;";
 
