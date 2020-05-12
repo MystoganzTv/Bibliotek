@@ -92,7 +92,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace pref="95" max="32767" attributes="0"/>
+                      <EmptySpace pref="89" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel1" min="-2" pref="64" max="-2" attributes="0"/>
@@ -123,7 +123,7 @@
                                       <Component id="txtISBN" max="32767" attributes="0"/>
                                       <Component id="jFieldPublisher" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jFieldPurchasePrice" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jFieldLocation" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="jFieldInStock" alignment="1" max="32767" attributes="0"/>
                                       <Component id="jFieldAuthor" alignment="0" max="32767" attributes="0"/>
                                       <Component id="boxCategory" alignment="0" max="32767" attributes="0"/>
                                   </Group>
@@ -170,7 +170,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelLocation" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFieldLocation" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFieldInStock" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -261,7 +261,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="aa" green="83" red="69" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Placering"/>
+                <Property name="text" type="java.lang.String" value="Antal kopior"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
@@ -343,7 +343,7 @@
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jFieldLocation">
+            <Component class="javax.swing.JTextField" name="jFieldInStock">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
