@@ -235,9 +235,10 @@ public class QueryMethods {
                         results.getString("author"),
                         results.getString("publisher"),
                         results.getString("isbn"),
+                        results.getDouble("purchase_price"),
                         results.getString("bookType"),
-                        results.getString("purchase_price"),
                         results.getString("category"),
+                        results.getString("placement"),
                         results.getString("notes"));
                 deletedBooks.add(currentDeletedBooks);
                 currentDeletedBooks = null;
@@ -274,9 +275,10 @@ public class QueryMethods {
                         results.getString("author"),
                         results.getString("publisher"),
                         results.getString("isbn"),
-                        results.getString("bookType"),
-                        results.getString("purchase_price"),
+                        results.getDouble("purchase_price"),
+                        results.getString("bookType"),                  
                         results.getString("category"),
+                        results.getString("placement"),
                         results.getString("notes"));
                 deletedBooks.add(currentDeletedBooks);
                 currentDeletedBooks = null;
@@ -1115,7 +1117,7 @@ public class QueryMethods {
                 deletedBook.setPublisher(rs.getString("publisher"));
                 deletedBook.setIsbn(rs.getString("isbn"));
                 deletedBook.setBookType(rs.getString("bookType"));
-                deletedBook.setPurchasePrice(rs.getString("purchase_price"));
+                deletedBook.setPurchasePrice(rs.getDouble("purchase_price"));
                 deletedBook.setCategory(rs.getString("category"));
                 deletedBook.setNotes(rs.getString("notes"));
 

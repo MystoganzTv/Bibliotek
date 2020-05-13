@@ -50,6 +50,7 @@ public class AdminHomePage extends javax.swing.JFrame {
     private ArrayList<Admin> admins;
 
     private ArrayList<String> choiceList;
+    private ArrayList<DeletedBook> deletedBook;
     private ArrayList<DeletedBook> deletedEBook;
     private PreparedStatement ps;
     Connection con;
@@ -74,6 +75,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         boxUsers.addItem(new ComboItem("Gäst", "3"));
 
         this.choiceList = new ArrayList<>();
+        this.deletedBook = new ArrayList<>();
         this.deletedEBook = new ArrayList<>();
 
         //basic setup
@@ -91,22 +93,20 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     public void showBookType() {
 
-        deletedEBook = qMethods.getRemovedBooks();
+        deletedBook = qMethods.getRemovedBooks();
 
         con = MyConnection.getConnection();
-        query = "SELECT bookType FROM deleted_books GROUP BY bookType";
+        query = "SELECT bookType FROM deleted_books";
 
         try {
             ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            choiceList.add("Välj något");
 
             while (rs.next()) {
 
                 String choise = rs.getString("bookType");
                 if (choise != null) {
                     choiceList.add(choise);
-                    System.out.println(choise);
                 }
             }
 
@@ -126,21 +126,20 @@ public class AdminHomePage extends javax.swing.JFrame {
     }
 
     public void fillBookLogTable() {
-        deletedEBook = qMethods.findDeletedBooks();
-
-        DefaultTableModel defaultModel = new DefaultTableModel(colNames, 0);
+        deletedBook = qMethods.findDeletedBooks();
+        String[] colname = {"id", "Titel", "Förfatare", "ISBN", "Inköpspris", "Kategori", "Förlag", "Beskrivning"};
+        DefaultTableModel defaultModel = new DefaultTableModel(colname, 0);
 
         defaultModel.setRowCount(0);
-        for (int i = 0; i < deletedEBook.size(); i++) {
-            defaultModel.addRow(new Object[]{deletedEBook.get(i).getId(),
-                deletedEBook.get(i).getTitle(),
-                deletedEBook.get(i).getAuthor(),
-                deletedEBook.get(i).getBookType(),
-                deletedEBook.get(i).getIsbn(),
-                deletedEBook.get(i).getPurchasePrice(),
-                deletedEBook.get(i).getCategory(),
-                deletedEBook.get(i).getPublisher(),
-                deletedEBook.get(i).getNotes()});
+        for (int i = 0; i < deletedBook.size(); i++) {
+            defaultModel.addRow(new Object[]{deletedBook.get(i).getId(),
+                deletedBook.get(i).getTitle(),
+                deletedBook.get(i).getAuthor(),
+                deletedBook.get(i).getIsbn(),
+                deletedBook.get(i).getPurchasePrice(),
+                deletedBook.get(i).getCategory(),
+                deletedBook.get(i).getPublisher(),
+                deletedBook.get(i).getNotes()});
         }
 
         BookLogTable.setModel(defaultModel);
@@ -148,16 +147,15 @@ public class AdminHomePage extends javax.swing.JFrame {
     }
 
     public void fillEBookLogTable() {
-        deletedEBook = qMethods.findDeletedBooks();
-
-        DefaultTableModel defaultModel = new DefaultTableModel(colNames, 0);
+        deletedEBook = qMethods.findDeletedEBooks();
+        String[] colname = {"id", "Titel", "Förfatare", "ISBN", "Inköpspris", "Kategori", "Förlag", "Beskrivning"};
+        DefaultTableModel defaultModel = new DefaultTableModel(colname, 0);
 
         defaultModel.setRowCount(0);
-        for (int i = 0; i < deletedEBook.size(); i++) {
+        for (int i = 0; i < deletedBook.size(); i++) {
             defaultModel.addRow(new Object[]{deletedEBook.get(i).getId(),
                 deletedEBook.get(i).getTitle(),
                 deletedEBook.get(i).getAuthor(),
-                deletedEBook.get(i).getBookType(),
                 deletedEBook.get(i).getIsbn(),
                 deletedEBook.get(i).getPurchasePrice(),
                 deletedEBook.get(i).getCategory(),
