@@ -25,7 +25,9 @@ public class E_Books {
     
     private String category;
     
-    public E_Books(int id, String title, String author, String isbn, String publisher, double purchase_price, String category) {
+    private String desc;
+    
+    public E_Books(int id, String title, String author, String isbn, String publisher, double purchase_price, String category, String desc) {
 
         this.id = id;
         this.title = title;
@@ -34,9 +36,10 @@ public class E_Books {
         this.publisher = publisher;
         this.purchase_price = purchase_price;
         this.category = category;
+        this.desc = desc;
     }
 
-    public E_Books(String title, String author, String isbn, String publisher, double purchase_price, String category) {
+    public E_Books(String title, String author, String isbn, String publisher, double purchase_price, String category, String desc) {
 
         this.id = id;
         this.title = title;
@@ -45,10 +48,19 @@ public class E_Books {
         this.publisher = publisher;
         this.purchase_price = purchase_price;
         this.category = category;
+        this.desc = desc;
     }
     
     public E_Books() {
         
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public int getId() {
