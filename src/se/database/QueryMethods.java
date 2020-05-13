@@ -28,6 +28,7 @@ import se.model.E_Books;
 import se.model.Guest;
 import se.model.Librarian;
 import se.model.LibraryCards;
+    
 
 /**
  *
@@ -44,7 +45,6 @@ public class QueryMethods {
     public QueryMethods() {
 
     }
-
     public void insertEmail(String email) {
         con = MyConnection.getConnection();
 
@@ -213,6 +213,85 @@ public class QueryMethods {
         }
         return idLibrarian;
 
+    }
+
+    public ArrayList<DeletedBook> findDeletedBooks() {
+
+        try {
+            MyConnection tryConnect = new MyConnection();
+            ArrayList<DeletedBook> deletedBooks = new ArrayList<DeletedBook>();
+            DeletedBook currentDeletedBooks;
+
+            Connection conn = tryConnect.getConnection();
+            Statement stmt = conn.createStatement();
+
+            stmt.executeQuery("SELECT * FROM deleted_books WHERE bookType = 'Book'");
+            ResultSet results = stmt.getResultSet();
+
+            while (results.next()) {
+
+                currentDeletedBooks = new DeletedBook(Integer.parseInt(results.getString("id")),
+                        results.getString("title"),
+                        results.getString("author"),
+                        results.getString("publisher"),
+                        results.getString("isbn"),
+                        results.getDouble("purchase_price"),
+                        results.getString("bookType"),
+                        results.getString("category"),
+                        results.getString("placement"),
+                        results.getString("notes"));
+                deletedBooks.add(currentDeletedBooks);
+                currentDeletedBooks = null;
+            }
+
+            conn.close();
+            stmt.close();
+
+            return deletedBooks;
+        } catch (SQLException e) {
+            System.out.println("Something went wrong: " + e);
+        }
+        return null;
+    }
+
+    public ArrayList<DeletedBook> findDeletedEBooks() {
+
+        try {
+            MyConnection tryConnect = new MyConnection();
+            ArrayList<DeletedBook> deletedBooks = new ArrayList<DeletedBook>();
+            DeletedBook currentDeletedBooks;
+
+            Connection conn = tryConnect.getConnection();
+            Statement stmt = conn.createStatement();
+            //     stmt.execute("SELECT * FROM deleted_books");
+
+            stmt.executeQuery("SELECT * FROM deleted_books WHERE bookType = 'EBook'");
+            ResultSet results = stmt.getResultSet();
+
+            while (results.next()) {
+
+                currentDeletedBooks = new DeletedBook(Integer.parseInt(results.getString("id")),
+                        results.getString("title"),
+                        results.getString("author"),
+                        results.getString("publisher"),
+                        results.getString("isbn"),
+                        results.getDouble("purchase_price"),
+                        results.getString("bookType"),                  
+                        results.getString("category"),
+                        results.getString("placement"),
+                        results.getString("notes"));
+                deletedBooks.add(currentDeletedBooks);
+                currentDeletedBooks = null;
+            }
+
+            conn.close();
+            stmt.close();
+
+            return deletedBooks;
+        } catch (SQLException e) {
+            System.out.println("Something went wrong: " + e);
+        }
+        return null;
     }
 
     public ArrayList<Admin> findAdmins() {
@@ -608,18 +687,34 @@ public class QueryMethods {
         }
     }
 
-    public void deleteBook(Books b) {
+     public void deleteBook(Books b, String notes) {
 
         con = MyConnection.getConnection();
 
-        String deleteBookQuery = "DELETE FROM books WHERE id=?";
+        String bookType = "Book";
+       
+        Statement stmt;
 
         try {
-            ps = con.prepareStatement(deleteBookQuery);
-            ps.setInt(1, b.getId());
-            ps.executeUpdate();
+            
+            stmt = con.createStatement();
+                         
+            stmt.execute("DELETE FROM books WHERE id=" + b.getId());
+            
+            String deleteBookQuery1 = "INSERT INTO deleted_books (title, author,  publisher, isbn, bookType, purchase_price, category, placement, notes) "
+                    + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getPublisher() + "', '" + b.getIsbn() + "', '"
+                    + bookType + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', '" + notes + "')";    
+                                  
+          
+            
+            stmt.execute(deleteBookQuery1);
+            stmt.execute("DELETE FROM books WHERE id="+ b.getId());
+            stmt.close();
+            con.close();
+
         } catch (Exception e) {
             System.out.println("Något gick fel när du har försökt att radera den bok: " + e.getMessage());
+            e.printStackTrace();
         }
 
     }
@@ -1045,7 +1140,7 @@ public class QueryMethods {
                 deletedBook.setPublisher(rs.getString("publisher"));
                 deletedBook.setIsbn(rs.getString("isbn"));
                 deletedBook.setBookType(rs.getString("bookType"));
-                deletedBook.setPurchasePrice(rs.getString("purchase_price"));
+                deletedBook.setPurchasePrice(rs.getDouble("purchase_price"));
                 deletedBook.setCategory(rs.getString("category"));
                 deletedBook.setNotes(rs.getString("notes"));
 
