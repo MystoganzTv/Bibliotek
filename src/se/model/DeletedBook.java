@@ -16,17 +16,11 @@ public class DeletedBook {
     private String title;
     private String author;
     private String bookType;
-   
     private String isbn;
-    
-    private String purchasePrice;
-    
+    private double purchasePrice;
     private String publisher;
-    
-    private String category;
-    
     private String placement;
-    
+    private String category;
     private String notes;
     
     private int inStock;
@@ -49,6 +43,14 @@ public class DeletedBook {
 
     public String getNotes() {
         return notes;
+    }
+
+    public String getPlacement() {
+        return placement;
+    }
+
+    public void setPlacement(String placement) {
+        this.placement = placement;
     }
 
     public void setNotes(String notes) {
@@ -106,11 +108,11 @@ public class DeletedBook {
         this.isbn = isbn;
     }
 
-    public String getPurchasePrice() {
+    public double getPurchasePrice() {
         return purchasePrice;
     }
 
-    public void setPurchasePrice(String purchasePrice) {
+    public void setPurchasePrice(double purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
 
