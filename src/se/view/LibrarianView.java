@@ -8,7 +8,10 @@ package se.view;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
@@ -37,6 +40,8 @@ public class LibrarianView extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        jPanelInvisible.setVisible(false);
+
         queryMethods = new QueryMethods();
         books = qMethods.findBooks();
 
@@ -125,278 +130,44 @@ public class LibrarianView extends javax.swing.JFrame {
 
         jPanelbackground = new javax.swing.JPanel();
         jLabelBackgroundPhoto = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        TitleUser = new javax.swing.JLabel();
-        Usertxt = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        UsersTable = new javax.swing.JTable();
-        NewUserbtn = new javax.swing.JButton();
-        jbtnManageCards = new javax.swing.JButton();
-        jbtnBlockedCards = new javax.swing.JButton();
-        jbtnSave = new javax.swing.JButton();
-        jlblTableTitle = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        TitleBooks = new javax.swing.JLabel();
-        Bookstxt = new javax.swing.JTextField();
-        NewBookbtn = new javax.swing.JButton();
-        DeleteBookbtn = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        BooksTable = new javax.swing.JTable();
         jPanelTitle = new javax.swing.JPanel();
         jLabelTitle = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jTabbedPaneReport3 = new javax.swing.JTabbedPane();
+        jPanelTabBookings3 = new javax.swing.JPanel();
+        jLabelSearchBookingsText3 = new javax.swing.JLabel();
+        Usertxt = new javax.swing.JTextField();
+        jLabelSearchUsersIcon3 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        UsersTable = new javax.swing.JTable();
+        jbtnShowBorrowedBooks = new javax.swing.JButton();
+        jbtnBlockedCards = new javax.swing.JButton();
+        jbtnManageCards = new javax.swing.JButton();
+        jbtnSave = new javax.swing.JButton();
+        jPanelTabLendings = new javax.swing.JPanel();
+        jLabelSearchLendingText = new javax.swing.JLabel();
+        Bookstxt = new javax.swing.JTextField();
+        jLabelSearchBooksIcon = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        BooksTable = new javax.swing.JTable();
+        NewBookbtn = new javax.swing.JButton();
+        DeleteBookbtn = new javax.swing.JButton();
+        jPanelInvisible = new javax.swing.JPanel();
+        btnClose = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jListBorrowedBooks = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1719, 795));
 
         jPanelbackground.setBackground(new java.awt.Color(244, 244, 244));
 
         jLabelBackgroundPhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/LibrarianPageBooks.jpg"))); // NOI18N
 
-        jPanel1.setBackground(new java.awt.Color(244, 244, 244));
-
-        jPanel2.setBackground(new java.awt.Color(244, 244, 244));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Användaren", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 1, 18), new java.awt.Color(105, 131, 170))); // NOI18N
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/key_24px.png"))); // NOI18N
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/lock_24px.png"))); // NOI18N
-
-        TitleUser.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        TitleUser.setText("Sök användare:");
-
-        Usertxt.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
-        Usertxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UsertxtActionPerformed(evt);
-            }
-        });
-
-        UsersTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(UsersTable);
-
-        NewUserbtn.setBackground(new java.awt.Color(244, 244, 244));
-        NewUserbtn.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        NewUserbtn.setText("Lägga ny Användare");
-        NewUserbtn.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
-        NewUserbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NewUserbtnActionPerformed(evt);
-            }
-        });
-
-        jbtnManageCards.setBackground(new java.awt.Color(244, 244, 244));
-        jbtnManageCards.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jbtnManageCards.setText("Handera Lånekort");
-        jbtnManageCards.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
-        jbtnManageCards.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnManageCardsActionPerformed(evt);
-            }
-        });
-
-        jbtnBlockedCards.setBackground(new java.awt.Color(244, 244, 244));
-        jbtnBlockedCards.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jbtnBlockedCards.setText("Spärrade Lånekort");
-        jbtnBlockedCards.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
-        jbtnBlockedCards.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnBlockedCardsActionPerformed(evt);
-            }
-        });
-
-        jbtnSave.setBackground(new java.awt.Color(244, 244, 244));
-        jbtnSave.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jbtnSave.setText("Spara Ändring");
-        jbtnSave.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
-        jbtnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnSaveActionPerformed(evt);
-            }
-        });
-
-        jlblTableTitle.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jbtnBlockedCards, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(89, 89, 89)
-                                .addComponent(jbtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(NewUserbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(89, 89, 89)
-                                .addComponent(jbtnManageCards, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(TitleUser)
-                        .addGap(26, 26, 26)
-                        .addComponent(Usertxt, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4)
-                        .addGap(31, 31, 31))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TitleUser)
-                            .addComponent(Usertxt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(NewUserbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbtnManageCards, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnBlockedCards, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28))
-        );
-
-        jPanel4.setBackground(new java.awt.Color(244, 244, 244));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Böcker", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 1, 18), new java.awt.Color(105, 131, 170))); // NOI18N
-
-        TitleBooks.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        TitleBooks.setText("Sök bok:");
-
-        Bookstxt.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
-        Bookstxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BookstxtActionPerformed(evt);
-            }
-        });
-
-        NewBookbtn.setBackground(new java.awt.Color(244, 244, 244));
-        NewBookbtn.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        NewBookbtn.setText("Lägga till");
-        NewBookbtn.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
-        NewBookbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NewBookbtnActionPerformed(evt);
-            }
-        });
-
-        DeleteBookbtn.setBackground(new java.awt.Color(244, 244, 244));
-        DeleteBookbtn.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        DeleteBookbtn.setText("Radera");
-        DeleteBookbtn.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
-        DeleteBookbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DeleteBookbtnActionPerformed(evt);
-            }
-        });
-
-        BooksTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(BooksTable);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(NewBookbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(76, 76, 76)
-                        .addComponent(DeleteBookbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(TitleBooks)
-                        .addGap(53, 53, 53)
-                        .addComponent(Bookstxt, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Bookstxt, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TitleBooks))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NewBookbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DeleteBookbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43))
-        );
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(157, Short.MAX_VALUE))
-        );
-
-        jPanel4.getAccessibleContext().setAccessibleName("Böker");
-
         jPanelTitle.setBackground(new java.awt.Color(105, 131, 170));
+        jPanelTitle.setPreferredSize(new java.awt.Dimension(1719, 159));
 
         jLabelTitle.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabelTitle.setText("Inloggad som Bibliotekarie");
@@ -426,7 +197,7 @@ public class LibrarianView extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 829, Short.MAX_VALUE)
                 .addComponent(jLabelTitle)
                 .addGap(38, 38, 38)
                 .addComponent(jLabel5)
@@ -437,7 +208,7 @@ public class LibrarianView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
                     .addGroup(jPanelTitleLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -447,27 +218,279 @@ public class LibrarianView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jTabbedPaneReport3.setForeground(new java.awt.Color(105, 131, 170));
+        jTabbedPaneReport3.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+
+        jLabelSearchBookingsText3.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelSearchBookingsText3.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelSearchBookingsText3.setText("Sök");
+
+        jLabelSearchUsersIcon3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
+        jLabelSearchUsersIcon3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelSearchUsersIcon3MouseClicked(evt);
+            }
+        });
+
+        UsersTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane7.setViewportView(UsersTable);
+
+        jbtnShowBorrowedBooks.setBackground(new java.awt.Color(244, 244, 244));
+        jbtnShowBorrowedBooks.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jbtnShowBorrowedBooks.setText("Visa Lånade Böcker");
+        jbtnShowBorrowedBooks.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
+        jbtnShowBorrowedBooks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnShowBorrowedBooksActionPerformed(evt);
+            }
+        });
+
+        jbtnBlockedCards.setBackground(new java.awt.Color(244, 244, 244));
+        jbtnBlockedCards.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jbtnBlockedCards.setText("Spärrade Lånekort");
+        jbtnBlockedCards.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
+        jbtnBlockedCards.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnBlockedCardsActionPerformed(evt);
+            }
+        });
+
+        jbtnManageCards.setBackground(new java.awt.Color(244, 244, 244));
+        jbtnManageCards.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jbtnManageCards.setText("Hantera Lånekort");
+        jbtnManageCards.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
+        jbtnManageCards.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnManageCardsActionPerformed(evt);
+            }
+        });
+
+        jbtnSave.setBackground(new java.awt.Color(244, 244, 244));
+        jbtnSave.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jbtnSave.setText("Spara Ändring");
+        jbtnSave.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
+        jbtnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnSaveActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelTabBookings3Layout = new javax.swing.GroupLayout(jPanelTabBookings3);
+        jPanelTabBookings3.setLayout(jPanelTabBookings3Layout);
+        jPanelTabBookings3Layout.setHorizontalGroup(
+            jPanelTabBookings3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTabBookings3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelTabBookings3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelTabBookings3Layout.createSequentialGroup()
+                        .addComponent(jbtnShowBorrowedBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnBlockedCards, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbtnManageCards, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookings3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabelSearchBookingsText3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Usertxt, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelSearchUsersIcon3)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookings3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
+        );
+        jPanelTabBookings3Layout.setVerticalGroup(
+            jPanelTabBookings3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookings3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelTabBookings3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelSearchUsersIcon3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookings3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Usertxt, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelSearchBookingsText3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelTabBookings3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelTabBookings3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68))
+                    .addGroup(jPanelTabBookings3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jbtnShowBorrowedBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbtnBlockedCards, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbtnManageCards, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(68, 68, 68))
+        );
+
+        jTabbedPaneReport3.addTab("Användare", jPanelTabBookings3);
+
+        jLabelSearchLendingText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelSearchLendingText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelSearchLendingText.setText("Sök");
+
+        jLabelSearchBooksIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
+
+        BooksTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane8.setViewportView(BooksTable);
+
+        NewBookbtn.setBackground(new java.awt.Color(244, 244, 244));
+        NewBookbtn.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        NewBookbtn.setText("Lägga till");
+        NewBookbtn.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
+        NewBookbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NewBookbtnActionPerformed(evt);
+            }
+        });
+
+        DeleteBookbtn.setBackground(new java.awt.Color(244, 244, 244));
+        DeleteBookbtn.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        DeleteBookbtn.setText("Radera");
+        DeleteBookbtn.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
+        DeleteBookbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteBookbtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelTabLendingsLayout = new javax.swing.GroupLayout(jPanelTabLendings);
+        jPanelTabLendings.setLayout(jPanelTabLendingsLayout);
+        jPanelTabLendingsLayout.setHorizontalGroup(
+            jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
+                        .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
+                                .addComponent(NewBookbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(DeleteBookbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12))
+                            .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLendingsLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabelSearchLendingText, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Bookstxt, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelSearchBooksIcon)))
+                .addContainerGap())
+        );
+        jPanelTabLendingsLayout.setVerticalGroup(
+            jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLendingsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelSearchBooksIcon, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Bookstxt, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelSearchLendingText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68))
+                    .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(NewBookbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(DeleteBookbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(69, 69, 69))
+        );
+
+        jTabbedPaneReport3.addTab("Böcker", jPanelTabLendings);
+
+        btnClose.setText("Stäng");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
+
+        jListBorrowedBooks.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(jListBorrowedBooks);
+
+        javax.swing.GroupLayout jPanelInvisibleLayout = new javax.swing.GroupLayout(jPanelInvisible);
+        jPanelInvisible.setLayout(jPanelInvisibleLayout);
+        jPanelInvisibleLayout.setHorizontalGroup(
+            jPanelInvisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelInvisibleLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelInvisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelInvisibleLayout.createSequentialGroup()
+                        .addGap(0, 78, Short.MAX_VALUE)
+                        .addComponent(btnClose))
+                    .addComponent(jScrollPane2))
+                .addContainerGap())
+        );
+        jPanelInvisibleLayout.setVerticalGroup(
+            jPanelInvisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInvisibleLayout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(btnClose)
+                .addGap(68, 68, 68))
+        );
+
         javax.swing.GroupLayout jPanelbackgroundLayout = new javax.swing.GroupLayout(jPanelbackground);
         jPanelbackground.setLayout(jPanelbackgroundLayout);
         jPanelbackgroundLayout.setHorizontalGroup(
             jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelbackgroundLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelBackgroundPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 834, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(jPanelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelbackgroundLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabelBackgroundPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 834, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanelInvisible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTabbedPaneReport3, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(714, Short.MAX_VALUE))
         );
         jPanelbackgroundLayout.setVerticalGroup(
             jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelbackgroundLayout.createSequentialGroup()
                 .addComponent(jPanelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelBackgroundPhoto))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelbackgroundLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTabbedPaneReport3, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelBackgroundPhoto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelbackgroundLayout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jPanelInvisible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -478,29 +501,25 @@ public class LibrarianView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelbackground, javax.swing.GroupLayout.PREFERRED_SIZE, 854, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanelbackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void UsertxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsertxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UsertxtActionPerformed
-
-    private void NewUserbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewUserbtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NewUserbtnActionPerformed
-
-    private void BookstxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookstxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BookstxtActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         StartPage sp = new StartPage();
         sp.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel2MouseClicked
+
+
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        StartPage sp = new StartPage();
+        sp.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabel5MouseClicked
 
     private void DeleteBookbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBookbtnActionPerformed
 
@@ -519,40 +538,9 @@ public class LibrarianView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_DeleteBookbtnActionPerformed
 
-    private void jbtnBlockedCardsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBlockedCardsActionPerformed
+    private void NewBookbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewBookbtnActionPerformed
         // TODO add your handling code here:
-        model = (DefaultTableModel) UsersTable.getModel();
-        model.setRowCount(0);
-        model.setColumnCount(3);
-        for (int i = 0; i < qMethods.blockedCards().size(); i++) {
-            model.addRow(new Object[]{qMethods.blockedCards().get(i).getGuestId(), qMethods.blockedCards().get(i).getFullname(),
-                qMethods.blockedCards().get(i).getCategory()});
-        }
-
-        UsersTable.setRowSelectionAllowed(true);
-
-        UsersTable.getColumnModel().getColumn(0).setHeaderValue("Id");
-        UsersTable.getColumnModel().getColumn(1).setHeaderValue("Namn");
-        UsersTable.getColumnModel().getColumn(2).setHeaderValue("Kategori");
-        jlblTableTitle.setText("Spärrade Lånekort");
-        UsersTable.setToolTipText(null);
-    }//GEN-LAST:event_jbtnBlockedCardsActionPerformed
-
-
-    private void jbtnManageCardsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnManageCardsActionPerformed
-        // TODO add your handling code here:
-        fillUsersTable();
-        UsersTable.setToolTipText("Du kan nu redigera kolumnera Spärrad och Kategori");
-        String[] blocked = {"Ja", "Nej"};
-        String[] category = {"", "Många sena böcker", "Många försvunna böcker", "Stöld"};
-        JComboBox blockedBox = new JComboBox(blocked);
-        JComboBox categoryBox = new JComboBox(category);
-        UsersTable.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(blockedBox));
-        UsersTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(categoryBox));
-        jlblTableTitle.setText("Hantera kort");
-
-
-    }//GEN-LAST:event_jbtnManageCardsActionPerformed
+    }//GEN-LAST:event_NewBookbtnActionPerformed
 
     private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
         // TODO add your handling code here:
@@ -562,7 +550,7 @@ public class LibrarianView extends javax.swing.JFrame {
             if (UsersTable.getValueAt(i, 2).equals("Ja")) {
                 if (UsersTable.getValueAt(i, 3).equals("")) {
                     JOptionPane.showMessageDialog(this, "Välj kategori för användare Id: " + UsersTable.getValueAt(i, 0)
-                            + " för att kunna spara");
+                        + " för att kunna spara");
                     return;
 
                 } else {
@@ -581,19 +569,78 @@ public class LibrarianView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ändringarna har sparats");
         }
 
-
     }//GEN-LAST:event_jbtnSaveActionPerformed
 
-
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        StartPage sp = new StartPage();
-        sp.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jLabel5MouseClicked
-
-    private void NewBookbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewBookbtnActionPerformed
+    private void jbtnManageCardsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnManageCardsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_NewBookbtnActionPerformed
+        fillUsersTable();
+        UsersTable.setToolTipText("Du kan nu redigera kolumnera Spärrad och Kategori");
+        String[] blocked = {"Ja", "Nej"};
+        String[] category = {"", "Många sena böcker", "Många försvunna böcker", "Stöld"};
+        JComboBox blockedBox = new JComboBox(blocked);
+        JComboBox categoryBox = new JComboBox(category);
+        UsersTable.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(blockedBox));
+        UsersTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(categoryBox));
+
+    }//GEN-LAST:event_jbtnManageCardsActionPerformed
+
+    private void jbtnBlockedCardsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBlockedCardsActionPerformed
+        // TODO add your handling code here:
+        model = (DefaultTableModel) UsersTable.getModel();
+        model.setRowCount(0);
+        model.setColumnCount(3);
+        for (int i = 0; i < qMethods.blockedCards().size(); i++) {
+            model.addRow(new Object[]{qMethods.blockedCards().get(i).getGuestId(), qMethods.blockedCards().get(i).getFullname(),
+                qMethods.blockedCards().get(i).getCategory()});
+        }
+
+        UsersTable.setRowSelectionAllowed(true);
+
+        UsersTable.getColumnModel().getColumn(0).setHeaderValue("Id");
+        UsersTable.getColumnModel().getColumn(1).setHeaderValue("Namn");
+        UsersTable.getColumnModel().getColumn(2).setHeaderValue("Kategori");
+        UsersTable.setToolTipText(null);
+    }//GEN-LAST:event_jbtnBlockedCardsActionPerformed
+    
+   
+    private void jbtnShowBorrowedBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnShowBorrowedBooksActionPerformed
+        // TODO add your handling code here:
+        if(UsersTable.getSelectedRow() == -1){
+        JOptionPane.showMessageDialog(this, "Du har inte valt användare");
+        }else{
+        jPanelInvisible.setVisible(true);
+        DefaultListModel list = new DefaultListModel();
+        jListBorrowedBooks.setModel(list);
+        String lineDivision = "";
+        
+        int cardID = (int) UsersTable.getValueAt(UsersTable.getSelectedRow(), 0);
+        
+        for (int i = 0; i < qMethods.getAllBorrowedBooks().size(); i++) {
+            
+            if(qMethods.getAllBorrowedBooks().get(i).getLibraryCardId() == cardID){
+                
+                lineDivision = "<html>"+qMethods.getAllBooks().get(i).getTitle() +  "<br>" +
+                     qMethods.getAllBooks().get(i).getAuthor() + "<br>" +
+                     "ISBN: "+ qMethods.getAllBooks().get(i).getIsbn()+ "<br>" +
+                     "Återlämning: "+qMethods.getAllBorrowedBooks().get(i).getReturnDate().toString()+"<br/>" ;
+                
+            list.addElement(lineDivision) ;
+            
+            }
+            
+        }
+        }
+    }//GEN-LAST:event_jbtnShowBorrowedBooksActionPerformed
+
+    private void jLabelSearchUsersIcon3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchUsersIcon3MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelSearchUsersIcon3MouseClicked
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        // TODO add your handling code here:
+    jPanelInvisible.setVisible(false);
+
+    }//GEN-LAST:event_btnCloseActionPerformed
 
 
 
@@ -640,28 +687,31 @@ public class LibrarianView extends javax.swing.JFrame {
     private javax.swing.JTextField Bookstxt;
     private javax.swing.JButton DeleteBookbtn;
     private javax.swing.JButton NewBookbtn;
-    private javax.swing.JButton NewUserbtn;
-    private javax.swing.JLabel TitleBooks;
-    private javax.swing.JLabel TitleUser;
     private javax.swing.JTable UsersTable;
     private javax.swing.JTextField Usertxt;
+    private javax.swing.JButton btnClose;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelBackgroundPhoto;
+    private javax.swing.JLabel jLabelSearchBookingsText3;
+    private javax.swing.JLabel jLabelSearchBooksIcon;
+    private javax.swing.JLabel jLabelSearchLendingText;
+    private javax.swing.JLabel jLabelSearchUsersIcon3;
     private javax.swing.JLabel jLabelTitle;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JList<String> jListBorrowedBooks;
+    private javax.swing.JPanel jPanelInvisible;
+    private javax.swing.JPanel jPanelTabBookings3;
+    private javax.swing.JPanel jPanelTabLendings;
     private javax.swing.JPanel jPanelTitle;
     private javax.swing.JPanel jPanelbackground;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JTabbedPane jTabbedPaneReport3;
     private javax.swing.JButton jbtnBlockedCards;
     private javax.swing.JButton jbtnManageCards;
     private javax.swing.JButton jbtnSave;
-    private javax.swing.JLabel jlblTableTitle;
+    private javax.swing.JButton jbtnShowBorrowedBooks;
     // End of variables declaration//GEN-END:variables
 }

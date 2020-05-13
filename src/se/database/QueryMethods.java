@@ -338,7 +338,9 @@ public class QueryMethods {
                         results.getString("publisher"),
                         results.getDouble("purchase_price"),
                         results.getString("category"),
-                        results.getString("placement"));
+                        results.getString("placement"),
+                        results.getInt("in_stock"),
+                        results.getString("desc"));
                 books.add(currentBooks);
                 currentBooks = null;
             }
@@ -590,18 +592,20 @@ public class QueryMethods {
 
         con = MyConnection.getConnection();
 
+        System.out.println("INSERT INTO books(title, author, isbn, publisher, purchase_price, category, in_stock, descript)"
+                    + " VALUES ('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
+                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', " + b.getInStock() + ", '" + b.getDesc() + "')");
         try {
             Statement stmt = con.createStatement();
-            stmt.execute("INSERT INTO books(title, author, isbn, publisher, purchase_price, category)"
-                    + " VALUES ('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
-                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "')");
+            stmt.execute("INSERT INTO books(title, author, isbn, publisher, purchase_price, category, in_stock, descript)"
+                    + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
+                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', " + b.getInStock() + ", '" + b.getDesc() + "')");
             stmt.close();
             con.close();
 
-        } catch (Exception e) {
-
-            
             JOptionPane.showMessageDialog(null, "Boken har sparats!");
+        } catch (Exception e) {
+            System.out.println("Soemthing went wrong while adding a book: " + e.getMessage());
         }
     }
 
@@ -644,16 +648,17 @@ public class QueryMethods {
 
         try {
             Statement stmt = con.createStatement();
-            stmt.execute("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category) "
+            stmt.execute("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category, descript) "
                     + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
-                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "')");
+                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getDesc() + "')");
             stmt.close();
             con.close();
 
+            JOptionPane.showMessageDialog(null, "E-Boken har sparats!");
         } catch (Exception e) {
 
-            
-            JOptionPane.showMessageDialog(null, "E-Boken har sparats!");
+            System.out.println("Soemthing went wrong while adding an e-book: " + e);
+
         }
     }
 
@@ -708,6 +713,7 @@ public class QueryMethods {
         return blockedCards;
 
     }
+
     // All elements of librarycards table in database are included 
     public ArrayList<LibraryCards> getBlockedCards() {
 
@@ -743,7 +749,6 @@ public class QueryMethods {
         return blockedCards;
 
     }
-
 
     public ArrayList<LibraryCards> getAllCards() {
         String query = "select guests_id, concat(first_name, ' ', last_name)as fullname,\n"
@@ -1068,9 +1073,9 @@ public class QueryMethods {
         }
         return null;
     }
-    
-    public void borrowBooks(int bookId, int libraryCardId){
-        
+
+    public void borrowBooks(int bookId, int libraryCardId) {
+
         String query = "insert into borrowed_books(book_id, librarycard_id,"
                 + " return_date) values(? , ? , date_add(curdate(), interval 31 day));";
         con = MyConnection.getConnection();
@@ -1089,11 +1094,11 @@ public class QueryMethods {
                 Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
     }
-    
-    public void borrowEBooks(int eBookId, int libraryCardId){
-        
+
+    public void borrowEBooks(int eBookId, int libraryCardId) {
+
         String query = "insert into borrowed_ebooks(ebook_id, librarycard_id) values(? , ?);";
         con = MyConnection.getConnection();
 
@@ -1111,15 +1116,15 @@ public class QueryMethods {
                 Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
     }
-    
+
     // Returning NULL if no book found, Catch nullpointer when trying to find book!
     public LibraryCards findLibrarycardByEmail(String guestEmail) {
         String query = "select librarycards.id, librarycards.guests_id, librarycards.notes, "
-                + "librarycards.category, librarycards.entry from librarycards join " 
-                      +  "guests on guests.id = librarycards.guests_id " 
-                       + "where guests.email = '"+guestEmail +"' ;";
+                + "librarycards.category, librarycards.entry from librarycards join "
+                + "guests on guests.id = librarycards.guests_id "
+                + "where guests.email = '" + guestEmail + "' ;";
 
         con = MyConnection.getConnection();
         try {
@@ -1133,7 +1138,7 @@ public class QueryMethods {
                 libraryCard.setNotes(rs.getString(3));
                 libraryCard.setCategory(rs.getString(4));
                 libraryCard.setEntry(rs.getInt(5));
-              
+
                 return libraryCard;
             }
 
@@ -1145,7 +1150,7 @@ public class QueryMethods {
         return null;
 
     }
-    
+
     public ArrayList<BorrowedBooks> getAllBorrowedBooks() {
         String query = "select * from borrowed_books;";
 

@@ -28,11 +28,7 @@ public class UserView extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
 
-        fillSortimentTable();
-        fillMyBorrowingsTable();
         
-        jTextFieldSearchSortiment.setToolTipText("Skriv titel, författare eller kategori");
-        jLabelTitle.setText("Inloggad som "+ qm.findLibrarycardByEmail(guestEmail).getFullname());
     }
     
     public UserView(String guestEmail){
@@ -43,14 +39,32 @@ public class UserView extends javax.swing.JFrame {
         
         jTextFieldSearchSortiment.setToolTipText("Skriv titel, författare eller kategori");
         
+
         this.guestEmail = guestEmail;
 
         fillMyBorrowingsTable();
+        
+        jLabelTitle.setText("Inloggad som "+ guestFullName());
     }
     
+    public String guestFullName(){
+        String guestFullName = "";
+        int guestId =  qm.findLibrarycardByEmail(this.guestEmail).getId();
+        for (int i = 0 ; i < qm.getAllCards().size() ; i ++){
+        if ( qm.getAllCards().get(i).getGuestId() == guestId ){
+            guestFullName = qm.getAllCards().get(i).getFullname();
+        }
+        }
+        int indexOfSpace = guestFullName.indexOf(" ");
+        String firstName = guestFullName.substring(0,1).toUpperCase() 
+                            + guestFullName.substring(1, indexOfSpace);
+        
+        String lastName = guestFullName.substring(indexOfSpace + 1, indexOfSpace + 2).toUpperCase() 
+                            + guestFullName.substring(indexOfSpace + 2);
+        return  firstName + " " + lastName ;
+    }
  
-    
-     public void fillSortimentTable() {
+    public void fillSortimentTable() {
         DefaultTableModel model = (DefaultTableModel) jtableSortiment.getModel();
         model.setRowCount(0);
         model.setColumnCount(7);
