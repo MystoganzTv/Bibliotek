@@ -7,6 +7,7 @@ package se.view;
 
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Scanner;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
@@ -28,10 +29,11 @@ import se.model.DeletedBook;
 public class LibrarianView extends javax.swing.JFrame {
 
     private QueryMethods queryMethods;
-    private String[] colNames = {"Titel", "Författare", "ISBN", "Förlag", "Inköp Pris", "Kategori", "Placering"};
+    private String[] colNames = {"Id", "Titel", "Författare", "ISBN", "Förlag", "Inköp Pris", "Kategori", "Placering"};
     private DefaultTableModel model = new DefaultTableModel(colNames, 0);
     private QueryMethods qMethods = new QueryMethods();
     private ArrayList<Books> books;
+    private ArrayList<DeletedBook> deletedBook;
 
     /**
      * Creates new form StartPage1
@@ -60,12 +62,40 @@ public class LibrarianView extends javax.swing.JFrame {
         //model = (DefaultTableModel) BooksTable.getModel();
         model.setRowCount(0);
         for (int i = 0; i < books.size(); i++) {
-            model.addRow(new Object[]{books.get(i).getTitle(), books.get(i).getAuthor(),
+            model.addRow(new Object[]{books.get(i).getId(), books.get(i).getTitle(), books.get(i).getAuthor(),
                 books.get(i).getIsbn(), books.get(i).getPublisher(), books.get(i).getPurchase_price(), books.get(i).getCategory(),books.get(i).getPlacement()});
         }
         BooksTable.setModel(model);
         BooksTable.setRowSelectionAllowed(true);
 
+    }
+    public void fillBookLogTable() {
+        deletedBook = qMethods.findDeletedBooks();
+
+ 
+
+        DefaultTableModel defaultModel = new DefaultTableModel(colNames, 0);
+
+ 
+
+        defaultModel.setRowCount(0);
+        for (int i = 0; i < deletedBook.size(); i++) {
+            defaultModel.addRow(new Object[]{deletedBook.get(i).getId(),
+                deletedBook.get(i).getTitle(),
+                deletedBook.get(i).getAuthor(),
+                deletedBook.get(i).getBookType(),
+                deletedBook.get(i).getIsbn(),
+                deletedBook.get(i).getPurchasePrice(),
+                deletedBook.get(i).getCategory(),
+                deletedBook.get(i).getPublisher(),
+                deletedBook.get(i).getPlacement(),
+                deletedBook.get(i).getNotes()});
+        }
+
+ 
+
+        BooksTable.setModel(defaultModel);
+        BooksTable.setRowSelectionAllowed(true);
     }
 
     public void fillUsersTable() {
@@ -523,15 +553,18 @@ public class LibrarianView extends javax.swing.JFrame {
 
     private void DeleteBookbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBookbtnActionPerformed
 
+        Scanner sc = new Scanner(System.in);
+        
         int selection = BooksTable.getSelectedRow();
         String stringId = BooksTable.getModel().getValueAt(selection, 0).toString();
         System.out.println(stringId);
         int id = Integer.parseInt(stringId);
-
         for (Books b : books) {
             if (b.getId() == id) {
-                System.out.println(b.getTitle());
-                queryMethods.deleteBook(b);
+                
+                String notes = JOptionPane.showInputDialog(null, "Snälla berätta anlädning för att radera bok");                
+                queryMethods.deleteBook(b, notes);
+                fillBookLogTable();
 
             }
             fillBooksTable();
