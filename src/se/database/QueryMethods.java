@@ -28,6 +28,7 @@ import se.model.E_Books;
 import se.model.Guest;
 import se.model.Librarian;
 import se.model.LibraryCards;
+    
 
 /**
  *
@@ -43,6 +44,112 @@ public class QueryMethods {
 
     public QueryMethods() {
 
+    }
+    public ArrayList<DeletedBook> findDeletedBooks() { 
+
+        try {
+            MyConnection tryConnect = new MyConnection();
+            ArrayList<DeletedBook> deletedBooks = new ArrayList<DeletedBook>();
+            DeletedBook currentDeletedBooks;
+
+ 
+
+            Connection con = tryConnect.getConnection();
+            Statement stmt = con.createStatement();
+
+ 
+
+            stmt.executeQuery("SELECT * FROM deleted_books WHERE bookType = 'Book'");
+            ResultSet results = stmt.getResultSet();
+
+ 
+
+            while (results.next()) {
+ 
+
+                currentDeletedBooks = new DeletedBook(Integer.parseInt(results.getString("id")),
+                        results.getString("title"),
+                        results.getString("author"),
+                        results.getString("publisher"),
+                        results.getString("isbn"),
+                        results.getString("bookType"),
+                        results.getString("purchase_price"),
+                        results.getString("category"),
+                        results.getString("placement"),
+                        results.getString("notes"));
+                        
+                deletedBooks.add(currentDeletedBooks);
+                currentDeletedBooks = null;
+            }
+
+ 
+
+            con.close();
+            stmt.close();
+
+ 
+
+            return deletedBooks;
+        } catch (SQLException e) {
+            System.out.println("Something went wrong: " + e);
+        }
+        return null;
+    }
+
+ 
+
+    public ArrayList<DeletedBook> findDeletedEBooks() {
+
+ 
+
+        try {
+            MyConnection tryConnect = new MyConnection();
+            ArrayList<DeletedBook> deletedBooks = new ArrayList<DeletedBook>();
+            DeletedBook currentDeletedBooks;
+
+ 
+
+            Connection conn = tryConnect.getConnection();
+            Statement stmt = conn.createStatement();
+            //     stmt.execute("SELECT * FROM deleted_books");
+
+ 
+
+            stmt.executeQuery("SELECT * FROM deleted_books WHERE bookType = 'EBook'");
+            ResultSet results = stmt.getResultSet();
+
+ 
+
+            while (results.next()) {
+
+ 
+
+                currentDeletedBooks = new DeletedBook(Integer.parseInt(results.getString("id")),
+                        results.getString("title"),
+                        results.getString("author"),
+                        results.getString("publisher"),
+                        results.getString("isbn"),
+                        results.getString("bookType"),
+                        results.getString("purchase_price"),
+                        results.getString("category"),
+                        results.getString("placement"),
+                        results.getString("notes"));
+                deletedBooks.add(currentDeletedBooks);
+                currentDeletedBooks = null;
+            }
+
+ 
+
+            conn.close();
+            stmt.close();
+
+ 
+
+            return deletedBooks;
+        } catch (SQLException e) {
+            System.out.println("Something went wrong: " + e);
+        }
+        return null;
     }
 
     public void insertEmail(String email) {
@@ -416,7 +523,9 @@ public class QueryMethods {
                         results.getString("publisher"),
                         results.getDouble("purchase_price"),
                         results.getString("category"),
-                        results.getString("placement"));
+                        results.getString("placement"),
+                        results.getInt("in_stock"),
+                        results.getString("desc"));
                 books.add(currentBooks);
                 currentBooks = null;
             }
@@ -668,32 +777,51 @@ public class QueryMethods {
 
         con = MyConnection.getConnection();
 
+        System.out.println("INSERT INTO books(title, author, isbn, publisher, purchase_price, category, in_stock, descript)"
+                    + " VALUES ('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
+                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', " + b.getInStock() + ", '" + b.getDesc() + "')");
         try {
             Statement stmt = con.createStatement();
-            stmt.execute("INSERT INTO books(title, author, isbn, publisher, purchase_price, category)"
-                    + " VALUES ('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
-                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "')");
+            stmt.execute("INSERT INTO books(title, author, isbn, publisher, purchase_price, category, in_stock, descript)"
+                    + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
+                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', " + b.getInStock() + ", '" + b.getDesc() + "')");
+            stmt.close();
+            con.close();
+
+            JOptionPane.showMessageDialog(null, "Boken har sparats!");
+        } catch (Exception e) {
+            System.out.println("Soemthing went wrong while adding a book: " + e.getMessage());
+        }
+    }
+
+     public void deleteBook(Books b, String notes) {
+
+        con = MyConnection.getConnection();
+
+        String bookType = "Book";
+       
+        Statement stmt;
+
+        try {
+            
+            stmt = con.createStatement();
+                         
+            stmt.execute("DELETE FROM books WHERE id=" + b.getId());
+            
+            String deleteBookQuery1 = "INSERT INTO deleted_books (title, author,  publisher, isbn, bookType, purchase_price, category, placement, notes) "
+                    + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getPublisher() + "', '" + b.getIsbn() + "', '"
+                    + bookType + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', '" + notes + "')";    
+                                  
+          
+            
+            stmt.execute(deleteBookQuery1);
+            stmt.execute("DELETE FROM books WHERE id="+ b.getId());
             stmt.close();
             con.close();
 
         } catch (Exception e) {
-
-            JOptionPane.showMessageDialog(null, "Boken har sparats!");
-        }
-    }
-
-    public void deleteBook(Books b) {
-
-        con = MyConnection.getConnection();
-
-        String deleteBookQuery = "DELETE FROM books WHERE id=?";
-
-        try {
-            ps = con.prepareStatement(deleteBookQuery);
-            ps.setInt(1, b.getId());
-            ps.executeUpdate();
-        } catch (Exception e) {
             System.out.println("Något gick fel när du har försökt att radera den bok: " + e.getMessage());
+            e.printStackTrace();
         }
 
     }
@@ -705,15 +833,17 @@ public class QueryMethods {
 
         try {
             Statement stmt = con.createStatement();
-            stmt.execute("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category) "
+            stmt.execute("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category, descript) "
                     + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
-                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "')");
+                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getDesc() + "')");
             stmt.close();
             con.close();
 
+            JOptionPane.showMessageDialog(null, "E-Boken har sparats!");
         } catch (Exception e) {
 
-            JOptionPane.showMessageDialog(null, "E-Boken har sparats!");
+            System.out.println("Soemthing went wrong while adding an e-book: " + e);
+
         }
     }
 
