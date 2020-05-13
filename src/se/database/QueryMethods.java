@@ -28,7 +28,6 @@ import se.model.E_Books;
 import se.model.Guest;
 import se.model.Librarian;
 import se.model.LibraryCards;
-    
 
 /**
  *
@@ -45,6 +44,7 @@ public class QueryMethods {
     public QueryMethods() {
 
     }
+
     public void insertEmail(String email) {
         con = MyConnection.getConnection();
 
@@ -276,7 +276,7 @@ public class QueryMethods {
                         results.getString("publisher"),
                         results.getString("isbn"),
                         results.getDouble("purchase_price"),
-                        results.getString("bookType"),                  
+                        results.getString("bookType"),
                         results.getString("category"),
                         results.getString("placement"),
                         results.getString("notes"));
@@ -670,14 +670,13 @@ public class QueryMethods {
 
         con = MyConnection.getConnection();
 
-        System.out.println("INSERT INTO books(title, author, isbn, publisher, purchase_price, category, in_stock, descript)"
-                    + " VALUES ('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
-                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', " + b.getInStock() + ", '" + b.getDesc() + "')");
         try {
+            System.out.println("Creating statement");
             Statement stmt = con.createStatement();
-            stmt.execute("INSERT INTO books(title, author, isbn, publisher, purchase_price, category, in_stock, descript)"
+            System.out.println("Executing query");
+            stmt.execute("INSERT INTO books(title, author, isbn, publisher, purchase_price, category, placement, in_stock, descript)"
                     + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
-                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', " + b.getInStock() + ", '" + b.getDesc() + "')");
+                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', " + b.getInStock() + ", '" + b.getDesc() + "')");
             stmt.close();
             con.close();
 
@@ -687,28 +686,26 @@ public class QueryMethods {
         }
     }
 
-     public void deleteBook(Books b, String notes) {
+    public void deleteBook(Books b, String notes) {
 
         con = MyConnection.getConnection();
 
         String bookType = "Book";
-       
+
         Statement stmt;
 
         try {
-            
+
             stmt = con.createStatement();
-                         
+
             stmt.execute("DELETE FROM books WHERE id=" + b.getId());
-            
+
             String deleteBookQuery1 = "INSERT INTO deleted_books (title, author,  publisher, isbn, bookType, purchase_price, category, placement, notes) "
                     + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getPublisher() + "', '" + b.getIsbn() + "', '"
-                    + bookType + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', '" + notes + "')";    
-                                  
-          
-            
+                    + bookType + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', '" + notes + "')";
+
             stmt.execute(deleteBookQuery1);
-            stmt.execute("DELETE FROM books WHERE id="+ b.getId());
+            stmt.execute("DELETE FROM books WHERE id=" + b.getId());
             stmt.close();
             con.close();
 
@@ -723,12 +720,14 @@ public class QueryMethods {
 
         MyConnection tryConnect = new MyConnection();
         con = MyConnection.getConnection();
-
+        System.out.println("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category, placement, descript) "
+                    + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
+                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', " + b.getDesc() + "')");
         try {
             Statement stmt = con.createStatement();
-            stmt.execute("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category, descript) "
+            stmt.execute("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category, placement, descript) "
                     + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
-                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getDesc() + "')");
+                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', '" + b.getDesc() + "')");
             stmt.close();
             con.close();
 
