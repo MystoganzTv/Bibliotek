@@ -6,6 +6,7 @@
 package se.view;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 import se.database.QueryMethods;
 import se.model.Books;
 import se.model.Category;
@@ -19,7 +20,7 @@ import se.model.E_Books;
 public class AddBook extends javax.swing.JFrame {
 
     private QueryMethods qm = new QueryMethods();
-    
+
     /**
      * Creates new form AddBook
      */
@@ -27,7 +28,7 @@ public class AddBook extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
-        
+
         boxType.addItem(new ComboItem("Bok", "1"));
         boxType.addItem(new ComboItem("E-Bok", "2"));
         fillBoxCategory();
@@ -125,6 +126,12 @@ public class AddBook extends javax.swing.JFrame {
         jLabelTitel2.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabelTitel2.setForeground(new java.awt.Color(105, 131, 170));
         jLabelTitel2.setText("Kategori");
+
+        boxType.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                boxTypeItemStateChanged(evt);
+            }
+        });
 
         txtISBN.setToolTipText("");
 
@@ -303,63 +310,70 @@ public class AddBook extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void fillBoxCategory() {
-        
+
         ArrayList<Category> categories = qm.findCategories();
         int indexCount = 1;
-        
-        for(Category category : categories) {
-            boxCategory.addItem(new ComboItem(category.getCategory(), Integer.toString(indexCount)));   
+
+        for (Category category : categories) {
+            boxCategory.addItem(new ComboItem(category.getCategory(), Integer.toString(indexCount)));
         }
     }
-    
+
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        
+
         QueryMethods qMethods = new QueryMethods();
-        String title = jFieldTitle.getText();
+        String title = jFieldTitle.getText().replace("'", "´");
         String author = jFieldAuthor.getText();
         String isbn = txtISBN.getText();
-        int inStock = Integer.parseInt(jFieldInStock.getText());
-        String desc = jFieldDescription.getText();
-        String publisher = jFieldPublisher.getText();
+        String desc = jFieldDescription.getText().replaceAll("'", "\\'");
+        String publisher = jFieldPublisher.getText().replaceAll("'", "\\'");
         double purchasePrice = Double.parseDouble(jFieldPurchasePrice.getText());
         String bookType = boxType.getSelectedItem().toString().toLowerCase();
-        String category = boxCategory.getSelectedItem().toString();
-        String placering = "";
-        
-        switch(category) {
+        String category = boxCategory.getSelectedItem().toString().trim();
+        String placement = "";
+
+        switch (category) {
             case "Datavetenskap, information och allmänna verk":
-                placering = "000";
+                placement = "000";
+                break;
             case "Filosofi och psykologi":
-                placering = "100";
+                placement = "100";
+                break;
             case "Religion":
-                placering = "200";
+                placement = "200";
+                break;
             case "Samhällsvetenskaperna":
-                placering = "300";
+                placement = "300";
+                break;
             case "Språk och Språkvetenskap":
-                placering = "400";
+                placement = "400";
+                break;
             case "Naturvetenskap":
-                placering = "500";
+                placement = "500";
+                break;
             case "Teknologi, medicin, teknik (tillämpade vetenskaper)":
-                placering = "600";
+                placement = "600";
+                break;
             case "Konst, musik och fritid":
-                placering = "700";
+                placement = "700";
+                break;
             case "Litteratur":
-                placering = "800";
+                placement = "800";
+                break;
             case "Geografi och historia":
-                placering = "900";
+                placement = "900";
+                break;
         }
-        
-        if(bookType.equals("bok"))
-        {
-            Books b = new Books(title, author, isbn, publisher, purchasePrice, category, placering, inStock, desc);
+
+        if (bookType.equals("bok")) {
+            int inStock = Integer.parseInt(jFieldInStock.getText());
+            Books b = new Books(title, author, isbn, publisher, purchasePrice, category, placement, inStock, desc);
             qMethods.addBook(b);
-        }
-        else
-        {
-            E_Books b = new E_Books(title, author, isbn, publisher, purchasePrice, category, desc);
+        } else {
+            E_Books b = new E_Books(title, author, isbn, publisher, purchasePrice, category, placement, desc);
             qMethods.addEBook(b);
         }
-        
+
         clearMenu();
     }//GEN-LAST:event_jLabel1MouseClicked
 
@@ -374,13 +388,22 @@ public class AddBook extends javax.swing.JFrame {
         boxType.setSelectedIndex(0);
         boxCategory.setSelectedIndex(0);
     }
-    
+
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         StartPage sp = new StartPage();
         sp.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel4MouseClicked
-    
+
+    private void boxTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxTypeItemStateChanged
+        
+        if(boxType.getSelectedItem().toString().toLowerCase().equals("e-bok")) {
+            jFieldInStock.setEnabled(false);
+        } else {
+             jFieldInStock.setEnabled(true);
+        }
+    }//GEN-LAST:event_boxTypeItemStateChanged
+
     /**
      * @param args the command line arguments
      */
