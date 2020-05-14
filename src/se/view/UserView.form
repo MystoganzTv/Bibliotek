@@ -130,7 +130,7 @@
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="jbtnBorrow" min="-2" pref="91" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jbtnBorrow1" min="-2" pref="91" max="-2" attributes="0"/>
+                                      <Component id="jbtnAboutBook" min="-2" pref="91" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
@@ -179,7 +179,7 @@
                                   </Group>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jbtnBorrow" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jbtnBorrow1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jbtnAboutBook" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
@@ -293,12 +293,12 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnBorrowActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jbtnBorrow1">
+                    <Component class="javax.swing.JButton" name="jbtnAboutBook">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Om Boken"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnBorrow1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnAboutBookActionPerformed"/>
                       </Events>
                     </Component>
                   </SubComponents>
