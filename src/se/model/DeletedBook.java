@@ -16,29 +16,40 @@ public class DeletedBook {
     private String title;
     private String author;
     private String bookType;
-    private String bookName;
     private String isbn;
-    private String purchasePrice;
+    private double purchasePrice;
     private String publisher;
+    private String placement;
     private String category;
     private String notes;
+   
+    private int inStock;
+    private String desc;
     
 
-    public DeletedBook(int id, String title, String author, String bookType, String bookName, String isbn, String purchasePrice, String category, String publisher, String notes) {
+    public DeletedBook(int id, String title, String author, String bookType,String isbn, double purchasePrice, String category, String publisher, String placement, String notes) {
         this.id = id;
         this.title = title;
         this.author = author;
-        this.bookType = bookType;
-        this.bookName = bookName;
+        this.bookType = bookType;        
         this.isbn = isbn;
         this.purchasePrice = purchasePrice;
         this.category = category;
         this.publisher = publisher;
+        this.placement = placement;
         this.notes = notes;
     }
 
     public String getNotes() {
         return notes;
+    }
+
+    public String getPlacement() {
+        return placement;
+    }
+
+    public void setPlacement(String placement) {
+        this.placement = placement;
     }
 
     public void setNotes(String notes) {
@@ -86,15 +97,7 @@ public class DeletedBook {
 
     public void setBookType(String bookType) {
         this.bookType = bookType;
-    }
-
-    public String getBookName() {
-        return bookName;
-    }
-
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
-    }
+    }   
 
     public String getIsbn() {
         return isbn;
@@ -104,11 +107,11 @@ public class DeletedBook {
         this.isbn = isbn;
     }
 
-    public String getPurchasePrice() {
+    public double getPurchasePrice() {
         return purchasePrice;
     }
 
-    public void setPurchasePrice(String purchasePrice) {
+    public void setPurchasePrice(double purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
 
@@ -119,5 +122,4 @@ public class DeletedBook {
     public void setCategory(String category) {
         this.category = category;
     }
-
 }

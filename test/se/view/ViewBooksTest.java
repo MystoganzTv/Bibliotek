@@ -41,14 +41,14 @@ public class ViewBooksTest {
     public void setUp() {
         
 
-        books.add(new Books(3, "Be polite", "Andreas", "isbn", "A publisher", 0.0, "Music", "M1"));
-        books.add(new Books(1, "Hello World", "J.R.R Tolkien", "isbn", "B publisher", 0.0, "History", "H2"));
-        books.add(new Books(2, "A is first", "Zlatan", "isbn", "Z publisher", 0.0, "Sports", "S3"));
+        books.add(new Books(3, "Be polite", "Andreas", "isbn", "A publisher", 0.0, "Music", "M1",1,  "description"));
+        books.add(new Books(1, "Hello World", "J.R.R Tolkien", "isbn", "B publisher", 0.0, "History", "H2",1,  "description"));
+        books.add(new Books(2, "A is first", "Zlatan", "isbn", "Z publisher", 0.0, "Sports", "S3",1, "description"));
 
         
-        eBooks.add(new E_Books(3, "Be polite", "Andreas", "isbn", "A publisher", 0.0, "Music"));
-        eBooks.add(new E_Books(1, "Hello World", "J.R.R Tolkien", "isbn", "B publisher", 0.0, "History"));
-        eBooks.add(new E_Books(2, "A is first", "Zlatan", "isbn", "Z publisher", 0.0, "Sports"));
+        eBooks.add(new E_Books(3, "Be polite", "Andreas", "isbn", "A publisher", 0.0, "Music", "description"));
+        eBooks.add(new E_Books(1, "Hello World", "J.R.R Tolkien", "isbn", "B publisher", 0.0, "History", "description"));
+        eBooks.add(new E_Books(2, "A is first", "Zlatan", "isbn", "Z publisher", 0.0, "Sports", "description"));
         
         
     }
