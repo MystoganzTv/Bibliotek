@@ -34,7 +34,7 @@ public class LibrarianView extends javax.swing.JFrame {
     private QueryMethods qMethods = new QueryMethods();
     private ArrayList<Books> books;
     private ArrayList<DeletedBook> deletedBook;
-
+    private String librarianEmail;
     /**
      * Creates new form StartPage1
      */
@@ -53,6 +53,41 @@ public class LibrarianView extends javax.swing.JFrame {
         jbtnManageCards.setToolTipText("Tryck här för att redigera lånekort");
         UsersTable.setToolTipText("Tryck på funktionknappen för att redigera");
 
+    }
+    public LibrarianView(String librarianEmail) {
+        initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
+        jPanelInvisible.setVisible(false);
+        this.librarianEmail = librarianEmail;
+
+        queryMethods = new QueryMethods();
+        books = qMethods.findBooks();
+
+        fillBooksTable();
+        fillUsersTable();
+
+        jbtnManageCards.setToolTipText("Tryck här för att redigera lånekort");
+        UsersTable.setToolTipText("Tryck på funktionknappen för att redigera");
+        jLabelTitle.setText("Inloggad Bibliotekarie: "+ librarianFullName());
+    }
+    
+    public String librarianFullName(){
+        String librarianFirstName = "";
+        String librarianLastName = "";
+       
+        for (int i = 0 ; i < qMethods.findLibrarians().size() ; i ++){
+        if ( qMethods.findLibrarians().get(i).getEmail().equals(this.librarianEmail) ){
+            librarianFirstName = qMethods.findLibrarians().get(i).getFirstName();
+            librarianLastName = qMethods.findLibrarians().get(i).getLastName();
+        }
+        }
+        String firstName = librarianFirstName.substring(0, 1).toUpperCase() 
+                            + librarianFirstName.substring(1);
+        
+        String lastName = librarianLastName.substring(0, 1).toUpperCase() 
+                            + librarianLastName.substring(1);
+        return  firstName + " " + lastName ;
     }
 
     public void fillBooksTable() {
@@ -227,7 +262,7 @@ public class LibrarianView extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 836, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 829, Short.MAX_VALUE)
                 .addComponent(jLabelTitle)
                 .addGap(38, 38, 38)
                 .addComponent(jLabel5)
@@ -238,7 +273,7 @@ public class LibrarianView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
                     .addGroup(jPanelTitleLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)

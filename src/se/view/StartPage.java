@@ -359,7 +359,7 @@ public class StartPage extends javax.swing.JFrame {
             if(!qm.loginChecker("admins",jTextFieldEmail.getText(),jPasswordField.getText()).equals("")){
 
                 jlblMessage.setText("");
-                AdminHomePage ah = new AdminHomePage();
+                AdminHomePage ah = new AdminHomePage(jTextFieldEmail.getText().trim());
                 ah.setVisible(true);
                 this.setVisible(false);
 
@@ -378,7 +378,7 @@ public class StartPage extends javax.swing.JFrame {
             if(!qm.loginChecker("librarians",jTextFieldEmail.getText(),jPasswordField.getText()).equals("")){
 
                 jlblMessage.setText("");
-                LibrarianView lv = new LibrarianView();
+                LibrarianView lv = new LibrarianView(jTextFieldEmail.getText().trim());
                 lv.setVisible(true);
                 this.setVisible(false);
                 }
