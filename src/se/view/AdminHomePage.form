@@ -100,8 +100,8 @@
                       <Component id="jLabelLogo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabelLogo1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="1126" max="32767" attributes="0"/>
-                      <Component id="jLabelTitle" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="782" max="32767" attributes="0"/>
+                      <Component id="jLabelTitle" min="-2" pref="446" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -140,6 +140,9 @@
                   <Color blue="d5" green="ba" red="40" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Admin  "/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[362, 30]"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelLogo1">

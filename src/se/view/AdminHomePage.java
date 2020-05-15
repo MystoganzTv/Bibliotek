@@ -54,7 +54,8 @@ public class AdminHomePage extends javax.swing.JFrame {
     private ArrayList<DeletedBook> deletedEBook;
     private PreparedStatement ps;
     Connection con;
-
+    
+    private String adminEmail;
     /**
      * Creates new form StartPage1
      */
@@ -79,6 +80,39 @@ public class AdminHomePage extends javax.swing.JFrame {
         this.deletedEBook = new ArrayList<>();
 
         //basic setup
+//        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+//        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+//        btnRegister.setBackground(new java.awt.Color(142, 198, 197));
+//        btnClose.setBackground(new java.awt.Color(142, 198, 197));
+
+        fillGuestTable();
+        fillLibrarianTable();
+        fillAdminTable();
+        showBookType();
+        fillBookLogTable();
+    }
+    
+    public AdminHomePage(String adminEmail) {
+
+        initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
+        queryMethods = new QueryMethods();
+        guests = qMethods.findGuests();
+
+        jTabbedPaneEdit.setVisible(false);
+        jTabbedPaneReport.setVisible(false);
+        jPanelRegister.setVisible(false);
+
+        boxUsers.addItem(new ComboItem("Administratör", "1"));
+        boxUsers.addItem(new ComboItem("Bibliotekarie", "2"));
+        boxUsers.addItem(new ComboItem("Gäst", "3"));
+
+        this.choiceList = new ArrayList<>();
+        this.deletedBook = new ArrayList<>();
+        this.deletedEBook = new ArrayList<>();
+
+//        basic setup
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         btnRegister.setBackground(new java.awt.Color(142, 198, 197));
@@ -89,7 +123,28 @@ public class AdminHomePage extends javax.swing.JFrame {
         fillAdminTable();
         showBookType();
         fillBookLogTable();
+        
+        this.adminEmail = adminEmail;
+        jLabelTitle.setText("Inloggad Admin: "+ adminFullName());
     }
+    
+       public String adminFullName(){
+        String adminFirstName = "";
+        String adminLastName = "";
+        for (int i = 0 ; i < qMethods.findAdmins().size() ; i ++){
+            if ( qMethods.findAdmins().get(i).getEmail().trim().equals(this.adminEmail) ){
+            adminFirstName = qMethods.findAdmins().get(i).getFirstName();
+            adminLastName = qMethods.findAdmins().get(i).getLastName();
+        }
+        }
+        String firstName = adminFirstName.substring(0, 1).toUpperCase() 
+                            + adminFirstName.substring(1);
+        
+        String lastName = adminLastName.substring(0, 1).toUpperCase() 
+                            + adminLastName.substring(1);
+        return  firstName + " " + lastName ;
+    }
+
 
     public void showBookType() {
 
@@ -348,6 +403,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabelTitle.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabelTitle.setForeground(new java.awt.Color(64, 186, 213));
         jLabelTitle.setText("Admin  ");
+        jLabelTitle.setPreferredSize(new java.awt.Dimension(362, 30));
 
         jLabelLogo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Logo letras libro.png"))); // NOI18N
 
@@ -375,8 +431,8 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addComponent(jLabelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelLogo1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1126, Short.MAX_VALUE)
-                .addComponent(jLabelTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 782, Short.MAX_VALUE)
+                .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addContainerGap())
