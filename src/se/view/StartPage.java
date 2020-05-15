@@ -21,9 +21,9 @@ public class StartPage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         
-        
+    
     }
-
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -359,7 +359,7 @@ public class StartPage extends javax.swing.JFrame {
             if(!qm.loginChecker("admins",jTextFieldEmail.getText(),jPasswordField.getText()).equals("")){
 
                 jlblMessage.setText("");
-                AdminHomePage ah = new AdminHomePage();
+                AdminHomePage ah = new AdminHomePage(jTextFieldEmail.getText().trim());
                 ah.setVisible(true);
                 this.setVisible(false);
 
@@ -378,7 +378,7 @@ public class StartPage extends javax.swing.JFrame {
             if(!qm.loginChecker("librarians",jTextFieldEmail.getText(),jPasswordField.getText()).equals("")){
 
                 jlblMessage.setText("");
-                LibrarianView lv = new LibrarianView();
+                LibrarianView lv = new LibrarianView(jTextFieldEmail.getText().trim());
                 lv.setVisible(true);
                 this.setVisible(false);
                 }

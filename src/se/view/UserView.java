@@ -27,24 +27,28 @@ public class UserView extends javax.swing.JFrame {
     public UserView() {
         initComponents();
         setLocationRelativeTo(null);
-
+        jPanelInvisible.setVisible(false);
+        fillSortimentTable();
+        
+        jTextFieldSearchSortiment.setToolTipText("Skriv titel, författare eller kategori");
+        
+        fillMyBorrowingsTable();
         
     }
     
     public UserView(String guestEmail){
         initComponents();
         setLocationRelativeTo(null);
-
+        jPanelInvisible.setVisible(false);
         fillSortimentTable();
         
         jTextFieldSearchSortiment.setToolTipText("Skriv titel, författare eller kategori");
         
-
         this.guestEmail = guestEmail;
 
         fillMyBorrowingsTable();
         
-        jLabelTitle.setText("Inloggad som "+ guestFullName());
+        jLabelTitle.setText("Inloggad Gäst: "+ guestFullName());
     }
     
     public String guestFullName(){
@@ -139,6 +143,7 @@ public class UserView extends javax.swing.JFrame {
         jLabelUpdateSortimentIcon = new javax.swing.JLabel();
         jLabelUpdateSortimentText = new javax.swing.JLabel();
         jbtnBorrow = new javax.swing.JButton();
+        jbtnAboutBook = new javax.swing.JButton();
         jPanelTabLendings = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jtableMyBorrowings = new javax.swing.JTable();
@@ -156,6 +161,9 @@ public class UserView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jPanelInvisible = new javax.swing.JPanel();
+        btnClose = new javax.swing.JButton();
+        jLabelAboutBook = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -213,6 +221,13 @@ public class UserView extends javax.swing.JFrame {
             }
         });
 
+        jbtnAboutBook.setText("Om Boken");
+        jbtnAboutBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAboutBookActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelTabBookingsLayout = new javax.swing.GroupLayout(jPanelTabBookings);
         jPanelTabBookings.setLayout(jPanelTabBookingsLayout);
         jPanelTabBookingsLayout.setHorizontalGroup(
@@ -222,6 +237,8 @@ public class UserView extends javax.swing.JFrame {
                 .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookingsLayout.createSequentialGroup()
                         .addComponent(jbtnBorrow, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnAboutBook, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
@@ -256,7 +273,9 @@ public class UserView extends javax.swing.JFrame {
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabelUpdateSortimentIcon))
-                    .addComponent(jbtnBorrow))
+                    .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jbtnBorrow)
+                        .addComponent(jbtnAboutBook)))
                 .addGap(4, 4, 4)
                 .addComponent(jLabelUpdateSortimentText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44))
@@ -406,7 +425,7 @@ public class UserView extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 70, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jTabbedPaneReport, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -468,12 +487,44 @@ public class UserView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        btnClose.setText("Stäng");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelInvisibleLayout = new javax.swing.GroupLayout(jPanelInvisible);
+        jPanelInvisible.setLayout(jPanelInvisibleLayout);
+        jPanelInvisibleLayout.setHorizontalGroup(
+            jPanelInvisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelInvisibleLayout.createSequentialGroup()
+                .addContainerGap(101, Short.MAX_VALUE)
+                .addComponent(btnClose)
+                .addContainerGap())
+            .addGroup(jPanelInvisibleLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelAboutBook, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanelInvisibleLayout.setVerticalGroup(
+            jPanelInvisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInvisibleLayout.createSequentialGroup()
+                .addContainerGap(96, Short.MAX_VALUE)
+                .addComponent(jLabelAboutBook, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(btnClose)
+                .addGap(21, 21, 21))
+        );
+
         javax.swing.GroupLayout jPanelbackgroundLayout = new javax.swing.GroupLayout(jPanelbackground);
         jPanelbackground.setLayout(jPanelbackgroundLayout);
         jPanelbackgroundLayout.setHorizontalGroup(
             jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelbackgroundLayout.createSequentialGroup()
-                .addGap(950, 950, 950)
+                .addGap(838, 838, 838)
+                .addComponent(jPanelInvisible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(jPanelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -482,8 +533,13 @@ public class UserView extends javax.swing.JFrame {
             jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelbackgroundLayout.createSequentialGroup()
                 .addComponent(jPanelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelbackgroundLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelbackgroundLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jPanelInvisible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -662,6 +718,32 @@ public class UserView extends javax.swing.JFrame {
         fillMyBorrowingsTable();
     }//GEN-LAST:event_jLabelUpdateMyBorrowingsIconMouseClicked
 
+    private void jbtnAboutBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAboutBookActionPerformed
+        // TODO add your handling code here:
+        if( jtableSortiment.getSelectedRow() == -1 ){
+            JOptionPane.showMessageDialog(this, "Du har inte valt en bok");
+        }else{
+        DefaultTableModel model = (DefaultTableModel) jtableSortiment.getModel();
+
+        String bookIsbn = model.getValueAt(jtableSortiment.getSelectedRow(), 2).toString().trim();
+        
+        
+        jPanelInvisible.setVisible(true);
+
+        for (int i = 0 ; i < qm.findBooks().size() ; i++){
+            if(qm.findBooks().get(i).getIsbn().trim().equals(bookIsbn)){
+                jLabelAboutBook.setText("<html>"+qm.findBooks().get(i).getDesc()+"</html>");
+            }  
+        }
+        
+        }
+    }//GEN-LAST:event_jbtnAboutBookActionPerformed
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        // TODO add your handling code here:
+        jPanelInvisible.setVisible(false);
+    }//GEN-LAST:event_btnCloseActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -699,9 +781,11 @@ public class UserView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable MyReservationsTable;
+    private javax.swing.JButton btnClose;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelAboutBook;
     private javax.swing.JLabel jLabelEraseMyReservationsIcon;
     private javax.swing.JLabel jLabelEraseMyReservationsText;
     private javax.swing.JLabel jLabelSearchBookingsText;
@@ -714,6 +798,7 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelUpdateSortimentIcon;
     private javax.swing.JLabel jLabelUpdateSortimentText;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelInvisible;
     private javax.swing.JPanel jPanelTabBookings;
     private javax.swing.JPanel jPanelTabLendings;
     private javax.swing.JPanel jPanelTabStock;
@@ -724,6 +809,7 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPaneReport;
     private javax.swing.JTextField jTextFieldSearchSortiment;
+    private javax.swing.JButton jbtnAboutBook;
     private javax.swing.JButton jbtnBorrow;
     private javax.swing.JTable jtableMyBorrowings;
     private javax.swing.JTable jtableSortiment;
