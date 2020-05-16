@@ -151,7 +151,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         deletedBook = qMethods.getRemovedBooks();
 
         con = MyConnection.getConnection();
-        query = "SELECT bookType FROM deleted_books";
+        query = "SELECT DISTINCT bookType FROM deleted_books GROUP BY bookType";
 
         try {
             ps = con.prepareStatement(query);
@@ -203,7 +203,7 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     public void fillEBookLogTable() {
         deletedEBook = qMethods.findDeletedEBooks();
-        String[] colname = {"id", "Titel", "Förfatare", "ISBN", "Inköpspris", "Kategori", "Förlag", "Beskrivning"};
+        String[] colname = {"id", "Titel", "Förfatare", "ISBN", "Inköpspris", "Förlag", "Beskrivning"};
         DefaultTableModel defaultModel = new DefaultTableModel(colname, 0);
 
         defaultModel.setRowCount(0);
@@ -213,7 +213,6 @@ public class AdminHomePage extends javax.swing.JFrame {
                 deletedEBook.get(i).getAuthor(),
                 deletedEBook.get(i).getIsbn(),
                 deletedEBook.get(i).getPurchasePrice(),
-                deletedEBook.get(i).getCategory(),
                 deletedEBook.get(i).getPublisher(),
                 deletedEBook.get(i).getNotes()});
         }
