@@ -182,7 +182,7 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     public void fillBookLogTable() {
         deletedBook = qMethods.findDeletedBooks();
-        String[] colname = {"id", "Titel", "Förfatare", "ISBN", "Inköpspris", "Kategori", "Förlag", "Beskrivning"};
+        String[] colname = {"id", "Titel", "Förfatare", "ISBN", "Inköpspris", "Kategori", "Förlag", "Anländning"};
         DefaultTableModel defaultModel = new DefaultTableModel(colname, 0);
 
         defaultModel.setRowCount(0);
@@ -203,7 +203,7 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     public void fillEBookLogTable() {
         deletedEBook = qMethods.findDeletedEBooks();
-        String[] colname = {"id", "Titel", "Förfatare", "ISBN", "Inköpspris", "Förlag", "Beskrivning"};
+        String[] colname = {"id", "Titel", "Förfatare", "ISBN", "Inköpspris", "Förlag", "Anlädning"};
         DefaultTableModel defaultModel = new DefaultTableModel(colname, 0);
 
         defaultModel.setRowCount(0);
