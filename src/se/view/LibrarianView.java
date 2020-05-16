@@ -57,8 +57,8 @@ public class LibrarianView extends javax.swing.JFrame {
     public LibrarianView(String librarianEmail) {
         initComponents();
         setLocationRelativeTo(null);
-        setResizable(false);
         jPanelInvisible.setVisible(false);
+        setResizable(false);
         this.librarianEmail = librarianEmail;
 
         queryMethods = new QueryMethods();
@@ -70,6 +70,8 @@ public class LibrarianView extends javax.swing.JFrame {
         jbtnManageCards.setToolTipText("Tryck här för att redigera lånekort");
         UsersTable.setToolTipText("Tryck på funktionknappen för att redigera");
         jLabelTitle.setText("Inloggad Bibliotekarie: "+ librarianFullName());
+        
+
     }
     
     public String librarianFullName(){
@@ -223,6 +225,7 @@ public class LibrarianView extends javax.swing.JFrame {
         btnClose = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListBorrowedBooks = new javax.swing.JList<>();
+        jbtnReturn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1719, 795));
@@ -503,6 +506,13 @@ public class LibrarianView extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jListBorrowedBooks);
 
+        jbtnReturn.setText("Återlämna");
+        jbtnReturn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnReturnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelInvisibleLayout = new javax.swing.GroupLayout(jPanelInvisible);
         jPanelInvisible.setLayout(jPanelInvisibleLayout);
         jPanelInvisibleLayout.setHorizontalGroup(
@@ -511,7 +521,9 @@ public class LibrarianView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelInvisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelInvisibleLayout.createSequentialGroup()
-                        .addGap(0, 78, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jbtnReturn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnClose))
                     .addComponent(jScrollPane2))
                 .addContainerGap())
@@ -522,7 +534,9 @@ public class LibrarianView extends javax.swing.JFrame {
                 .addGap(54, 54, 54)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(btnClose)
+                .addGroup(jPanelInvisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnClose)
+                    .addComponent(jbtnReturn))
                 .addGap(68, 68, 68))
         );
 
@@ -676,27 +690,30 @@ public class LibrarianView extends javax.swing.JFrame {
         if(UsersTable.getSelectedRow() == -1){
         JOptionPane.showMessageDialog(this, "Du har inte valt användare");
         }else{
-        jPanelInvisible.setVisible(true);
         DefaultListModel list = new DefaultListModel();
         jListBorrowedBooks.setModel(list);
         String lineDivision = "";
         
         int cardID = (int) UsersTable.getValueAt(UsersTable.getSelectedRow(), 0);
         
-        for (int i = 0; i < qMethods.getAllBorrowedBooks().size(); i++) {
-            
-            if(qMethods.getAllBorrowedBooks().get(i).getLibraryCardId() == cardID){
-                
-                lineDivision = "<html>"+qMethods.getAllBooks().get(i).getTitle() +  "<br>" +
-                     qMethods.getAllBooks().get(i).getAuthor() + "<br>" +
-                     "ISBN: "+ qMethods.getAllBooks().get(i).getIsbn()+ "<br>" +
+        for (int i = 0; i < qMethods.getBorrowedBooksByCardId(cardID).size(); i++) {
+                            
+                lineDivision = "<html>"+qMethods.getBorrowedBooksByCardId(cardID).get(i).getTitle() +  "<br>" +
+                     qMethods.getBorrowedBooksByCardId(cardID).get(i).getAuthor() + "<br>" +
+                     "ISBN: "+ qMethods.getBorrowedBooksByCardId(cardID).get(i).getIsbn()+ "<br>" +
                      "Återlämning: "+qMethods.getAllBorrowedBooks().get(i).getReturnDate().toString()+"<br/>" ;
                 
             list.addElement(lineDivision) ;
             
-            }
+            
             
         }
+            if(list.isEmpty()){
+                JOptionPane.showMessageDialog(this, "Användare har inga böcker");
+                jPanelInvisible.setVisible(false);
+            }else{
+                  jPanelInvisible.setVisible(true);
+            }
         }
     }//GEN-LAST:event_jbtnShowBorrowedBooksActionPerformed
 
@@ -709,6 +726,22 @@ public class LibrarianView extends javax.swing.JFrame {
     jPanelInvisible.setVisible(false);
 
     }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void jbtnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnReturnActionPerformed
+        // TODO add your handling code here:
+        if (jListBorrowedBooks.getSelectedValue() == null){
+            JOptionPane.showMessageDialog(this, "Du har inte valt en bok");
+        }else{
+        String bookInfo = jListBorrowedBooks.getSelectedValue();
+        
+        for (int i = 0 ; i < queryMethods.getAllBooks().size() ; i ++){
+            if(bookInfo.contains(queryMethods.getAllBooks().get(i).getIsbn())){
+                queryMethods.returnBook(queryMethods.getAllBooks().get(i).getId());
+            }
+        }
+        jbtnShowBorrowedBooks.doClick();
+    }
+    }//GEN-LAST:event_jbtnReturnActionPerformed
 
 
 
@@ -779,6 +812,7 @@ public class LibrarianView extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPaneReport3;
     private javax.swing.JButton jbtnBlockedCards;
     private javax.swing.JButton jbtnManageCards;
+    private javax.swing.JButton jbtnReturn;
     private javax.swing.JButton jbtnSave;
     private javax.swing.JButton jbtnShowBorrowedBooks;
     // End of variables declaration//GEN-END:variables

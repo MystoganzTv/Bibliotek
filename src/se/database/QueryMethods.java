@@ -1254,4 +1254,61 @@ public class QueryMethods {
         }
         return borrowedBooks;
     }
+    
+    public ArrayList<Books> getBorrowedBooksByCardId(int libraryCardId) {
+        String query = "select * from books join borrowed_books on book_id = "
+                       + "books.id where librarycard_id = "+libraryCardId+";";
+
+        ArrayList<Books> borrowedBooks = new ArrayList<Books>();
+        Books list;
+
+        con = MyConnection.getConnection();
+        PreparedStatement ps;
+
+        try {
+            ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list = new Books(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getDouble(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getInt(9),
+                        rs.getString(10));
+                borrowedBooks.add(list);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.toString() + " getBorrowedBooksByCardId()");
+        }
+        return borrowedBooks;
+    }
+    
+    
+    
+    public void returnBook(int bookId) {
+        
+        //hitta bokens id i borrowed_books med hjälp av library card
+        //ta bort boken från borrowed_books
+        //hitta boken i books plussa en till in_stock där id är samma som i borrowed_books
+        
+        MyConnection myConnection = new MyConnection();
+        
+        try {
+            Connection conn = myConnection.getConnection();
+            Statement stmt = conn.createStatement();
+            
+            stmt.execute("DELETE FROM borrowed_books WHERE book_id = " + bookId + "");
+            System.out.println("Book Removed from borrowed_books");
+            //must update books/e_books table in_stock column!
+            
+        } catch(Exception e) {
+            System.out.println("Something went wrong while returning a book: " + e);
+        }
+    }
+    
 }

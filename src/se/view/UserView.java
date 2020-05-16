@@ -102,13 +102,14 @@ public class UserView extends javax.swing.JFrame {
         model.setRowCount(0);
         model.setColumnCount(4);
         int libraryCardId = qm.findLibrarycardByEmail(this.guestEmail).getId();
-        
-        for (int i = 0; i < qm.getAllBorrowedBooks().size(); i++) {
-            if(qm.getAllBorrowedBooks().get(i).getLibraryCardId() == libraryCardId){
-            model.addRow(new Object[]{qm.getAllBooks().get(i).getTitle(), qm.getAllBooks().get(i).getAuthor(),
-                qm.getAllBooks().get(i).getIsbn(), qm.getAllBorrowedBooks().get(i).getReturnDate()});
-            }
+        for (int i = 0; i < qm.getBorrowedBooksByCardId(libraryCardId).size(); i++) {
+            model.addRow(new Object[]{qm.getBorrowedBooksByCardId(libraryCardId).get(i).getTitle(),
+                                      qm.getBorrowedBooksByCardId(libraryCardId).get(i).getAuthor(),
+                                      qm.getBorrowedBooksByCardId(libraryCardId).get(i).getIsbn(), 
+                                      qm.getAllBorrowedBooks().get(i).getReturnDate()});
+            
         }
+        
 //        for (int i = 0; i < qm.getAllEBooks().size(); i++) {
 //            model.addRow(new Object[]{qm.getAllEBooks().get(i).getTitle(), qm.getAllEBooks().get(i).getAuthor(),
 //                qm.getAllEBooks().get(i).getIsbn(), qm.getAllEBooks().get(i).getPublisher(), 
@@ -664,7 +665,6 @@ public class UserView extends javax.swing.JFrame {
         
         boolean cardIsBlocked = false;
         boolean bookIsLent = false;
-        
         for (int i = 0 ; i < qm.blockedCards().size() ; i ++){
             if (qm.getBlockedCards().get(i).getId() == libraryCardId){
                 cardIsBlocked = true;
