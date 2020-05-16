@@ -1195,6 +1195,28 @@ public class QueryMethods {
         }
 
     }
+    public void returnBook(LibraryCards card, String bookType, int bookId) {
+        
+        //hitta bokens id i borrowed_books med hjälp av library card
+        //ta bort boken från borrowed_books
+        //hitta boken i books plussa en till in_stock där id är samma som i borrowed_books
+        
+        MyConnection myConnection = new MyConnection();
+        
+        try {
+            Connection conn = myConnection.getConnection();
+            Statement stmt = conn.createStatement();
+            
+            stmt.executeUpdate("DELETE FROM borrowed_books WHERE librarycard_id = " + card.getId() + " AND book_id = " 
+                    + bookId + "");
+            System.out.println("Book Removed from borrowed_books");
+            //must update books/e_books table in_stock column!
+            
+        } catch(Exception e) {
+            System.out.println("Something went wrong while returning a book: " + e);
+        }
+    }
+    
 
     // Returning NULL if no book found, Catch nullpointer when trying to find book!
     public LibraryCards findLibrarycardByEmail(String guestEmail) {

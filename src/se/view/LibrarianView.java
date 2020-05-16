@@ -21,6 +21,7 @@ import se.model.Admin;
 import se.model.Guest;
 import se.model.Books;
 import se.model.DeletedBook;
+import se.model.LibraryCards;
 
 /**
  *
@@ -188,9 +189,9 @@ public class LibrarianView extends javax.swing.JFrame {
         btnClose = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListBorrowedBooks = new javax.swing.JList<>();
+        btnReturnbook = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1719, 795));
 
         jPanelbackground.setBackground(new java.awt.Color(244, 244, 244));
 
@@ -227,7 +228,7 @@ public class LibrarianView extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 836, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 829, Short.MAX_VALUE)
                 .addComponent(jLabelTitle)
                 .addGap(38, 38, 38)
                 .addComponent(jLabel5)
@@ -238,7 +239,7 @@ public class LibrarianView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
                     .addGroup(jPanelTitleLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -468,6 +469,13 @@ public class LibrarianView extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jListBorrowedBooks);
 
+        btnReturnbook.setText("Återlämna");
+        btnReturnbook.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReturnbookMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelInvisibleLayout = new javax.swing.GroupLayout(jPanelInvisible);
         jPanelInvisible.setLayout(jPanelInvisibleLayout);
         jPanelInvisibleLayout.setHorizontalGroup(
@@ -476,7 +484,9 @@ public class LibrarianView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelInvisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelInvisibleLayout.createSequentialGroup()
-                        .addGap(0, 78, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnReturnbook)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnClose))
                     .addComponent(jScrollPane2))
                 .addContainerGap())
@@ -487,7 +497,9 @@ public class LibrarianView extends javax.swing.JFrame {
                 .addGap(54, 54, 54)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(btnClose)
+                .addGroup(jPanelInvisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnClose)
+                    .addComponent(btnReturnbook))
                 .addGap(68, 68, 68))
         );
 
@@ -505,7 +517,7 @@ public class LibrarianView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jTabbedPaneReport3, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(714, Short.MAX_VALUE))
+                .addContainerGap(713, Short.MAX_VALUE))
         );
         jPanelbackgroundLayout.setVerticalGroup(
             jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -675,6 +687,19 @@ public class LibrarianView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnCloseActionPerformed
 
+    private void btnReturnbookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReturnbookMouseClicked
+        // TODO add your handling code here:
+         QueryMethods qm = new QueryMethods();
+        String email = "harry.bolt@libsys.se";
+        LibraryCards card = qm.findLibrarycardByEmail(email);
+        String bookType = "book";
+        int bookId = 1;
+        qm.returnBook(card, bookType, bookId);
+        
+        jbtnShowBorrowedBooks.doClick();
+        
+    }//GEN-LAST:event_btnReturnbookMouseClicked
+
 
 
     /**
@@ -723,6 +748,7 @@ public class LibrarianView extends javax.swing.JFrame {
     private javax.swing.JTable UsersTable;
     private javax.swing.JTextField Usertxt;
     private javax.swing.JButton btnClose;
+    private javax.swing.JButton btnReturnbook;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
