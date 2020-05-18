@@ -28,6 +28,7 @@ import se.model.E_Books;
 import se.model.Guest;
 import se.model.Librarian;
 import se.model.LibraryCards;
+import se.model.Deleted_E_Books;
 
 /**
  *
@@ -739,18 +740,32 @@ public class QueryMethods {
         }
     }
 
-    public void deleteE_Book(E_Books b) {
+    public void deleteE_Book(E_Books b, String notes) {
 
         con = MyConnection.getConnection();
 
-        String deleteE_BookQuery = "DELETE FROM e-books WHERE id=?";
+        String bookType = "e-Book";
+
+        Statement stmt;
 
         try {
-            ps = con.prepareStatement(deleteE_BookQuery);
-            ps.setInt(1, b.getId());
-            ps.executeUpdate();
+
+            stmt = con.createStatement();
+
+            stmt.execute("DELETE FROM e_books WHERE id=" + b.getId());
+
+            String deleteBookQuery1 = "INSERT INTO deleted_ebooks (title, author,  publisher, isbn, bookType, purchase_price, category, notes) "
+                    + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getPublisher() + "', '" + b.getIsbn() + "', '"
+                    + bookType + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + notes + "')";
+
+            stmt.execute(deleteBookQuery1);
+            stmt.execute("DELETE FROM e_books WHERE id=" + b.getId());
+            stmt.close();
+            con.close();
+
         } catch (Exception e) {
-            System.out.println("Något gick fel när du har försökt att radera denna e-bok: " + e.getMessage());
+            System.out.println("Något gick fel när du har försökt att radera den bok: " + e.getMessage());
+            e.printStackTrace();
         }
 
     }
