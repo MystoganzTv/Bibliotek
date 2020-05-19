@@ -27,7 +27,12 @@ public class UserView extends javax.swing.JFrame {
     public UserView() {
         initComponents();
         setLocationRelativeTo(null);
-
+        jPanelInvisible.setVisible(false);
+        fillSortimentTable();
+        
+        jTextFieldSearchSortiment.setToolTipText("Skriv titel, författare eller kategori");
+        
+        fillMyBorrowingsTable();
         
     }
     
@@ -39,12 +44,11 @@ public class UserView extends javax.swing.JFrame {
         
         jTextFieldSearchSortiment.setToolTipText("Skriv titel, författare eller kategori");
         
-
         this.guestEmail = guestEmail;
 
         fillMyBorrowingsTable();
         
-        jLabelTitle.setText("Inloggad som "+ guestFullName());
+        jLabelTitle.setText("Inloggad Gäst: "+ guestFullName());
     }
     
     public String guestFullName(){
@@ -98,13 +102,14 @@ public class UserView extends javax.swing.JFrame {
         model.setRowCount(0);
         model.setColumnCount(4);
         int libraryCardId = qm.findLibrarycardByEmail(this.guestEmail).getId();
-        
-        for (int i = 0; i < qm.getAllBorrowedBooks().size(); i++) {
-            if(qm.getAllBorrowedBooks().get(i).getLibraryCardId() == libraryCardId){
-            model.addRow(new Object[]{qm.getAllBooks().get(i).getTitle(), qm.getAllBooks().get(i).getAuthor(),
-                qm.getAllBooks().get(i).getIsbn(), qm.getAllBorrowedBooks().get(i).getReturnDate()});
-            }
+        for (int i = 0; i < qm.getBorrowedBooksByCardId(libraryCardId).size(); i++) {
+            model.addRow(new Object[]{qm.getBorrowedBooksByCardId(libraryCardId).get(i).getTitle(),
+                                      qm.getBorrowedBooksByCardId(libraryCardId).get(i).getAuthor(),
+                                      qm.getBorrowedBooksByCardId(libraryCardId).get(i).getIsbn(), 
+                                      qm.getAllBorrowedBooks().get(i).getReturnDate()});
+            
         }
+        
 //        for (int i = 0; i < qm.getAllEBooks().size(); i++) {
 //            model.addRow(new Object[]{qm.getAllEBooks().get(i).getTitle(), qm.getAllEBooks().get(i).getAuthor(),
 //                qm.getAllEBooks().get(i).getIsbn(), qm.getAllEBooks().get(i).getPublisher(), 
@@ -139,7 +144,7 @@ public class UserView extends javax.swing.JFrame {
         jLabelUpdateSortimentIcon = new javax.swing.JLabel();
         jLabelUpdateSortimentText = new javax.swing.JLabel();
         jbtnBorrow = new javax.swing.JButton();
-        jbtnBorrow1 = new javax.swing.JButton();
+        jbtnAboutBook = new javax.swing.JButton();
         jPanelTabLendings = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jtableMyBorrowings = new javax.swing.JTable();
@@ -217,10 +222,10 @@ public class UserView extends javax.swing.JFrame {
             }
         });
 
-        jbtnBorrow1.setText("Om Boken");
-        jbtnBorrow1.addActionListener(new java.awt.event.ActionListener() {
+        jbtnAboutBook.setText("Om Boken");
+        jbtnAboutBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnBorrow1ActionPerformed(evt);
+                jbtnAboutBookActionPerformed(evt);
             }
         });
 
@@ -234,7 +239,7 @@ public class UserView extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookingsLayout.createSequentialGroup()
                         .addComponent(jbtnBorrow, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jbtnBorrow1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbtnAboutBook, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
@@ -271,7 +276,7 @@ public class UserView extends javax.swing.JFrame {
                         .addComponent(jLabelUpdateSortimentIcon))
                     .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jbtnBorrow)
-                        .addComponent(jbtnBorrow1)))
+                        .addComponent(jbtnAboutBook)))
                 .addGap(4, 4, 4)
                 .addComponent(jLabelUpdateSortimentText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44))
@@ -668,7 +673,6 @@ public class UserView extends javax.swing.JFrame {
         
         boolean cardIsBlocked = false;
         boolean bookIsLent = false;
-        
         for (int i = 0 ; i < qm.blockedCards().size() ; i ++){
             if (qm.getBlockedCards().get(i).getId() == libraryCardId){
                 cardIsBlocked = true;
@@ -722,7 +726,7 @@ public class UserView extends javax.swing.JFrame {
         fillMyBorrowingsTable();
     }//GEN-LAST:event_jLabelUpdateMyBorrowingsIconMouseClicked
 
-    private void jbtnBorrow1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBorrow1ActionPerformed
+    private void jbtnAboutBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAboutBookActionPerformed
         // TODO add your handling code here:
         if( jtableSortiment.getSelectedRow() == -1 ){
             JOptionPane.showMessageDialog(this, "Du har inte valt en bok");
@@ -741,7 +745,7 @@ public class UserView extends javax.swing.JFrame {
         }
         
         }
-    }//GEN-LAST:event_jbtnBorrow1ActionPerformed
+    }//GEN-LAST:event_jbtnAboutBookActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         // TODO add your handling code here:
@@ -813,8 +817,8 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPaneReport;
     private javax.swing.JTextField jTextFieldSearchSortiment;
+    private javax.swing.JButton jbtnAboutBook;
     private javax.swing.JButton jbtnBorrow;
-    private javax.swing.JButton jbtnBorrow1;
     private javax.swing.JTable jtableMyBorrowings;
     private javax.swing.JTable jtableSortiment;
     // End of variables declaration//GEN-END:variables

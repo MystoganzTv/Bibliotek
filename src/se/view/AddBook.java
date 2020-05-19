@@ -339,7 +339,7 @@ public class AddBook extends javax.swing.JFrame {
             Books b = new Books(title, author, isbn, publisher, purchasePrice, category, placement,  desc);
             qMethods.addBook(b);
         } else {
-            E_Books b = new E_Books(title, author, isbn, publisher, purchasePrice, category,desc);
+            E_Books b = new E_Books(title, author, isbn, publisher, purchasePrice, category, placement, desc);
             qMethods.addEBook(b);
         }
 
