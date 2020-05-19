@@ -9,13 +9,15 @@ package se.model;
  *
  * @author Enrique
  */
-public class Seminarium {
+public class Seminar {
     
     private int id; 
     
     private String title;
     
     private String Speaker;
+    
+    private String location;
     
     private String startDate;
     
@@ -27,10 +29,11 @@ public class Seminarium {
     
     private String programDescription;
 
-    public Seminarium(int id, String title, String Speaker, String startDate, String endDate, int countVisitor, String seminariumDescription, String programDescription) {
+    public Seminar(int id, String title, String Speaker, String location, String startDate, String endDate, int countVisitor, String seminariumDescription, String programDescription) {
         this.id = id;
         this.title = title;
         this.Speaker = Speaker;
+        this.location = location;
         this.startDate = startDate;
         this.endDate = endDate;
         this.countVisitor = countVisitor;
@@ -38,9 +41,10 @@ public class Seminarium {
         this.programDescription = programDescription;
     }
 
-    public Seminarium(String title, String Speaker, String startDate, String endDate, int countVisitor, String seminariumDescription, String programDescription) {
+    public Seminar(String title, String Speaker, String location, String startDate, String endDate, int countVisitor, String seminariumDescription, String programDescription) {
         this.title = title;
         this.Speaker = Speaker;
+        this.location = location;
         this.startDate = startDate;
         this.endDate = endDate;
         this.countVisitor = countVisitor;
@@ -48,9 +52,17 @@ public class Seminarium {
         this.programDescription = programDescription;
     }
 
-    public Seminarium() {
+    public Seminar() {
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+    
     public int getId() {
         return id;
     }

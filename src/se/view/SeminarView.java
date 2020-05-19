@@ -5,16 +5,19 @@
  */
 package se.view;
 
+import se.database.QueryMethods;
+import se.model.Seminar;
+
 /**
  *
  * @author enriq
  */
-public class SeminariumView extends javax.swing.JFrame {
+public class SeminarView extends javax.swing.JFrame {
 
     /**
      * Creates new form SeminariumView
      */
-    public SeminariumView() {
+    public SeminarView() {
         initComponents();
     }
 
@@ -40,14 +43,17 @@ public class SeminariumView extends javax.swing.JFrame {
         jlbName = new javax.swing.JLabel();
         jbtnCancel = new javax.swing.JButton();
         jlbDate = new javax.swing.JLabel();
-        jtfTotalVisitor = new javax.swing.JPasswordField();
         jlbTotalVisitor = new javax.swing.JLabel();
         jbtnAdd = new javax.swing.JButton();
         jlbSpeaker = new javax.swing.JLabel();
         jlbDescription = new javax.swing.JLabel();
-        jtfDescription = new javax.swing.JPasswordField();
         jlbProgram = new javax.swing.JLabel();
-        jtfProgram = new javax.swing.JPasswordField();
+        txtSpeaker = new javax.swing.JTextField();
+        txtLocation = new javax.swing.JTextField();
+        txtDate = new javax.swing.JTextField();
+        txtMaxGuests = new javax.swing.JTextField();
+        txtDesc = new javax.swing.JTextField();
+        txtProgram = new javax.swing.JTextField();
         jPanelCurrentSeminarium = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableSeminarium = new javax.swing.JTable();
@@ -130,6 +136,11 @@ public class SeminariumView extends javax.swing.JFrame {
         jlbTotalVisitor.setText("Max besökare");
 
         jbtnAdd.setText("Lägg till");
+        jbtnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAddActionPerformed(evt);
+            }
+        });
 
         jlbSpeaker.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jlbSpeaker.setForeground(new java.awt.Color(105, 131, 170));
@@ -143,17 +154,54 @@ public class SeminariumView extends javax.swing.JFrame {
         jlbProgram.setForeground(new java.awt.Color(105, 131, 170));
         jlbProgram.setText("Program");
 
+        txtSpeaker.setToolTipText("");
+        txtSpeaker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSpeakerActionPerformed(evt);
+            }
+        });
+
+        txtLocation.setToolTipText("");
+        txtLocation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLocationActionPerformed(evt);
+            }
+        });
+
+        txtDate.setToolTipText("");
+        txtDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDateActionPerformed(evt);
+            }
+        });
+
+        txtMaxGuests.setToolTipText("");
+        txtMaxGuests.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaxGuestsActionPerformed(evt);
+            }
+        });
+
+        txtDesc.setToolTipText("");
+        txtDesc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescActionPerformed(evt);
+            }
+        });
+
+        txtProgram.setToolTipText("");
+        txtProgram.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtProgramActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelAddSeminariumLayout = new javax.swing.GroupLayout(jPanelAddSeminarium);
         jPanelAddSeminarium.setLayout(jPanelAddSeminariumLayout);
         jPanelAddSeminariumLayout.setHorizontalGroup(
             jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
                 .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAddSeminariumLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jlbTotalVisitor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtfTotalVisitor))
                     .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addComponent(jlbName)
@@ -171,21 +219,33 @@ public class SeminariumView extends javax.swing.JFrame {
                             .addComponent(jlbProgram))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfProgram)
-                            .addComponent(jtfDescription)))
+                            .addComponent(txtDesc)
+                            .addComponent(txtProgram)))
                     .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
+                        .addGap(70, 70, 70)
                         .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
-                                .addGap(70, 70, 70)
-                                .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
-                                        .addGap(12, 12, 12)
-                                        .addComponent(jlbPlace, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jlbSpeaker)))
+                                .addGap(12, 12, 12)
+                                .addComponent(jlbPlace, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtLocation))
+                            .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
+                                .addComponent(jlbSpeaker)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtSpeaker))))
+                    .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
+                        .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAddSeminariumLayout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(jlbTotalVisitor)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtMaxGuests))
                             .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
                                 .addGap(74, 74, 74)
-                                .addComponent(jlbDate)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jlbDate)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtDate)))
+                        .addGap(6, 6, 6)))
                 .addContainerGap())
         );
         jPanelAddSeminariumLayout.setVerticalGroup(
@@ -196,26 +256,35 @@ public class SeminariumView extends javax.swing.JFrame {
                     .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlbName))
                 .addGap(17, 17, 17)
-                .addComponent(jlbSpeaker)
-                .addGap(20, 20, 20)
-                .addComponent(jlbPlace)
-                .addGap(20, 20, 20)
-                .addComponent(jlbDate)
-                .addGap(19, 19, 19)
                 .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfTotalVisitor, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlbTotalVisitor))
+                    .addComponent(jlbSpeaker)
+                    .addComponent(txtSpeaker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlbPlace)
+                    .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlbDate)
+                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlbTotalVisitor)
+                    .addComponent(txtMaxGuests, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
                         .addComponent(jlbDescription)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jtfDescription))
+                        .addGap(0, 100, Short.MAX_VALUE))
+                    .addComponent(txtDesc))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfProgram, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlbProgram))
-                .addGap(18, 18, 18)
+                    .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
+                        .addComponent(jlbProgram)
+                        .addGap(144, 144, 144))
+                    .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
+                        .addComponent(txtProgram)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbtnAdd)
                     .addComponent(jbtnCancel))
@@ -248,7 +317,7 @@ public class SeminariumView extends javax.swing.JFrame {
             jPanelCurrentSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCurrentSeminariumLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1, Short.MAX_VALUE))
+                .addGap(0, 5, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelbackgroundLayout = new javax.swing.GroupLayout(jPanelbackground);
@@ -305,6 +374,56 @@ public class SeminariumView extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jlbExitIconMouseClicked
 
+    private void txtSpeakerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSpeakerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSpeakerActionPerformed
+
+    private void txtLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLocationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLocationActionPerformed
+
+    private void txtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDateActionPerformed
+
+    private void txtMaxGuestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaxGuestsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaxGuestsActionPerformed
+
+    private void txtDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescActionPerformed
+
+    private void txtProgramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProgramActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtProgramActionPerformed
+
+    private void jbtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAddActionPerformed
+       String name = jtfName.getText();
+       String speaker = txtSpeaker.getText();
+       String location = txtLocation.getText();
+       String sDate = txtDate.getText();
+       String eDate = txtDate.getText();
+       String maxGuests = txtMaxGuests.getText();
+       String desc = txtDesc.getText();
+       String program = txtProgram.getText();
+       
+       QueryMethods qMethods = new QueryMethods();
+       Seminar seminar = new Seminar(name, speaker, location, sDate, eDate, Integer.parseInt(maxGuests), desc, program);
+       qMethods.addSeminar(seminar);
+       clearInputFields();
+    }//GEN-LAST:event_jbtnAddActionPerformed
+
+    private void clearInputFields() {
+        jtfName.setText("");
+        txtSpeaker.setText("");
+        txtLocation.setText("");
+        txtDate.setText("");
+        txtMaxGuests.setText("");
+        txtDesc.setText("");
+        txtProgram.setText("");
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -322,20 +441,20 @@ public class SeminariumView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SeminariumView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeminarView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SeminariumView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeminarView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SeminariumView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeminarView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SeminariumView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeminarView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SeminariumView().setVisible(true);
+                new SeminarView().setVisible(true);
             }
         });
     }
@@ -361,9 +480,12 @@ public class SeminariumView extends javax.swing.JFrame {
     private javax.swing.JLabel jlbProgram;
     private javax.swing.JLabel jlbSpeaker;
     private javax.swing.JLabel jlbTotalVisitor;
-    private javax.swing.JPasswordField jtfDescription;
     private javax.swing.JTextField jtfName;
-    private javax.swing.JPasswordField jtfProgram;
-    private javax.swing.JPasswordField jtfTotalVisitor;
+    private javax.swing.JTextField txtDate;
+    private javax.swing.JTextField txtDesc;
+    private javax.swing.JTextField txtLocation;
+    private javax.swing.JTextField txtMaxGuests;
+    private javax.swing.JTextField txtProgram;
+    private javax.swing.JTextField txtSpeaker;
     // End of variables declaration//GEN-END:variables
 }
