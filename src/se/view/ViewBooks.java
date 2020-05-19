@@ -18,7 +18,7 @@ import se.model.E_Books;
 
 /**
  *
- * @author adde
+ * @author adde1
  */
 public class ViewBooks extends javax.swing.JFrame {
     
