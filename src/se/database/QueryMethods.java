@@ -721,14 +721,14 @@ public class QueryMethods {
 
         MyConnection tryConnect = new MyConnection();
         con = MyConnection.getConnection();
-        System.out.println("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category, placement, descript) "
+        System.out.println("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category, descript) "
                     + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
-                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', " + b.getDesc() + "')");
+                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getDesc() + "')");
         try {
             Statement stmt = con.createStatement();
-            stmt.execute("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category, placement, descript) "
+            stmt.execute("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category, descript) "
                     + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
-                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', '" + b.getDesc() + "')");
+                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '"  + b.getDesc() + "')");
             stmt.close();
             con.close();
 
