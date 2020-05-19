@@ -42,6 +42,19 @@ public class E_Books {
         this.placement = placement;
     }
 
+    public E_Books(String title, String author, String isbn, String publisher, double purchase_price, String category, String placement, String desc) {
+
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.publisher = publisher;
+        this.purchase_price = purchase_price;
+        this.category = category;
+        this.desc = desc;
+        this.placement = placement;
+    }
+    
     public E_Books() {
         
     }

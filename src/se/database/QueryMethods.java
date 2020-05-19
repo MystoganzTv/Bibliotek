@@ -28,7 +28,6 @@ import se.model.E_Books;
 import se.model.Guest;
 import se.model.Librarian;
 import se.model.LibraryCards;
-import se.model.Deleted_E_Books;
 
 /**
  *
@@ -722,14 +721,14 @@ public class QueryMethods {
 
         MyConnection tryConnect = new MyConnection();
         con = MyConnection.getConnection();
-        System.out.println("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category, descript) "
+        System.out.println("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category, placement, descript) "
                     + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
-                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getDesc() + "')");
+                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', " + b.getDesc() + "')");
         try {
             Statement stmt = con.createStatement();
-            stmt.execute("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category, descript) "
+            stmt.execute("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category, placement, descript) "
                     + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
-                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '"  + b.getDesc() + "')");
+                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', '" + b.getDesc() + "')");
             stmt.close();
             con.close();
 
@@ -741,32 +740,18 @@ public class QueryMethods {
         }
     }
 
-    public void deleteE_Book(E_Books b, String notes) {
+    public void deleteE_Book(E_Books b) {
 
         con = MyConnection.getConnection();
 
-        String bookType = "e-Book";
-
-        Statement stmt;
+        String deleteE_BookQuery = "DELETE FROM e-books WHERE id=?";
 
         try {
-
-            stmt = con.createStatement();
-
-            stmt.execute("DELETE FROM e_books WHERE id=" + b.getId());
-
-            String deleteBookQuery1 = "INSERT INTO deleted_ebooks (title, author,  publisher, isbn, bookType, purchase_price, category, notes) "
-                    + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getPublisher() + "', '" + b.getIsbn() + "', '"
-                    + bookType + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + notes + "')";
-
-            stmt.execute(deleteBookQuery1);
-            stmt.execute("DELETE FROM e_books WHERE id=" + b.getId());
-            stmt.close();
-            con.close();
-
+            ps = con.prepareStatement(deleteE_BookQuery);
+            ps.setInt(1, b.getId());
+            ps.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Något gick fel när du har försökt att radera den bok: " + e.getMessage());
-            e.printStackTrace();
+            System.out.println("Något gick fel när du har försökt att radera denna e-bok: " + e.getMessage());
         }
 
     }
@@ -1243,28 +1228,6 @@ public class QueryMethods {
         }
 
     }
-    public void returnBook(LibraryCards card, String bookType, int bookId) {
-        
-        //hitta bokens id i borrowed_books med hjälp av library card
-        //ta bort boken från borrowed_books
-        //hitta boken i books plussa en till in_stock där id är samma som i borrowed_books
-        
-        MyConnection myConnection = new MyConnection();
-        
-        try {
-            Connection conn = myConnection.getConnection();
-            Statement stmt = conn.createStatement();
-            
-            stmt.executeUpdate("DELETE FROM borrowed_books WHERE librarycard_id = " + card.getId() + " AND book_id = " 
-                    + bookId + "");
-            System.out.println("Book Removed from borrowed_books");
-            //must update books/e_books table in_stock column!
-            
-        } catch(Exception e) {
-            System.out.println("Something went wrong while returning a book: " + e);
-        }
-    }
-    
 
     // Returning NULL if no book found, Catch nullpointer when trying to find book!
     public LibraryCards findLibrarycardByEmail(String guestEmail) {
@@ -1380,5 +1343,4 @@ public class QueryMethods {
         }
     }
     
-
 }

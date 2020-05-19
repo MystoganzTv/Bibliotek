@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import se.database.MyConnection;
 import se.database.QueryMethods;
 import se.model.Books;
+import se.model.BorrowedBooks;
 import se.model.E_Books;
 
 /**
@@ -24,7 +25,10 @@ public class ViewBooks extends javax.swing.JFrame {
     private List<Books> books = new ArrayList<>();
     private List<E_Books> eBooks = new ArrayList<>();
     private QueryMethods queryMethods;
-    private String[] colNames = {"Titel", "Författare", "ISBN", "Förlag", "Inköp Pris", "Kategori", "Placering"};
+    private String[] colNamesBooks = {"Titel", "Författare", "ISBN", "Förlag","Kategori", "Placering", "Tillgänglig"};
+    private String[] colNamesEBooks = {"Titel", "Författare", "ISBN", "Förlag","Kategori"};
+    private ArrayList<Integer> borrowedBooksId = new ArrayList<>();
+
 
     /**
      * Creates new form ViewBooks
@@ -32,9 +36,50 @@ public class ViewBooks extends javax.swing.JFrame {
     public ViewBooks() {
         initComponents();
         setLocationRelativeTo(null);
+        jPanelInvisible.setVisible(false);
+
         queryMethods = new QueryMethods();
         books = queryMethods.getAllBooks();
         eBooks = queryMethods.getAllEBooks();
+        fillBooksTable();
+        fillEBooksTable();
+    }
+    
+    public void fillEBooksTable(){
+        ArrayList<E_Books> allEBooks = new ArrayList<>();
+        String searchWord = Bookstxt.getText().toLowerCase();
+        eBooks.stream().filter((e)-> e.getTitle().toLowerCase().contains(searchWord) || e.getAuthor().toLowerCase().contains(searchWord)
+                                || e.getCategory().toLowerCase().equals(searchWord) || e.getIsbn().equals(searchWord)).forEach(allEBooks::add);
+        
+        DefaultTableModel model = new DefaultTableModel(colNamesEBooks, 0);
+            
+        for(E_Books e : allEBooks){
+            model.addRow(new Object[]{e.getTitle(),e.getAuthor(), e.getIsbn(),e.getPublisher(),e.getCategory()});
+            }
+               eBooksTable.setModel(model);
+    }    
+    public void fillBooksTable(){
+        DefaultTableModel model = new DefaultTableModel(colNamesBooks, 0);
+
+        BooksTable.setModel(model);
+        String bookIsAvailable ;
+        
+        for (int i = 0 ; i < queryMethods.getAllBorrowedBooks().size() ; i++){
+            borrowedBooksId.add(queryMethods.getAllBorrowedBooks().get(i).getBookId());
+        }
+            
+        for (int i = 0; i < queryMethods.getAllBooks().size(); i++) {
+            if( borrowedBooksId.contains(queryMethods.getAllBooks().get(i).getId())){
+                bookIsAvailable = "Nej";
+            }else{
+                bookIsAvailable = "Ja";
+            }
+            model.addRow(new Object[]{queryMethods.getAllBooks().get(i).getTitle(), queryMethods.getAllBooks().get(i).getAuthor(),
+                queryMethods.getAllBooks().get(i).getIsbn(), queryMethods.getAllBooks().get(i).getPublisher(), 
+                queryMethods.getAllBooks().get(i).getCategory(), queryMethods.getAllBooks().get(i).getPlacement(), bookIsAvailable});
+        }
+
+    
     }
     
     public void sortBooksByTitle(List<Books> books){
@@ -120,14 +165,25 @@ public class ViewBooks extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        Bookstxt = new javax.swing.JTextField();
-        Backwardsbtn = new javax.swing.JButton();
+        jLabelImg = new javax.swing.JLabel();
+        jTabbedPaneReport = new javax.swing.JTabbedPane();
+        jPanelTabBookings = new javax.swing.JPanel();
+        jLabelSearchBookingsText1 = new javax.swing.JLabel();
+        jbtnAboutBook = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         BooksTable = new javax.swing.JTable();
-        jLabelSearchBookingsIcon = new javax.swing.JLabel();
-        jLabelSearchBookingsText = new javax.swing.JLabel();
-        jLabelImg = new javax.swing.JLabel();
+        Bookstxt = new javax.swing.JTextField();
+        jLabelSearchBookIcon = new javax.swing.JLabel();
+        jPanelTabLendings = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        eBooksTable = new javax.swing.JTable();
+        jbtnAboutBook1 = new javax.swing.JButton();
+        eBookstxt = new javax.swing.JTextField();
+        jLabelSearcheBookIcon = new javax.swing.JLabel();
+        jLabelSearchBookingsText2 = new javax.swing.JLabel();
+        jPanelInvisible = new javax.swing.JPanel();
+        jLabelAboutBook = new javax.swing.JLabel();
+        btnClose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -171,7 +227,7 @@ public class ViewBooks extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1170, Short.MAX_VALUE)
                 .addComponent(jLabelTitle)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
@@ -179,7 +235,7 @@ public class ViewBooks extends javax.swing.JFrame {
         );
         jPanelTitleLayout.setVerticalGroup(
             jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -189,23 +245,19 @@ public class ViewBooks extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel4.setBackground(new java.awt.Color(244, 244, 244));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Böcker", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 1, 18), new java.awt.Color(105, 131, 170))); // NOI18N
+        jLabelImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/viewBook.jpg"))); // NOI18N
 
-        Bookstxt.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
-        Bookstxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BookstxtActionPerformed(evt);
-            }
-        });
+        jTabbedPaneReport.setForeground(new java.awt.Color(105, 131, 170));
+        jTabbedPaneReport.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
 
-        Backwardsbtn.setBackground(new java.awt.Color(244, 244, 244));
-        Backwardsbtn.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        Backwardsbtn.setText("Tillbaka");
-        Backwardsbtn.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
-        Backwardsbtn.addActionListener(new java.awt.event.ActionListener() {
+        jLabelSearchBookingsText1.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelSearchBookingsText1.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelSearchBookingsText1.setText("Sök");
+
+        jbtnAboutBook.setText("Om Boken");
+        jbtnAboutBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BackwardsbtnActionPerformed(evt);
+                jbtnAboutBookActionPerformed(evt);
             }
         });
 
@@ -222,80 +274,193 @@ public class ViewBooks extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(BooksTable);
 
-        jLabelSearchBookingsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
-        jLabelSearchBookingsIcon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelSearchBookingsIconMouseClicked(evt);
+        Bookstxt.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
+        Bookstxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BookstxtActionPerformed(evt);
             }
         });
 
-        jLabelSearchBookingsText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelSearchBookingsText.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelSearchBookingsText.setText("Sök");
+        jLabelSearchBookIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
+        jLabelSearchBookIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelSearchBookIconMouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelTabBookingsLayout = new javax.swing.GroupLayout(jPanelTabBookings);
+        jPanelTabBookings.setLayout(jPanelTabBookingsLayout);
+        jPanelTabBookingsLayout.setHorizontalGroup(
+            jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Backwardsbtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabelSearchBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(Bookstxt, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelSearchBookingsIcon)))))
+                        .addComponent(jLabelSearchBookingsText1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Bookstxt, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelSearchBookIcon))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
+                    .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
+                        .addComponent(jbtnAboutBook, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabelSearchBookingsIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelSearchBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Bookstxt, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+        jPanelTabBookingsLayout.setVerticalGroup(
+            jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookingsLayout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelSearchBookingsText1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Bookstxt, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelSearchBookIcon))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Backwardsbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(29, 29, 29)
+                .addComponent(jbtnAboutBook)
+                .addGap(21, 21, 21))
         );
 
-        jLabelImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/viewBook.jpg"))); // NOI18N
+        jTabbedPaneReport.addTab("Böcker", jPanelTabBookings);
+
+        eBooksTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane5.setViewportView(eBooksTable);
+
+        jbtnAboutBook1.setText("Om Boken");
+        jbtnAboutBook1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAboutBook1ActionPerformed(evt);
+            }
+        });
+
+        eBookstxt.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
+        eBookstxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eBookstxtActionPerformed(evt);
+            }
+        });
+
+        jLabelSearcheBookIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
+        jLabelSearcheBookIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelSearcheBookIconMouseClicked(evt);
+            }
+        });
+
+        jLabelSearchBookingsText2.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelSearchBookingsText2.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelSearchBookingsText2.setText("Sök");
+
+        javax.swing.GroupLayout jPanelTabLendingsLayout = new javax.swing.GroupLayout(jPanelTabLendings);
+        jPanelTabLendings.setLayout(jPanelTabLendingsLayout);
+        jPanelTabLendingsLayout.setHorizontalGroup(
+            jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnAboutBook1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLendingsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelSearchBookingsText2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(eBookstxt, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelSearcheBookIcon)
+                .addGap(28, 28, 28))
+        );
+        jPanelTabLendingsLayout.setVerticalGroup(
+            jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLendingsLayout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(eBookstxt, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelSearchBookingsText2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelSearcheBookIcon))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66)
+                .addComponent(jbtnAboutBook1)
+                .addGap(46, 46, 46))
+        );
+
+        jTabbedPaneReport.addTab("E-Böcker", jPanelTabLendings);
+
+        btnClose.setText("Stäng");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelInvisibleLayout = new javax.swing.GroupLayout(jPanelInvisible);
+        jPanelInvisible.setLayout(jPanelInvisibleLayout);
+        jPanelInvisibleLayout.setHorizontalGroup(
+            jPanelInvisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInvisibleLayout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addGroup(jPanelInvisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnClose)
+                    .addComponent(jLabelAboutBook, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25))
+        );
+        jPanelInvisibleLayout.setVerticalGroup(
+            jPanelInvisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelInvisibleLayout.createSequentialGroup()
+                .addGap(78, 78, 78)
+                .addComponent(jLabelAboutBook, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnClose)
+                .addGap(66, 66, 66))
+        );
 
         javax.swing.GroupLayout jPanelbackgroundLayout = new javax.swing.GroupLayout(jPanelbackground);
         jPanelbackground.setLayout(jPanelbackgroundLayout);
         jPanelbackgroundLayout.setHorizontalGroup(
             jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelbackgroundLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelImg)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanelbackgroundLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabelImg)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanelInvisible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTabbedPaneReport, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(495, 495, 495)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanelbackgroundLayout.setVerticalGroup(
             jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelbackgroundLayout.createSequentialGroup()
-                .addComponent(jPanelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelbackgroundLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
+                        .addGap(158, 158, 158)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelbackgroundLayout.createSequentialGroup()
+                        .addComponent(jPanelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelImg, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabelImg, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jPanelInvisible, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTabbedPaneReport, javax.swing.GroupLayout.Alignment.LEADING)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -303,26 +468,63 @@ public class ViewBooks extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelbackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelbackground, javax.swing.GroupLayout.PREFERRED_SIZE, 1756, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelbackground, javax.swing.GroupLayout.PREFERRED_SIZE, 811, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanelbackground, javax.swing.GroupLayout.PREFERRED_SIZE, 811, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BookstxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookstxtActionPerformed
+    private void jLabelSearchBookIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchBookIconMouseClicked
+
+        ArrayList<Books> foundBooks = new ArrayList<>();
+        String searchWord = Bookstxt.getText().toLowerCase();
+        String bookIsAvailable;
+        books.stream().filter((b)-> b.getTitle().toLowerCase().contains(searchWord) || b.getAuthor().toLowerCase().contains(searchWord)
+            || b.getCategory().toLowerCase().equals(searchWord) || b.getIsbn().equals(searchWord)).forEach(foundBooks::add);
+        
+        if(!foundBooks.isEmpty()){
+            DefaultTableModel model = new DefaultTableModel(colNamesBooks, 0);
+
+            for(Books b : foundBooks){
+                if (borrowedBooksId.contains(b.getId())){
+                    bookIsAvailable = "Nej";
+                }else{
+                    bookIsAvailable = "Ja";
+                }
+                model.addRow(new Object[]{b.getTitle(),b.getAuthor(), b.getIsbn(),b.getPublisher(),b.getCategory(),b.getPlacement(), bookIsAvailable});
+            }
+            BooksTable.setModel(model);
+            Bookstxt.setText("");
+        }else {
+            JOptionPane.showMessageDialog(this, "Ingen bok matchade din sökning");
+        }
+    }//GEN-LAST:event_jLabelSearchBookIconMouseClicked
+
+    private void jbtnAboutBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAboutBookActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BookstxtActionPerformed
+        if( BooksTable.getSelectedRow() == -1 ){
+            JOptionPane.showMessageDialog(this, "Du har inte valt en bok");
+        }else{
+            DefaultTableModel model = (DefaultTableModel) BooksTable.getModel();
 
-    private void BackwardsbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackwardsbtnActionPerformed
+            String bookIsbn = model.getValueAt(BooksTable.getSelectedRow(), 2).toString().trim();
 
-        this.setVisible(false);
-        StartPage sp = new StartPage();
-        sp.setVisible(true);
-    }//GEN-LAST:event_BackwardsbtnActionPerformed
+            jPanelInvisible.setVisible(true);
+
+            for (int i = 0 ; i < queryMethods.findBooks().size() ; i++){
+                if(queryMethods.findBooks().get(i).getIsbn().trim().equals(bookIsbn)){
+                    jLabelAboutBook.setText("<html>"+queryMethods.findBooks().get(i).getDesc()+"</html>");
+                }
+            }
+
+        }
+    }//GEN-LAST:event_jbtnAboutBookActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         StartPage sp = new StartPage();
@@ -362,32 +564,6 @@ public class ViewBooks extends javax.swing.JFrame {
     private void eBookstxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eBookstxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_eBookstxtActionPerformed
-  
-  private void jLabelSearchBookIconMouseClicked(java.awt.event.MouseEvent evt) {                                                  
-
-        ArrayList<Books> foundBooks = new ArrayList<>();
-        String searchWord = Bookstxt.getText().toLowerCase();
-        String bookIsAvailable;
-        books.stream().filter((b)-> b.getTitle().toLowerCase().contains(searchWord) || b.getAuthor().toLowerCase().contains(searchWord)
-            || b.getCategory().toLowerCase().equals(searchWord) || b.getIsbn().equals(searchWord)).forEach(foundBooks::add);
-        
-        if(!foundBooks.isEmpty()){
-            DefaultTableModel model = new DefaultTableModel(colNamesBooks, 0);
-
-            for(Books b : foundBooks){
-                if (borrowedBooksId.contains(b.getId())){
-                    bookIsAvailable = "Nej";
-                }else{
-                    bookIsAvailable = "Ja";
-                }
-                model.addRow(new Object[]{b.getTitle(),b.getAuthor(), b.getIsbn(),b.getPublisher(),b.getCategory(),b.getPlacement(), bookIsAvailable});
-            }
-            BooksTable.setModel(model);
-            Bookstxt.setText("");
-        }else {
-            JOptionPane.showMessageDialog(this, "Ingen bok matchade din sökning");
-        }
-    }   
 
     private void jLabelSearcheBookIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearcheBookIconMouseClicked
         // TODO add your handling code here:
@@ -397,21 +573,18 @@ public class ViewBooks extends javax.swing.JFrame {
         eBooks.stream().filter((e)-> e.getTitle().toLowerCase().contains(searchWord) || e.getAuthor().toLowerCase().contains(searchWord)
             || e.getCategory().toLowerCase().equals(searchWord) || e.getIsbn().equals(searchWord)).forEach(foundBooks::add);
 
-
         if(!foundBooks.isEmpty()){
-            DefaultTableModel model = new DefaultTableModel(colNames, 0);
-            
-            for(Books b : foundBooks){
-                model.addRow(new Object[]{b.getTitle(),b.getAuthor(), b.getIsbn(),b.getPublisher(),b.getPurchase_price(),b.getCategory(),b.getPlacement()});
+            DefaultTableModel model = new DefaultTableModel(colNamesEBooks, 0);
+
+            for(E_Books e : foundBooks){
+                model.addRow(new Object[]{e.getTitle(),e.getAuthor(), e.getIsbn(),e.getPublisher(),e.getCategory()});
             }
-            BooksTable.setModel(model);
-            Bookstxt.setText("");
+            eBooksTable.setModel(model);
+            eBookstxt.setText("");
         }else {
             JOptionPane.showMessageDialog(this, "Ingen bok matchade din sökning");
         }
-        
-        
-    }//GEN-LAST:event_jLabelSearchBookingsIconMouseClicked
+    }//GEN-LAST:event_jLabelSearcheBookIconMouseClicked
 
     /**
      * @param args the command line arguments
@@ -449,20 +622,31 @@ public class ViewBooks extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Backwardsbtn;
     private javax.swing.JTable BooksTable;
     private javax.swing.JTextField Bookstxt;
+    private javax.swing.JButton btnClose;
+    private javax.swing.JTable eBooksTable;
+    private javax.swing.JTextField eBookstxt;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelAboutBook;
     private javax.swing.JLabel jLabelImg;
-    private javax.swing.JLabel jLabelSearchBookingsIcon;
-    private javax.swing.JLabel jLabelSearchBookingsText;
+    private javax.swing.JLabel jLabelSearchBookIcon;
+    private javax.swing.JLabel jLabelSearchBookingsText1;
+    private javax.swing.JLabel jLabelSearchBookingsText2;
+    private javax.swing.JLabel jLabelSearcheBookIcon;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanelInvisible;
+    private javax.swing.JPanel jPanelTabBookings;
+    private javax.swing.JPanel jPanelTabLendings;
     private javax.swing.JPanel jPanelTitle;
     private javax.swing.JPanel jPanelbackground;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTabbedPane jTabbedPaneReport;
+    private javax.swing.JButton jbtnAboutBook;
+    private javax.swing.JButton jbtnAboutBook1;
     // End of variables declaration//GEN-END:variables
 }
