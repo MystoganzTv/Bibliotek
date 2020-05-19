@@ -660,7 +660,15 @@ public class UserView extends javax.swing.JFrame {
         
         DefaultTableModel model = (DefaultTableModel) jtableSortiment.getModel();
         String bookIsbn = model.getValueAt(jtableSortiment.getSelectedRow(), 2).toString();
-        int bookId = qm.findBookByIsbn(bookIsbn).getId();
+        int bookId = 0;
+        int eBookId = 0;
+        try{
+        bookId = qm.findBookByIsbn(bookIsbn).getId();
+        }catch(Exception e){
+            eBookId = qm.findEBookByIsbn(bookIsbn).getId();
+        }
+        
+        
         int libraryCardId = qm.findLibrarycardByEmail(this.guestEmail).getId();
         
         boolean cardIsBlocked = false;
@@ -706,7 +714,7 @@ public class UserView extends javax.swing.JFrame {
                 "Bekräftelse",JOptionPane.YES_NO_OPTION);
             
             if(input == JOptionPane.YES_OPTION){ 
-                 qm.borrowEBooks(bookId, libraryCardId);
+                 qm.borrowEBooks(eBookId, libraryCardId);
             }
         }
         

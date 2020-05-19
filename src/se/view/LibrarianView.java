@@ -622,6 +622,9 @@ public class LibrarianView extends javax.swing.JFrame {
 
     private void NewBookbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewBookbtnActionPerformed
         // TODO add your handling code here:
+        AddBook addBook = new AddBook();
+        this.setVisible(false);
+        addBook.setVisible(true);
     }//GEN-LAST:event_NewBookbtnActionPerformed
 
     private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
