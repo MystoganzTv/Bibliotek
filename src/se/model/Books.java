@@ -27,11 +27,9 @@ public class Books {
 
     private String placement;
 
-    private int inStock;
-
     private String desc;
 
-    public Books(int id, String title, String author, String isbn, String publisher, double purchase_price, String category, String placement, int inStock, String desc) {
+    public Books(int id, String title, String author, String isbn, String publisher, double purchase_price, String category, String placement, String desc) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -40,11 +38,10 @@ public class Books {
         this.purchase_price = purchase_price;
         this.category = category;
         this.placement = placement;
-        this.inStock = inStock;
         this.desc = desc;
     }
 
-    public Books(String title, String author, String isbn, String publisher, double purchase_price, String category, String placement, int inStock, String desc) {
+    public Books(String title, String author, String isbn, String publisher, double purchase_price, String category, String placement,  String desc) {
         this.title = title;
         this.author = author;
         this.isbn = isbn;
@@ -52,7 +49,6 @@ public class Books {
         this.purchase_price = purchase_price;
         this.category = category;
         this.placement = placement;
-        this.inStock = inStock;
         this.desc = desc;
     }
 
@@ -60,13 +56,6 @@ public class Books {
 
     }
 
-    public int getInStock() {
-        return inStock;
-    }
-
-    public void setInStock(int inStock) {
-        this.inStock = inStock;
-    }
 
     public String getDesc() {
         return desc;

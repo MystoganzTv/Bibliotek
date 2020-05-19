@@ -330,15 +330,74 @@ public class ViewBooks extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jLabel4MouseClicked
 
-    private void jLabelSearchBookingsIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchBookingsIconMouseClicked
-        
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        // TODO add your handling code here:
+        jPanelInvisible.setVisible(false);
+    }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void jbtnAboutBook1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAboutBook1ActionPerformed
+        // TODO add your handling code here:
+                if( eBooksTable.getSelectedRow() == -1 ){
+            JOptionPane.showMessageDialog(this, "Du har inte valt en bok");
+        }else{
+            DefaultTableModel model = (DefaultTableModel) eBooksTable.getModel();
+
+            String bookIsbn = model.getValueAt(eBooksTable.getSelectedRow(), 2).toString().trim();
+
+            jPanelInvisible.setVisible(true);
+
+            for (int i = 0 ; i < queryMethods.getAllEBooks().size() ; i++){
+                if(queryMethods.getAllEBooks().get(i).getIsbn().trim().equals(bookIsbn)){
+                    jLabelAboutBook.setText("<html>"+queryMethods.getAllEBooks().get(i).getDesc()+"</html>");
+                }
+            }
+
+        }
+    }//GEN-LAST:event_jbtnAboutBook1ActionPerformed
+
+    private void BookstxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookstxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BookstxtActionPerformed
+
+    private void eBookstxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eBookstxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eBookstxtActionPerformed
+  
+  private void jLabelSearchBookIconMouseClicked(java.awt.event.MouseEvent evt) {                                                  
+
         ArrayList<Books> foundBooks = new ArrayList<>();
         String searchWord = Bookstxt.getText().toLowerCase();
-    
-         books.stream().filter((b)-> b.getTitle().toLowerCase().contains(searchWord) || b.getAuthor().toLowerCase().contains(searchWord)
-                                || b.getCategory().toLowerCase().equals(searchWord) || b.getIsbn().equals(searchWord)).forEach(foundBooks::add);
-                 
-                 
+        String bookIsAvailable;
+        books.stream().filter((b)-> b.getTitle().toLowerCase().contains(searchWord) || b.getAuthor().toLowerCase().contains(searchWord)
+            || b.getCategory().toLowerCase().equals(searchWord) || b.getIsbn().equals(searchWord)).forEach(foundBooks::add);
+        
+        if(!foundBooks.isEmpty()){
+            DefaultTableModel model = new DefaultTableModel(colNamesBooks, 0);
+
+            for(Books b : foundBooks){
+                if (borrowedBooksId.contains(b.getId())){
+                    bookIsAvailable = "Nej";
+                }else{
+                    bookIsAvailable = "Ja";
+                }
+                model.addRow(new Object[]{b.getTitle(),b.getAuthor(), b.getIsbn(),b.getPublisher(),b.getCategory(),b.getPlacement(), bookIsAvailable});
+            }
+            BooksTable.setModel(model);
+            Bookstxt.setText("");
+        }else {
+            JOptionPane.showMessageDialog(this, "Ingen bok matchade din sökning");
+        }
+    }   
+
+    private void jLabelSearcheBookIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearcheBookIconMouseClicked
+        // TODO add your handling code here:
+        ArrayList<E_Books> foundBooks = new ArrayList<>();
+        String searchWord = eBookstxt.getText().toLowerCase();
+
+        eBooks.stream().filter((e)-> e.getTitle().toLowerCase().contains(searchWord) || e.getAuthor().toLowerCase().contains(searchWord)
+            || e.getCategory().toLowerCase().equals(searchWord) || e.getIsbn().equals(searchWord)).forEach(foundBooks::add);
+
+
         if(!foundBooks.isEmpty()){
             DefaultTableModel model = new DefaultTableModel(colNames, 0);
             
