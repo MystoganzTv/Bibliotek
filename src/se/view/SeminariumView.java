@@ -29,24 +29,21 @@ public class SeminariumView extends javax.swing.JFrame {
 
         jPanelbackground = new javax.swing.JPanel();
         jLabelBackgroundPhoto = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
         jPanelTitle = new javax.swing.JPanel();
         jLabelTitle = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jlbExitIcon = new javax.swing.JLabel();
         jPanelAddSeminarium = new javax.swing.JPanel();
         jtfName = new javax.swing.JTextField();
         jlbPlace = new javax.swing.JLabel();
         jlbName = new javax.swing.JLabel();
         jbtnCancel = new javax.swing.JButton();
-        jtfDate = new javax.swing.JPasswordField();
         jlbDate = new javax.swing.JLabel();
-        jtfPlace = new javax.swing.JPasswordField();
         jtfTotalVisitor = new javax.swing.JPasswordField();
         jlbTotalVisitor = new javax.swing.JLabel();
         jbtnAdd = new javax.swing.JButton();
         jlbSpeaker = new javax.swing.JLabel();
-        jtfSpeaker = new javax.swing.JPasswordField();
         jlbDescription = new javax.swing.JLabel();
         jtfDescription = new javax.swing.JPasswordField();
         jlbProgram = new javax.swing.JLabel();
@@ -61,19 +58,6 @@ public class SeminariumView extends javax.swing.JFrame {
 
         jLabelBackgroundPhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/seminarium.jpg"))); // NOI18N
 
-        jPanel1.setBackground(new java.awt.Color(244, 244, 244));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 678, Short.MAX_VALUE)
-        );
-
         jPanelTitle.setBackground(new java.awt.Color(133, 102, 170));
 
         jLabelTitle.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
@@ -83,6 +67,13 @@ public class SeminariumView extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Logo libro.png"))); // NOI18N
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Logo letras libro.png"))); // NOI18N
+
+        jlbExitIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/home_80px.png"))); // NOI18N
+        jlbExitIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlbExitIconMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelTitleLayout = new javax.swing.GroupLayout(jPanelTitle);
         jPanelTitle.setLayout(jPanelTitleLayout);
@@ -94,6 +85,8 @@ public class SeminariumView extends javax.swing.JFrame {
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlbExitIcon)
                 .addContainerGap())
         );
         jPanelTitleLayout.setVerticalGroup(
@@ -101,13 +94,11 @@ public class SeminariumView extends javax.swing.JFrame {
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
-                        .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))))
+                .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlbExitIcon)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         jPanelAddSeminarium.setBackground(new java.awt.Color(244, 244, 244));
@@ -158,23 +149,6 @@ public class SeminariumView extends javax.swing.JFrame {
             jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
                 .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jlbPlace, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtfPlace))
-                            .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
-                                .addComponent(jlbSpeaker)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtfSpeaker))))
-                    .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(jlbDate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtfDate))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAddSeminariumLayout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(jlbTotalVisitor)
@@ -198,7 +172,20 @@ public class SeminariumView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtfProgram)
-                            .addComponent(jtfDescription))))
+                            .addComponent(jtfDescription)))
+                    .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
+                        .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(jlbPlace, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jlbSpeaker)))
+                            .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
+                                .addGap(74, 74, 74)
+                                .addComponent(jlbDate)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelAddSeminariumLayout.setVerticalGroup(
@@ -208,22 +195,13 @@ public class SeminariumView extends javax.swing.JFrame {
                 .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlbName))
-                .addGap(16, 16, 16)
-                .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfSpeaker, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlbSpeaker))
-                .addGap(16, 16, 16)
-                .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfPlace, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlbPlace))
-                .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jtfDate, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlbDate)))
-                .addGap(16, 16, 16)
+                .addGap(17, 17, 17)
+                .addComponent(jlbSpeaker)
+                .addGap(20, 20, 20)
+                .addComponent(jlbPlace)
+                .addGap(20, 20, 20)
+                .addComponent(jlbDate)
+                .addGap(19, 19, 19)
                 .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfTotalVisitor, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlbTotalVisitor))
@@ -284,8 +262,7 @@ public class SeminariumView extends javax.swing.JFrame {
                 .addComponent(jPanelCurrentSeminarium, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelAddSeminarium, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
             .addComponent(jPanelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanelbackgroundLayout.setVerticalGroup(
@@ -295,15 +272,13 @@ public class SeminariumView extends javax.swing.JFrame {
                 .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelbackgroundLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jPanelCurrentSeminarium, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanelAddSeminarium, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanelCurrentSeminarium, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanelAddSeminarium, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanelbackgroundLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelBackgroundPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -323,6 +298,12 @@ public class SeminariumView extends javax.swing.JFrame {
     private void jtfNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfNameActionPerformed
+
+    private void jlbExitIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbExitIconMouseClicked
+        StartPage sp = new StartPage();
+        sp.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jlbExitIconMouseClicked
 
     /**
      * @param args the command line arguments
@@ -364,7 +345,6 @@ public class SeminariumView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelBackgroundPhoto;
     private javax.swing.JLabel jLabelTitle;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelAddSeminarium;
     private javax.swing.JPanel jPanelCurrentSeminarium;
     private javax.swing.JPanel jPanelTitle;
@@ -375,17 +355,15 @@ public class SeminariumView extends javax.swing.JFrame {
     private javax.swing.JButton jbtnCancel;
     private javax.swing.JLabel jlbDate;
     private javax.swing.JLabel jlbDescription;
+    private javax.swing.JLabel jlbExitIcon;
     private javax.swing.JLabel jlbName;
     private javax.swing.JLabel jlbPlace;
     private javax.swing.JLabel jlbProgram;
     private javax.swing.JLabel jlbSpeaker;
     private javax.swing.JLabel jlbTotalVisitor;
-    private javax.swing.JPasswordField jtfDate;
     private javax.swing.JPasswordField jtfDescription;
     private javax.swing.JTextField jtfName;
-    private javax.swing.JPasswordField jtfPlace;
     private javax.swing.JPasswordField jtfProgram;
-    private javax.swing.JPasswordField jtfSpeaker;
     private javax.swing.JPasswordField jtfTotalVisitor;
     // End of variables declaration//GEN-END:variables
 }

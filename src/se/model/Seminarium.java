@@ -38,6 +38,16 @@ public class Seminarium {
         this.programDescription = programDescription;
     }
 
+    public Seminarium(String title, String Speaker, String startDate, String endDate, int countVisitor, String seminariumDescription, String programDescription) {
+        this.title = title;
+        this.Speaker = Speaker;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.countVisitor = countVisitor;
+        this.seminariumDescription = seminariumDescription;
+        this.programDescription = programDescription;
+    }
+
     public Seminarium() {
     }
 
