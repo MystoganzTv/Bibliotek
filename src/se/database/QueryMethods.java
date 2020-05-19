@@ -28,6 +28,7 @@ import se.model.E_Books;
 import se.model.Guest;
 import se.model.Librarian;
 import se.model.LibraryCards;
+import se.model.Seminar;
 
 /**
  *
@@ -1340,6 +1341,31 @@ public class QueryMethods {
             
         } catch(Exception e) {
             System.out.println("Something went wrong while returning a book: " + e);
+        }
+    }
+    
+    public void addSeminar(Seminar seminar) {
+        
+        try {
+            
+            MyConnection connect = new MyConnection();
+            con = connect.getConnection();
+            Statement stmt = con.createStatement();
+            stmt.execute("INSERT INTO seminarium(Title, Speaker, StartDate, EndDate, CountVisitor, Description, Program) VALUES('" 
+                         + seminar.getTitle() + "', '" 
+                         + seminar.getSpeaker() + "', '"
+                         + seminar.getStartDate() + "', '"
+                         + seminar.getEndDate() + "', '"
+                         + Integer.toString(seminar.getCountVisitor()) + "', '" 
+                         + seminar.getSeminariumDescription() + "', '" 
+                         + seminar.getProgramDescription() + "')");
+            
+            stmt.close();
+            con.close();
+            
+            JOptionPane.showMessageDialog(null, "Seminarium har sparats!");
+        } catch(Exception e) {
+            System.out.println("Something went wrong while adding a seminar: " + e);
         }
     }
     
