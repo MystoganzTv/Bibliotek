@@ -19,6 +19,8 @@ public class SeminarView extends javax.swing.JFrame {
      */
     public SeminarView() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
     }
 
     /**
@@ -399,19 +401,19 @@ public class SeminarView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtProgramActionPerformed
 
     private void jbtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAddActionPerformed
-       String name = jtfName.getText();
-       String speaker = txtSpeaker.getText();
-       String location = txtLocation.getText();
-       String sDate = txtDate.getText();
-       String eDate = txtDate.getText();
-       String maxGuests = txtMaxGuests.getText();
-       String desc = txtDesc.getText();
-       String program = txtProgram.getText();
-       
-       QueryMethods qMethods = new QueryMethods();
-       Seminar seminar = new Seminar(name, speaker, location, sDate, eDate, Integer.parseInt(maxGuests), desc, program);
-       qMethods.addSeminar(seminar);
-       clearInputFields();
+        String name = jtfName.getText();
+        String speaker = txtSpeaker.getText();
+        String location = txtLocation.getText();
+        String sDate = txtDate.getText();
+        String eDate = txtDate.getText();
+        String maxGuests = txtMaxGuests.getText();
+        String desc = txtDesc.getText();
+        String program = txtProgram.getText();
+
+        QueryMethods qMethods = new QueryMethods();
+        Seminar seminar = new Seminar(name, speaker, location, sDate, eDate, Integer.parseInt(maxGuests), desc, program);
+        qMethods.addSeminar(seminar);
+        clearInputFields();
     }//GEN-LAST:event_jbtnAddActionPerformed
 
     private void clearInputFields() {
@@ -423,7 +425,7 @@ public class SeminarView extends javax.swing.JFrame {
         txtDesc.setText("");
         txtProgram.setText("");
     }
-    
+
     /**
      * @param args the command line arguments
      */
