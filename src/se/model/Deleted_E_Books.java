@@ -9,9 +9,9 @@ package se.model;
  *
  * @author annaz
  */
-public class E_Books {
+public class Deleted_E_Books {
     
-    private int id;
+     private int id;
     
     private String title;
     
@@ -20,17 +20,16 @@ public class E_Books {
     private String isbn;
     
     private String publisher;
-    
-    private String placement;
-    
+       
     private double purchase_price;
     
     private String category;
     
     private String desc;
     
-    public E_Books(int id, String title, String author, String isbn, String publisher, double purchase_price, String category, String placement, String desc) {
+    private String notes;
 
+    public Deleted_E_Books(int id, String title, String author, String isbn, String publisher, double purchase_price, String category, String desc, String notes) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -39,27 +38,10 @@ public class E_Books {
         this.purchase_price = purchase_price;
         this.category = category;
         this.desc = desc;
-        this.placement = placement;
+        this.notes = notes;
     }
 
-    public E_Books() {
-        
-    }
-
-    public String getPlacement() {
-        return placement;
-    }
-
-    public void setPlacement(String placement) {
-        this.placement = placement;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public Deleted_E_Books() {
     }
 
     public int getId() {
@@ -117,6 +99,23 @@ public class E_Books {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+    
     
     
 }
