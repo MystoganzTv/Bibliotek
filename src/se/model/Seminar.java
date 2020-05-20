@@ -7,7 +7,7 @@ package se.model;
 
 /**
  *
- * @author Enrique
+ * @author enrique & simon
  */
 public class Seminar {
     
