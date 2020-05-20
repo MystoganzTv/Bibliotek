@@ -28,6 +28,8 @@ public class Books {
     private String placement;
 
     private String desc;
+    
+    private int copies;
 
     public Books(int id, String title, String author, String isbn, String publisher, double purchase_price, String category, String placement, String desc) {
         this.id = id;
@@ -50,6 +52,18 @@ public class Books {
         this.category = category;
         this.placement = placement;
         this.desc = desc;
+    }
+    
+    public Books(String title, String author, String isbn, String publisher, double purchase_price, String category, String placement,  String desc, int copies) {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.publisher = publisher;
+        this.purchase_price = purchase_price;
+        this.category = category;
+        this.placement = placement;
+        this.desc = desc;
+        this.copies = copies;
     }
 
     public Books() {
@@ -127,6 +141,14 @@ public class Books {
 
     public void setPlacement(String placement) {
         this.placement = placement;
+    }
+    
+     public int getCopies() {
+        return copies;
+    }
+
+    public void setCopies(int copies) {
+        this.copies = copies;
     }
 
     @Override

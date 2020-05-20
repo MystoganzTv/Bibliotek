@@ -71,17 +71,61 @@ public class UserView extends javax.swing.JFrame {
     public void fillSortimentTable() {
         DefaultTableModel model = (DefaultTableModel) jtableSortiment.getModel();
         model.setRowCount(0);
-        model.setColumnCount(7);
+        model.setColumnCount(8);
         
-        for (int i = 0; i < qm.getAllBooks().size(); i++) {
-            model.addRow(new Object[]{qm.getAllBooks().get(i).getTitle(), qm.getAllBooks().get(i).getAuthor(),
-                qm.getAllBooks().get(i).getIsbn(), qm.getAllBooks().get(i).getPublisher(), 
-                qm.getAllBooks().get(i).getCategory(), "Bok", qm.getAllBooks().get(i).getPlacement(),});
+//        for (int i = 0; i < qm.getAllBooks().size(); i++) {
+//            model.addRow(new Object[]{qm.getAllBooks().get(i).getTitle(), qm.getAllBooks().get(i).getAuthor(),
+//                qm.getAllBooks().get(i).getIsbn(), qm.getAllBooks().get(i).getPublisher(), 
+//                qm.getAllBooks().get(i).getCategory(), "Bok", qm.getAllBooks().get(i).getPlacement(),});
+//        }
+
+        String bookIsAvailable = "";
+        ArrayList<Books> books = qm.groupAllBooksByIsbn();
+        ArrayList<Books> booksByIsbn ;
+        ArrayList<Integer> borrowedBooksId = new ArrayList<>();
+
+        
+        for (int i = 0 ; i < qm.getAllBorrowedBooks().size() ; i++){
+            borrowedBooksId.add(qm.getAllBorrowedBooks().get(i).getBookId());
         }
+        
+
+        for (int i = 0; i < books.size(); i++) {
+
+            model.addRow(new Object[]{books.get(i).getTitle(), books.get(i).getAuthor(),
+                books.get(i).getIsbn(), books.get(i).getPublisher(), 
+                books.get(i).getCategory(),"Bok", books.get(i).getPlacement()});
+        }
+        
+        
+        for (int i = 0 ; i < model.getRowCount() ; i++){
+            String isbn = (String) model.getValueAt(i, 2);
+            booksByIsbn = qm.findBooksByIsbn(isbn);
+            boolean allIsBorrowed = false;
+            
+            for (int j = 0 ; j < booksByIsbn.size() ; j ++){
+                
+                if(!borrowedBooksId.contains(booksByIsbn.get(j).getId())){
+                    allIsBorrowed = false;
+                }else{
+                    allIsBorrowed = true;
+                }
+                
+                }
+            
+                if(allIsBorrowed){
+                bookIsAvailable = "Nej";
+                }else{
+                bookIsAvailable = "Ja";
+                }
+            model.setValueAt(bookIsAvailable, i, 7);
+        }
+        
+
         for (int i = 0; i < qm.getAllEBooks().size(); i++) {
             model.addRow(new Object[]{qm.getAllEBooks().get(i).getTitle(), qm.getAllEBooks().get(i).getAuthor(),
                 qm.getAllEBooks().get(i).getIsbn(), qm.getAllEBooks().get(i).getPublisher(), 
-                qm.getAllEBooks().get(i).getCategory(), "E-Bok"});
+                qm.getAllEBooks().get(i).getCategory(), "E-Bok", "", "Ja"});
         }
         jtableSortiment.getColumnModel().getColumn(0).setHeaderValue("Titel");
         jtableSortiment.getColumnModel().getColumn(1).setHeaderValue("Författare");
@@ -90,6 +134,7 @@ public class UserView extends javax.swing.JFrame {
         jtableSortiment.getColumnModel().getColumn(4).setHeaderValue("Kategori");
         jtableSortiment.getColumnModel().getColumn(5).setHeaderValue("Typ");
         jtableSortiment.getColumnModel().getColumn(6).setHeaderValue("Placering");
+        jtableSortiment.getColumnModel().getColumn(7).setHeaderValue("Tillgänglig");
 
         jtableSortiment.getColumn("Kategori").setPreferredWidth(150);
         jtableSortiment.getColumn("Typ").setPreferredWidth(40);
