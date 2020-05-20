@@ -129,4 +129,10 @@ public class Books {
         this.placement = placement;
     }
 
+    @Override
+    public String toString() {
+        return id + " " + title + " " + author;
+    }
+    
+
 }

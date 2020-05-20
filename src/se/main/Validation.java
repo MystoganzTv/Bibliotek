@@ -22,6 +22,15 @@ public class Validation {
         
     }
     
+    public static boolean isValidID(String ID){
+        
+        if(ID.isEmpty()){
+            return false;
+        }
+        
+        return ID.matches("^[1-9]+$");
+    }
+    
     public static boolean isValidPN(String PN){
         
         if(PN.isEmpty()){

@@ -1399,5 +1399,29 @@ public class QueryMethods {
             System.out.println("Something went wrong while adding a seminar: " + e);
         }
     }
+    
+    public Books findBorrowedBookById(int id){
+        con = MyConnection.getConnection();
+        
+        String query = "SELECT book_id, title, author  FROM borrowed_books INNER JOIN books ON borrowed_books.book_id = books.id WHERE book_id =" + id;
+        Books book = new Books();
+        try {
+            Statement statement = con.createStatement();
+            rs = statement.executeQuery(query);
+            
+            while(rs.next()){
+                
+                book.setId(rs.getInt(1));
+                book.setTitle(rs.getString(2));
+                book.setAuthor(rs.getString(3));
+                return book;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        book.setId(-1);
+        return book;
+    }
 
 }
