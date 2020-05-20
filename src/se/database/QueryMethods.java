@@ -28,6 +28,7 @@ import se.model.E_Books;
 import se.model.Guest;
 import se.model.Librarian;
 import se.model.LibraryCards;
+import se.model.Seminar;
 
 /**
  *
@@ -677,7 +678,7 @@ public class QueryMethods {
             System.out.println("Executing query");
             stmt.execute("INSERT INTO books(title, author, isbn, publisher, purchase_price, category, placement,  descript)"
                     + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
-                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', "  + " '" + b.getDesc() + "')");
+                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', " + " '" + b.getDesc() + "')");
             stmt.close();
             con.close();
 
@@ -722,8 +723,8 @@ public class QueryMethods {
         MyConnection tryConnect = new MyConnection();
         con = MyConnection.getConnection();
         System.out.println("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category, placement, descript) "
-                    + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
-                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', " + b.getDesc() + "')");
+                + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
+                + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', " + b.getDesc() + "')");
         try {
             Statement stmt = con.createStatement();
             stmt.execute("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category, placement, descript) "
@@ -1020,7 +1021,7 @@ public class QueryMethods {
         return null;
 
     }
-    
+
     // Returning NULL if no book found, Catch nullpointer when trying to find book!
     public ArrayList<Books> findBooksByIsbn(String isbn) {
         String query = "SELECT * FROM books WHERE isbn = '" + isbn + "'";
@@ -1194,7 +1195,7 @@ public class QueryMethods {
     public ArrayList<DeletedBook> getRemovedBooks() {
 
         con = MyConnection.getConnection();
-        ArrayList<DeletedBook> RemovedBooks = new ArrayList<>();
+        //  ArrayList<DeletedBook> RemovedBooks = new ArrayList<>();
 
         try {
             Statement stmt;
@@ -1323,10 +1324,10 @@ public class QueryMethods {
         }
         return borrowedBooks;
     }
-    
+
     public ArrayList<Books> getBorrowedBooksByCardId(int libraryCardId) {
         String query = "select * from books join borrowed_books on book_id = "
-                       + "books.id where librarycard_id = "+libraryCardId+";";
+                + "books.id where librarycard_id = " + libraryCardId + ";";
 
         ArrayList<Books> borrowedBooks = new ArrayList<Books>();
         Books list;
@@ -1355,27 +1356,83 @@ public class QueryMethods {
         }
         return borrowedBooks;
     }
-    
-    
-    
+
     public void returnBook(int bookId) {
-        
+
         //hitta bokens id i borrowed_books med hjälp av library card
         //ta bort boken från borrowed_books
         //hitta boken i books plussa en till in_stock där id är samma som i borrowed_books
-        
         MyConnection myConnection = new MyConnection();
-        
+
         try {
             Connection conn = myConnection.getConnection();
             Statement stmt = conn.createStatement();
-            
+
             stmt.execute("DELETE FROM borrowed_books WHERE book_id = " + bookId + "");
             System.out.println("Book Removed from borrowed_books");
             //must update books/e_books table in_stock column!
-            
-        } catch(Exception e) {
+
+        } catch (Exception e) {
             System.out.println("Something went wrong while returning a book: " + e);
+        }
+    }
+
+    public ArrayList<Seminar> findSeminar() {
+        ArrayList<Seminar> seminar = new ArrayList<Seminar>();
+        try {
+            MyConnection tryConnection = new MyConnection();
+
+            Seminar currentSeminar;
+
+            Connection conn = tryConnection.getConnection();
+            Statement stmt = conn.createStatement();
+            stmt.execute("SELECT * FROM seminarium");
+
+            ResultSet results = stmt.getResultSet();
+            while (results.next()) {
+                currentSeminar = new Seminar(results.getString("id"),
+                        results.getString("Title"),
+                        results.getString("Speaker"),
+                        results.getString("StartDate"),
+                        results.getString("EndDate"),
+                        results.getInt("CountVisitor"),
+                        results.getString("Description"),
+                        results.getString("Program"));
+                seminar.add(currentSeminar);
+                currentSeminar = null;
+            }
+            stmt.close();
+            conn.close();
+
+            return seminar;
+        } catch (SQLException e) {
+            System.out.println("Something went wrong: " + e);
+        }
+        return seminar;
+    }
+
+    public void addSeminar(Seminar seminar) {
+
+        try {
+
+            MyConnection connect = new MyConnection();
+            con = connect.getConnection();
+            Statement stmt = con.createStatement();
+            stmt.execute("INSERT INTO seminarium(Title, Speaker, StartDate, EndDate, CountVisitor, Description, Program) VALUES('"
+                    + seminar.getTitle() + "', '"
+                    + seminar.getSpeaker() + "', '"
+                    + seminar.getStartDate() + "', '"
+                    + seminar.getEndDate() + "', '"
+                    + Integer.toString(seminar.getCountVisitor()) + "', '"
+                    + seminar.getSeminariumDescription() + "', '"
+                    + seminar.getProgramDescription() + "')");
+
+            stmt.close();
+            con.close();
+
+            JOptionPane.showMessageDialog(null, "Seminarium har sparats!");
+        } catch (Exception e) {
+            System.out.println("Something went wrong while adding a seminar: " + e);
         }
     }
     
@@ -1413,4 +1470,29 @@ public class QueryMethods {
     }
     
     
+    public Books findBorrowedBookById(int id){
+        con = MyConnection.getConnection();
+        
+        String query = "SELECT book_id, title, author  FROM borrowed_books INNER JOIN books ON borrowed_books.book_id = books.id WHERE book_id =" + id;
+        Books book = new Books();
+        try {
+            Statement statement = con.createStatement();
+            rs = statement.executeQuery(query);
+            
+            while(rs.next()){
+                
+                book.setId(rs.getInt(1));
+                book.setTitle(rs.getString(2));
+                book.setAuthor(rs.getString(3));
+                return book;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        book.setId(-1);
+        return book;
+    }
+
+
 }

@@ -8,6 +8,7 @@ package se.view;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javafx.scene.control.SelectionMode;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
@@ -17,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import se.database.QueryMethods;
+import se.main.Validation;
 import se.model.Admin;
 import se.model.Guest;
 import se.model.Books;
@@ -35,6 +37,7 @@ public class LibrarianView extends javax.swing.JFrame {
     private ArrayList<Books> books;
     private ArrayList<DeletedBook> deletedBook;
     private String librarianEmail;
+    private DefaultListModel returnBooksListModel = new DefaultListModel();
     /**
      * Creates new form StartPage1
      */
@@ -52,6 +55,9 @@ public class LibrarianView extends javax.swing.JFrame {
 
         jbtnManageCards.setToolTipText("Tryck här för att redigera lånekort");
         UsersTable.setToolTipText("Tryck på funktionknappen för att redigera");
+        
+        returnBooksList.setSelectionMode(1);
+        returnBooksList.setModel(returnBooksListModel);
 
     }
     public LibrarianView(String librarianEmail) {
@@ -71,6 +77,8 @@ public class LibrarianView extends javax.swing.JFrame {
         UsersTable.setToolTipText("Tryck på funktionknappen för att redigera");
         jLabelTitle.setText("Inloggad Bibliotekarie: "+ librarianFullName());
         
+        returnBooksList.setSelectionMode(1);
+        returnBooksList.setModel(returnBooksListModel);
 
     }
     
@@ -202,7 +210,7 @@ public class LibrarianView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTabbedPaneReport3 = new javax.swing.JTabbedPane();
+        returnBooksPanel = new javax.swing.JTabbedPane();
         jPanelTabBookings3 = new javax.swing.JPanel();
         jLabelSearchBookingsText3 = new javax.swing.JLabel();
         Usertxt = new javax.swing.JTextField();
@@ -221,6 +229,14 @@ public class LibrarianView extends javax.swing.JFrame {
         BooksTable = new javax.swing.JTable();
         NewBookbtn = new javax.swing.JButton();
         DeleteBookbtn = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        bookIdTextField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        returnBooksList = new javax.swing.JList<>();
+        addBookToReturnListButton = new javax.swing.JButton();
+        returnBooksInListButton = new javax.swing.JButton();
+        removeFromReturnBooksList = new javax.swing.JButton();
         jPanelInvisible = new javax.swing.JPanel();
         btnClose = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -265,7 +281,7 @@ public class LibrarianView extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 829, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 832, Short.MAX_VALUE)
                 .addComponent(jLabelTitle)
                 .addGap(38, 38, 38)
                 .addComponent(jLabel5)
@@ -276,7 +292,7 @@ public class LibrarianView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
                     .addGroup(jPanelTitleLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -286,8 +302,8 @@ public class LibrarianView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPaneReport3.setForeground(new java.awt.Color(105, 131, 170));
-        jTabbedPaneReport3.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        returnBooksPanel.setForeground(new java.awt.Color(105, 131, 170));
+        returnBooksPanel.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
 
         jLabelSearchBookingsText3.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabelSearchBookingsText3.setForeground(new java.awt.Color(105, 131, 170));
@@ -404,7 +420,7 @@ public class LibrarianView extends javax.swing.JFrame {
                 .addGap(68, 68, 68))
         );
 
-        jTabbedPaneReport3.addTab("Användare", jPanelTabBookings3);
+        returnBooksPanel.addTab("Användare", jPanelTabBookings3);
 
         jLabelSearchLendingText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabelSearchLendingText.setForeground(new java.awt.Color(105, 131, 170));
@@ -490,7 +506,73 @@ public class LibrarianView extends javax.swing.JFrame {
                 .addGap(69, 69, 69))
         );
 
-        jTabbedPaneReport3.addTab("Böcker", jPanelTabLendings);
+        returnBooksPanel.addTab("Böcker", jPanelTabLendings);
+
+        jLabel1.setText("Bok ID:");
+
+        jScrollPane1.setViewportView(returnBooksList);
+
+        addBookToReturnListButton.setText("Ok");
+        addBookToReturnListButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBookToReturnListButtonActionPerformed(evt);
+            }
+        });
+
+        returnBooksInListButton.setText("Lämna tillbaka");
+        returnBooksInListButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnBooksInListButtonActionPerformed(evt);
+            }
+        });
+
+        removeFromReturnBooksList.setText("Ångra");
+        removeFromReturnBooksList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeFromReturnBooksListActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(105, 105, 105)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(addBookToReturnListButton, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                    .addComponent(bookIdTextField))
+                .addGap(102, 102, 102)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(removeFromReturnBooksList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(returnBooksInListButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(90, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bookIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(addBookToReturnListButton))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(returnBooksInListButton)
+                    .addComponent(removeFromReturnBooksList))
+                .addContainerGap(206, Short.MAX_VALUE))
+        );
+
+        returnBooksPanel.addTab("Återlämning", jPanel1);
 
         btnClose.setText("Stäng");
         btnClose.addActionListener(new java.awt.event.ActionListener() {
@@ -552,7 +634,7 @@ public class LibrarianView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanelInvisible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTabbedPaneReport3, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(returnBooksPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(714, Short.MAX_VALUE))
         );
@@ -564,7 +646,7 @@ public class LibrarianView extends javax.swing.JFrame {
                     .addGroup(jPanelbackgroundLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTabbedPaneReport3, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(returnBooksPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelBackgroundPhoto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelbackgroundLayout.createSequentialGroup()
                         .addGap(50, 50, 50)
@@ -746,6 +828,42 @@ public class LibrarianView extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_jbtnReturnActionPerformed
 
+    private void addBookToReturnListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBookToReturnListButtonActionPerformed
+        // TODO add your handling code here:
+        
+        if(Validation.isValidID(bookIdTextField.getText())){
+            Books book = queryMethods.findBorrowedBookById(Integer.parseInt(bookIdTextField.getText()));
+            if(book.getId() != -1){
+                returnBooksListModel.addElement(book);
+               bookIdTextField.setText("");
+                
+            }else {
+                JOptionPane.showMessageDialog(this, "Kunde inte hitta utlånad bok med id: " +  bookIdTextField.getText());
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Vänligen fyll i ett korrekt ID");
+        }
+    }//GEN-LAST:event_addBookToReturnListButtonActionPerformed
+
+    private void returnBooksInListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBooksInListButtonActionPerformed
+        
+        for(int i = 0; i < returnBooksListModel.getSize(); i++){
+           // String element = returnBooksListModel.getElementAt(i).toString();
+           Books book = (Books)returnBooksListModel.getElementAt(i);
+           
+           queryMethods.returnBook(book.getId());
+           
+        }
+        returnBooksListModel.clear();
+    }//GEN-LAST:event_returnBooksInListButtonActionPerformed
+
+    private void removeFromReturnBooksListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeFromReturnBooksListActionPerformed
+        
+        int index = returnBooksList.getSelectedIndex();
+        
+        returnBooksListModel.remove(index);
+    }//GEN-LAST:event_removeFromReturnBooksListActionPerformed
+
 
 
     /**
@@ -793,7 +911,10 @@ public class LibrarianView extends javax.swing.JFrame {
     private javax.swing.JButton NewBookbtn;
     private javax.swing.JTable UsersTable;
     private javax.swing.JTextField Usertxt;
+    private javax.swing.JButton addBookToReturnListButton;
+    private javax.swing.JTextField bookIdTextField;
     private javax.swing.JButton btnClose;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
@@ -804,19 +925,24 @@ public class LibrarianView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelSearchUsersIcon3;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JList<String> jListBorrowedBooks;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelInvisible;
     private javax.swing.JPanel jPanelTabBookings3;
     private javax.swing.JPanel jPanelTabLendings;
     private javax.swing.JPanel jPanelTitle;
     private javax.swing.JPanel jPanelbackground;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JTabbedPane jTabbedPaneReport3;
     private javax.swing.JButton jbtnBlockedCards;
     private javax.swing.JButton jbtnManageCards;
     private javax.swing.JButton jbtnReturn;
     private javax.swing.JButton jbtnSave;
     private javax.swing.JButton jbtnShowBorrowedBooks;
+    private javax.swing.JButton removeFromReturnBooksList;
+    private javax.swing.JButton returnBooksInListButton;
+    private javax.swing.JList<String> returnBooksList;
+    private javax.swing.JTabbedPane returnBooksPanel;
     // End of variables declaration//GEN-END:variables
 }

@@ -151,4 +151,10 @@ public class Books {
         this.copies = copies;
     }
 
+    @Override
+    public String toString() {
+        return id + " " + title + " " + author;
+    }
+    
+
 }
