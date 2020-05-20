@@ -1022,6 +1022,42 @@ public class QueryMethods {
     }
     
     // Returning NULL if no book found, Catch nullpointer when trying to find book!
+    public ArrayList<Books> findBooksByIsbn(String isbn) {
+        String query = "SELECT * FROM books WHERE isbn = '" + isbn + "'";
+        ArrayList<Books> books = new ArrayList<Books>();
+        con = MyConnection.getConnection();
+        try {
+//            ps = con.prepareStatement(query);
+//            rs = ps.executeQuery();
+            Statement statement = con.createStatement();
+            rs = statement.executeQuery(query);
+
+            while (rs.next()) {
+                Books book = new Books();
+                book.setId(rs.getInt(1));
+                book.setTitle(rs.getString(2));
+                book.setAuthor(rs.getString(3));
+                book.setIsbn(rs.getString(4));
+                book.setPublisher(rs.getString(5));
+                book.setPurchase_price(rs.getDouble(6));
+                book.setCategory(rs.getString(7));
+                book.setPlacement(rs.getString(8));
+                book.setDesc(rs.getString(9));
+                books.add(book);
+                
+            }
+                return books;
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+
+        }
+        return null;
+
+    }
+    
+    
+    // Returning NULL if no book found, Catch nullpointer when trying to find book!
     public E_Books findEBookByIsbn(String isbn) {
         String query = "SELECT * FROM e_books WHERE isbn = '" + isbn + "'";
 
@@ -1342,5 +1378,39 @@ public class QueryMethods {
             System.out.println("Something went wrong while returning a book: " + e);
         }
     }
+    
+    public ArrayList<Books> groupAllBooksByIsbn() {
+        String query = "Select title, author, isbn, publisher, purchase_price, category,\n" +
+                      " placement, books.desc, count(*) as copies from books group by isbn;";
+
+        ArrayList<Books> borrowedBooks = new ArrayList<Books>();
+        Books list;
+
+        con = MyConnection.getConnection();
+        PreparedStatement ps;
+
+        try {
+            ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list = new Books(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getDouble(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getInt(9));
+                borrowedBooks.add(list);
+            }
+            return borrowedBooks;
+
+        } catch (Exception e) {
+            System.out.println(e.toString() + " groupAllBooksByIsbn()");
+        }
+        return borrowedBooks;
+    }
+    
     
 }

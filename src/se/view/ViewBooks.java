@@ -57,27 +57,54 @@ public class ViewBooks extends javax.swing.JFrame {
             model.addRow(new Object[]{e.getTitle(),e.getAuthor(), e.getIsbn(),e.getPublisher(),e.getCategory()});
             }
                eBooksTable.setModel(model);
-    }    
+    } 
+    
     public void fillBooksTable(){
         DefaultTableModel model = new DefaultTableModel(colNamesBooks, 0);
 
         BooksTable.setModel(model);
-        String bookIsAvailable ;
+        String bookIsAvailable = "";
+        ArrayList<Books> books = queryMethods.groupAllBooksByIsbn();
+        ArrayList<Books> booksByIsbn ;
         
         for (int i = 0 ; i < queryMethods.getAllBorrowedBooks().size() ; i++){
             borrowedBooksId.add(queryMethods.getAllBorrowedBooks().get(i).getBookId());
         }
-            
-        for (int i = 0; i < queryMethods.getAllBooks().size(); i++) {
-            if( borrowedBooksId.contains(queryMethods.getAllBooks().get(i).getId())){
-                bookIsAvailable = "Nej";
-            }else{
-                bookIsAvailable = "Ja";
-            }
-            model.addRow(new Object[]{queryMethods.getAllBooks().get(i).getTitle(), queryMethods.getAllBooks().get(i).getAuthor(),
-                queryMethods.getAllBooks().get(i).getIsbn(), queryMethods.getAllBooks().get(i).getPublisher(), 
-                queryMethods.getAllBooks().get(i).getCategory(), queryMethods.getAllBooks().get(i).getPlacement(), bookIsAvailable});
+        
+
+        for (int i = 0; i < books.size(); i++) {
+
+            model.addRow(new Object[]{books.get(i).getTitle(), books.get(i).getAuthor(),
+                books.get(i).getIsbn(), books.get(i).getPublisher(), 
+                books.get(i).getCategory(), books.get(i).getPlacement(), bookIsAvailable});
         }
+        
+        
+        for (int i = 0 ; i < model.getRowCount() ; i++){
+            String isbn = (String) model.getValueAt(i, 2);
+            booksByIsbn = queryMethods.findBooksByIsbn(isbn);
+            boolean allIsBorrowed = false;
+            
+            for (int j = 0 ; j < booksByIsbn.size() ; j ++){
+                
+                if(!borrowedBooksId.contains(booksByIsbn.get(j).getId())){
+                    allIsBorrowed = false;
+                }else{
+                    allIsBorrowed = true;
+                }
+                
+                }
+            
+                if(allIsBorrowed){
+                bookIsAvailable = "Nej";
+                }else{
+                bookIsAvailable = "Ja";
+                }
+            model.setValueAt(bookIsAvailable, i, 6);
+        }
+        
+        
+
 
     
     }
@@ -497,7 +524,7 @@ public class ViewBooks extends javax.swing.JFrame {
                 }else{
                     bookIsAvailable = "Ja";
                 }
-                model.addRow(new Object[]{b.getTitle(),b.getAuthor(), b.getIsbn(),b.getPublisher(),b.getCategory(),b.getPlacement(), bookIsAvailable});
+                model.addRow(new Object[]{b.getTitle(),b.getAuthor(), b.getIsbn(),b.getPublisher(),b.getCategory(),b.getPlacement()});
             }
             BooksTable.setModel(model);
             Bookstxt.setText("");
