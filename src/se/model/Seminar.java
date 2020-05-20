@@ -21,32 +21,28 @@ public class Seminar {
     
     private String startDate;
     
-    private String endDate;
-    
     private int countVisitor;
     
     private String seminariumDescription;
     
     private String programDescription;
 
-    public Seminar(int id, String title, String Speaker, String location, String startDate, String endDate, int countVisitor, String seminariumDescription, String programDescription) {
+    public Seminar(int id, String title, String Speaker, String location, String startDate, int countVisitor, String seminariumDescription, String programDescription) {
         this.id = id;
         this.title = title;
         this.Speaker = Speaker;
         this.location = location;
         this.startDate = startDate;
-        this.endDate = endDate;
         this.countVisitor = countVisitor;
         this.seminariumDescription = seminariumDescription;
         this.programDescription = programDescription;
     }
 
-    public Seminar(String title, String Speaker, String location, String startDate, String endDate, int countVisitor, String seminariumDescription, String programDescription) {
+    public Seminar(String title, String speaker, String location, String startDate, int countVisitor, String seminariumDescription, String programDescription) {
         this.title = title;
-        this.Speaker = Speaker;
+        this.Speaker = speaker;
         this.location = location;
         this.startDate = startDate;
-        this.endDate = endDate;
         this.countVisitor = countVisitor;
         this.seminariumDescription = seminariumDescription;
         this.programDescription = programDescription;
@@ -93,14 +89,6 @@ public class Seminar {
 
     public void setStartDate(String startDate) {
         this.startDate = startDate;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
     }
 
     public int getCountVisitor() {
