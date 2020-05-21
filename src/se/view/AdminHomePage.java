@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import se.database.MyConnection;
 import se.database.QueryMethods;
 import se.model.ComboItem;
@@ -32,6 +33,8 @@ import se.model.Guest;
 import se.model.Librarian;
 import se.database.QueryMethods;
 import se.main.Validation;
+import se.model.Books;
+import se.model.E_Books;
 import se.model.DeletedBook;
 
 //tadevos test
@@ -52,6 +55,12 @@ public class AdminHomePage extends javax.swing.JFrame {
     private ArrayList<String> choiceList;
     private ArrayList<DeletedBook> deletedBook;
     private ArrayList<DeletedBook> deletedEBook;
+    
+    private ArrayList<Books> books;
+    private ArrayList<E_Books> eBooks;
+    private String[] colNamesSort = {"Titel", "Författare", "Kategory", "Pris"};
+    
+        
     private PreparedStatement ps;
     Connection con;
     
@@ -66,6 +75,8 @@ public class AdminHomePage extends javax.swing.JFrame {
         setResizable(false);
         queryMethods = new QueryMethods();
         guests = qMethods.findGuests();
+        books = qMethods.findBooks();
+        eBooks = qMethods.findEBooks();
 
         jTabbedPaneEdit.setVisible(false);
         jTabbedPaneReport.setVisible(false);
@@ -90,6 +101,9 @@ public class AdminHomePage extends javax.swing.JFrame {
         fillAdminTable();
         showBookType();
         fillBookLogTable();
+        fillBooksTable();
+        //fillEBooksTable();
+        
     }
     
     public AdminHomePage(String adminEmail) {
@@ -143,6 +157,38 @@ public class AdminHomePage extends javax.swing.JFrame {
         String lastName = adminLastName.substring(0, 1).toUpperCase() 
                             + adminLastName.substring(1);
         return  firstName + " " + lastName ;
+    }
+       
+      public void fillBooksTable() {
+        //ArrayList<Books> books = qMethods.findBooks();
+        books = queryMethods.findBooks();
+        eBooks = queryMethods.findEBooks();
+        DefaultTableModel model = new DefaultTableModel(colNamesSort, 0);
+        //model = (DefaultTableModel) BooksTable.getModel();
+        model.setRowCount(0);
+        for (int i = 0; i < books.size(); i++) {            
+            model.addRow(new Object[]{ books.get(i).getTitle(), books.get(i).getAuthor(),
+                 books.get(i).getCategory(), books.get(i).getPurchase_price()});
+        }
+        
+        StockTable.setModel(model);
+        StockTable.setAutoCreateRowSorter(true);
+              
+    }
+      
+    
+     public void fillEBooksTable() {
+        //ArrayList<EBooks> ebooks = qMethods.findEBooks();
+        eBooks = queryMethods.findEBooks();
+        DefaultTableModel model = new DefaultTableModel(colNames, 0);
+        //model = (DefaultTableModel) BooksTable.getModel();
+        model.setRowCount(0);
+        for (int i = 0; i < eBooks.size(); i++) {
+            model.addRow(new Object[]{eBooks.get(i).getId(), eBooks.get(i).getTitle(), eBooks.get(i).getAuthor(),
+                eBooks.get(i).getIsbn(), eBooks.get(i).getPublisher(), eBooks.get(i).getPurchase_price(), eBooks.get(i).getCategory()});
+        }
+        StockTable.setModel(model);
+        
     }
 
 
