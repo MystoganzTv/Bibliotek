@@ -103,10 +103,6 @@ public class ViewBooks extends javax.swing.JFrame {
             model.setValueAt(bookIsAvailable, i, 6);
         }
         
-        
-
-
-    
     }
     
     public void sortBooksByTitle(List<Books> books){
@@ -511,21 +507,49 @@ public class ViewBooks extends javax.swing.JFrame {
 
         ArrayList<Books> foundBooks = new ArrayList<>();
         String searchWord = Bookstxt.getText().toLowerCase();
-        String bookIsAvailable;
-        books.stream().filter((b)-> b.getTitle().toLowerCase().contains(searchWord) || b.getAuthor().toLowerCase().contains(searchWord)
+        String bookIsAvailable = "";
+        ArrayList<Books> bookListIsbn  = queryMethods.groupAllBooksByIsbn();
+        
+        bookListIsbn.stream().filter((b)-> b.getTitle().toLowerCase().contains(searchWord) || b.getAuthor().toLowerCase().contains(searchWord)
             || b.getCategory().toLowerCase().equals(searchWord) || b.getIsbn().equals(searchWord)).forEach(foundBooks::add);
+        
+        for (int i = 0 ; i < queryMethods.getAllBorrowedBooks().size() ; i++){
+            borrowedBooksId.add(queryMethods.getAllBorrowedBooks().get(i).getBookId());
+        }
         
         if(!foundBooks.isEmpty()){
             DefaultTableModel model = new DefaultTableModel(colNamesBooks, 0);
 
-            for(Books b : foundBooks){
-                if (borrowedBooksId.contains(b.getId())){
-                    bookIsAvailable = "Nej";
-                }else{
-                    bookIsAvailable = "Ja";
-                }
-                model.addRow(new Object[]{b.getTitle(),b.getAuthor(), b.getIsbn(),b.getPublisher(),b.getCategory(),b.getPlacement()});
+            for (int i = 0; i < foundBooks.size(); i++) {
+
+            model.addRow(new Object[]{foundBooks.get(i).getTitle(), foundBooks.get(i).getAuthor(),
+                foundBooks.get(i).getIsbn(), foundBooks.get(i).getPublisher(), 
+                foundBooks.get(i).getCategory(), foundBooks.get(i).getPlacement(), bookIsAvailable});
             }
+
+            for (int i = 0 ; i < model.getRowCount() ; i++){
+            String isbn = (String) model.getValueAt(i, 2);
+            boolean allIsBorrowed = false;
+            ArrayList<Books> borrowedBooksListIsbn = queryMethods.findBooksByIsbn(isbn);
+            
+                for (int j = 0 ; j < borrowedBooksListIsbn.size() ; j ++){
+                
+                    if(!borrowedBooksId.contains(borrowedBooksListIsbn.get(j).getId())){
+                    allIsBorrowed = false;
+                    }else{
+                    allIsBorrowed = true;
+                    }
+                
+                }
+            
+            if(allIsBorrowed){
+                bookIsAvailable = "Nej";
+            }else{
+                bookIsAvailable = "Ja";
+            }
+            model.setValueAt(bookIsAvailable, i, 6);
+        }
+ 
             BooksTable.setModel(model);
             Bookstxt.setText("");
         }else {
