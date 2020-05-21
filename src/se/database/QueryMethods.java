@@ -1386,15 +1386,15 @@ public class QueryMethods {
 
             Connection conn = tryConnection.getConnection();
             Statement stmt = conn.createStatement();
-            stmt.execute("SELECT * FROM seminarium");
+            stmt.execute("SELECT id, Title, Speaker, Location, StartDate, CountVisitor, Description, Program FROM seminarium");
 
             ResultSet results = stmt.getResultSet();
             while (results.next()) {
-                currentSeminar = new Seminar(results.getString("id"),
+                currentSeminar = new Seminar(results.getInt("id"), 
                         results.getString("Title"),
                         results.getString("Speaker"),
+                        results.getString("Location"),
                         results.getString("StartDate"),
-                        results.getString("EndDate"),
                         results.getInt("CountVisitor"),
                         results.getString("Description"),
                         results.getString("Program"));
@@ -1418,11 +1418,11 @@ public class QueryMethods {
             MyConnection connect = new MyConnection();
             con = connect.getConnection();
             Statement stmt = con.createStatement();
-            stmt.execute("INSERT INTO seminarium(Title, Speaker, StartDate, EndDate, CountVisitor, Description, Program) VALUES('"
+            stmt.execute("INSERT INTO seminarium(Title, Speaker, Location, StartDate, CountVisitor, Description, Program) VALUES('"
                     + seminar.getTitle() + "', '"
                     + seminar.getSpeaker() + "', '"
+                    + seminar.getLocation() + "', '"
                     + seminar.getStartDate() + "', '"
-                    + seminar.getEndDate() + "', '"
                     + Integer.toString(seminar.getCountVisitor()) + "', '"
                     + seminar.getSeminariumDescription() + "', '"
                     + seminar.getProgramDescription() + "')");
