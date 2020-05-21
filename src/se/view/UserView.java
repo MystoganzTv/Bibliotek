@@ -5,11 +5,20 @@
  */
 package se.view;
 
+import java.awt.Color;
+import java.time.Duration;
+import java.time.Instant;
+import static java.time.Instant.now;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import se.database.QueryMethods;
 import se.model.Books;
+import se.model.BorrowedBooks;
 import se.model.E_Books;
 
 /**
@@ -147,11 +156,36 @@ public class UserView extends javax.swing.JFrame {
         model.setRowCount(0);
         model.setColumnCount(4);
         int libraryCardId = qm.findLibrarycardByEmail(this.guestEmail).getId();
+        ArrayList<Date> borrowedBooksDates = new ArrayList<>();
+        Date toDayDate = new Date();
+        String returnBookReminder = "";
+        
+        for (int i = 0 ; i < qm.getAllBorrowedBooks().size() ; i++){
+            if(qm.getAllBorrowedBooks().get(i).getLibraryCardId() == libraryCardId){
+                borrowedBooksDates.add(qm.getAllBorrowedBooks().get(i).getReturnDate());
+            }
+        }
+        
+        
         for (int i = 0; i < qm.getBorrowedBooksByCardId(libraryCardId).size(); i++) {
+            int dayDiff = borrowedBooksDates.get(i).getDay() - toDayDate.getDay();
+            int monthDiff = borrowedBooksDates.get(i).getMonth() - toDayDate.getMonth();
+            if(dayDiff <= 0 && monthDiff <= 0){
+                returnBookReminder =  "Försenad";
+                System.out.println(returnBookReminder);
+                
+            }
+            else if(dayDiff == 1 && monthDiff == 0){
+                returnBookReminder = "1 dag kvar";
+            }
+            else if(dayDiff == 2 && monthDiff == 0){
+                returnBookReminder = "2 dagar kvar";
+            }
+            
             model.addRow(new Object[]{qm.getBorrowedBooksByCardId(libraryCardId).get(i).getTitle(),
                                       qm.getBorrowedBooksByCardId(libraryCardId).get(i).getAuthor(),
                                       qm.getBorrowedBooksByCardId(libraryCardId).get(i).getIsbn(), 
-                                      qm.getAllBorrowedBooks().get(i).getReturnDate()});
+                                      qm.getAllBorrowedBooks().get(i).getReturnDate() + "  " + returnBookReminder});
             
         }
         
@@ -639,50 +673,64 @@ public class UserView extends javax.swing.JFrame {
 
     private void jLabelSearchSortimentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchSortimentMouseClicked
         // TODO add your handling code here:
-        
-        
-        ArrayList<Books> authorSearch = qm.findBooksByAuthor(jTextFieldSearchSortiment.getText());
-        ArrayList<E_Books> authorSearchE = qm.findEBooksByAuthor(jTextFieldSearchSortiment.getText());
-        ArrayList<Books> titleSearch = qm.findBooksByTitle(jTextFieldSearchSortiment.getText().trim());
-        ArrayList<E_Books> titleSearchE = qm.findEBooksByTitle(jTextFieldSearchSortiment.getText().trim());
-        ArrayList<Books> categorySearch = qm.findBooksByCategory(jTextFieldSearchSortiment.getText().trim());
-        ArrayList<E_Books> categorySearchE = qm.findEBooksByCategory(jTextFieldSearchSortiment.getText().trim());
+        ArrayList<Books> foundBooks = new ArrayList<>();
+        ArrayList<E_Books> foundeBooks = new ArrayList<>();
+        List<E_Books> eBooks = new ArrayList<>();
 
+        String searchWord = jTextFieldSearchSortiment.getText().toLowerCase();
+        String bookIsAvailable = "";
+        ArrayList<Books> bookListIsbn  = qm.groupAllBooksByIsbn();
+        ArrayList<Integer> borrowedBooksId = new ArrayList<>();
         DefaultTableModel model = (DefaultTableModel) jtableSortiment.getModel();
-
         model.setRowCount(0);
-        model.setColumnCount(7);
+        model.setColumnCount(8);
         
-        if (jTextFieldSearchSortiment.getText().equals("")){
-            fillSortimentTable();
+        bookListIsbn.stream().filter((b)-> b.getTitle().toLowerCase().contains(searchWord) || b.getAuthor().toLowerCase().contains(searchWord)
+            || b.getCategory().toLowerCase().equals(searchWord) || b.getIsbn().equals(searchWord)).forEach(foundBooks::add);
+        
+        for (int i = 0 ; i < qm.getAllBorrowedBooks().size() ; i++){
+            borrowedBooksId.add(qm.getAllBorrowedBooks().get(i).getBookId());
+        }
+        
+        if(!foundBooks.isEmpty() ){
+ //           DefaultTableModel model = new DefaultTableModel(colNamesBooks, 0);
+
+            for (int i = 0; i < foundBooks.size(); i++) {
+
+            model.addRow(new Object[]{foundBooks.get(i).getTitle(), foundBooks.get(i).getAuthor(),
+                foundBooks.get(i).getIsbn(), foundBooks.get(i).getPublisher(), 
+                foundBooks.get(i).getCategory(), "Bok" ,foundBooks.get(i).getPlacement(), bookIsAvailable});
+            }
+
+            for (int i = 0 ; i < model.getRowCount() ; i++){
+            String isbn = (String) model.getValueAt(i, 2);
+            boolean allIsBorrowed = false;
+            ArrayList<Books> borrowedBooksListIsbn = qm.findBooksByIsbn(isbn);
+            
+                for (int j = 0 ; j < borrowedBooksListIsbn.size() ; j ++){
+                
+                    if(!borrowedBooksId.contains(borrowedBooksListIsbn.get(j).getId())){
+                    allIsBorrowed = false;
+                    }else{
+                    allIsBorrowed = true;
+                    }
+                
+                }
+            
+            if(allIsBorrowed){
+                bookIsAvailable = "Nej";
+            }else{
+                bookIsAvailable = "Ja";
+            }
+            model.setValueAt(bookIsAvailable, i, 7);
+        }
+ 
+            jtableSortiment.setModel(model);
+            jTextFieldSearchSortiment.setText("");
         }else {
-        for (int i = 0; i < authorSearch.size() ; i++) {
-            model.addRow(new Object[]{authorSearch.get(i).getTitle(), authorSearch.get(i).getAuthor(),
-                authorSearch.get(i).getIsbn(), authorSearch.get(i).getPublisher(), 
-                authorSearch.get(i).getCategory(), "Bok", authorSearch.get(i).getPlacement()});
-            model.addRow(new Object[]{authorSearchE.get(i).getTitle(), authorSearchE.get(i).getAuthor(),
-                authorSearchE.get(i).getIsbn(), authorSearchE.get(i).getPublisher(), 
-                authorSearchE.get(i).getCategory(), "E-Bok", ""});
+            JOptionPane.showMessageDialog(this, "Ingen bok matchade din sökning");
         }
         
-        for (int i = 0 ; i < titleSearch.size() ; i++){
-            model.addRow(new Object[]{titleSearch.get(i).getTitle(), titleSearch.get(i).getAuthor(),
-                titleSearch.get(i).getIsbn(), titleSearch.get(i).getPublisher(), 
-                titleSearch.get(i).getCategory(), "Bok", titleSearch.get(i).getPlacement()});
-            model.addRow(new Object[]{titleSearchE.get(i).getTitle(), titleSearchE.get(i).getAuthor(),
-                titleSearchE.get(i).getIsbn(), titleSearchE.get(i).getPublisher(), 
-                titleSearchE.get(i).getCategory(), "E-Bok", ""});
-        }
-        for (int i = 0 ; i < categorySearch.size() ; i++){
-            model.addRow(new Object[]{categorySearch.get(i).getTitle(), categorySearch.get(i).getAuthor(),
-                categorySearch.get(i).getIsbn(), categorySearch.get(i).getPublisher(), 
-                categorySearch.get(i).getCategory(), "Bok", categorySearch.get(i).getPlacement()});
-            model.addRow(new Object[]{categorySearchE.get(i).getTitle(), categorySearchE.get(i).getAuthor(),
-                categorySearchE.get(i).getIsbn(), categorySearchE.get(i).getPublisher(), 
-                categorySearchE.get(i).getCategory(), "E-Bok", ""});
-        }
-        
-        }
         jtableSortiment.getColumnModel().getColumn(0).setHeaderValue("Titel");
         jtableSortiment.getColumnModel().getColumn(1).setHeaderValue("Författare");
         jtableSortiment.getColumnModel().getColumn(2).setHeaderValue("ISBN");
@@ -690,10 +738,65 @@ public class UserView extends javax.swing.JFrame {
         jtableSortiment.getColumnModel().getColumn(4).setHeaderValue("Kategori");
         jtableSortiment.getColumnModel().getColumn(5).setHeaderValue("Typ");
         jtableSortiment.getColumnModel().getColumn(6).setHeaderValue("Placering");
+        jtableSortiment.getColumnModel().getColumn(7).setHeaderValue("Tillgänglig");
 
-        jtableSortiment.getColumn("Kategori").setPreferredWidth(150);
-        jtableSortiment.getColumn("Typ").setPreferredWidth(40);
-        jtableSortiment.getColumn("Placering").setPreferredWidth(50);
+        
+//        
+//        
+//        ArrayList<Books> authorSearch = qm.findBooksByAuthor(jTextFieldSearchSortiment.getText());
+//        ArrayList<E_Books> authorSearchE = qm.findEBooksByAuthor(jTextFieldSearchSortiment.getText());
+//        ArrayList<Books> titleSearch = qm.findBooksByTitle(jTextFieldSearchSortiment.getText().trim());
+//        ArrayList<E_Books> titleSearchE = qm.findEBooksByTitle(jTextFieldSearchSortiment.getText().trim());
+//        ArrayList<Books> categorySearch = qm.findBooksByCategory(jTextFieldSearchSortiment.getText().trim());
+//        ArrayList<E_Books> categorySearchE = qm.findEBooksByCategory(jTextFieldSearchSortiment.getText().trim());
+//
+//        DefaultTableModel model = (DefaultTableModel) jtableSortiment.getModel();
+//
+//        model.setRowCount(0);
+//        model.setColumnCount(7);
+//        
+//        if (jTextFieldSearchSortiment.getText().equals("")){
+//            fillSortimentTable();
+//        }else {
+//        for (int i = 0; i < authorSearch.size() ; i++) {
+//            model.addRow(new Object[]{authorSearch.get(i).getTitle(), authorSearch.get(i).getAuthor(),
+//                authorSearch.get(i).getIsbn(), authorSearch.get(i).getPublisher(), 
+//                authorSearch.get(i).getCategory(), "Bok", authorSearch.get(i).getPlacement()});
+//            model.addRow(new Object[]{authorSearchE.get(i).getTitle(), authorSearchE.get(i).getAuthor(),
+//                authorSearchE.get(i).getIsbn(), authorSearchE.get(i).getPublisher(), 
+//                authorSearchE.get(i).getCategory(), "E-Bok", ""});
+//        }
+//        
+//        for (int i = 0 ; i < titleSearch.size() ; i++){
+//            model.addRow(new Object[]{titleSearch.get(i).getTitle(), titleSearch.get(i).getAuthor(),
+//                titleSearch.get(i).getIsbn(), titleSearch.get(i).getPublisher(), 
+//                titleSearch.get(i).getCategory(), "Bok", titleSearch.get(i).getPlacement()});
+//            model.addRow(new Object[]{titleSearchE.get(i).getTitle(), titleSearchE.get(i).getAuthor(),
+//                titleSearchE.get(i).getIsbn(), titleSearchE.get(i).getPublisher(), 
+//                titleSearchE.get(i).getCategory(), "E-Bok", ""});
+//        }
+//        for (int i = 0 ; i < categorySearch.size() ; i++){
+//            model.addRow(new Object[]{categorySearch.get(i).getTitle(), categorySearch.get(i).getAuthor(),
+//                categorySearch.get(i).getIsbn(), categorySearch.get(i).getPublisher(), 
+//                categorySearch.get(i).getCategory(), "Bok", categorySearch.get(i).getPlacement()});
+//            model.addRow(new Object[]{categorySearchE.get(i).getTitle(), categorySearchE.get(i).getAuthor(),
+//                categorySearchE.get(i).getIsbn(), categorySearchE.get(i).getPublisher(), 
+//                categorySearchE.get(i).getCategory(), "E-Bok", ""});
+//        }
+//        
+//        }
+//        jtableSortiment.getColumnModel().getColumn(0).setHeaderValue("Titel");
+//        jtableSortiment.getColumnModel().getColumn(1).setHeaderValue("Författare");
+//        jtableSortiment.getColumnModel().getColumn(2).setHeaderValue("ISBN");
+//        jtableSortiment.getColumnModel().getColumn(3).setHeaderValue("Förlag");
+//        jtableSortiment.getColumnModel().getColumn(4).setHeaderValue("Kategori");
+//        jtableSortiment.getColumnModel().getColumn(5).setHeaderValue("Typ");
+//        jtableSortiment.getColumnModel().getColumn(6).setHeaderValue("Placering");
+//
+//        jtableSortiment.getColumn("Kategori").setPreferredWidth(150);
+//        jtableSortiment.getColumn("Typ").setPreferredWidth(40);
+//        jtableSortiment.getColumn("Placering").setPreferredWidth(50);
+         
     }//GEN-LAST:event_jLabelSearchSortimentMouseClicked
 
     private void jLabelUpdateSortimentIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateSortimentIconMouseClicked
