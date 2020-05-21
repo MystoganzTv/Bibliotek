@@ -21,15 +21,13 @@ public class E_Books {
     
     private String publisher;
     
-    private String placement;
-    
     private double purchase_price;
     
     private String category;
     
     private String desc;
     
-    public E_Books(int id, String title, String author, String isbn, String publisher, double purchase_price, String category, String placement, String desc) {
+    public E_Books(int id, String title, String author, String isbn, String publisher, double purchase_price, String category, String desc) {
 
         this.id = id;
         this.title = title;
@@ -39,12 +37,12 @@ public class E_Books {
         this.purchase_price = purchase_price;
         this.category = category;
         this.desc = desc;
-        this.placement = placement;
+       
     }
 
-    public E_Books(String title, String author, String isbn, String publisher, double purchase_price, String category, String placement, String desc) {
+    public E_Books(String title, String author, String isbn, String publisher, double purchase_price, String category, String desc) {
 
-        this.id = id;
+       
         this.title = title;
         this.author = author;
         this.isbn = isbn;
@@ -52,20 +50,13 @@ public class E_Books {
         this.purchase_price = purchase_price;
         this.category = category;
         this.desc = desc;
-        this.placement = placement;
+       
     }
     
     public E_Books() {
         
     }
-
-    public String getPlacement() {
-        return placement;
-    }
-
-    public void setPlacement(String placement) {
-        this.placement = placement;
-    }
+    
 
     public String getDesc() {
         return desc;
