@@ -15,7 +15,7 @@ public class Seminar {
     
     private String title;
     
-    private String Speaker;
+    private String speaker;
     
     private String location;
     
@@ -30,7 +30,7 @@ public class Seminar {
     public Seminar(int id, String title, String Speaker, String location, String startDate, int countVisitor, String seminariumDescription, String programDescription) {
         this.id = id;
         this.title = title;
-        this.Speaker = Speaker;
+        this.speaker = Speaker;
         this.location = location;
         this.startDate = startDate;
         this.countVisitor = countVisitor;
@@ -40,7 +40,7 @@ public class Seminar {
 
     public Seminar(String title, String speaker, String location, String startDate, int countVisitor, String seminariumDescription, String programDescription) {
         this.title = title;
-        this.Speaker = speaker;
+        this.speaker = speaker;
         this.location = location;
         this.startDate = startDate;
         this.countVisitor = countVisitor;
@@ -76,11 +76,11 @@ public class Seminar {
     }
 
     public String getSpeaker() {
-        return Speaker;
+        return speaker;
     }
 
     public void setSpeaker(String Speaker) {
-        this.Speaker = Speaker;
+        this.speaker = Speaker;
     }
 
     public String getStartDate() {
@@ -114,6 +114,12 @@ public class Seminar {
     public void setProgramDescription(String programDescription) {
         this.programDescription = programDescription;
     }
+
+    @Override
+    public String toString() {
+        return title;
+    }
+    
     
     
     
