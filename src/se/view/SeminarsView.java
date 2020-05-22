@@ -94,7 +94,7 @@ public class SeminarsView extends javax.swing.JFrame {
 
         jLabelTitle.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabelTitle.setForeground(new java.awt.Color(64, 186, 213));
-        jLabelTitle.setText("Böcker");
+        jLabelTitle.setText("Seminarium");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Logo libro.png"))); // NOI18N
 
@@ -115,11 +115,11 @@ public class SeminarsView extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1170, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1070, Short.MAX_VALUE)
                 .addComponent(jLabelTitle)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
-                .addContainerGap())
+                .addGap(110, 110, 110))
         );
         jPanelTitleLayout.setVerticalGroup(
             jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

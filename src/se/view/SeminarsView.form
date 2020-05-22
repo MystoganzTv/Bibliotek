@@ -147,11 +147,11 @@
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="1170" max="32767" attributes="0"/>
+                      <EmptySpace pref="1070" max="32767" attributes="0"/>
                       <Component id="jLabelTitle" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -179,7 +179,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="d5" green="ba" red="40" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="B&#xf6;cker"/>
+                <Property name="text" type="java.lang.String" value="Seminarium"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
