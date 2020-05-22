@@ -170,6 +170,7 @@ public class UserView extends javax.swing.JFrame {
         for (int i = 0; i < qm.getBorrowedBooksByCardId(libraryCardId).size(); i++) {
             int dayDiff = borrowedBooksDates.get(i).getDay() - toDayDate.getDay();
             int monthDiff = borrowedBooksDates.get(i).getMonth() - toDayDate.getMonth();
+            
             if(dayDiff <= 0 && monthDiff <= 0){
                 returnBookReminder =  "Försenad";
                 System.out.println(returnBookReminder);
@@ -180,6 +181,8 @@ public class UserView extends javax.swing.JFrame {
             }
             else if(dayDiff == 2 && monthDiff == 0){
                 returnBookReminder = "2 dagar kvar";
+            }else{
+                returnBookReminder = "";
             }
             
             model.addRow(new Object[]{qm.getBorrowedBooksByCardId(libraryCardId).get(i).getTitle(),
@@ -188,6 +191,8 @@ public class UserView extends javax.swing.JFrame {
                                       qm.getAllBorrowedBooks().get(i).getReturnDate() + "  " + returnBookReminder});
             
         }
+        
+        
         
 //        for (int i = 0; i < qm.getAllEBooks().size(); i++) {
 //            model.addRow(new Object[]{qm.getAllEBooks().get(i).getTitle(), qm.getAllEBooks().get(i).getAuthor(),
@@ -676,10 +681,11 @@ public class UserView extends javax.swing.JFrame {
         ArrayList<Books> foundBooks = new ArrayList<>();
         ArrayList<E_Books> foundeBooks = new ArrayList<>();
         List<E_Books> eBooks = new ArrayList<>();
-
+        eBooks = qm.getAllEBooks();
         String searchWord = jTextFieldSearchSortiment.getText().toLowerCase();
         String bookIsAvailable = "";
         ArrayList<Books> bookListIsbn  = qm.groupAllBooksByIsbn();
+        
         ArrayList<Integer> borrowedBooksId = new ArrayList<>();
         DefaultTableModel model = (DefaultTableModel) jtableSortiment.getModel();
         model.setRowCount(0);
@@ -687,6 +693,8 @@ public class UserView extends javax.swing.JFrame {
         
         bookListIsbn.stream().filter((b)-> b.getTitle().toLowerCase().contains(searchWord) || b.getAuthor().toLowerCase().contains(searchWord)
             || b.getCategory().toLowerCase().equals(searchWord) || b.getIsbn().equals(searchWord)).forEach(foundBooks::add);
+        eBooks.stream().filter((b)-> b.getTitle().toLowerCase().contains(searchWord) || b.getAuthor().toLowerCase().contains(searchWord)
+            || b.getCategory().toLowerCase().equals(searchWord) || b.getIsbn().equals(searchWord)).forEach(foundeBooks::add);
         
         for (int i = 0 ; i < qm.getAllBorrowedBooks().size() ; i++){
             borrowedBooksId.add(qm.getAllBorrowedBooks().get(i).getBookId());
@@ -724,6 +732,11 @@ public class UserView extends javax.swing.JFrame {
             }
             model.setValueAt(bookIsAvailable, i, 7);
         }
+            
+            for(E_Books ebook : foundeBooks){
+                model.addRow(new Object[] { ebook.getTitle(), ebook.getAuthor(),ebook.getIsbn(), ebook.getPublisher(),
+                                            ebook.getCategory(), "E-Bok", "", "Ja"});
+            }
  
             jtableSortiment.setModel(model);
             jTextFieldSearchSortiment.setText("");
@@ -855,14 +868,14 @@ public class UserView extends javax.swing.JFrame {
         
         if(type == "E-Bok"){
             if ( cardIsBlocked == true){
-            JOptionPane.showMessageDialog(null, "Lånekortet är spärrat");
+                JOptionPane.showMessageDialog(null, "Lånekortet är spärrat");
         }   
             else{
             int input = JOptionPane.showConfirmDialog(null, "Är du säker du vill låna eboken?", 
                 "Bekräftelse",JOptionPane.YES_NO_OPTION);
             
             if(input == JOptionPane.YES_OPTION){ 
-                 qm.borrowEBooks(eBookId, libraryCardId);
+                qm.borrowEBooks(eBookId, libraryCardId);
             }
         }
         
