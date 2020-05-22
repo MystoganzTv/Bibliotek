@@ -443,7 +443,7 @@ public class QueryMethods {
 
             con = MyConnection.getConnection();
             Statement stmt = con.createStatement();
-            stmt.execute("SELECT * FROM books");
+            stmt.execute("SELECT * FROM e_books");
 
             ResultSet results = stmt.getResultSet();
             while (results.next()) {
@@ -889,6 +889,34 @@ public class QueryMethods {
             System.out.println(e.toString() + " getAllCards()");
         }
         return allCardsList;
+    }
+    
+    public ArrayList<LibraryCards> getGuestsLibraryCardsByGuestList(ArrayList<Guest> guests){
+        
+        ArrayList<LibraryCards> cards = new ArrayList<>();
+        con = MyConnection.getConnection();
+        for(Guest g : guests){
+        String query = "select guests_id, concat(first_name, ' ', last_name)as fullname,\n"
+                +"entry, category from librarycards inner join guests on guests_id = guests.id WHERE guests.id = "+ g.getId();
+        
+        try{
+            Statement statement = con.createStatement();
+            rs = statement.executeQuery(query);
+            
+            while(rs.next()){
+                LibraryCards libraryCard = new LibraryCards();
+                libraryCard.setGuestId(rs.getInt(1));
+                libraryCard.setFullname(rs.getString(2));
+                libraryCard.setEntry(rs.getInt(3));
+                libraryCard.setCategory(rs.getString(4));
+                cards.add(libraryCard);
+            }
+        }catch(SQLException e){
+            
+        }
+        
+                }
+        return cards;
     }
 
     // entry is a boolean type in database,where 0 = false which means unblocked card 
