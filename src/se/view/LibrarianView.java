@@ -250,7 +250,6 @@ public class LibrarianView extends javax.swing.JFrame {
         jbtnReturn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1719, 795));
 
         jPanelbackground.setBackground(new java.awt.Color(244, 244, 244));
 
@@ -287,7 +286,8 @@ public class LibrarianView extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 832, Short.MAX_VALUE)
+
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 836, Short.MAX_VALUE)
                 .addComponent(jLabelTitle)
                 .addGap(38, 38, 38)
                 .addComponent(jLabel5)
@@ -298,7 +298,8 @@ public class LibrarianView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                     .addGroup(jPanelTitleLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -794,7 +795,8 @@ public class LibrarianView extends javax.swing.JFrame {
         
         for (int i = 0; i < qMethods.getBorrowedBooksByCardId(cardID).size(); i++) {
                             
-                lineDivision = "<html>"+qMethods.getBorrowedBooksByCardId(cardID).get(i).getTitle() +  "<br>" +
+                lineDivision = "<html>"+qMethods.getBorrowedBooksByCardId(cardID).get(i).getId()+ ". "
+                        +qMethods.getBorrowedBooksByCardId(cardID).get(i).getTitle() +  "<br>" +
                      qMethods.getBorrowedBooksByCardId(cardID).get(i).getAuthor() + "<br>" +
                      "ISBN: "+ qMethods.getBorrowedBooksByCardId(cardID).get(i).getIsbn()+ "<br>" +
                      "Återlämning: "+qMethods.getAllBorrowedBooks().get(i).getReturnDate().toString()+"<br/>" ;
@@ -863,13 +865,16 @@ public class LibrarianView extends javax.swing.JFrame {
         if (jListBorrowedBooks.getSelectedValue() == null){
             JOptionPane.showMessageDialog(this, "Du har inte valt en bok");
         }else{
-        String bookInfo = jListBorrowedBooks.getSelectedValue();
+        int indexOfPoint = jListBorrowedBooks.getSelectedValue().indexOf(".");
+        String bookInfo = jListBorrowedBooks.getSelectedValue().substring(6, indexOfPoint);
+        int bookId = Integer.parseInt(bookInfo);
+        queryMethods.returnBook(bookId);
+//        for (int i = 0 ; i < queryMethods.getAllBooks().size() ; i ++){
+//            if(bookInfo.contains(queryMethods.getAllBooks().get(i).getIsbn())){
+//                queryMethods.returnBook(queryMethods.getAllBooks().get(i).getId());
+//            }
+//        }
         
-        for (int i = 0 ; i < queryMethods.getAllBooks().size() ; i ++){
-            if(bookInfo.contains(queryMethods.getAllBooks().get(i).getIsbn())){
-                queryMethods.returnBook(queryMethods.getAllBooks().get(i).getId());
-            }
-        }
         jbtnShowBorrowedBooks.doClick();
     }
     }//GEN-LAST:event_jbtnReturnActionPerformed
@@ -877,8 +882,8 @@ public class LibrarianView extends javax.swing.JFrame {
     private void addBookToReturnListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBookToReturnListButtonActionPerformed
         // TODO add your handling code here:
         
-        if(Validation.isValidID(bookIdTextField.getText())){
-            Books book = queryMethods.findBorrowedBookById(Integer.parseInt(bookIdTextField.getText()));
+        if(Validation.isValidID(bookIdTextField.getText().trim())){
+            Books book = queryMethods.findBorrowedBookById(Integer.parseInt(bookIdTextField.getText().trim()));
             if(book.getId() != -1){
                returnBooksListModel.addElement(book);
                bookIdTextField.setText("");
@@ -911,6 +916,7 @@ public class LibrarianView extends javax.swing.JFrame {
     }//GEN-LAST:event_removeFromReturnBooksListActionPerformed
 
     private void jLabelSearchBooksIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchBooksIconMouseClicked
+
        
         ArrayList<Books> foundBooks = new ArrayList<>();
         ArrayList<E_Books> foundEBooks = new ArrayList<>();
@@ -938,6 +944,7 @@ public class LibrarianView extends javax.swing.JFrame {
         
         BooksTable.setModel(searchModel);
         
+
 
     }//GEN-LAST:event_jLabelSearchBooksIconMouseClicked
 
