@@ -1420,7 +1420,7 @@ public class QueryMethods {
 
             Connection conn = tryConnection.getConnection();
             Statement stmt = conn.createStatement();
-            stmt.execute("SELECT id, Title, Speaker, Location, StartDate, CountVisitor, Description, Program FROM seminarium");
+            stmt.execute("SELECT id, Title, Speaker, Location, StartDate, CountVisitor, Description, Program FROM seminarium ORDER BY StartDate ASC");
 
             ResultSet results = stmt.getResultSet();
             while (results.next()) {

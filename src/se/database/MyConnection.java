@@ -15,14 +15,22 @@ public class MyConnection {
         try{
         // get connection to database
 
-        String url ="jdbc:mysql://libsys.mysql.database.azure.com:3306/libsys?useSSL=true&requireSSL=false"; 
-        myDbConn = DriverManager.getConnection(url, "java@libsys", "Projekt!");
+//
+//        String url ="jdbc:mysql://libsys.mysql.database.azure.com:3306/libsys?useSSL=true&requireSSL=false"; 
+//        myDbConn = DriverManager.getConnection(url, "java@libsys", "Projekt!");
+////        
+//        connection tilll lokalt databas
+
+
+       // String url ="jdbc:mysql://libsys.mysql.database.azure.com:3306/libsys?useSSL=true&requireSSL=false"; 
+       // myDbConn = DriverManager.getConnection(url, "java@libsys", "Projekt!");
         
         //connection tilll lokalt databas
-//        Class.forName("com.mysql.jdbc.Driver");
-//
-//        String url = "jdbc:mysql://localhost/libsys?autoReconnect=true&useSSL=false";
-//        myDbConn = DriverManager.getConnection(url, "root", "root");
+
+        Class.forName("com.mysql.jdbc.Driver");
+
+        String url = "jdbc:mysql://localhost/libsys?autoReconnect=true&useSSL=false";
+        myDbConn = DriverManager.getConnection(url, "root", "root");
          return myDbConn;
         
         }catch(Exception e)
