@@ -57,29 +57,52 @@ public class ViewBooks extends javax.swing.JFrame {
             model.addRow(new Object[]{e.getTitle(),e.getAuthor(), e.getIsbn(),e.getPublisher(),e.getCategory()});
             }
                eBooksTable.setModel(model);
-    }    
+    } 
+    
     public void fillBooksTable(){
         DefaultTableModel model = new DefaultTableModel(colNamesBooks, 0);
 
         BooksTable.setModel(model);
-        String bookIsAvailable ;
+        String bookIsAvailable = "";
+        ArrayList<Books> books = queryMethods.groupAllBooksByIsbn();
+        ArrayList<Books> booksByIsbn ;
         
         for (int i = 0 ; i < queryMethods.getAllBorrowedBooks().size() ; i++){
             borrowedBooksId.add(queryMethods.getAllBorrowedBooks().get(i).getBookId());
         }
-            
-        for (int i = 0; i < queryMethods.getAllBooks().size(); i++) {
-            if( borrowedBooksId.contains(queryMethods.getAllBooks().get(i).getId())){
-                bookIsAvailable = "Nej";
-            }else{
-                bookIsAvailable = "Ja";
-            }
-            model.addRow(new Object[]{queryMethods.getAllBooks().get(i).getTitle(), queryMethods.getAllBooks().get(i).getAuthor(),
-                queryMethods.getAllBooks().get(i).getIsbn(), queryMethods.getAllBooks().get(i).getPublisher(), 
-                queryMethods.getAllBooks().get(i).getCategory(), queryMethods.getAllBooks().get(i).getPlacement(), bookIsAvailable});
-        }
+        
 
-    
+        for (int i = 0; i < books.size(); i++) {
+
+            model.addRow(new Object[]{books.get(i).getTitle(), books.get(i).getAuthor(),
+                books.get(i).getIsbn(), books.get(i).getPublisher(), 
+                books.get(i).getCategory(), books.get(i).getPlacement(), bookIsAvailable});
+        }
+        
+        
+        for (int i = 0 ; i < model.getRowCount() ; i++){
+            String isbn = (String) model.getValueAt(i, 2);
+            booksByIsbn = queryMethods.findBooksByIsbn(isbn);
+            boolean allIsBorrowed = false;
+            
+            for (int j = 0 ; j < booksByIsbn.size() ; j ++){
+                
+                if(!borrowedBooksId.contains(booksByIsbn.get(j).getId())){
+                    allIsBorrowed = false;
+                }else{
+                    allIsBorrowed = true;
+                }
+                
+                }
+            
+                if(allIsBorrowed){
+                bookIsAvailable = "Nej";
+                }else{
+                bookIsAvailable = "Ja";
+                }
+            model.setValueAt(bookIsAvailable, i, 6);
+        }
+        
     }
     
     public void sortBooksByTitle(List<Books> books){
@@ -159,7 +182,6 @@ public class ViewBooks extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanelbackground = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
         jPanelTitle = new javax.swing.JPanel();
         jLabelTitle = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -188,19 +210,6 @@ public class ViewBooks extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanelbackground.setBackground(new java.awt.Color(244, 244, 244));
-
-        jPanel1.setBackground(new java.awt.Color(244, 244, 244));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 678, Short.MAX_VALUE)
-        );
 
         jPanelTitle.setBackground(new java.awt.Color(133, 102, 170));
 
@@ -245,7 +254,7 @@ public class ViewBooks extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabelImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/viewBook.jpg"))); // NOI18N
+        jLabelImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/viewBook_Small.jpg"))); // NOI18N
 
         jTabbedPaneReport.setForeground(new java.awt.Color(105, 131, 170));
         jTabbedPaneReport.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
@@ -296,13 +305,12 @@ public class ViewBooks extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabelSearchBookingsText1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Bookstxt, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Bookstxt)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabelSearchBookIcon))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1132, Short.MAX_VALUE)
                     .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
                         .addComponent(jbtnAboutBook, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -371,17 +379,20 @@ public class ViewBooks extends javax.swing.JFrame {
             .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnAboutBook1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLendingsLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelSearchBookingsText2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(eBookstxt, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelSearcheBookIcon)
-                .addGap(28, 28, 28))
+                    .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
+                        .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
+                                .addComponent(jbtnAboutBook1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 1041, Short.MAX_VALUE))
+                            .addComponent(jScrollPane5))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLendingsLayout.createSequentialGroup()
+                        .addComponent(jLabelSearchBookingsText2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(eBookstxt)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelSearcheBookIcon)
+                        .addGap(28, 28, 28))))
         );
         jPanelTabLendingsLayout.setVerticalGroup(
             jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,21 +423,24 @@ public class ViewBooks extends javax.swing.JFrame {
         jPanelInvisible.setLayout(jPanelInvisibleLayout);
         jPanelInvisibleLayout.setHorizontalGroup(
             jPanelInvisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInvisibleLayout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addGroup(jPanelInvisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnClose)
-                    .addComponent(jLabelAboutBook, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25))
+            .addGroup(jPanelInvisibleLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelInvisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInvisibleLayout.createSequentialGroup()
+                        .addComponent(jLabelAboutBook, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInvisibleLayout.createSequentialGroup()
+                        .addComponent(btnClose)
+                        .addGap(26, 26, 26))))
         );
         jPanelInvisibleLayout.setVerticalGroup(
             jPanelInvisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelInvisibleLayout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addComponent(jLabelAboutBook, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabelAboutBook, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
                 .addComponent(btnClose)
-                .addGap(66, 66, 66))
+                .addGap(49, 49, 49))
         );
 
         javax.swing.GroupLayout jPanelbackgroundLayout = new javax.swing.GroupLayout(jPanelbackground);
@@ -436,31 +450,24 @@ public class ViewBooks extends javax.swing.JFrame {
             .addGroup(jPanelbackgroundLayout.createSequentialGroup()
                 .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanelbackgroundLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabelImg)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanelInvisible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTabbedPaneReport, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTabbedPaneReport, javax.swing.GroupLayout.PREFERRED_SIZE, 1146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanelInvisible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(495, 495, 495)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         jPanelbackgroundLayout.setVerticalGroup(
             jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelbackgroundLayout.createSequentialGroup()
+                .addComponent(jPanelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelbackgroundLayout.createSequentialGroup()
-                        .addGap(158, 158, 158)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelbackgroundLayout.createSequentialGroup()
-                        .addComponent(jPanelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelImg, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jPanelInvisible, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTabbedPaneReport, javax.swing.GroupLayout.Alignment.LEADING)))))
+                    .addComponent(jLabelImg, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jPanelInvisible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTabbedPaneReport, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -468,12 +475,12 @@ public class ViewBooks extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelbackground, javax.swing.GroupLayout.PREFERRED_SIZE, 1756, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanelbackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelbackground, javax.swing.GroupLayout.PREFERRED_SIZE, 811, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelbackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -484,21 +491,49 @@ public class ViewBooks extends javax.swing.JFrame {
 
         ArrayList<Books> foundBooks = new ArrayList<>();
         String searchWord = Bookstxt.getText().toLowerCase();
-        String bookIsAvailable;
-        books.stream().filter((b)-> b.getTitle().toLowerCase().contains(searchWord) || b.getAuthor().toLowerCase().contains(searchWord)
+        String bookIsAvailable = "";
+        ArrayList<Books> bookListIsbn  = queryMethods.groupAllBooksByIsbn();
+        
+        bookListIsbn.stream().filter((b)-> b.getTitle().toLowerCase().contains(searchWord) || b.getAuthor().toLowerCase().contains(searchWord)
             || b.getCategory().toLowerCase().equals(searchWord) || b.getIsbn().equals(searchWord)).forEach(foundBooks::add);
+        
+        for (int i = 0 ; i < queryMethods.getAllBorrowedBooks().size() ; i++){
+            borrowedBooksId.add(queryMethods.getAllBorrowedBooks().get(i).getBookId());
+        }
         
         if(!foundBooks.isEmpty()){
             DefaultTableModel model = new DefaultTableModel(colNamesBooks, 0);
 
-            for(Books b : foundBooks){
-                if (borrowedBooksId.contains(b.getId())){
-                    bookIsAvailable = "Nej";
-                }else{
-                    bookIsAvailable = "Ja";
-                }
-                model.addRow(new Object[]{b.getTitle(),b.getAuthor(), b.getIsbn(),b.getPublisher(),b.getCategory(),b.getPlacement(), bookIsAvailable});
+            for (int i = 0; i < foundBooks.size(); i++) {
+
+            model.addRow(new Object[]{foundBooks.get(i).getTitle(), foundBooks.get(i).getAuthor(),
+                foundBooks.get(i).getIsbn(), foundBooks.get(i).getPublisher(), 
+                foundBooks.get(i).getCategory(), foundBooks.get(i).getPlacement(), bookIsAvailable});
             }
+
+            for (int i = 0 ; i < model.getRowCount() ; i++){
+            String isbn = (String) model.getValueAt(i, 2);
+            boolean allIsBorrowed = false;
+            ArrayList<Books> borrowedBooksListIsbn = queryMethods.findBooksByIsbn(isbn);
+            
+                for (int j = 0 ; j < borrowedBooksListIsbn.size() ; j ++){
+                
+                    if(!borrowedBooksId.contains(borrowedBooksListIsbn.get(j).getId())){
+                    allIsBorrowed = false;
+                    }else{
+                    allIsBorrowed = true;
+                    }
+                
+                }
+            
+            if(allIsBorrowed){
+                bookIsAvailable = "Nej";
+            }else{
+                bookIsAvailable = "Ja";
+            }
+            model.setValueAt(bookIsAvailable, i, 6);
+        }
+ 
             BooksTable.setModel(model);
             Bookstxt.setText("");
         }else {
@@ -548,9 +583,9 @@ public class ViewBooks extends javax.swing.JFrame {
 
             jPanelInvisible.setVisible(true);
 
-            for (int i = 0 ; i < queryMethods.findBooks().size() ; i++){
-                if(queryMethods.findBooks().get(i).getIsbn().trim().equals(bookIsbn)){
-                    jLabelAboutBook.setText("<html>"+queryMethods.findBooks().get(i).getDesc()+"</html>");
+            for (int i = 0 ; i < queryMethods.getAllEBooks().size() ; i++){
+                if(queryMethods.getAllEBooks().get(i).getIsbn().trim().equals(bookIsbn)){
+                    jLabelAboutBook.setText("<html>"+queryMethods.getAllEBooks().get(i).getDesc()+"</html>");
                 }
             }
 
@@ -637,7 +672,6 @@ public class ViewBooks extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelSearchBookingsText2;
     private javax.swing.JLabel jLabelSearcheBookIcon;
     private javax.swing.JLabel jLabelTitle;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelInvisible;
     private javax.swing.JPanel jPanelTabBookings;
     private javax.swing.JPanel jPanelTabLendings;

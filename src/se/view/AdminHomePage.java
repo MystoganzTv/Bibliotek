@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import se.database.MyConnection;
 import se.database.QueryMethods;
 import se.model.ComboItem;
@@ -32,6 +33,8 @@ import se.model.Guest;
 import se.model.Librarian;
 import se.database.QueryMethods;
 import se.main.Validation;
+import se.model.Books;
+import se.model.E_Books;
 import se.model.DeletedBook;
 
 //tadevos test
@@ -52,6 +55,12 @@ public class AdminHomePage extends javax.swing.JFrame {
     private ArrayList<String> choiceList;
     private ArrayList<DeletedBook> deletedBook;
     private ArrayList<DeletedBook> deletedEBook;
+    
+    private ArrayList<Books> books;
+    private ArrayList<E_Books> eBooks;
+    private String[] colNamesSort = {"Titel", "Författare", "Kategory", "Pris"};
+    
+        
     private PreparedStatement ps;
     Connection con;
     
@@ -66,6 +75,8 @@ public class AdminHomePage extends javax.swing.JFrame {
         setResizable(false);
         queryMethods = new QueryMethods();
         guests = qMethods.findGuests();
+        books = qMethods.findBooks();
+        eBooks = qMethods.findEBooks();
 
         jTabbedPaneEdit.setVisible(false);
         jTabbedPaneReport.setVisible(false);
@@ -90,6 +101,9 @@ public class AdminHomePage extends javax.swing.JFrame {
         fillAdminTable();
         showBookType();
         fillBookLogTable();
+        fillBooksTable();
+        //fillEBooksTable();
+        
     }
     
     public AdminHomePage(String adminEmail) {
@@ -144,6 +158,38 @@ public class AdminHomePage extends javax.swing.JFrame {
                             + adminLastName.substring(1);
         return  firstName + " " + lastName ;
     }
+       
+      public void fillBooksTable() {
+        //ArrayList<Books> books = qMethods.findBooks();
+        books = queryMethods.findBooks();
+        eBooks = queryMethods.findEBooks();
+        DefaultTableModel model = new DefaultTableModel(colNamesSort, 0);
+        //model = (DefaultTableModel) BooksTable.getModel();
+        model.setRowCount(0);
+        for (int i = 0; i < books.size(); i++) {            
+            model.addRow(new Object[]{ books.get(i).getTitle(), books.get(i).getAuthor(),
+                 books.get(i).getCategory(), books.get(i).getPurchase_price()});
+        }
+        
+        StockTable.setModel(model);
+        StockTable.setAutoCreateRowSorter(true);
+              
+    }
+      
+    
+     public void fillEBooksTable() {
+        //ArrayList<EBooks> ebooks = qMethods.findEBooks();
+        eBooks = queryMethods.findEBooks();
+        DefaultTableModel model = new DefaultTableModel(colNames, 0);
+        //model = (DefaultTableModel) BooksTable.getModel();
+        model.setRowCount(0);
+        for (int i = 0; i < eBooks.size(); i++) {
+            model.addRow(new Object[]{eBooks.get(i).getId(), eBooks.get(i).getTitle(), eBooks.get(i).getAuthor(),
+                eBooks.get(i).getIsbn(), eBooks.get(i).getPublisher(), eBooks.get(i).getPurchase_price(), eBooks.get(i).getCategory()});
+        }
+        StockTable.setModel(model);
+        
+    }
 
 
     public void showBookType() {
@@ -182,7 +228,7 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     public void fillBookLogTable() {
         deletedBook = qMethods.findDeletedBooks();
-        String[] colname = {"id", "Titel", "Förfatare", "ISBN", "Inköpspris", "Kategori", "Förlag", "Beskrivning"};
+        String[] colname = {"id", "Titel", "Förfatare", "ISBN", "Inköpspris", "Kategori", "Förlag", "Anländning"};
         DefaultTableModel defaultModel = new DefaultTableModel(colname, 0);
 
         defaultModel.setRowCount(0);
@@ -203,7 +249,7 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     public void fillEBookLogTable() {
         deletedEBook = qMethods.findDeletedEBooks();
-        String[] colname = {"id", "Titel", "Förfatare", "ISBN", "Inköpspris", "Förlag", "Beskrivning"};
+        String[] colname = {"id", "Titel", "Förfatare", "ISBN", "Inköpspris", "Förlag", "Anlädning"};
         DefaultTableModel defaultModel = new DefaultTableModel(colname, 0);
 
         defaultModel.setRowCount(0);
@@ -358,8 +404,8 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabelEditStockText = new javax.swing.JLabel();
         jPanelTabDeletedBooks = new javax.swing.JPanel();
         jLabelSearchText = new javax.swing.JLabel();
-        jTextFieldSearch = new javax.swing.JTextField();
-        jLabelSearchIcon = new javax.swing.JLabel();
+        searchDeletedBookText = new javax.swing.JTextField();
+        searchRemovedBooks = new javax.swing.JLabel();
         jLabelRecoveryIcon = new javax.swing.JLabel();
         jLabelEditText = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
@@ -1234,7 +1280,12 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabelSearchText.setForeground(new java.awt.Color(105, 131, 170));
         jLabelSearchText.setText("Sök");
 
-        jLabelSearchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
+        searchRemovedBooks.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
+        searchRemovedBooks.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchRemovedBooksMouseClicked(evt);
+            }
+        });
 
         jLabelRecoveryIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/reset_50px.png"))); // NOI18N
         jLabelRecoveryIcon.setAlignmentY(1.0F);
@@ -1302,9 +1353,9 @@ public class AdminHomePage extends javax.swing.JFrame {
                         .addGroup(jPanelTabDeletedBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jComboBoxType, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabDeletedBooksLayout.createSequentialGroup()
-                                .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(searchDeletedBookText, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelSearchIcon))))
+                                .addComponent(searchRemovedBooks))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabDeletedBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabDeletedBooksLayout.createSequentialGroup()
                             .addComponent(jLabelEditIcon)
@@ -1324,9 +1375,9 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addComponent(jComboBoxType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelTabDeletedBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelSearchIcon, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(searchRemovedBooks, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabDeletedBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextFieldSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(searchDeletedBookText, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabelSearchText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1344,7 +1395,7 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        jTabbedPaneReport.addTab("Bokhistorik", jPanelTabDeletedBooks);
+        jTabbedPaneReport.addTab("Borttagna Böcker", jPanelTabDeletedBooks);
 
         jLayeredPaneWorkArea.setLayer(jTabbedPaneEdit, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPaneWorkArea.setLayer(jTabbedPaneReport, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -2071,6 +2122,39 @@ public class AdminHomePage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBoxTypeItemStateChanged
 
+    private void searchRemovedBooksMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchRemovedBooksMouseClicked
+        
+        String removedBookToFind = searchDeletedBookText.getText().toLowerCase();
+        
+        ArrayList<DeletedBook> deletedBooks = queryMethods.findDeletedBooks();
+        
+        if(!removedBookToFind.isEmpty()){
+            ArrayList<DeletedBook> foundDeletedBooks = new ArrayList<>();
+            
+            deletedBooks.stream().filter((deletedBook) -> deletedBook.getTitle().toLowerCase().contains(removedBookToFind) 
+                                        || deletedBook.getAuthor().toLowerCase().contains(removedBookToFind)
+                                        || deletedBook.getIsbn().equals(removedBookToFind)
+                                        || deletedBook.getCategory().equals(removedBookToFind)).forEach(foundDeletedBooks::add);
+            
+            if(!foundDeletedBooks.isEmpty()){
+                
+               String[] colname = {"id", "Titel", "Förfatare", "ISBN", "Inköpspris", "Kategori", "Förlag", "Beskrivning"};
+               DefaultTableModel defaultModel = new DefaultTableModel(colname, 0);
+               
+               for(DeletedBook deletedBook : foundDeletedBooks){
+                   defaultModel.addRow(new Object[]{deletedBook.getId(), deletedBook.getTitle(), deletedBook.getAuthor(), deletedBook.getIsbn()
+                   ,deletedBook.getPurchasePrice(), deletedBook.getCategory(), deletedBook.getPublisher(), deletedBook.getDesc()});
+               }
+               BookLogTable.setModel(defaultModel);
+               searchDeletedBookText.setText("");
+            }else {
+                JOptionPane.showMessageDialog(this, "Kunde inte hitta ett objekt som matchar din sökning");
+            }
+            
+        }
+        
+    }//GEN-LAST:event_searchRemovedBooksMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -2168,7 +2252,6 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelSearchAdminText;
     private javax.swing.JLabel jLabelSearchBookingsIcon;
     private javax.swing.JLabel jLabelSearchBookingsText;
-    private javax.swing.JLabel jLabelSearchIcon;
     private javax.swing.JLabel jLabelSearchLendingIcon;
     private javax.swing.JLabel jLabelSearchLendingText;
     private javax.swing.JLabel jLabelSearchLibrarianIcon;
@@ -2214,7 +2297,6 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPaneEdit;
     private javax.swing.JTabbedPane jTabbedPaneReport;
-    private javax.swing.JTextField jTextFieldSearch;
     private javax.swing.JTextField jTextFieldSearchAdmin;
     private javax.swing.JTextField jTextFieldSearchBooking;
     private javax.swing.JTextField jTextFieldSearchLending;
@@ -2222,6 +2304,8 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldSearchStock;
     private javax.swing.JTextField jTextFieldSearchUser;
     private javax.swing.JTable librarianTable;
+    private javax.swing.JTextField searchDeletedBookText;
+    private javax.swing.JLabel searchRemovedBooks;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFirstname;
     private javax.swing.JTextField txtLastname;

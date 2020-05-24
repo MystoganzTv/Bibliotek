@@ -7,7 +7,9 @@ package se.view;
 
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import javafx.scene.control.SelectionMode;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
@@ -17,10 +19,13 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import se.database.QueryMethods;
+import se.main.Validation;
 import se.model.Admin;
 import se.model.Guest;
 import se.model.Books;
 import se.model.DeletedBook;
+import se.model.E_Books;
+import se.model.LibraryCards;
 
 /**
  *
@@ -33,8 +38,10 @@ public class LibrarianView extends javax.swing.JFrame {
     private DefaultTableModel model = new DefaultTableModel(colNames, 0);
     private QueryMethods qMethods = new QueryMethods();
     private ArrayList<Books> books;
+    private ArrayList<E_Books> eBooks;
     private ArrayList<DeletedBook> deletedBook;
     private String librarianEmail;
+    private DefaultListModel returnBooksListModel = new DefaultListModel();
     /**
      * Creates new form StartPage1
      */
@@ -46,23 +53,28 @@ public class LibrarianView extends javax.swing.JFrame {
 
         queryMethods = new QueryMethods();
         books = qMethods.findBooks();
+        eBooks = qMethods.findEBooks();
 
         fillBooksTable();
         fillUsersTable();
 
         jbtnManageCards.setToolTipText("Tryck här för att redigera lånekort");
         UsersTable.setToolTipText("Tryck på funktionknappen för att redigera");
+        
+        returnBooksList.setSelectionMode(1);
+        returnBooksList.setModel(returnBooksListModel);
 
     }
     public LibrarianView(String librarianEmail) {
         initComponents();
         setLocationRelativeTo(null);
-        setResizable(false);
         jPanelInvisible.setVisible(false);
+        setResizable(false);
         this.librarianEmail = librarianEmail;
 
         queryMethods = new QueryMethods();
         books = qMethods.findBooks();
+        eBooks = qMethods.findEBooks();
 
         fillBooksTable();
         fillUsersTable();
@@ -70,6 +82,10 @@ public class LibrarianView extends javax.swing.JFrame {
         jbtnManageCards.setToolTipText("Tryck här för att redigera lånekort");
         UsersTable.setToolTipText("Tryck på funktionknappen för att redigera");
         jLabelTitle.setText("Inloggad Bibliotekarie: "+ librarianFullName());
+        
+        returnBooksList.setSelectionMode(1);
+        returnBooksList.setModel(returnBooksListModel);
+
     }
     
     public String librarianFullName(){
@@ -200,7 +216,7 @@ public class LibrarianView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTabbedPaneReport3 = new javax.swing.JTabbedPane();
+        returnBooksPanel = new javax.swing.JTabbedPane();
         jPanelTabBookings3 = new javax.swing.JPanel();
         jLabelSearchBookingsText3 = new javax.swing.JLabel();
         Usertxt = new javax.swing.JTextField();
@@ -219,13 +235,21 @@ public class LibrarianView extends javax.swing.JFrame {
         BooksTable = new javax.swing.JTable();
         NewBookbtn = new javax.swing.JButton();
         DeleteBookbtn = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        bookIdTextField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        returnBooksList = new javax.swing.JList<>();
+        addBookToReturnListButton = new javax.swing.JButton();
+        returnBooksInListButton = new javax.swing.JButton();
+        removeFromReturnBooksList = new javax.swing.JButton();
         jPanelInvisible = new javax.swing.JPanel();
         btnClose = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListBorrowedBooks = new javax.swing.JList<>();
+        jbtnReturn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1719, 795));
 
         jPanelbackground.setBackground(new java.awt.Color(244, 244, 244));
 
@@ -262,7 +286,8 @@ public class LibrarianView extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 832, Short.MAX_VALUE)
+
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 836, Short.MAX_VALUE)
                 .addComponent(jLabelTitle)
                 .addGap(38, 38, 38)
                 .addComponent(jLabel5)
@@ -273,7 +298,8 @@ public class LibrarianView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                     .addGroup(jPanelTitleLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -283,8 +309,8 @@ public class LibrarianView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPaneReport3.setForeground(new java.awt.Color(105, 131, 170));
-        jTabbedPaneReport3.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        returnBooksPanel.setForeground(new java.awt.Color(105, 131, 170));
+        returnBooksPanel.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
 
         jLabelSearchBookingsText3.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabelSearchBookingsText3.setForeground(new java.awt.Color(105, 131, 170));
@@ -401,13 +427,18 @@ public class LibrarianView extends javax.swing.JFrame {
                 .addGap(68, 68, 68))
         );
 
-        jTabbedPaneReport3.addTab("Användare", jPanelTabBookings3);
+        returnBooksPanel.addTab("Användare", jPanelTabBookings3);
 
         jLabelSearchLendingText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabelSearchLendingText.setForeground(new java.awt.Color(105, 131, 170));
         jLabelSearchLendingText.setText("Sök");
 
         jLabelSearchBooksIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
+        jLabelSearchBooksIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelSearchBooksIconMouseClicked(evt);
+            }
+        });
 
         BooksTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -487,7 +518,73 @@ public class LibrarianView extends javax.swing.JFrame {
                 .addGap(69, 69, 69))
         );
 
-        jTabbedPaneReport3.addTab("Böcker", jPanelTabLendings);
+        returnBooksPanel.addTab("Böcker", jPanelTabLendings);
+
+        jLabel1.setText("Bok ID:");
+
+        jScrollPane1.setViewportView(returnBooksList);
+
+        addBookToReturnListButton.setText("Ok");
+        addBookToReturnListButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBookToReturnListButtonActionPerformed(evt);
+            }
+        });
+
+        returnBooksInListButton.setText("Lämna tillbaka");
+        returnBooksInListButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnBooksInListButtonActionPerformed(evt);
+            }
+        });
+
+        removeFromReturnBooksList.setText("Ångra");
+        removeFromReturnBooksList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeFromReturnBooksListActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(105, 105, 105)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(addBookToReturnListButton, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                    .addComponent(bookIdTextField))
+                .addGap(102, 102, 102)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(removeFromReturnBooksList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(returnBooksInListButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(82, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bookIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(addBookToReturnListButton))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(returnBooksInListButton)
+                    .addComponent(removeFromReturnBooksList))
+                .addContainerGap(204, Short.MAX_VALUE))
+        );
+
+        returnBooksPanel.addTab("Återlämning", jPanel1);
 
         btnClose.setText("Stäng");
         btnClose.addActionListener(new java.awt.event.ActionListener() {
@@ -503,6 +600,13 @@ public class LibrarianView extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jListBorrowedBooks);
 
+        jbtnReturn.setText("Återlämna");
+        jbtnReturn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnReturnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelInvisibleLayout = new javax.swing.GroupLayout(jPanelInvisible);
         jPanelInvisible.setLayout(jPanelInvisibleLayout);
         jPanelInvisibleLayout.setHorizontalGroup(
@@ -511,7 +615,9 @@ public class LibrarianView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelInvisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelInvisibleLayout.createSequentialGroup()
-                        .addGap(0, 78, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jbtnReturn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnClose))
                     .addComponent(jScrollPane2))
                 .addContainerGap())
@@ -522,7 +628,9 @@ public class LibrarianView extends javax.swing.JFrame {
                 .addGap(54, 54, 54)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(btnClose)
+                .addGroup(jPanelInvisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnClose)
+                    .addComponent(jbtnReturn))
                 .addGap(68, 68, 68))
         );
 
@@ -538,7 +646,7 @@ public class LibrarianView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanelInvisible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTabbedPaneReport3, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(returnBooksPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(714, Short.MAX_VALUE))
         );
@@ -550,7 +658,7 @@ public class LibrarianView extends javax.swing.JFrame {
                     .addGroup(jPanelbackgroundLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTabbedPaneReport3, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(returnBooksPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelBackgroundPhoto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelbackgroundLayout.createSequentialGroup()
                         .addGap(50, 50, 50)
@@ -608,6 +716,9 @@ public class LibrarianView extends javax.swing.JFrame {
 
     private void NewBookbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewBookbtnActionPerformed
         // TODO add your handling code here:
+        AddBook addBook = new AddBook();
+        this.setVisible(false);
+        addBook.setVisible(true);
     }//GEN-LAST:event_NewBookbtnActionPerformed
 
     private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
@@ -676,32 +787,71 @@ public class LibrarianView extends javax.swing.JFrame {
         if(UsersTable.getSelectedRow() == -1){
         JOptionPane.showMessageDialog(this, "Du har inte valt användare");
         }else{
-        jPanelInvisible.setVisible(true);
         DefaultListModel list = new DefaultListModel();
         jListBorrowedBooks.setModel(list);
         String lineDivision = "";
         
         int cardID = (int) UsersTable.getValueAt(UsersTable.getSelectedRow(), 0);
         
-        for (int i = 0; i < qMethods.getAllBorrowedBooks().size(); i++) {
-            
-            if(qMethods.getAllBorrowedBooks().get(i).getLibraryCardId() == cardID){
-                
-                lineDivision = "<html>"+qMethods.getAllBooks().get(i).getTitle() +  "<br>" +
-                     qMethods.getAllBooks().get(i).getAuthor() + "<br>" +
-                     "ISBN: "+ qMethods.getAllBooks().get(i).getIsbn()+ "<br>" +
+        for (int i = 0; i < qMethods.getBorrowedBooksByCardId(cardID).size(); i++) {
+                            
+                lineDivision = "<html>"+qMethods.getBorrowedBooksByCardId(cardID).get(i).getId()+ ". "
+                        +qMethods.getBorrowedBooksByCardId(cardID).get(i).getTitle() +  "<br>" +
+                     qMethods.getBorrowedBooksByCardId(cardID).get(i).getAuthor() + "<br>" +
+                     "ISBN: "+ qMethods.getBorrowedBooksByCardId(cardID).get(i).getIsbn()+ "<br>" +
                      "Återlämning: "+qMethods.getAllBorrowedBooks().get(i).getReturnDate().toString()+"<br/>" ;
                 
             list.addElement(lineDivision) ;
             
-            }
+            
             
         }
+            if(list.isEmpty()){
+                JOptionPane.showMessageDialog(this, "Användare har inga böcker");
+                jPanelInvisible.setVisible(false);
+            }else{
+                  jPanelInvisible.setVisible(true);
+            }
         }
     }//GEN-LAST:event_jbtnShowBorrowedBooksActionPerformed
 
     private void jLabelSearchUsersIcon3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchUsersIcon3MouseClicked
-        // TODO add your handling code here:
+        
+         ArrayList<Guest> guests = queryMethods.findGuests();
+         String userToFind = Usertxt.getText().toLowerCase().trim();
+         String[] columns = {"ID", "Namn","Spärrad", "category" };
+         ArrayList<LibraryCards> cards = new ArrayList<>();
+         DefaultTableModel model = new DefaultTableModel(columns,0);
+         
+        if (!userToFind.isEmpty()) {
+            ArrayList<Guest> foundGuests = new ArrayList<>();
+
+            guests.stream().filter((g) -> g.getLastName().toLowerCase().contains(userToFind)
+                    || g.getFirstName().toLowerCase().contains(userToFind) || g.getEmail().equalsIgnoreCase(userToFind)
+                    || g.getPersonId().equals(userToFind)).forEach(foundGuests::add);
+
+            if (!foundGuests.isEmpty()) {
+                
+                cards = queryMethods.getGuestsLibraryCardsByGuestList(foundGuests);
+                for(LibraryCards card : cards){
+                 String entry = "";
+                 
+                 if(card.getEntry() == 1){
+                     entry = "Ja";
+                 }else {
+                     entry = "Nej";
+                 }
+                model.addRow(new Object[]{card.getGuestId(), card.getFullname(), entry, card.getCategory()});
+                }
+                
+                }
+                UsersTable.setModel(model);
+                Usertxt.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Ingen användare kunde hittas");
+
+            }
+        
     }//GEN-LAST:event_jLabelSearchUsersIcon3MouseClicked
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
@@ -709,6 +859,94 @@ public class LibrarianView extends javax.swing.JFrame {
     jPanelInvisible.setVisible(false);
 
     }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void jbtnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnReturnActionPerformed
+        // TODO add your handling code here:
+        if (jListBorrowedBooks.getSelectedValue() == null){
+            JOptionPane.showMessageDialog(this, "Du har inte valt en bok");
+        }else{
+        int indexOfPoint = jListBorrowedBooks.getSelectedValue().indexOf(".");
+        String bookInfo = jListBorrowedBooks.getSelectedValue().substring(6, indexOfPoint);
+        int bookId = Integer.parseInt(bookInfo);
+        queryMethods.returnBook(bookId);
+//        for (int i = 0 ; i < queryMethods.getAllBooks().size() ; i ++){
+//            if(bookInfo.contains(queryMethods.getAllBooks().get(i).getIsbn())){
+//                queryMethods.returnBook(queryMethods.getAllBooks().get(i).getId());
+//            }
+//        }
+        
+        jbtnShowBorrowedBooks.doClick();
+    }
+    }//GEN-LAST:event_jbtnReturnActionPerformed
+
+    private void addBookToReturnListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBookToReturnListButtonActionPerformed
+        // TODO add your handling code here:
+        
+        if(Validation.isValidID(bookIdTextField.getText().trim())){
+            Books book = queryMethods.findBorrowedBookById(Integer.parseInt(bookIdTextField.getText().trim()));
+            if(book.getId() != -1){
+               returnBooksListModel.addElement(book);
+               bookIdTextField.setText("");
+                
+            }else {
+                JOptionPane.showMessageDialog(this, "Kunde inte hitta utlånad bok med id: " +  bookIdTextField.getText());
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Vänligen fyll i ett korrekt ID");
+        }
+    }//GEN-LAST:event_addBookToReturnListButtonActionPerformed
+
+    private void returnBooksInListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBooksInListButtonActionPerformed
+        
+        for(int i = 0; i < returnBooksListModel.getSize(); i++){
+           // String element = returnBooksListModel.getElementAt(i).toString();
+           Books book = (Books)returnBooksListModel.getElementAt(i);
+           
+           queryMethods.returnBook(book.getId());
+           
+        }
+        returnBooksListModel.clear();
+    }//GEN-LAST:event_returnBooksInListButtonActionPerformed
+
+    private void removeFromReturnBooksListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeFromReturnBooksListActionPerformed
+        
+        int index = returnBooksList.getSelectedIndex();
+        
+        returnBooksListModel.remove(index);
+    }//GEN-LAST:event_removeFromReturnBooksListActionPerformed
+
+    private void jLabelSearchBooksIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchBooksIconMouseClicked
+
+       
+        ArrayList<Books> foundBooks = new ArrayList<>();
+        ArrayList<E_Books> foundEBooks = new ArrayList<>();
+        
+        String searchWord = Bookstxt.getText().toLowerCase();
+        
+        books.stream().filter((b)-> b.getAuthor().contains(searchWord) || b.getTitle().contains(searchWord)
+                                || b.getCategory().equals(searchWord) || b.getIsbn().equals(searchWord)
+                                ).forEach(foundBooks::add);
+       
+                                
+        eBooks.stream().filter((eBook)-> eBook.getAuthor().contains(searchWord) || eBook.getTitle().contains(searchWord)
+                                || eBook.getCategory().equals(searchWord) || eBook.getIsbn().equals(searchWord)
+                                    ).forEach(foundEBooks::add);
+        
+        DefaultTableModel searchModel = new DefaultTableModel(colNames, 0);
+        
+           //private String[] colNames = {"Id", "Titel", "Författare", "ISBN", "Förlag", "Inköp Pris", "Kategori", "Placering"};
+        for(Books b : foundBooks){
+            searchModel.addRow(new Object[]{b.getId(), b.getTitle(),b.getAuthor(),b.getIsbn(),b.getPublisher(), b.getPurchase_price(), b.getCategory(), b.getPlacement()});
+        }
+        for(E_Books eBook : foundEBooks){
+            searchModel.addRow(new Object[]{eBook.getId(), eBook.getTitle(),eBook.getAuthor(),eBook.getIsbn(),eBook.getPublisher(), eBook.getPurchase_price(), eBook.getCategory(), "E-Bok"});
+        }
+        
+        BooksTable.setModel(searchModel);
+        
+
+
+    }//GEN-LAST:event_jLabelSearchBooksIconMouseClicked
 
 
 
@@ -757,7 +995,10 @@ public class LibrarianView extends javax.swing.JFrame {
     private javax.swing.JButton NewBookbtn;
     private javax.swing.JTable UsersTable;
     private javax.swing.JTextField Usertxt;
+    private javax.swing.JButton addBookToReturnListButton;
+    private javax.swing.JTextField bookIdTextField;
     private javax.swing.JButton btnClose;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
@@ -768,18 +1009,24 @@ public class LibrarianView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelSearchUsersIcon3;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JList<String> jListBorrowedBooks;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelInvisible;
     private javax.swing.JPanel jPanelTabBookings3;
     private javax.swing.JPanel jPanelTabLendings;
     private javax.swing.JPanel jPanelTitle;
     private javax.swing.JPanel jPanelbackground;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JTabbedPane jTabbedPaneReport3;
     private javax.swing.JButton jbtnBlockedCards;
     private javax.swing.JButton jbtnManageCards;
+    private javax.swing.JButton jbtnReturn;
     private javax.swing.JButton jbtnSave;
     private javax.swing.JButton jbtnShowBorrowedBooks;
+    private javax.swing.JButton removeFromReturnBooksList;
+    private javax.swing.JButton returnBooksInListButton;
+    private javax.swing.JList<String> returnBooksList;
+    private javax.swing.JTabbedPane returnBooksPanel;
     // End of variables declaration//GEN-END:variables
 }

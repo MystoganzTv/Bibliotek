@@ -5,6 +5,7 @@
  */
 package se.view;
 
+import javax.swing.BorderFactory;
 import se.database.QueryMethods;
 
 /**
@@ -21,6 +22,7 @@ public class StartPage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         
+       
     
     }
    
@@ -53,10 +55,10 @@ public class StartPage extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        seminarIcon = new javax.swing.JLabel();
+        seminarText = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        newsPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -215,11 +217,21 @@ public class StartPage extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Seminarie_80px.png"))); // NOI18N
+        seminarIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Seminarie_80px.png"))); // NOI18N
+        seminarIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                seminarIconMouseClicked(evt);
+            }
+        });
 
-        jLabel8.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(105, 131, 170));
-        jLabel8.setText("Seminarium");
+        seminarText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        seminarText.setForeground(new java.awt.Color(105, 131, 170));
+        seminarText.setText("Seminarium");
+        seminarText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                seminarTextMouseClicked(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(105, 131, 170));
@@ -241,8 +253,8 @@ public class StartPage extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(seminarIcon, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(seminarText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
         );
         jPanel3Layout.setVerticalGroup(
@@ -252,26 +264,26 @@ public class StartPage extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel7))
+                    .addComponent(seminarIcon))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
+                    .addComponent(seminarText)
                     .addComponent(jLabel9)
                     .addComponent(jLabel5))
                 .addGap(41, 41, 41))
         );
 
-        jPanel4.setBackground(new java.awt.Color(244, 244, 244));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nyheter", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 1, 18), new java.awt.Color(105, 131, 170))); // NOI18N
+        newsPanel.setBackground(new java.awt.Color(244, 244, 244));
+        newsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nyheter", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 1, 18), new java.awt.Color(105, 131, 170))); // NOI18N
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout newsPanelLayout = new javax.swing.GroupLayout(newsPanel);
+        newsPanel.setLayout(newsPanelLayout);
+        newsPanelLayout.setHorizontalGroup(
+            newsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 336, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        newsPanelLayout.setVerticalGroup(
+            newsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 512, Short.MAX_VALUE)
         );
 
@@ -286,7 +298,7 @@ public class StartPage extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(newsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -303,7 +315,7 @@ public class StartPage extends javax.swing.JFrame {
                         .addGap(24, 24, 24)
                         .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(newsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanelbackgroundLayout.createSequentialGroup()
                                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
@@ -385,6 +397,20 @@ public class StartPage extends javax.swing.JFrame {
         ViewBooks vb = new ViewBooks();
         vb.setVisible(true);
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void seminarIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seminarIconMouseClicked
+
+        SeminarsView sm = new SeminarsView();
+        sm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_seminarIconMouseClicked
+
+    private void seminarTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seminarTextMouseClicked
+        
+         SeminarsView sm = new SeminarsView();
+        sm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_seminarTextMouseClicked
    
     /**
      * @param args the command line arguments
@@ -431,8 +457,6 @@ public class StartPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelBackgroundPhoto;
     private javax.swing.JLabel jLabelPassword1;
@@ -441,11 +465,13 @@ public class StartPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanelTitle;
     private javax.swing.JPanel jPanelbackground;
     private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JLabel jlblMessage;
+    private javax.swing.JPanel newsPanel;
+    private javax.swing.JLabel seminarIcon;
+    private javax.swing.JLabel seminarText;
     // End of variables declaration//GEN-END:variables
 }
