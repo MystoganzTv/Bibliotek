@@ -5,6 +5,11 @@
  */
 package se.database;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -1253,5 +1258,34 @@ public class QueryMethods {
             System.out.println(e.toString() + " getAllBorrowedBooks()");
         }
         return borrowedBooks;
+    }
+    
+    public void readBook(int idEbook) throws FileNotFoundException, IOException {
+        InputStream input = null;
+        String query = "SELECT book_file FROM e_books_files where id_e_book =?";
+        con = MyConnection.getConnection();
+
+        try {
+            ps = con.prepareStatement(query);
+            ps.setInt(1, idEbook);
+            rs = ps.executeQuery();
+            
+            File bookFile = new File ("ebooktest");
+            FileOutputStream output = new FileOutputStream(bookFile);
+            
+            if(rs.next()){
+                input = rs.getBinaryStream("e_books_files");
+                
+                byte[]buffer = new byte[1024];
+                
+                while(input.read(buffer)>0){
+                    
+                    output.write(buffer);
+                }
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
