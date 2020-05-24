@@ -1498,6 +1498,35 @@ public class QueryMethods {
         }
     }
     
+    public void bookSeminar(Guest g, Seminar s) {
+        
+        try {
+            MyConnection tryConnection = new MyConnection();
+            Connection conn = tryConnection.getConnection();
+            Statement stmt = conn.createStatement();
+            
+            // receiving max num of guests
+            ResultSet rs = stmt.executeQuery("SELECT CountVisitor FROM seminarium WHERE id = " + s.getId() + "");
+            rs.next();
+            int nrOfVisitors = rs.getInt("CountVisitor");
+            
+            // checking for available spaces
+            if((nrOfVisitors - 1) >= 0) {
+                // inserting guest if there are available spaces
+                stmt.execute("INSERT INTO bookings(seminar_id, guest_id) VALUES(" + s.getId() + ", " + g.getId() + ")"); // insert guest into bokings table
+                stmt.execute("UPDATE seminarium SET CountVisitor = " + (nrOfVisitors - 1) + " WHERE id = " + s.getId() + ""); // update seminarium visitors
+                JOptionPane.showMessageDialog(null, "Bokningen är genomfört!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Seminarium är fullbokad.");
+            }
+
+            stmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println("Something went wrong while booking seminar: " + e);
+        }
+    }
+    
     public ArrayList<Books> groupAllBooksByIsbn() {
         String query = "Select title, author, isbn, publisher, purchase_price, category,\n" +
                       " placement, books.desc, count(*) as copies from books group by isbn;";
