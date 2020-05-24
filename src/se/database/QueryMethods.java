@@ -5,6 +5,11 @@
  */
 package se.database;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -1387,6 +1392,7 @@ public class QueryMethods {
         return borrowedBooks;
     }
 
+
     public ArrayList<Books> getBorrowedBooksByCardId(int libraryCardId) {
         String query = "select * from books join borrowed_books on book_id = "
                 + "books.id where librarycard_id = " + libraryCardId + ";";
@@ -1576,14 +1582,18 @@ public class QueryMethods {
                 book.setTitle(rs.getString(2));
                 book.setAuthor(rs.getString(3));
                 return book;
+
             }
             
         } catch (SQLException ex) {
             Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+
         book.setId(-1);
         return book;
     }
+
 
 
 }
