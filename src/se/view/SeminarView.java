@@ -198,7 +198,7 @@ public class SeminarView extends javax.swing.JFrame {
             }
         });
 
-        txtDate.setToolTipText("");
+        txtDate.setToolTipText("MM-DD");
         txtDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDateActionPerformed(evt);
