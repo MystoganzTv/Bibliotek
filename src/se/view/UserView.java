@@ -216,6 +216,10 @@ public class UserView extends javax.swing.JFrame {
         btnClose = new javax.swing.JButton();
         jLabelAboutBook = new javax.swing.JLabel();
         jTabbedPaneReport = new javax.swing.JTabbedPane();
+        jPanelTabBokaSeminarium = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        BookSeminariumTable = new javax.swing.JTable();
+        jbtnReserve = new javax.swing.JButton();
         jPanelTabBookings = new javax.swing.JPanel();
         jLabelSearchBookingsText = new javax.swing.JLabel();
         jTextFieldSearchSortiment = new javax.swing.JTextField();
@@ -337,6 +341,50 @@ public class UserView extends javax.swing.JFrame {
         jTabbedPaneReport.setForeground(new java.awt.Color(105, 131, 170));
         jTabbedPaneReport.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
 
+        BookSeminariumTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane7.setViewportView(BookSeminariumTable);
+
+        jbtnReserve.setText("Boka");
+        jbtnReserve.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnReserveActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelTabBokaSeminariumLayout = new javax.swing.GroupLayout(jPanelTabBokaSeminarium);
+        jPanelTabBokaSeminarium.setLayout(jPanelTabBokaSeminariumLayout);
+        jPanelTabBokaSeminariumLayout.setHorizontalGroup(
+            jPanelTabBokaSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTabBokaSeminariumLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelTabBokaSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 917, Short.MAX_VALUE)
+                    .addGroup(jPanelTabBokaSeminariumLayout.createSequentialGroup()
+                        .addComponent(jbtnReserve, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+        jPanelTabBokaSeminariumLayout.setVerticalGroup(
+            jPanelTabBokaSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBokaSeminariumLayout.createSequentialGroup()
+                .addContainerGap(69, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(jbtnReserve)
+                .addGap(70, 70, 70))
+        );
+
+        jTabbedPaneReport.addTab("Boka Seminarium", jPanelTabBokaSeminarium);
+
         jLabelSearchBookingsText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabelSearchBookingsText.setForeground(new java.awt.Color(105, 131, 170));
         jLabelSearchBookingsText.setText("Sök");
@@ -451,14 +499,10 @@ public class UserView extends javax.swing.JFrame {
         jPanelTabLendingsLayout.setHorizontalGroup(
             jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jbtnUpdate1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 917, Short.MAX_VALUE)))
+                    .addComponent(jbtnUpdate1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 911, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelTabLendingsLayout.setVerticalGroup(
@@ -831,6 +875,10 @@ public class UserView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jbtnEraseMyReservationsActionPerformed
 
+    private void jbtnReserveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnReserveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnReserveActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -867,6 +915,7 @@ public class UserView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable BookSeminariumTable;
     private javax.swing.JTable MyReservationsTable;
     private javax.swing.JButton btnClose;
     private javax.swing.JLabel jLabel1;
@@ -879,6 +928,7 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelInvisible;
+    private javax.swing.JPanel jPanelTabBokaSeminarium;
     private javax.swing.JPanel jPanelTabBookings;
     private javax.swing.JPanel jPanelTabLendings;
     private javax.swing.JPanel jPanelTabStock;
@@ -887,11 +937,13 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPaneReport;
     private javax.swing.JTextField jTextFieldSearchSortiment;
     private javax.swing.JButton jbtnAboutBook;
     private javax.swing.JButton jbtnBorrow;
     private javax.swing.JButton jbtnEraseMyReservations;
+    private javax.swing.JButton jbtnReserve;
     private javax.swing.JButton jbtnUpdate;
     private javax.swing.JButton jbtnUpdate1;
     private javax.swing.JButton jbtnUpdateMyReservations;
