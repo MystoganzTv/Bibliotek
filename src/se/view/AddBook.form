@@ -94,43 +94,42 @@
                   <Group type="102" attributes="0">
                       <EmptySpace pref="92" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jLabel1" min="-2" pref="64" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabel3" min="-2" pref="64" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabelISBN" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelPublisher" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelPurchaseprice" max="32767" attributes="0"/>
+                              <Component id="jLabelLocation" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelTitel" min="-2" pref="29" max="-2" attributes="0"/>
+                              <Component id="jLabelAuthor" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelTitel1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabelTitel2" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jLabelISBN" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelPublisher" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelPurchaseprice" max="32767" attributes="0"/>
-                                      <Component id="jLabelLocation" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelTitel" min="-2" pref="29" max="-2" attributes="0"/>
-                                      <Component id="jLabelAuthor" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelTitel1" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabelTitel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="jLabelDescription" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelDescription" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jbtnAccept" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jbtnCancel" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jFieldDescription" pref="317" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jFieldTitle" alignment="0" pref="314" max="32767" attributes="0"/>
+                                  <Component id="boxType" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="txtISBN" max="32767" attributes="0"/>
+                                  <Component id="jFieldPublisher" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jFieldPurchasePrice" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jFieldPlacement" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="jFieldAuthor" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="boxCategory" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jFieldDescription" pref="317" max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jFieldTitle" alignment="0" pref="314" max="32767" attributes="0"/>
-                                      <Component id="boxType" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                                      <Component id="txtISBN" max="32767" attributes="0"/>
-                                      <Component id="jFieldPublisher" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jFieldPurchasePrice" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jFieldPlacement" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="jFieldAuthor" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="boxCategory" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -183,11 +182,11 @@
                           <Component id="jFieldDescription" min="-2" pref="105" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel1" min="-2" pref="76" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="1" min="-2" pref="76" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jbtnAccept" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbtnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -262,23 +261,6 @@
                   <Color blue="aa" green="83" red="69" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Placering"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel1">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/se/image/ok_64px.png"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel1MouseClicked"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel3">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/se/image/cancel_64px.png"/>
-                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelAuthor">
@@ -360,6 +342,22 @@
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbtnAccept">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="L&#xe4;gg till"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnAcceptActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbtnCancel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Avbryt"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnCancelActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -32,108 +32,103 @@ public class UserView extends javax.swing.JFrame {
      */
     QueryMethods qm = new QueryMethods();
     private String guestEmail;
-    
+
     public UserView() {
         initComponents();
         setLocationRelativeTo(null);
         jPanelInvisible.setVisible(false);
         fillSortimentTable();
-        
+
         jTextFieldSearchSortiment.setToolTipText("Skriv titel, författare eller kategori");
-        
+
         fillMyBorrowingsTable();
-        
+
     }
-    
-    public UserView(String guestEmail){
+
+    public UserView(String guestEmail) {
         initComponents();
         setLocationRelativeTo(null);
         jPanelInvisible.setVisible(false);
         fillSortimentTable();
-        
+
         jTextFieldSearchSortiment.setToolTipText("Skriv titel, författare eller kategori");
-        
+
         this.guestEmail = guestEmail;
 
         fillMyBorrowingsTable();
-        
-        jLabelTitle.setText("Inloggad Gäst: "+ guestFullName());
+
+        jLabelTitle.setText("Inloggad Gäst: " + guestFullName());
     }
-    
-    public String guestFullName(){
+
+    public String guestFullName() {
         String guestFullName = "";
-        int guestId =  qm.findLibrarycardByEmail(this.guestEmail).getId();
-        for (int i = 0 ; i < qm.getAllCards().size() ; i ++){
-        if ( qm.getAllCards().get(i).getGuestId() == guestId ){
-            guestFullName = qm.getAllCards().get(i).getFullname();
-        }
+        int guestId = qm.findLibrarycardByEmail(this.guestEmail).getId();
+        for (int i = 0; i < qm.getAllCards().size(); i++) {
+            if (qm.getAllCards().get(i).getGuestId() == guestId) {
+                guestFullName = qm.getAllCards().get(i).getFullname();
+            }
         }
         int indexOfSpace = guestFullName.indexOf(" ");
-        String firstName = guestFullName.substring(0,1).toUpperCase() 
-                            + guestFullName.substring(1, indexOfSpace);
-        
-        String lastName = guestFullName.substring(indexOfSpace + 1, indexOfSpace + 2).toUpperCase() 
-                            + guestFullName.substring(indexOfSpace + 2);
-        return  firstName + " " + lastName ;
+        String firstName = guestFullName.substring(0, 1).toUpperCase()
+                + guestFullName.substring(1, indexOfSpace);
+
+        String lastName = guestFullName.substring(indexOfSpace + 1, indexOfSpace + 2).toUpperCase()
+                + guestFullName.substring(indexOfSpace + 2);
+        return firstName + " " + lastName;
     }
- 
+
     public void fillSortimentTable() {
         DefaultTableModel model = (DefaultTableModel) jtableSortiment.getModel();
         model.setRowCount(0);
         model.setColumnCount(8);
-        
+
 //        for (int i = 0; i < qm.getAllBooks().size(); i++) {
 //            model.addRow(new Object[]{qm.getAllBooks().get(i).getTitle(), qm.getAllBooks().get(i).getAuthor(),
 //                qm.getAllBooks().get(i).getIsbn(), qm.getAllBooks().get(i).getPublisher(), 
 //                qm.getAllBooks().get(i).getCategory(), "Bok", qm.getAllBooks().get(i).getPlacement(),});
 //        }
-
         String bookIsAvailable = "";
         ArrayList<Books> books = qm.groupAllBooksByIsbn();
-        ArrayList<Books> booksByIsbn ;
+        ArrayList<Books> booksByIsbn;
         ArrayList<Integer> borrowedBooksId = new ArrayList<>();
 
-        
-        for (int i = 0 ; i < qm.getAllBorrowedBooks().size() ; i++){
+        for (int i = 0; i < qm.getAllBorrowedBooks().size(); i++) {
             borrowedBooksId.add(qm.getAllBorrowedBooks().get(i).getBookId());
         }
-        
 
         for (int i = 0; i < books.size(); i++) {
 
             model.addRow(new Object[]{books.get(i).getTitle(), books.get(i).getAuthor(),
-                books.get(i).getIsbn(), books.get(i).getPublisher(), 
-                books.get(i).getCategory(),"Bok", books.get(i).getPlacement()});
+                books.get(i).getIsbn(), books.get(i).getPublisher(),
+                books.get(i).getCategory(), "Bok", books.get(i).getPlacement()});
         }
-        
-        
-        for (int i = 0 ; i < model.getRowCount() ; i++){
+
+        for (int i = 0; i < model.getRowCount(); i++) {
             String isbn = (String) model.getValueAt(i, 2);
             booksByIsbn = qm.findBooksByIsbn(isbn);
             boolean allIsBorrowed = false;
-            
-            for (int j = 0 ; j < booksByIsbn.size() ; j ++){
-                
-                if(!borrowedBooksId.contains(booksByIsbn.get(j).getId())){
+
+            for (int j = 0; j < booksByIsbn.size(); j++) {
+
+                if (!borrowedBooksId.contains(booksByIsbn.get(j).getId())) {
                     allIsBorrowed = false;
-                }else{
+                } else {
                     allIsBorrowed = true;
                 }
-                
-                }
-            
-                if(allIsBorrowed){
+
+            }
+
+            if (allIsBorrowed) {
                 bookIsAvailable = "Nej";
-                }else{
+            } else {
                 bookIsAvailable = "Ja";
-                }
+            }
             model.setValueAt(bookIsAvailable, i, 7);
         }
-        
 
         for (int i = 0; i < qm.getAllEBooks().size(); i++) {
             model.addRow(new Object[]{qm.getAllEBooks().get(i).getTitle(), qm.getAllEBooks().get(i).getAuthor(),
-                qm.getAllEBooks().get(i).getIsbn(), qm.getAllEBooks().get(i).getPublisher(), 
+                qm.getAllEBooks().get(i).getIsbn(), qm.getAllEBooks().get(i).getPublisher(),
                 qm.getAllEBooks().get(i).getCategory(), "E-Bok", "", "Ja"});
         }
         jtableSortiment.getColumnModel().getColumn(0).setHeaderValue("Titel");
@@ -150,8 +145,8 @@ public class UserView extends javax.swing.JFrame {
         jtableSortiment.getColumn("Placering").setPreferredWidth(50);
 
     }
-     
-     public void fillMyBorrowingsTable() {
+
+    public void fillMyBorrowingsTable() {
         DefaultTableModel model = (DefaultTableModel) jtableMyBorrowings.getModel();
         model.setRowCount(0);
         model.setColumnCount(4);
@@ -159,41 +154,36 @@ public class UserView extends javax.swing.JFrame {
         ArrayList<Date> borrowedBooksDates = new ArrayList<>();
         Date toDayDate = new Date();
         String returnBookReminder = "";
-        
-        for (int i = 0 ; i < qm.getAllBorrowedBooks().size() ; i++){
-            if(qm.getAllBorrowedBooks().get(i).getLibraryCardId() == libraryCardId){
+
+        for (int i = 0; i < qm.getAllBorrowedBooks().size(); i++) {
+            if (qm.getAllBorrowedBooks().get(i).getLibraryCardId() == libraryCardId) {
                 borrowedBooksDates.add(qm.getAllBorrowedBooks().get(i).getReturnDate());
             }
         }
-        
-        
+
         for (int i = 0; i < qm.getBorrowedBooksByCardId(libraryCardId).size(); i++) {
             int dayDiff = borrowedBooksDates.get(i).getDay() - toDayDate.getDay();
             int monthDiff = borrowedBooksDates.get(i).getMonth() - toDayDate.getMonth();
-            
-            if(dayDiff <= 0 && monthDiff <= 0){
-                returnBookReminder =  "Försenad";
+
+            if (dayDiff <= 0 && monthDiff <= 0) {
+                returnBookReminder = "Försenad";
                 System.out.println(returnBookReminder);
-                
-            }
-            else if(dayDiff == 1 && monthDiff == 0){
+
+            } else if (dayDiff == 1 && monthDiff == 0) {
                 returnBookReminder = "1 dag kvar";
-            }
-            else if(dayDiff == 2 && monthDiff == 0){
+            } else if (dayDiff == 2 && monthDiff == 0) {
                 returnBookReminder = "2 dagar kvar";
-            }else{
+            } else {
                 returnBookReminder = "";
             }
-            
+
             model.addRow(new Object[]{qm.getBorrowedBooksByCardId(libraryCardId).get(i).getTitle(),
-                                      qm.getBorrowedBooksByCardId(libraryCardId).get(i).getAuthor(),
-                                      qm.getBorrowedBooksByCardId(libraryCardId).get(i).getIsbn(), 
-                                      qm.getAllBorrowedBooks().get(i).getReturnDate() + "  " + returnBookReminder});
-            
+                qm.getBorrowedBooksByCardId(libraryCardId).get(i).getAuthor(),
+                qm.getBorrowedBooksByCardId(libraryCardId).get(i).getIsbn(),
+                qm.getAllBorrowedBooks().get(i).getReturnDate() + "  " + returnBookReminder});
+
         }
-        
-        
-        
+
 //        for (int i = 0; i < qm.getAllEBooks().size(); i++) {
 //            model.addRow(new Object[]{qm.getAllEBooks().get(i).getTitle(), qm.getAllEBooks().get(i).getAuthor(),
 //                qm.getAllEBooks().get(i).getIsbn(), qm.getAllEBooks().get(i).getPublisher(), 
@@ -203,7 +193,6 @@ public class UserView extends javax.swing.JFrame {
         jtableMyBorrowings.getColumnModel().getColumn(1).setHeaderValue("Författare");
         jtableMyBorrowings.getColumnModel().getColumn(2).setHeaderValue("ISBN");
         jtableMyBorrowings.getColumnModel().getColumn(3).setHeaderValue("Återlämning");
-        
 
     }
 
@@ -233,22 +222,18 @@ public class UserView extends javax.swing.JFrame {
         jLabelSearchSortiment = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jtableSortiment = new javax.swing.JTable();
-        jLabelUpdateSortimentIcon = new javax.swing.JLabel();
-        jLabelUpdateSortimentText = new javax.swing.JLabel();
         jbtnBorrow = new javax.swing.JButton();
         jbtnAboutBook = new javax.swing.JButton();
+        jbtnUpdate = new javax.swing.JButton();
         jPanelTabLendings = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jtableMyBorrowings = new javax.swing.JTable();
-        jLabelUpdateMyBorrowingsIcon = new javax.swing.JLabel();
-        jLabelUpdateMyBorrowingsText = new javax.swing.JLabel();
+        jbtnUpdate1 = new javax.swing.JButton();
         jPanelTabStock = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         MyReservationsTable = new javax.swing.JTable();
-        jLabelEraseMyReservationsIcon = new javax.swing.JLabel();
-        jLabelEraseMyReservationsText = new javax.swing.JLabel();
-        jLabelUpdateMyReservationsText = new javax.swing.JLabel();
-        jLabelUpdateMyReservationsIcon = new javax.swing.JLabel();
+        jbtnUpdateMyReservations = new javax.swing.JButton();
+        jbtnEraseMyReservations = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -376,22 +361,6 @@ public class UserView extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(jtableSortiment);
 
-        jLabelUpdateSortimentIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_50px.png"))); // NOI18N
-        jLabelUpdateSortimentIcon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelUpdateSortimentIconMouseClicked(evt);
-            }
-        });
-
-        jLabelUpdateSortimentText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelUpdateSortimentText.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelUpdateSortimentText.setText("Uppdatera");
-        jLabelUpdateSortimentText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelUpdateSortimentTextMouseClicked(evt);
-            }
-        });
-
         jbtnBorrow.setText("Låna");
         jbtnBorrow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -406,31 +375,34 @@ public class UserView extends javax.swing.JFrame {
             }
         });
 
+        jbtnUpdate.setText("Uppdatera");
+        jbtnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnUpdateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelTabBookingsLayout = new javax.swing.GroupLayout(jPanelTabBookings);
         jPanelTabBookings.setLayout(jPanelTabBookingsLayout);
         jPanelTabBookingsLayout.setHorizontalGroup(
             jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookingsLayout.createSequentialGroup()
+            .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane4)
-                    .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
-                        .addComponent(jbtnBorrow, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbtnAboutBook, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 571, Short.MAX_VALUE)
-                        .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(jLabelUpdateSortimentIcon))
-                            .addComponent(jLabelUpdateSortimentText, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(68, 68, 68))
-                    .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
+                .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 911, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookingsLayout.createSequentialGroup()
                         .addComponent(jLabelSearchBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldSearchSortiment)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelSearchSortiment)))
+                        .addComponent(jLabelSearchSortiment))
+                    .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
+                        .addComponent(jbtnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnBorrow, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnAboutBook, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelTabBookingsLayout.setVerticalGroup(
@@ -444,15 +416,12 @@ public class UserView extends javax.swing.JFrame {
                         .addComponent(jLabelSearchBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelUpdateSortimentIcon)
-                    .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jbtnBorrow)
-                        .addComponent(jbtnAboutBook)))
-                .addGap(4, 4, 4)
-                .addComponent(jLabelUpdateSortimentText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
+                .addGap(32, 32, 32)
+                .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtnBorrow)
+                    .addComponent(jbtnAboutBook)
+                    .addComponent(jbtnUpdate))
+                .addGap(72, 72, 72))
         );
 
         jTabbedPaneReport.addTab("Sortiment", jPanelTabBookings);
@@ -470,19 +439,10 @@ public class UserView extends javax.swing.JFrame {
         ));
         jScrollPane5.setViewportView(jtableMyBorrowings);
 
-        jLabelUpdateMyBorrowingsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_50px.png"))); // NOI18N
-        jLabelUpdateMyBorrowingsIcon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelUpdateMyBorrowingsIconMouseClicked(evt);
-            }
-        });
-
-        jLabelUpdateMyBorrowingsText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelUpdateMyBorrowingsText.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelUpdateMyBorrowingsText.setText("Uppdatera");
-        jLabelUpdateMyBorrowingsText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelUpdateMyBorrowingsTextMouseClicked(evt);
+        jbtnUpdate1.setText("Uppdatera");
+        jbtnUpdate1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnUpdate1ActionPerformed(evt);
             }
         });
 
@@ -491,28 +451,26 @@ public class UserView extends javax.swing.JFrame {
         jPanelTabLendingsLayout.setHorizontalGroup(
             jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
-                .addGap(518, 518, 518)
-                .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelUpdateMyBorrowingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
-                        .addComponent(jLabelUpdateMyBorrowingsIcon)
-                        .addGap(12, 12, 12)))
-                .addContainerGap(333, Short.MAX_VALUE))
-            .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane5)
+                        .addContainerGap()
+                        .addComponent(jbtnUpdate1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 917, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelTabLendingsLayout.setVerticalGroup(
             jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLendingsLayout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabelUpdateMyBorrowingsIcon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelUpdateMyBorrowingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
+                .addContainerGap(69, Short.MAX_VALUE)
+                .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLendingsLayout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68))
+                    .addComponent(jbtnUpdate1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(68, 68, 68))
         );
 
         jTabbedPaneReport.addTab("Mina Lån", jPanelTabLendings);
@@ -530,65 +488,46 @@ public class UserView extends javax.swing.JFrame {
         ));
         jScrollPane6.setViewportView(MyReservationsTable);
 
-        jLabelEraseMyReservationsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/trash_can_50px.png"))); // NOI18N
-        jLabelEraseMyReservationsIcon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEraseMyReservationsIconMouseClicked(evt);
+        jbtnUpdateMyReservations.setText("Uppdatera");
+        jbtnUpdateMyReservations.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnUpdateMyReservationsActionPerformed(evt);
             }
         });
 
-        jLabelEraseMyReservationsText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelEraseMyReservationsText.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelEraseMyReservationsText.setText("Ta bort");
-        jLabelEraseMyReservationsText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEraseMyReservationsTextMouseClicked(evt);
+        jbtnEraseMyReservations.setText("Ta bort");
+        jbtnEraseMyReservations.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnEraseMyReservationsActionPerformed(evt);
             }
         });
-
-        jLabelUpdateMyReservationsText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelUpdateMyReservationsText.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelUpdateMyReservationsText.setText("Uppdatera");
-        jLabelUpdateMyReservationsText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelUpdateMyReservationsTextMouseClicked(evt);
-            }
-        });
-
-        jLabelUpdateMyReservationsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_50px.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanelTabStockLayout = new javax.swing.GroupLayout(jPanelTabStock);
         jPanelTabStock.setLayout(jPanelTabStockLayout);
         jPanelTabStockLayout.setHorizontalGroup(
             jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTabStockLayout.createSequentialGroup()
-                .addContainerGap(772, Short.MAX_VALUE)
-                .addGroup(jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelUpdateMyReservationsIcon)
-                    .addComponent(jLabelUpdateMyReservationsText, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelEraseMyReservationsText, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEraseMyReservationsIcon))
-                .addGap(17, 17, 17))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabStockLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6))
+                .addGroup(jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelTabStockLayout.createSequentialGroup()
+                        .addComponent(jbtnUpdateMyReservations, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbtnEraseMyReservations, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 729, Short.MAX_VALUE))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 917, Short.MAX_VALUE)))
         );
         jPanelTabStockLayout.setVerticalGroup(
             jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabStockLayout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelEraseMyReservationsIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelUpdateMyReservationsIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelEraseMyReservationsText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelUpdateMyReservationsText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42))
+                .addContainerGap(69, Short.MAX_VALUE)
+                .addGroup(jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabStockLayout.createSequentialGroup()
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jbtnUpdateMyReservations)
+                        .addComponent(jbtnEraseMyReservations)))
+                .addGap(68, 68, 68))
         );
 
         jTabbedPaneReport.addTab("Mina Reservationer", jPanelTabStock);
@@ -654,28 +593,6 @@ public class UserView extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jLabel5MouseClicked
 
-    private void jLabelUpdateMyReservationsTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateMyReservationsTextMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelUpdateMyReservationsTextMouseClicked
-
-    private void jLabelEraseMyReservationsTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseMyReservationsTextMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEraseMyReservationsTextMouseClicked
-
-    private void jLabelEraseMyReservationsIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseMyReservationsIconMouseClicked
-        //TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEraseMyReservationsIconMouseClicked
-
-    private void jLabelUpdateMyBorrowingsTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateMyBorrowingsTextMouseClicked
-        // TODO add your handling code here:
-        fillMyBorrowingsTable();
-    }//GEN-LAST:event_jLabelUpdateMyBorrowingsTextMouseClicked
-
-    private void jLabelUpdateSortimentTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateSortimentTextMouseClicked
-        // TODO add your handling code here:
-        fillSortimentTable();
-    }//GEN-LAST:event_jLabelUpdateSortimentTextMouseClicked
-
     private void jLabelSearchSortimentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchSortimentMouseClicked
         // TODO add your handling code here:
         ArrayList<Books> foundBooks = new ArrayList<>();
@@ -684,66 +601,66 @@ public class UserView extends javax.swing.JFrame {
         eBooks = qm.getAllEBooks();
         String searchWord = jTextFieldSearchSortiment.getText().toLowerCase();
         String bookIsAvailable = "";
-        ArrayList<Books> bookListIsbn  = qm.groupAllBooksByIsbn();
-        
+        ArrayList<Books> bookListIsbn = qm.groupAllBooksByIsbn();
+
         ArrayList<Integer> borrowedBooksId = new ArrayList<>();
         DefaultTableModel model = (DefaultTableModel) jtableSortiment.getModel();
         model.setRowCount(0);
         model.setColumnCount(8);
-        
-        bookListIsbn.stream().filter((b)-> b.getTitle().toLowerCase().contains(searchWord) || b.getAuthor().toLowerCase().contains(searchWord)
-            || b.getCategory().toLowerCase().equals(searchWord) || b.getIsbn().equals(searchWord)).forEach(foundBooks::add);
-        eBooks.stream().filter((b)-> b.getTitle().toLowerCase().contains(searchWord) || b.getAuthor().toLowerCase().contains(searchWord)
-            || b.getCategory().toLowerCase().equals(searchWord) || b.getIsbn().equals(searchWord)).forEach(foundeBooks::add);
-        
-        for (int i = 0 ; i < qm.getAllBorrowedBooks().size() ; i++){
+
+        bookListIsbn.stream().filter((b) -> b.getTitle().toLowerCase().contains(searchWord) || b.getAuthor().toLowerCase().contains(searchWord)
+                || b.getCategory().toLowerCase().equals(searchWord) || b.getIsbn().equals(searchWord)).forEach(foundBooks::add);
+        eBooks.stream().filter((b) -> b.getTitle().toLowerCase().contains(searchWord) || b.getAuthor().toLowerCase().contains(searchWord)
+                || b.getCategory().toLowerCase().equals(searchWord) || b.getIsbn().equals(searchWord)).forEach(foundeBooks::add);
+
+        for (int i = 0; i < qm.getAllBorrowedBooks().size(); i++) {
             borrowedBooksId.add(qm.getAllBorrowedBooks().get(i).getBookId());
         }
-        
-        if(!foundBooks.isEmpty() ){
- //           DefaultTableModel model = new DefaultTableModel(colNamesBooks, 0);
+
+        if (!foundBooks.isEmpty()) {
+            //           DefaultTableModel model = new DefaultTableModel(colNamesBooks, 0);
 
             for (int i = 0; i < foundBooks.size(); i++) {
 
-            model.addRow(new Object[]{foundBooks.get(i).getTitle(), foundBooks.get(i).getAuthor(),
-                foundBooks.get(i).getIsbn(), foundBooks.get(i).getPublisher(), 
-                foundBooks.get(i).getCategory(), "Bok" ,foundBooks.get(i).getPlacement(), bookIsAvailable});
+                model.addRow(new Object[]{foundBooks.get(i).getTitle(), foundBooks.get(i).getAuthor(),
+                    foundBooks.get(i).getIsbn(), foundBooks.get(i).getPublisher(),
+                    foundBooks.get(i).getCategory(), "Bok", foundBooks.get(i).getPlacement(), bookIsAvailable});
             }
 
-            for (int i = 0 ; i < model.getRowCount() ; i++){
-            String isbn = (String) model.getValueAt(i, 2);
-            boolean allIsBorrowed = false;
-            ArrayList<Books> borrowedBooksListIsbn = qm.findBooksByIsbn(isbn);
-            
-                for (int j = 0 ; j < borrowedBooksListIsbn.size() ; j ++){
-                
-                    if(!borrowedBooksId.contains(borrowedBooksListIsbn.get(j).getId())){
-                    allIsBorrowed = false;
-                    }else{
-                    allIsBorrowed = true;
+            for (int i = 0; i < model.getRowCount(); i++) {
+                String isbn = (String) model.getValueAt(i, 2);
+                boolean allIsBorrowed = false;
+                ArrayList<Books> borrowedBooksListIsbn = qm.findBooksByIsbn(isbn);
+
+                for (int j = 0; j < borrowedBooksListIsbn.size(); j++) {
+
+                    if (!borrowedBooksId.contains(borrowedBooksListIsbn.get(j).getId())) {
+                        allIsBorrowed = false;
+                    } else {
+                        allIsBorrowed = true;
                     }
-                
+
                 }
-            
-            if(allIsBorrowed){
-                bookIsAvailable = "Nej";
-            }else{
-                bookIsAvailable = "Ja";
+
+                if (allIsBorrowed) {
+                    bookIsAvailable = "Nej";
+                } else {
+                    bookIsAvailable = "Ja";
+                }
+                model.setValueAt(bookIsAvailable, i, 7);
             }
-            model.setValueAt(bookIsAvailable, i, 7);
-        }
-            
-            for(E_Books ebook : foundeBooks){
-                model.addRow(new Object[] { ebook.getTitle(), ebook.getAuthor(),ebook.getIsbn(), ebook.getPublisher(),
-                                            ebook.getCategory(), "E-Bok", "", "Ja"});
+
+            for (E_Books ebook : foundeBooks) {
+                model.addRow(new Object[]{ebook.getTitle(), ebook.getAuthor(), ebook.getIsbn(), ebook.getPublisher(),
+                    ebook.getCategory(), "E-Bok", "", "Ja"});
             }
- 
+
             jtableSortiment.setModel(model);
             jTextFieldSearchSortiment.setText("");
-        }else {
+        } else {
             JOptionPane.showMessageDialog(this, "Ingen bok matchade din sökning");
         }
-        
+
         jtableSortiment.getColumnModel().getColumn(0).setHeaderValue("Titel");
         jtableSortiment.getColumnModel().getColumn(1).setHeaderValue("Författare");
         jtableSortiment.getColumnModel().getColumn(2).setHeaderValue("ISBN");
@@ -753,7 +670,6 @@ public class UserView extends javax.swing.JFrame {
         jtableSortiment.getColumnModel().getColumn(6).setHeaderValue("Placering");
         jtableSortiment.getColumnModel().getColumn(7).setHeaderValue("Tillgänglig");
 
-        
 //        
 //        
 //        ArrayList<Books> authorSearch = qm.findBooksByAuthor(jTextFieldSearchSortiment.getText());
@@ -809,102 +725,88 @@ public class UserView extends javax.swing.JFrame {
 //        jtableSortiment.getColumn("Kategori").setPreferredWidth(150);
 //        jtableSortiment.getColumn("Typ").setPreferredWidth(40);
 //        jtableSortiment.getColumn("Placering").setPreferredWidth(50);
-         
+
     }//GEN-LAST:event_jLabelSearchSortimentMouseClicked
 
-    private void jLabelUpdateSortimentIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateSortimentIconMouseClicked
-        // TODO add your handling code here:
-        fillSortimentTable();
-    }//GEN-LAST:event_jLabelUpdateSortimentIconMouseClicked
-
     private void jbtnBorrowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBorrowActionPerformed
-        
+
         DefaultTableModel model = (DefaultTableModel) jtableSortiment.getModel();
         String bookIsbn = model.getValueAt(jtableSortiment.getSelectedRow(), 2).toString();
         int bookId = 0;
         int eBookId = 0;
-        try{
-        bookId = qm.findBookByIsbn(bookIsbn).getId();
-        }catch(Exception e){
+        try {
+            bookId = qm.findBookByIsbn(bookIsbn).getId();
+        } catch (Exception e) {
             eBookId = qm.findEBookByIsbn(bookIsbn).getId();
         }
-        
-        
+
         int libraryCardId = qm.findLibrarycardByEmail(this.guestEmail).getId();
-        
+
         boolean cardIsBlocked = false;
         boolean bookIsLent = false;
-        for (int i = 0 ; i < qm.blockedCards().size() ; i ++){
-            if (qm.getBlockedCards().get(i).getId() == libraryCardId){
+        for (int i = 0; i < qm.blockedCards().size(); i++) {
+            if (qm.getBlockedCards().get(i).getId() == libraryCardId) {
                 cardIsBlocked = true;
             }
         }
-        
-        for (int i = 0; i < qm.getAllBorrowedBooks().size() ; i++){
-            if ( qm.getAllBorrowedBooks().get(i).getBookId() == bookId){
+
+        for (int i = 0; i < qm.getAllBorrowedBooks().size(); i++) {
+            if (qm.getAllBorrowedBooks().get(i).getBookId() == bookId) {
                 bookIsLent = true;
             }
         }
-        
+
         String type = model.getValueAt(jtableSortiment.getSelectedRow(), 5).toString();
-        
-        if(type == "Bok"){
-            
-            if ( cardIsBlocked == true){
-            JOptionPane.showMessageDialog(null, "Lånekortet är spärrat");
-        }
-            else if (bookIsLent == true){
-            JOptionPane.showMessageDialog(null, "Boken är utlånad");
-        }   else{
-        
-            int input = JOptionPane.showConfirmDialog(null, "Är du säker du vill låna boken?", 
-                "Bekräftelse",JOptionPane.YES_NO_OPTION);
-            
-            if(input == JOptionPane.YES_OPTION){ 
-                 qm.borrowBooks(bookId, libraryCardId);
-        }
-        }
-        }
-        
-        if(type == "E-Bok"){
-            if ( cardIsBlocked == true){
+
+        if (type == "Bok") {
+
+            if (cardIsBlocked == true) {
                 JOptionPane.showMessageDialog(null, "Lånekortet är spärrat");
-        }   
-            else{
-            int input = JOptionPane.showConfirmDialog(null, "Är du säker du vill låna eboken?", 
-                "Bekräftelse",JOptionPane.YES_NO_OPTION);
-            
-            if(input == JOptionPane.YES_OPTION){ 
-                qm.borrowEBooks(eBookId, libraryCardId);
+            } else if (bookIsLent == true) {
+                JOptionPane.showMessageDialog(null, "Boken är utlånad");
+            } else {
+
+                int input = JOptionPane.showConfirmDialog(null, "Är du säker du vill låna boken?",
+                        "Bekräftelse", JOptionPane.YES_NO_OPTION);
+
+                if (input == JOptionPane.YES_OPTION) {
+                    qm.borrowBooks(bookId, libraryCardId);
+                }
             }
         }
-        
+
+        if (type == "E-Bok") {
+            if (cardIsBlocked == true) {
+                JOptionPane.showMessageDialog(null, "Lånekortet är spärrat");
+            } else {
+                int input = JOptionPane.showConfirmDialog(null, "Är du säker du vill låna eboken?",
+                        "Bekräftelse", JOptionPane.YES_NO_OPTION);
+
+                if (input == JOptionPane.YES_OPTION) {
+                    qm.borrowEBooks(eBookId, libraryCardId);
+                }
+            }
+
         }
     }//GEN-LAST:event_jbtnBorrowActionPerformed
 
-    private void jLabelUpdateMyBorrowingsIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateMyBorrowingsIconMouseClicked
-        // TODO add your handling code here:
-        fillMyBorrowingsTable();
-    }//GEN-LAST:event_jLabelUpdateMyBorrowingsIconMouseClicked
-
     private void jbtnAboutBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAboutBookActionPerformed
         // TODO add your handling code here:
-        if( jtableSortiment.getSelectedRow() == -1 ){
+        if (jtableSortiment.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Du har inte valt en bok");
-        }else{
-        DefaultTableModel model = (DefaultTableModel) jtableSortiment.getModel();
+        } else {
+            DefaultTableModel model = (DefaultTableModel) jtableSortiment.getModel();
 
-        String bookIsbn = model.getValueAt(jtableSortiment.getSelectedRow(), 2).toString().trim();
-        
-        
-        jPanelInvisible.setVisible(true);
+            String bookIsbn = model.getValueAt(jtableSortiment.getSelectedRow(), 2).toString().trim();
 
-        for (int i = 0 ; i < qm.findBooks().size() ; i++){
-            if(qm.findBooks().get(i).getIsbn().trim().equals(bookIsbn)){
-                jLabelAboutBook.setText("<html>"+qm.findBooks().get(i).getDesc()+"</html>");
-            }  
-        }
-        
+            jPanelInvisible.setVisible(true);
+
+            for (int i = 0; i < qm.findBooks().size(); i++) {
+                if (qm.findBooks().get(i).getIsbn().trim().equals(bookIsbn)) {
+                    jLabelAboutBook.setText("<html>" + qm.findBooks().get(i).getDesc() + "</html>");
+                }
+            }
+
         }
     }//GEN-LAST:event_jbtnAboutBookActionPerformed
 
@@ -912,6 +814,22 @@ public class UserView extends javax.swing.JFrame {
         // TODO add your handling code here:
         jPanelInvisible.setVisible(false);
     }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void jbtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUpdateActionPerformed
+        fillSortimentTable();
+    }//GEN-LAST:event_jbtnUpdateActionPerformed
+
+    private void jbtnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUpdate1ActionPerformed
+        fillMyBorrowingsTable();
+    }//GEN-LAST:event_jbtnUpdate1ActionPerformed
+
+    private void jbtnUpdateMyReservationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUpdateMyReservationsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnUpdateMyReservationsActionPerformed
+
+    private void jbtnEraseMyReservationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEraseMyReservationsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnEraseMyReservationsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -956,17 +874,9 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelAboutBook;
-    private javax.swing.JLabel jLabelEraseMyReservationsIcon;
-    private javax.swing.JLabel jLabelEraseMyReservationsText;
     private javax.swing.JLabel jLabelSearchBookingsText;
     private javax.swing.JLabel jLabelSearchSortiment;
     private javax.swing.JLabel jLabelTitle;
-    private javax.swing.JLabel jLabelUpdateMyBorrowingsIcon;
-    private javax.swing.JLabel jLabelUpdateMyBorrowingsText;
-    private javax.swing.JLabel jLabelUpdateMyReservationsIcon;
-    private javax.swing.JLabel jLabelUpdateMyReservationsText;
-    private javax.swing.JLabel jLabelUpdateSortimentIcon;
-    private javax.swing.JLabel jLabelUpdateSortimentText;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelInvisible;
     private javax.swing.JPanel jPanelTabBookings;
@@ -981,6 +891,10 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldSearchSortiment;
     private javax.swing.JButton jbtnAboutBook;
     private javax.swing.JButton jbtnBorrow;
+    private javax.swing.JButton jbtnEraseMyReservations;
+    private javax.swing.JButton jbtnUpdate;
+    private javax.swing.JButton jbtnUpdate1;
+    private javax.swing.JButton jbtnUpdateMyReservations;
     private javax.swing.JTable jtableMyBorrowings;
     private javax.swing.JTable jtableSortiment;
     // End of variables declaration//GEN-END:variables

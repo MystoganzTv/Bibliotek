@@ -53,8 +53,6 @@ public class AddBook extends javax.swing.JFrame {
         jLabelPurchaseprice = new javax.swing.JLabel();
         jLabelDescription = new javax.swing.JLabel();
         jLabelLocation = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabelAuthor = new javax.swing.JLabel();
         jLabelTitel1 = new javax.swing.JLabel();
         jLabelTitel2 = new javax.swing.JLabel();
@@ -66,6 +64,8 @@ public class AddBook extends javax.swing.JFrame {
         jFieldPlacement = new javax.swing.JTextField();
         jFieldAuthor = new javax.swing.JTextField();
         jFieldDescription = new javax.swing.JTextField();
+        jbtnAccept = new javax.swing.JButton();
+        jbtnCancel = new javax.swing.JButton();
         jPanelTitle = new javax.swing.JPanel();
         jLabelTitle = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -106,15 +106,6 @@ public class AddBook extends javax.swing.JFrame {
         jLabelLocation.setForeground(new java.awt.Color(105, 131, 170));
         jLabelLocation.setText("Placering");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/ok_64px.png"))); // NOI18N
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-        });
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/cancel_64px.png"))); // NOI18N
-
         jLabelAuthor.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabelAuthor.setForeground(new java.awt.Color(105, 131, 170));
         jLabelAuthor.setText("Författare");
@@ -145,6 +136,20 @@ public class AddBook extends javax.swing.JFrame {
 
         jFieldDescription.setToolTipText("");
 
+        jbtnAccept.setText("Lägg till");
+        jbtnAccept.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAcceptActionPerformed(evt);
+            }
+        });
+
+        jbtnCancel.setText("Avbryt");
+        jbtnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnCancelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelAddBookLayout = new javax.swing.GroupLayout(jPanelAddBook);
         jPanelAddBook.setLayout(jPanelAddBookLayout);
         jPanelAddBookLayout.setHorizontalGroup(
@@ -152,36 +157,36 @@ public class AddBook extends javax.swing.JFrame {
             .addGroup(jPanelAddBookLayout.createSequentialGroup()
                 .addContainerGap(92, Short.MAX_VALUE)
                 .addGroup(jPanelAddBookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAddBookLayout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAddBookLayout.createSequentialGroup()
-                        .addGroup(jPanelAddBookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelAddBookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabelISBN)
-                                .addComponent(jLabelPublisher)
-                                .addComponent(jLabelPurchaseprice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabelLocation)
-                                .addComponent(jLabelTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabelAuthor)
-                                .addComponent(jLabelTitel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabelTitel2))
-                            .addComponent(jLabelDescription))
-                        .addGap(64, 64, 64)
-                        .addGroup(jPanelAddBookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jFieldDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
-                            .addGroup(jPanelAddBookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jFieldTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
-                                .addComponent(boxType, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtISBN)
-                                .addComponent(jFieldPublisher)
-                                .addComponent(jFieldPurchasePrice)
-                                .addComponent(jFieldPlacement, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jFieldAuthor)
-                                .addComponent(boxCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(35, 35, 35))))
+                    .addGroup(jPanelAddBookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabelISBN)
+                        .addComponent(jLabelPublisher)
+                        .addComponent(jLabelPurchaseprice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelLocation)
+                        .addComponent(jLabelTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelAuthor)
+                        .addComponent(jLabelTitel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelTitel2))
+                    .addComponent(jLabelDescription))
+                .addGap(64, 64, 64)
+                .addGroup(jPanelAddBookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelAddBookLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jbtnAccept)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbtnCancel))
+                    .addComponent(jFieldDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                    .addGroup(jPanelAddBookLayout.createSequentialGroup()
+                        .addGroup(jPanelAddBookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jFieldTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
+                            .addComponent(boxType, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtISBN)
+                            .addComponent(jFieldPublisher)
+                            .addComponent(jFieldPurchasePrice)
+                            .addComponent(jFieldPlacement, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jFieldAuthor)
+                            .addComponent(boxCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(35, 35, 35))
         );
         jPanelAddBookLayout.setVerticalGroup(
             jPanelAddBookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,10 +228,10 @@ public class AddBook extends javax.swing.JFrame {
                     .addComponent(jLabelDescription)
                     .addComponent(jFieldDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanelAddBookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35))
+                .addGroup(jPanelAddBookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtnAccept)
+                    .addComponent(jbtnCancel))
+                .addGap(79, 79, 79))
         );
 
         jPanelTitle.setBackground(new java.awt.Color(133, 102, 170));
@@ -319,8 +324,25 @@ public class AddBook extends javax.swing.JFrame {
         }
     }
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+ 
 
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        StartPage sp = new StartPage();
+        sp.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void boxTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxTypeItemStateChanged
+        
+        if(boxType.getSelectedItem().toString().toLowerCase().equals("e-bok")) {
+            jFieldPlacement.setEnabled(false);
+        } else {
+             jFieldPlacement.setEnabled(true);
+        }
+    }//GEN-LAST:event_boxTypeItemStateChanged
+
+    private void jbtnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAcceptActionPerformed
+     
         QueryMethods qMethods = new QueryMethods();
         String title = jFieldTitle.getText().replace("'", "´");
         String author = jFieldAuthor.getText();
@@ -344,8 +366,8 @@ public class AddBook extends javax.swing.JFrame {
         }
 
         clearMenu();
-    }//GEN-LAST:event_jLabel1MouseClicked
-
+    }                                    
+    
     public void clearMenu() {
         jFieldTitle.setText("");
         jFieldAuthor.setText("");
@@ -356,22 +378,11 @@ public class AddBook extends javax.swing.JFrame {
         jFieldDescription.setText("");
         boxType.setSelectedIndex(0);
         boxCategory.setSelectedIndex(0);
-    }
+    }//GEN-LAST:event_jbtnAcceptActionPerformed
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        StartPage sp = new StartPage();
-        sp.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jLabel4MouseClicked
-
-    private void boxTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxTypeItemStateChanged
-        
-        if(boxType.getSelectedItem().toString().toLowerCase().equals("e-bok")) {
-            jFieldPlacement.setEnabled(false);
-        } else {
-             jFieldPlacement.setEnabled(true);
-        }
-    }//GEN-LAST:event_boxTypeItemStateChanged
+    private void jbtnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -417,10 +428,8 @@ public class AddBook extends javax.swing.JFrame {
     private javax.swing.JTextField jFieldPublisher;
     private javax.swing.JTextField jFieldPurchasePrice;
     private javax.swing.JTextField jFieldTitle;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelAuthor;
     private javax.swing.JLabel jLabelBackgroundPhoto;
@@ -436,6 +445,8 @@ public class AddBook extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelAddBook;
     private javax.swing.JPanel jPanelTitle;
     private javax.swing.JPanel jPanelbackground;
+    private javax.swing.JButton jbtnAccept;
+    private javax.swing.JButton jbtnCancel;
     private javax.swing.JTextField txtISBN;
     // End of variables declaration//GEN-END:variables
 }
