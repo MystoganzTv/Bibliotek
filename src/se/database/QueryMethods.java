@@ -1384,6 +1384,7 @@ public class QueryMethods {
                         rs.getString(9));
                 borrowedBooks.add(list);
             }
+            return borrowedBooks;
 
         } catch (Exception e) {
             System.out.println(e.toString() + " getBorrowedBooksByCardId()");

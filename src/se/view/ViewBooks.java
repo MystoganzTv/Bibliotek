@@ -79,31 +79,54 @@ public class ViewBooks extends javax.swing.JFrame {
                 books.get(i).getCategory(), books.get(i).getPlacement(), bookIsAvailable});
         }
         
+//        
+//        for (int i = 0 ; i < model.getRowCount() ; i++){
+//            String isbn = (String) model.getValueAt(i, 2);
+//            booksByIsbn = queryMethods.findBooksByIsbn(isbn);
+//            boolean allIsBorrowed = false;
+//            
+//            for (int j = 0 ; j < booksByIsbn.size() ; j ++){
+//                
+//                if(!borrowedBooksId.contains(booksByIsbn.get(j).getId())){
+//                    allIsBorrowed = false;
+//                }else{
+//                    allIsBorrowed = true;
+//                }
+//                
+//                }
+//            
+//                if(allIsBorrowed){
+//                bookIsAvailable = "Nej";
+//                }else{
+//                bookIsAvailable = "Ja";
+//                }
+//            model.setValueAt(bookIsAvailable, i, 6);
+//        }
         
         for (int i = 0 ; i < model.getRowCount() ; i++){
             String isbn = (String) model.getValueAt(i, 2);
             booksByIsbn = queryMethods.findBooksByIsbn(isbn);
-            boolean allIsBorrowed = false;
+            bookIsAvailable = "Ja";
+            model.setValueAt(bookIsAvailable, i, 6);
+            int countCopies = 0;
+
             
             for (int j = 0 ; j < booksByIsbn.size() ; j ++){
-                
-                if(!borrowedBooksId.contains(booksByIsbn.get(j).getId())){
-                    allIsBorrowed = false;
-                }else{
-                    allIsBorrowed = true;
-                }
-                
+                if(borrowedBooksId.contains(booksByIsbn.get(j).getId())){
+                    countCopies++;
+                    if(countCopies == booksByIsbn.size()){
+                    bookIsAvailable = "Nej";
+                    model.setValueAt(bookIsAvailable, i, 6); }
+                    
+                }}
+               
+                    
                 }
             
-                if(allIsBorrowed){
-                bookIsAvailable = "Nej";
-                }else{
-                bookIsAvailable = "Ja";
-                }
-            model.setValueAt(bookIsAvailable, i, 6);
+               
         }
         
-    }
+    
     
     public void sortBooksByTitle(List<Books> books){
         Collections.sort(books, (b1,b2) -> b1.getTitle().compareTo(b2.getTitle()));
