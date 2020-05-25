@@ -133,7 +133,7 @@ public class SeminarsView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabelImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/viewBook.jpg"))); // NOI18N
+        jLabelImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Seminarium1.jpg"))); // NOI18N
 
         seminarList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -202,6 +202,7 @@ public class SeminarsView extends javax.swing.JFrame {
                             .addGroup(jPanelbackgroundLayout.createSequentialGroup()
                                 .addGap(39, 39, 39)
                                 .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanelbackgroundLayout.createSequentialGroup()
                                         .addComponent(seminarTitle)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -213,8 +214,7 @@ public class SeminarsView extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jScrollPane3))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(jScrollPane3)))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
