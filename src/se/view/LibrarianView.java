@@ -7,6 +7,7 @@ package se.view;
 
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import javafx.scene.control.SelectionMode;
 import javax.swing.DefaultCellEditor;
@@ -23,6 +24,8 @@ import se.model.Admin;
 import se.model.Guest;
 import se.model.Books;
 import se.model.DeletedBook;
+import se.model.E_Books;
+import se.model.LibraryCards;
 
 /**
  *
@@ -35,6 +38,7 @@ public class LibrarianView extends javax.swing.JFrame {
     private DefaultTableModel model = new DefaultTableModel(colNames, 0);
     private QueryMethods qMethods = new QueryMethods();
     private ArrayList<Books> books;
+    private ArrayList<E_Books> eBooks;
     private ArrayList<DeletedBook> deletedBook;
     private String librarianEmail;
     private DefaultListModel returnBooksListModel = new DefaultListModel();
@@ -49,6 +53,7 @@ public class LibrarianView extends javax.swing.JFrame {
 
         queryMethods = new QueryMethods();
         books = qMethods.findBooks();
+        eBooks = qMethods.findEBooks();
 
         fillBooksTable();
         fillUsersTable();
@@ -69,6 +74,7 @@ public class LibrarianView extends javax.swing.JFrame {
 
         queryMethods = new QueryMethods();
         books = qMethods.findBooks();
+        eBooks = qMethods.findEBooks();
 
         fillBooksTable();
         fillUsersTable();
@@ -810,7 +816,42 @@ public class LibrarianView extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnShowBorrowedBooksActionPerformed
 
     private void jLabelSearchUsersIcon3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchUsersIcon3MouseClicked
-        // TODO add your handling code here:
+        
+         ArrayList<Guest> guests = queryMethods.findGuests();
+         String userToFind = Usertxt.getText().toLowerCase().trim();
+         String[] columns = {"ID", "Namn","Spärrad", "category" };
+         ArrayList<LibraryCards> cards = new ArrayList<>();
+         DefaultTableModel model = new DefaultTableModel(columns,0);
+         
+        if (!userToFind.isEmpty()) {
+            ArrayList<Guest> foundGuests = new ArrayList<>();
+
+            guests.stream().filter((g) -> g.getLastName().toLowerCase().contains(userToFind)
+                    || g.getFirstName().toLowerCase().contains(userToFind) || g.getEmail().equalsIgnoreCase(userToFind)
+                    || g.getPersonId().equals(userToFind)).forEach(foundGuests::add);
+
+            if (!foundGuests.isEmpty()) {
+                
+                cards = queryMethods.getGuestsLibraryCardsByGuestList(foundGuests);
+                for(LibraryCards card : cards){
+                 String entry = "";
+                 
+                 if(card.getEntry() == 1){
+                     entry = "Ja";
+                 }else {
+                     entry = "Nej";
+                 }
+                model.addRow(new Object[]{card.getGuestId(), card.getFullname(), entry, card.getCategory()});
+                }
+                
+                }
+                UsersTable.setModel(model);
+                Usertxt.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Ingen användare kunde hittas");
+
+            }
+        
     }//GEN-LAST:event_jLabelSearchUsersIcon3MouseClicked
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
@@ -844,7 +885,7 @@ public class LibrarianView extends javax.swing.JFrame {
         if(Validation.isValidID(bookIdTextField.getText().trim())){
             Books book = queryMethods.findBorrowedBookById(Integer.parseInt(bookIdTextField.getText().trim()));
             if(book.getId() != -1){
-                returnBooksListModel.addElement(book);
+               returnBooksListModel.addElement(book);
                bookIdTextField.setText("");
                 
             }else {
@@ -875,8 +916,36 @@ public class LibrarianView extends javax.swing.JFrame {
     }//GEN-LAST:event_removeFromReturnBooksListActionPerformed
 
     private void jLabelSearchBooksIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchBooksIconMouseClicked
-        // TODO add your handling code here:
+
+       
+        ArrayList<Books> foundBooks = new ArrayList<>();
+        ArrayList<E_Books> foundEBooks = new ArrayList<>();
         
+        String searchWord = Bookstxt.getText().toLowerCase();
+        
+        books.stream().filter((b)-> b.getAuthor().contains(searchWord) || b.getTitle().contains(searchWord)
+                                || b.getCategory().equals(searchWord) || b.getIsbn().equals(searchWord)
+                                ).forEach(foundBooks::add);
+       
+                                
+        eBooks.stream().filter((eBook)-> eBook.getAuthor().contains(searchWord) || eBook.getTitle().contains(searchWord)
+                                || eBook.getCategory().equals(searchWord) || eBook.getIsbn().equals(searchWord)
+                                    ).forEach(foundEBooks::add);
+        
+        DefaultTableModel searchModel = new DefaultTableModel(colNames, 0);
+        
+           //private String[] colNames = {"Id", "Titel", "Författare", "ISBN", "Förlag", "Inköp Pris", "Kategori", "Placering"};
+        for(Books b : foundBooks){
+            searchModel.addRow(new Object[]{b.getId(), b.getTitle(),b.getAuthor(),b.getIsbn(),b.getPublisher(), b.getPurchase_price(), b.getCategory(), b.getPlacement()});
+        }
+        for(E_Books eBook : foundEBooks){
+            searchModel.addRow(new Object[]{eBook.getId(), eBook.getTitle(),eBook.getAuthor(),eBook.getIsbn(),eBook.getPublisher(), eBook.getPurchase_price(), eBook.getCategory(), "E-Bok"});
+        }
+        
+        BooksTable.setModel(searchModel);
+        
+
+
     }//GEN-LAST:event_jLabelSearchBooksIconMouseClicked
 
 

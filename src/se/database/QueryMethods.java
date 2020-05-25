@@ -5,6 +5,11 @@
  */
 package se.database;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -443,7 +448,7 @@ public class QueryMethods {
 
             con = MyConnection.getConnection();
             Statement stmt = con.createStatement();
-            stmt.execute("SELECT * FROM books");
+            stmt.execute("SELECT * FROM e_books");
 
             ResultSet results = stmt.getResultSet();
             while (results.next()) {
@@ -889,6 +894,34 @@ public class QueryMethods {
             System.out.println(e.toString() + " getAllCards()");
         }
         return allCardsList;
+    }
+    
+    public ArrayList<LibraryCards> getGuestsLibraryCardsByGuestList(ArrayList<Guest> guests){
+        
+        ArrayList<LibraryCards> cards = new ArrayList<>();
+        con = MyConnection.getConnection();
+        for(Guest g : guests){
+        String query = "select guests_id, concat(first_name, ' ', last_name)as fullname,\n"
+                +"entry, category from librarycards inner join guests on guests_id = guests.id WHERE guests.id = "+ g.getId();
+        
+        try{
+            Statement statement = con.createStatement();
+            rs = statement.executeQuery(query);
+            
+            while(rs.next()){
+                LibraryCards libraryCard = new LibraryCards();
+                libraryCard.setGuestId(rs.getInt(1));
+                libraryCard.setFullname(rs.getString(2));
+                libraryCard.setEntry(rs.getInt(3));
+                libraryCard.setCategory(rs.getString(4));
+                cards.add(libraryCard);
+            }
+        }catch(SQLException e){
+            
+        }
+        
+                }
+        return cards;
     }
 
     // entry is a boolean type in database,where 0 = false which means unblocked card 
@@ -1359,6 +1392,7 @@ public class QueryMethods {
         return borrowedBooks;
     }
 
+
     public ArrayList<Books> getBorrowedBooksByCardId(int libraryCardId) {
         String query = "select * from books join borrowed_books on book_id = "
                 + "books.id where librarycard_id = " + libraryCardId + ";";
@@ -1471,6 +1505,35 @@ public class QueryMethods {
         }
     }
     
+    public void bookSeminar(Guest g, Seminar s) {
+        
+        try {
+            MyConnection tryConnection = new MyConnection();
+            Connection conn = tryConnection.getConnection();
+            Statement stmt = conn.createStatement();
+            
+            // receiving max num of guests
+            ResultSet rs = stmt.executeQuery("SELECT CountVisitor FROM seminarium WHERE id = " + s.getId() + "");
+            rs.next();
+            int nrOfVisitors = rs.getInt("CountVisitor");
+            
+            // checking for available spaces
+            if((nrOfVisitors - 1) >= 0) {
+                // inserting guest if there are available spaces
+                stmt.execute("INSERT INTO bookings(seminar_id, guest_id) VALUES(" + s.getId() + ", " + g.getId() + ")"); // insert guest into bokings table
+                stmt.execute("UPDATE seminarium SET CountVisitor = " + (nrOfVisitors - 1) + " WHERE id = " + s.getId() + ""); // update seminarium visitors
+                JOptionPane.showMessageDialog(null, "Bokningen är genomfört!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Seminarium är fullbokad.");
+            }
+
+            stmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println("Something went wrong while booking seminar: " + e);
+        }
+    }
+    
     public ArrayList<Books> groupAllBooksByIsbn() {
         String query = "Select title, author, isbn, publisher, purchase_price, category,\n" +
                       " placement, books.desc, count(*) as copies from books group by isbn;";
@@ -1520,14 +1583,18 @@ public class QueryMethods {
                 book.setTitle(rs.getString(2));
                 book.setAuthor(rs.getString(3));
                 return book;
+
             }
             
         } catch (SQLException ex) {
             Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+
         book.setId(-1);
         return book;
     }
+
 
 
 }
