@@ -716,9 +716,9 @@ public class QueryMethods {
             System.out.println("Creating statement");
             Statement stmt = con.createStatement();
             System.out.println("Executing query");
-            stmt.execute("INSERT INTO books(title, author, isbn, publisher, purchase_price, category, placement,  descript)"
+            stmt.execute("INSERT INTO books(title, author, isbn, publisher, purchase_price, category, placement,  descript, date)"
                     + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
-                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', " + " '" + b.getDesc() + "')");
+                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', " + " '" + b.getDesc() +" '" + b.getDate() + "')");
             stmt.close();
             con.close();
 
