@@ -1206,7 +1206,6 @@ public class QueryMethods {
 
             }
 
-            ps.close();
             con.close();
             rs.close();
 

@@ -198,7 +198,7 @@ public class UserView extends javax.swing.JFrame {
     public void fillMyBorrowingsTable() {
         DefaultTableModel model = (DefaultTableModel) jtableMyBorrowings.getModel();
         model.setRowCount(0);
-        model.setColumnCount(4);
+        model.setColumnCount(5);
         int libraryCardId = qm.findLibrarycardByEmail(this.guestEmail).getId();
         ArrayList<Date> borrowedBooksDates = new ArrayList<>();
         Date toDayDate = new Date();
@@ -229,19 +229,56 @@ public class UserView extends javax.swing.JFrame {
             model.addRow(new Object[]{qm.getBorrowedBooksByCardId(libraryCardId).get(i).getTitle(),
                 qm.getBorrowedBooksByCardId(libraryCardId).get(i).getAuthor(),
                 qm.getBorrowedBooksByCardId(libraryCardId).get(i).getIsbn(),
+                "Bok",
                 qm.getAllBorrowedBooks().get(i).getReturnDate() + "  " + returnBookReminder});
 
         }
+        
+        // ebooks
+        ArrayList<BorrowEBooks> borrowedEBooks = qm.getAllBorrowedEBooks();
+        ArrayList<E_Books> allEBooks = qm.findEBooks();
+        ArrayList<BorrowEBooks> borrowedEBooksByCardId = new ArrayList<>();
+        ArrayList<E_Books> borrowedEBooksByCardIdInfo = new ArrayList<>();
+        for(int i = 0 ; i < borrowedEBooks.size() ; i++){
+            if(borrowedEBooks.get(i).getLibraryCardId() == libraryCardId){
+                borrowedEBooksByCardId.add(borrowedEBooks.get(i));
+            }
+        }
+        for(int i = 0 ; i < allEBooks.size() ; i++){
+            for( int j = 0 ; j < borrowedEBooksByCardId.size() ; j++){
+                if(allEBooks.get(i).getId() == borrowedEBooksByCardId.get(j).geteBookId()){
+                    borrowedEBooksByCardIdInfo.add(allEBooks.get(i));
 
-//        for (int i = 0; i < qm.getAllEBooks().size(); i++) {
-//            model.addRow(new Object[]{qm.getAllEBooks().get(i).getTitle(), qm.getAllEBooks().get(i).getAuthor(),
-//                qm.getAllEBooks().get(i).getIsbn(), qm.getAllEBooks().get(i).getPublisher(), 
-//                qm.getAllEBooks().get(i).getCategory(), "E-Bok"});
-//        }
+                }
+            }
+        }
+        
+        for (int i = 0; i < borrowedEBooksByCardId.size(); i++) {
+            int dayDiff = borrowedEBooksByCardId.get(i).getReturnDate().getDay() - toDayDate.getDay();
+            int monthDiff = borrowedEBooksByCardId.get(i).getReturnDate().getMonth() - toDayDate.getMonth();
+
+            if (dayDiff == 1 && monthDiff == 0) {
+                returnBookReminder = "1 dag kvar";
+            }else if (dayDiff == 2 && monthDiff == 0) {
+                returnBookReminder = "2 dagar kvar";
+            }else {
+                returnBookReminder = "";
+            }
+
+            model.addRow(new Object[]{borrowedEBooksByCardIdInfo.get(i).getTitle(),
+                                      borrowedEBooksByCardIdInfo.get(i).getAuthor(),
+                                      borrowedEBooksByCardIdInfo.get(i).getIsbn(),
+                                      "E-Bok",
+                                       borrowedEBooksByCardId.get(i).getReturnDate() +"  "+ returnBookReminder });
+
+        }
+
+       
         jtableMyBorrowings.getColumnModel().getColumn(0).setHeaderValue("Titel");
         jtableMyBorrowings.getColumnModel().getColumn(1).setHeaderValue("Författare");
         jtableMyBorrowings.getColumnModel().getColumn(2).setHeaderValue("ISBN");
-        jtableMyBorrowings.getColumnModel().getColumn(3).setHeaderValue("Återlämning");
+        jtableMyBorrowings.getColumnModel().getColumn(3).setHeaderValue("Typ");
+        jtableMyBorrowings.getColumnModel().getColumn(4).setHeaderValue("Återlämning");
 
     }
 
