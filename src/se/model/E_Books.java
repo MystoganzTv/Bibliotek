@@ -5,6 +5,8 @@
  */
 package se.model;
 
+import java.util.Date;
+
 /**
  *
  * @author annaz
@@ -26,6 +28,8 @@ public class E_Books {
     private String category;
     
     private String desc;
+    
+    private Date date;
     
     public E_Books(int id, String title, String author, String isbn, String publisher, double purchase_price, String category, String desc) {
 
@@ -52,6 +56,27 @@ public class E_Books {
         this.desc = desc;
        
     }
+
+    public E_Books(String title, String author, String isbn, String publisher, double purchase_price, String category, String desc, Date date) {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.publisher = publisher;
+        this.purchase_price = purchase_price;
+        this.category = category;
+        this.desc = desc;
+        this.date = date;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    
+    
     
     public E_Books() {
         
