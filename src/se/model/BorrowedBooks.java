@@ -69,6 +69,9 @@ public class BorrowedBooks {
         this.returnDate = returnDate;
     }
     
-    
+     @Override
+    public String toString() {
+        return bookId + "";
+    }
     
 }

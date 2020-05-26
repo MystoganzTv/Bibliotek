@@ -69,7 +69,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jTabbedPaneReport" max="32767" attributes="0"/>
+                          <Component id="jTabbedPaneReport" pref="604" max="32767" attributes="0"/>
                           <Component id="jPanelInvisible" max="32767" attributes="0"/>
                       </Group>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>

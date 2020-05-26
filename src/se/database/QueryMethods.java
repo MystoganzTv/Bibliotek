@@ -26,6 +26,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import se.model.Admin;
 import se.model.Books;
+import se.model.BorrowEBooks;
 import se.model.BorrowedBooks;
 import se.model.Category;
 import se.model.DeletedBook;
@@ -1313,7 +1314,8 @@ public class QueryMethods {
 
     public void borrowEBooks(int eBookId, int libraryCardId) {
 
-        String query = "insert into borrowed_ebooks(ebook_id, librarycard_id) values(? , ?);";
+        String query = "insert into borrowed_ebooks(ebook_id, librarycard_id,"
+                + " return_date) values(? , ? , date_add(curdate(), interval 31 day));";
         con = MyConnection.getConnection();
 
         try {
@@ -1388,8 +1390,47 @@ public class QueryMethods {
 
         } catch (Exception e) {
             System.out.println(e.toString() + " getAllBorrowedBooks()");
-        }
+        }finally{
+            try {
+                       con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+            }
+ }
         return borrowedBooks;
+    }
+    
+    public ArrayList<BorrowEBooks> getAllBorrowedEBooks() {
+        String query = "select * from borrowed_ebooks;";
+
+        ArrayList<BorrowEBooks> borrowedEBooks = new ArrayList<BorrowEBooks>();
+        BorrowEBooks borrowedEBook;
+
+        con = MyConnection.getConnection();
+        PreparedStatement ps;
+
+        try {
+            ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                borrowedEBook = new BorrowEBooks(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getDate(4),
+                        rs.getDate(5));
+                borrowedEBooks.add(borrowedEBook);
+            }
+            return borrowedEBooks;
+        } catch (Exception e) {
+            System.out.println(e.toString() + " getAllBorrowedBooks()");
+        }finally{
+            try {
+                       con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+            }
+     }
+        return borrowedEBooks;
     }
 
 
