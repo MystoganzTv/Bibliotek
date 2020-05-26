@@ -453,7 +453,7 @@ public class QueryMethods {
                         results.getDouble("purchase_price"),
                         results.getString("category"),
                         results.getString("placement"),
-                        results.getString("desc"));
+                        results.getString("description"));
                 books.add(currentBooks);
                 currentBooks = null;
             }
@@ -746,9 +746,9 @@ public class QueryMethods {
             System.out.println("Creating statement");
             Statement stmt = con.createStatement();
             System.out.println("Executing query");
-            stmt.execute("INSERT INTO books(title, author, isbn, publisher, purchase_price, category, placement,  descript, date)"
+            stmt.execute("INSERT INTO books(title, author, isbn, publisher, purchase_price, category, placement, description)"
                     + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
-                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', " + " '" + b.getDesc() + " '" + b.getDate() + "')");
+                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', '" + b.getDesc() + "')");
             stmt.close();
             con.close();
 
