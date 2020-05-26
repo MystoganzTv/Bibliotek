@@ -71,8 +71,7 @@ public class Books {
         this.copies = copies;
     }
     
-     public Books(int id, String title, String author, String isbn, String publisher, double purchase_price, String category, String placement, String desc, int copies, Date date) {
-        this.id = id;
+     public Books(String title, String author, String isbn, String publisher, double purchase_price, String category, String placement, String desc, int copies, Date date) {
         this.title = title;
         this.author = author;
         this.isbn = isbn;
@@ -90,11 +89,11 @@ public class Books {
     }
     
      public Date getDate() {
-        return date(Calendar.getInstance());
+        return date;
     }
 
     public void setDate(Date date) {
-        this.date = date(Calendar.getInstance());
+        this.date = date;
     }
 
 
