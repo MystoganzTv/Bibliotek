@@ -368,6 +368,36 @@ public class QueryMethods {
         return null;
     }
 
+    public Guest findGuestByMail(String email) {
+        Guest g = new Guest();
+
+        try {
+
+            con = MyConnection.getConnection();
+            Statement stmt = con.createStatement();
+            stmt.execute("SELECT * FROM guests WHERE email = '" + email + "'");
+
+            ResultSet results = stmt.getResultSet();
+            while (results.next()) {
+                g = new Guest(Integer.parseInt(results.getString("id")),
+                        results.getString("first_name"),
+                        results.getString("last_name"),
+                        results.getString("person_id"),
+                        results.getString("password"),
+                        results.getString("email"));
+            }
+
+            con.close();
+            stmt.close();
+
+            return g;
+        } catch (SQLException e) {
+            System.out.println("Something went wrong in findGuestByMail(): " + e);
+        }
+
+        return null;
+    }
+
     public ArrayList<Guest> findGuests() {
 
         try {
@@ -438,7 +468,7 @@ public class QueryMethods {
 
         return null;
     }
-    
+
     public ArrayList<E_Books> findEBooks() {
 
         try {
@@ -458,7 +488,7 @@ public class QueryMethods {
                         results.getString("isbn"),
                         results.getString("publisher"),
                         results.getDouble("purchase_price"),
-                        results.getString("category"),                        
+                        results.getString("category"),
                         results.getString("desc"));
                 eBooks.add(currentEBooks);
                 currentEBooks = null;
@@ -582,7 +612,7 @@ public class QueryMethods {
                 book.setIsbn(rs.getString(4));
                 book.setPublisher(rs.getString(5));
                 book.setPurchase_price(rs.getDouble(6));
-                book.setCategory(rs.getString(7));                
+                book.setCategory(rs.getString(7));
                 book.setDesc(rs.getString(9));
                 e_books.add(book);
 
@@ -718,7 +748,7 @@ public class QueryMethods {
             System.out.println("Executing query");
             stmt.execute("INSERT INTO books(title, author, isbn, publisher, purchase_price, category, placement,  descript, date)"
                     + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
-                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', " + " '" + b.getDesc() +" '" + b.getDate() + "')");
+                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', " + " '" + b.getDesc() + " '" + b.getDate() + "')");
             stmt.close();
             con.close();
 
@@ -769,7 +799,7 @@ public class QueryMethods {
             Statement stmt = con.createStatement();
             stmt.execute("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category, descript) "
                     + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
-                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '"  + b.getDesc() + "')");
+                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getDesc() + "')");
             stmt.close();
             con.close();
 
@@ -895,32 +925,32 @@ public class QueryMethods {
         }
         return allCardsList;
     }
-    
-    public ArrayList<LibraryCards> getGuestsLibraryCardsByGuestList(ArrayList<Guest> guests){
-        
+
+    public ArrayList<LibraryCards> getGuestsLibraryCardsByGuestList(ArrayList<Guest> guests) {
+
         ArrayList<LibraryCards> cards = new ArrayList<>();
         con = MyConnection.getConnection();
-        for(Guest g : guests){
-        String query = "select guests_id, concat(first_name, ' ', last_name)as fullname,\n"
-                +"entry, category from librarycards inner join guests on guests_id = guests.id WHERE guests.id = "+ g.getId();
-        
-        try{
-            Statement statement = con.createStatement();
-            rs = statement.executeQuery(query);
-            
-            while(rs.next()){
-                LibraryCards libraryCard = new LibraryCards();
-                libraryCard.setGuestId(rs.getInt(1));
-                libraryCard.setFullname(rs.getString(2));
-                libraryCard.setEntry(rs.getInt(3));
-                libraryCard.setCategory(rs.getString(4));
-                cards.add(libraryCard);
-            }
-        }catch(SQLException e){
-            
-        }
-        
+        for (Guest g : guests) {
+            String query = "select guests_id, concat(first_name, ' ', last_name)as fullname,\n"
+                    + "entry, category from librarycards inner join guests on guests_id = guests.id WHERE guests.id = " + g.getId();
+
+            try {
+                Statement statement = con.createStatement();
+                rs = statement.executeQuery(query);
+
+                while (rs.next()) {
+                    LibraryCards libraryCard = new LibraryCards();
+                    libraryCard.setGuestId(rs.getInt(1));
+                    libraryCard.setFullname(rs.getString(2));
+                    libraryCard.setEntry(rs.getInt(3));
+                    libraryCard.setCategory(rs.getString(4));
+                    cards.add(libraryCard);
                 }
+            } catch (SQLException e) {
+
+            }
+
+        }
         return cards;
     }
 
@@ -1113,9 +1143,9 @@ public class QueryMethods {
                 book.setPlacement(rs.getString(8));
                 book.setDesc(rs.getString(9));
                 books.add(book);
-                
+
             }
-                return books;
+            return books;
         } catch (SQLException e) {
 
             System.out.println(e.getMessage());
@@ -1124,8 +1154,7 @@ public class QueryMethods {
         return null;
 
     }
-    
-    
+
     // Returning NULL if no book found, Catch nullpointer when trying to find book!
     public E_Books findEBookByIsbn(String isbn) {
         String query = "SELECT * FROM e_books WHERE isbn = '" + isbn + "'";
@@ -1143,7 +1172,7 @@ public class QueryMethods {
                 ebook.setIsbn(rs.getString(4));
                 ebook.setPublisher(rs.getString(5));
                 ebook.setPurchase_price(rs.getDouble(6));
-                ebook.setCategory(rs.getString(7));                
+                ebook.setCategory(rs.getString(7));
                 ebook.setDesc(rs.getString(9));
                 return ebook;
             }
@@ -1392,7 +1421,6 @@ public class QueryMethods {
         return borrowedBooks;
     }
 
-
     public ArrayList<Books> getBorrowedBooksByCardId(int libraryCardId) {
         String query = "select * from books join borrowed_books on book_id = "
                 + "books.id where librarycard_id = " + libraryCardId + ";";
@@ -1459,7 +1487,7 @@ public class QueryMethods {
 
             ResultSet results = stmt.getResultSet();
             while (results.next()) {
-                currentSeminar = new Seminar(results.getInt("id"), 
+                currentSeminar = new Seminar(results.getInt("id"),
                         results.getString("Title"),
                         results.getString("Speaker"),
                         results.getString("Location"),
@@ -1478,6 +1506,38 @@ public class QueryMethods {
             System.out.println("Something went wrong: " + e);
         }
         return seminar;
+    }
+
+    public Seminar findSeminarByTitle(String title) {
+        Seminar s = new Seminar();
+
+        try {
+
+            con = MyConnection.getConnection();
+            Statement stmt = con.createStatement();
+            stmt.execute("SELECT * FROM seminarium WHERE Title = '" + title + "'");
+
+            ResultSet results = stmt.getResultSet();
+            while (results.next()) {
+                s = new Seminar(Integer.parseInt(results.getString("id")),
+                        results.getString("Title"),
+                        results.getString("Speaker"),
+                        results.getString("Location"),
+                        results.getString("StartDate"),
+                        results.getInt("CountVisitor"),
+                        results.getString("Description"),
+                        results.getString("Program"));
+            }
+
+            con.close();
+            stmt.close();
+
+            return s;
+        } catch (SQLException e) {
+            System.out.println("Something went wrong in findSeminarByTitle(): " + e);
+        }
+
+        return null;
     }
 
     public void addSeminar(Seminar seminar) {
@@ -1504,21 +1564,21 @@ public class QueryMethods {
             System.out.println("Something went wrong while adding a seminar: " + e);
         }
     }
-    
+
     public void bookSeminar(Guest g, Seminar s) {
-        
+
         try {
             MyConnection tryConnection = new MyConnection();
             Connection conn = tryConnection.getConnection();
             Statement stmt = conn.createStatement();
-            
+
             // receiving max num of guests
             ResultSet rs = stmt.executeQuery("SELECT CountVisitor FROM seminarium WHERE id = " + s.getId() + "");
             rs.next();
             int nrOfVisitors = rs.getInt("CountVisitor");
-            
+
             // checking for available spaces
-            if((nrOfVisitors - 1) >= 0) {
+            if ((nrOfVisitors - 1) >= 0) {
                 // inserting guest if there are available spaces
                 stmt.execute("INSERT INTO bookings(seminar_id, guest_id) VALUES(" + s.getId() + ", " + g.getId() + ")"); // insert guest into bokings table
                 stmt.execute("UPDATE seminarium SET CountVisitor = " + (nrOfVisitors - 1) + " WHERE id = " + s.getId() + ""); // update seminarium visitors
@@ -1533,10 +1593,10 @@ public class QueryMethods {
             System.out.println("Something went wrong while booking seminar: " + e);
         }
     }
-    
+
     public ArrayList<Books> groupAllBooksByIsbn() {
-        String query = "Select title, author, isbn, publisher, purchase_price, category,\n" +
-                      " placement, books.desc, count(*) as copies from books group by isbn;";
+        String query = "Select title, author, isbn, publisher, purchase_price, category,\n"
+                + " placement, books.desc, count(*) as copies from books group by isbn;";
 
         ArrayList<Books> borrowedBooks = new ArrayList<Books>();
         Books list;
@@ -1566,35 +1626,33 @@ public class QueryMethods {
         }
         return borrowedBooks;
     }
-    
-    
-    public Books findBorrowedBookById(int id){
+
+    public Books findBorrowedBookById(int id) {
         con = MyConnection.getConnection();
-        
+
         String query = "SELECT book_id, title, author  FROM borrowed_books INNER JOIN books ON borrowed_books.book_id = books.id WHERE book_id =" + id;
         Books book = new Books();
         try {
             Statement statement = con.createStatement();
             rs = statement.executeQuery(query);
-            
-            while(rs.next()){
-                
+
+            while (rs.next()) {
+
                 book.setId(rs.getInt(1));
                 book.setTitle(rs.getString(2));
                 book.setAuthor(rs.getString(3));
                 return book;
 
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
         book.setId(-1);
         return book;
     }
-    
+
     public void readBook(int idEbook) throws FileNotFoundException, IOException {
         InputStream input = null;
         String query = "SELECT book_file FROM e_books_files where id_e_book =?";
@@ -1604,25 +1662,24 @@ public class QueryMethods {
             ps = con.prepareStatement(query);
             ps.setInt(1, idEbook);
             rs = ps.executeQuery();
-            
-            File bookFile = new File ("ebooktest");
+
+            File bookFile = new File("ebooktest");
             FileOutputStream output = new FileOutputStream(bookFile);
-            
-            if(rs.next()){
+
+            if (rs.next()) {
                 input = rs.getBinaryStream("e_books_files");
-                
-                byte[]buffer = new byte[1024];
-                
-                while(input.read(buffer)>0){
-                    
+
+                byte[] buffer = new byte[1024];
+
+                while (input.read(buffer) > 0) {
+
                     output.write(buffer);
-                   
+
                 }
-                
 
             }
 
-}       catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
