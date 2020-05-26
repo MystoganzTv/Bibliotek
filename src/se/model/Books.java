@@ -5,6 +5,9 @@
  */
 package se.model;
 
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  *
  * @author annaz
@@ -30,6 +33,8 @@ public class Books {
     private String desc;
     
     private int copies;
+    
+    private Date date;
 
     public Books(int id, String title, String author, String isbn, String publisher, double purchase_price, String category, String placement, String desc) {
         this.id = id;
@@ -65,10 +70,33 @@ public class Books {
         this.desc = desc;
         this.copies = copies;
     }
+    
+     public Books(int id, String title, String author, String isbn, String publisher, double purchase_price, String category, String placement, String desc, int copies, Date date) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.publisher = publisher;
+        this.purchase_price = purchase_price;
+        this.category = category;
+        this.placement = placement;
+        this.desc = desc;
+        this.copies = copies;
+        this.date = date;       
+    }
 
     public Books() {
 
     }
+    
+     public Date getDate() {
+        return date(Calendar.getInstance());
+    }
+
+    public void setDate(Date date) {
+        this.date = date(Calendar.getInstance());
+    }
+
 
 
     public String getDesc() {
@@ -156,5 +184,9 @@ public class Books {
         return id + " " + title + " " + author;
     }
     
+
+    private Date date(Calendar instance) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
