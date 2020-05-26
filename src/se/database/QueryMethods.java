@@ -11,19 +11,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import se.model.Admin;
 import se.model.Books;
 import se.model.BorrowedBooks;
@@ -59,6 +55,7 @@ public class QueryMethods {
             ps = con.prepareStatement(query);
             ps.setString(1, email);
             ps.execute();
+            con.close();
         } catch (SQLException e) {
 
         } finally {
@@ -88,6 +85,8 @@ public class QueryMethods {
                     check = false;
                 }
             }
+            statement.close();
+            con.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -125,6 +124,9 @@ public class QueryMethods {
                     JOptionPane.showMessageDialog(null, firstName + " " + lastName + " har registrerats!");
                 }
             }
+
+            ps.close();
+            con.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
@@ -166,6 +168,9 @@ public class QueryMethods {
                 }
             }
 
+            ps.close();
+            con.close();
+
         } catch (SQLException ex) {
             Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -204,6 +209,9 @@ public class QueryMethods {
                     JOptionPane.showMessageDialog(null, firstName + " " + lastName + " har registrerats!");
                 }
             }
+            ps.close();
+            con.close();
+            rs.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
@@ -547,6 +555,9 @@ public class QueryMethods {
             if (rs.next()) {
                 email = rs.getString("email");
             }
+
+            check.close();
+            rs.close();
         } catch (Exception e) {
             System.out.println(e.toString() + " loginChecker()");
         }
@@ -577,6 +588,10 @@ public class QueryMethods {
                 books.add(book);
 
             }
+
+            con.close();
+            ps.close();
+            rs.close();
             return books;
 
         } catch (SQLException e) {
@@ -618,6 +633,10 @@ public class QueryMethods {
 
             }
 
+            rs.close();
+            con.close();
+            ps.close();
+
             return e_books;
 
         } catch (SQLException e) {
@@ -646,8 +665,9 @@ public class QueryMethods {
 
         try {
             ps = con.prepareStatement(deleteEmailQuery);
-
             ps.executeUpdate();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -655,6 +675,8 @@ public class QueryMethods {
             ps = con.prepareStatement(deleteLibraryCard);
             ps.setInt(1, guest.getId());
             ps.executeUpdate();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -662,10 +684,13 @@ public class QueryMethods {
             ps = con.prepareStatement(deleteGuest);
             ps.setInt(1, guest.getId());
             ps.executeUpdate();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
             try {
+                ps.close();
                 con.close();
             } catch (SQLException ex) {
                 Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
@@ -686,6 +711,8 @@ public class QueryMethods {
             ps = con.prepareStatement(deleteEmailQuery);
 
             ps.executeUpdate();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -694,10 +721,13 @@ public class QueryMethods {
             ps = con.prepareStatement(deleteAdmin);
             ps.setInt(1, admin.getId());
             ps.executeUpdate();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
             try {
+                ps.close();
                 con.close();
             } catch (SQLException ex) {
                 Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
@@ -718,6 +748,8 @@ public class QueryMethods {
             ps = con.prepareStatement(deleteEmailQuery);
 
             ps.executeUpdate();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -726,11 +758,14 @@ public class QueryMethods {
             ps = con.prepareStatement(deleteLibrarian);
             ps.setInt(1, librarian.getId());
             ps.executeUpdate();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
             try {
                 con.close();
+                ps.close();
             } catch (SQLException ex) {
                 Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -821,6 +856,8 @@ public class QueryMethods {
             ps = con.prepareStatement(deleteE_BookQuery);
             ps.setInt(1, b.getId());
             ps.executeUpdate();
+            ps.close();
+            con.close();
         } catch (Exception e) {
             System.out.println("Något gick fel när du har försökt att radera denna e-bok: " + e.getMessage());
         }
@@ -919,6 +956,9 @@ public class QueryMethods {
                         rs.getString("category"));
                 allCardsList.add(list);
             }
+            ps.close();
+            con.close();
+            rs.close();
 
         } catch (Exception e) {
             System.out.println(e.toString() + " getAllCards()");
@@ -946,6 +986,8 @@ public class QueryMethods {
                     libraryCard.setCategory(rs.getString(4));
                     cards.add(libraryCard);
                 }
+                rs.close();
+                con.close();
             } catch (SQLException e) {
 
             }
@@ -969,7 +1011,8 @@ public class QueryMethods {
         try {
             ps = con.prepareStatement(query);
             ps.execute();
-
+            ps.close();
+            con.close();
         } catch (Exception e) {
             System.out.println(e.toString() + " updateLibraryCards()");
         }
@@ -1001,11 +1044,15 @@ public class QueryMethods {
                 foundBooks.add(book);
 
             }
+            ps.close();
+            con.close();
+            rs.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
 
             try {
+                ps.close();
                 con.close();
                 rs.close();
             } catch (SQLException ex) {
@@ -1039,12 +1086,16 @@ public class QueryMethods {
 
             }
 
+            ps.close();
+            con.close();
+            rs.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
             try {
                 con.close();
                 rs.close();
+                ps.close();
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -1076,12 +1127,17 @@ public class QueryMethods {
                 foundBooks.add(book);
 
             }
+
+            ps.close();
+            con.close();
+            rs.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
             try {
                 con.close();
                 rs.close();
+                ps.close();
             } catch (SQLException ex) {
                 Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1111,6 +1167,9 @@ public class QueryMethods {
                 return book;
             }
 
+            ps.close();
+            con.close();
+            rs.close();
         } catch (SQLException e) {
 
             System.out.println(e.getMessage());
@@ -1145,6 +1204,11 @@ public class QueryMethods {
                 books.add(book);
 
             }
+
+            ps.close();
+            con.close();
+            rs.close();
+
             return books;
         } catch (SQLException e) {
 
@@ -1177,6 +1241,10 @@ public class QueryMethods {
                 return ebook;
             }
 
+            ps.close();
+            con.close();
+            rs.close();
+
         } catch (SQLException e) {
 
             System.out.println(e.getMessage());
@@ -1207,11 +1275,17 @@ public class QueryMethods {
                 eBook.setCategory(rs.getString(7));
                 foundEBooks.add(eBook);
             }
+
+            ps.close();
+            con.close();
+            rs.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
             try {
                 con.close();
+                ps.close();
+                rs.close();
             } catch (SQLException ex) {
                 Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1241,11 +1315,17 @@ public class QueryMethods {
                 foundEBooks.add(eBook);
             }
 
+            ps.close();
+            con.close();
+            rs.close();
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
             try {
                 con.close();
+                ps.close();
+                rs.close();
             } catch (SQLException ex) {
                 Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1276,11 +1356,17 @@ public class QueryMethods {
                 foundEBooks.add(eBook);
             }
 
+            ps.close();
+            con.close();
+            rs.close();
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
             try {
                 con.close();
+                ps.close();
+                rs.close();
             } catch (SQLException ex) {
                 Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1311,6 +1397,10 @@ public class QueryMethods {
 
             }
 
+            ps.close();
+            con.close();
+            rs.close();
+
         } catch (SQLException ex) {
             Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1328,11 +1418,17 @@ public class QueryMethods {
             ps.setInt(1, bookId);
             ps.setInt(2, libraryCardId);
             ps.execute();
+
+            ps.close();
+            con.close();
+            rs.close();
         } catch (SQLException e) {
 
         } finally {
             try {
                 con.close();
+                ps.close();
+                rs.close();
             } catch (SQLException ex) {
                 Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1350,11 +1446,17 @@ public class QueryMethods {
             ps.setInt(1, eBookId);
             ps.setInt(2, libraryCardId);
             ps.execute();
+
+            ps.close();
+            con.close();
+            rs.close();
         } catch (SQLException e) {
 
         } finally {
             try {
                 con.close();
+                ps.close();
+                rs.close();
             } catch (SQLException ex) {
                 Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1385,6 +1487,9 @@ public class QueryMethods {
                 return libraryCard;
             }
 
+            ps.close();
+            con.close();
+            rs.close();
         } catch (SQLException e) {
 
             System.out.println(e.getMessage() + " finLibraryCardByEmail()");
@@ -1414,6 +1519,10 @@ public class QueryMethods {
                         rs.getDate(5));
                 borrowedBooks.add(list);
             }
+
+            ps.close();
+            con.close();
+            rs.close();
 
         } catch (Exception e) {
             System.out.println(e.toString() + " getAllBorrowedBooks()");
@@ -1446,6 +1555,11 @@ public class QueryMethods {
                         rs.getString(9));
                 borrowedBooks.add(list);
             }
+
+            ps.close();
+            con.close();
+            rs.close();
+
             return borrowedBooks;
 
         } catch (Exception e) {
@@ -1468,6 +1582,9 @@ public class QueryMethods {
             stmt.execute("DELETE FROM borrowed_books WHERE book_id = " + bookId + "");
             System.out.println("Book Removed from borrowed_books");
             //must update books/e_books table in_stock column!
+            ps.close();
+            con.close();
+            stmt.close();
 
         } catch (Exception e) {
             System.out.println("Something went wrong while returning a book: " + e);
@@ -1498,6 +1615,7 @@ public class QueryMethods {
                 seminar.add(currentSeminar);
                 currentSeminar = null;
             }
+            results.close();
             stmt.close();
             conn.close();
 
@@ -1531,6 +1649,7 @@ public class QueryMethods {
 
             con.close();
             stmt.close();
+            results.close();
 
             return s;
         } catch (SQLException e) {
@@ -1589,6 +1708,7 @@ public class QueryMethods {
 
             stmt.close();
             conn.close();
+            rs.close();
         } catch (SQLException e) {
             System.out.println("Something went wrong while booking seminar: " + e);
         }
@@ -1619,6 +1739,11 @@ public class QueryMethods {
                         rs.getInt(9));
                 borrowedBooks.add(list);
             }
+
+            ps.close();
+            con.close();
+            rs.close();
+
             return borrowedBooks;
 
         } catch (Exception e) {
@@ -1641,6 +1766,11 @@ public class QueryMethods {
                 book.setId(rs.getInt(1));
                 book.setTitle(rs.getString(2));
                 book.setAuthor(rs.getString(3));
+
+                ps.close();
+                con.close();
+                rs.close();
+
                 return book;
 
             }
@@ -1679,6 +1809,9 @@ public class QueryMethods {
 
             }
 
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException ex) {
             Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
         }
