@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import se.database.QueryMethods;
 import se.model.Books;
+import se.model.BorrowEBooks;
 import se.model.BorrowedBooks;
 import se.model.E_Books;
 import se.model.Guest;
@@ -34,6 +35,9 @@ public class UserView extends javax.swing.JFrame {
      */
     QueryMethods qm = new QueryMethods();
     private String guestEmail;
+    private ArrayList<Integer> borrowedBooksId = new ArrayList<>();
+    private ArrayList<BorrowEBooks> borrowedEBooks = new ArrayList<>();
+
 
     public UserView() {
         initComponents();
@@ -129,27 +133,46 @@ public class UserView extends javax.swing.JFrame {
                 books.get(i).getCategory(), "Bok", books.get(i).getPlacement()});
         }
 
-        for (int i = 0; i < model.getRowCount(); i++) {
+//        for (int i = 0; i < model.getRowCount(); i++) {
+//            String isbn = (String) model.getValueAt(i, 2);
+//            booksByIsbn = qm.findBooksByIsbn(isbn);
+//            boolean allIsBorrowed = false;
+//
+//            for (int j = 0; j < booksByIsbn.size(); j++) {
+//
+//                if (!borrowedBooksId.contains(booksByIsbn.get(j).getId())) {
+//                    allIsBorrowed = false;
+//                } else {
+//                    allIsBorrowed = true;
+//                }
+//
+//            }
+//
+//            if (allIsBorrowed) {
+//                bookIsAvailable = "Nej";
+//            } else {
+//                bookIsAvailable = "Ja";
+//            }
+//            model.setValueAt(bookIsAvailable, i, 7);
+//        }
+        for (int i = 0 ; i < model.getRowCount() ; i++){
             String isbn = (String) model.getValueAt(i, 2);
             booksByIsbn = qm.findBooksByIsbn(isbn);
-            boolean allIsBorrowed = false;
-
-            for (int j = 0; j < booksByIsbn.size(); j++) {
-
-                if (!borrowedBooksId.contains(booksByIsbn.get(j).getId())) {
-                    allIsBorrowed = false;
-                } else {
-                    allIsBorrowed = true;
-                }
-
-            }
-
-            if (allIsBorrowed) {
-                bookIsAvailable = "Nej";
-            } else {
-                bookIsAvailable = "Ja";
-            }
+            bookIsAvailable = "Ja";
             model.setValueAt(bookIsAvailable, i, 7);
+            int countCopies = 0;
+
+            
+            for (int j = 0 ; j < booksByIsbn.size() ; j ++){
+                if(borrowedBooksId.contains(booksByIsbn.get(j).getId())){
+                    countCopies++;
+                    if(countCopies == booksByIsbn.size()){
+                    bookIsAvailable = "Nej";
+                    model.setValueAt(bookIsAvailable, i, 7); }
+                    
+                }}
+               
+                    
         }
 
         for (int i = 0; i < qm.getAllEBooks().size(); i++) {
@@ -672,6 +695,7 @@ public class UserView extends javax.swing.JFrame {
         String searchWord = jTextFieldSearchSortiment.getText().toLowerCase();
         String bookIsAvailable = "";
         ArrayList<Books> bookListIsbn = qm.groupAllBooksByIsbn();
+        ArrayList<Books> booksByIsbn = new ArrayList<>();
 
         ArrayList<Integer> borrowedBooksId = new ArrayList<>();
         DefaultTableModel model = (DefaultTableModel) jtableSortiment.getModel();
@@ -697,27 +721,46 @@ public class UserView extends javax.swing.JFrame {
                     foundBooks.get(i).getCategory(), "Bok", foundBooks.get(i).getPlacement(), bookIsAvailable});
             }
 
-            for (int i = 0; i < model.getRowCount(); i++) {
-                String isbn = (String) model.getValueAt(i, 2);
-                boolean allIsBorrowed = false;
-                ArrayList<Books> borrowedBooksListIsbn = qm.findBooksByIsbn(isbn);
+//            for (int i = 0; i < model.getRowCount(); i++) {
+//                String isbn = (String) model.getValueAt(i, 2);
+//                boolean allIsBorrowed = false;
+//                ArrayList<Books> borrowedBooksListIsbn = qm.findBooksByIsbn(isbn);
+//
+//                for (int j = 0; j < borrowedBooksListIsbn.size(); j++) {
+//
+//                    if (!borrowedBooksId.contains(borrowedBooksListIsbn.get(j).getId())) {
+//                        allIsBorrowed = false;
+//                    } else {
+//                        allIsBorrowed = true;
+//                    }
+//
+//                }
+//
+//                if (allIsBorrowed) {
+//                    bookIsAvailable = "Nej";
+//                } else {
+//                    bookIsAvailable = "Ja";
+//                }
+//                model.setValueAt(bookIsAvailable, i, 7);
+//            }
+            for (int i = 0 ; i < model.getRowCount() ; i++){
+            String isbn = (String) model.getValueAt(i, 2);
+            booksByIsbn = qm.findBooksByIsbn(isbn);
+            bookIsAvailable = "Ja";
+            model.setValueAt(bookIsAvailable, i, 7);
+            int countCopies = 0;
 
-                for (int j = 0; j < borrowedBooksListIsbn.size(); j++) {
-
-                    if (!borrowedBooksId.contains(borrowedBooksListIsbn.get(j).getId())) {
-                        allIsBorrowed = false;
-                    } else {
-                        allIsBorrowed = true;
-                    }
-
-                }
-
-                if (allIsBorrowed) {
+            
+            for (int j = 0 ; j < booksByIsbn.size() ; j ++){
+                if(borrowedBooksId.contains(booksByIsbn.get(j).getId())){
+                    countCopies++;
+                    if(countCopies == booksByIsbn.size()){
                     bookIsAvailable = "Nej";
-                } else {
-                    bookIsAvailable = "Ja";
-                }
-                model.setValueAt(bookIsAvailable, i, 7);
+                    model.setValueAt(bookIsAvailable, i, 7); }
+                    
+                }}
+               
+                    
             }
 
             for (E_Books ebook : foundeBooks) {
@@ -802,12 +845,19 @@ public class UserView extends javax.swing.JFrame {
 
         DefaultTableModel model = (DefaultTableModel) jtableSortiment.getModel();
         String bookIsbn = model.getValueAt(jtableSortiment.getSelectedRow(), 2).toString();
-        int bookId = 0;
+        ArrayList<Books> bookIdList = new ArrayList<>();
         int eBookId = 0;
+
+        for (int i = 0 ; i < qm.getAllBorrowedBooks().size() ; i++){
+            borrowedBooksId.add(qm.getAllBorrowedBooks().get(i).getBookId());
+        }
+        borrowedEBooks = qm.getAllBorrowedEBooks();
+        
         try {
-            bookId = qm.findBookByIsbn(bookIsbn).getId();
-        } catch (Exception e) {
+            bookIdList = qm.findBooksByIsbn(bookIsbn);
             eBookId = qm.findEBookByIsbn(bookIsbn).getId();
+
+        } catch (Exception e) {
         }
 
         int libraryCardId = qm.findLibrarycardByEmail(this.guestEmail).getId();
@@ -819,11 +869,17 @@ public class UserView extends javax.swing.JFrame {
                 cardIsBlocked = true;
             }
         }
-
+        int countCopies = 0;
         for (int i = 0; i < qm.getAllBorrowedBooks().size(); i++) {
-            if (qm.getAllBorrowedBooks().get(i).getBookId() == bookId) {
-                bookIsLent = true;
+            for ( int j = 0 ; j < bookIdList.size() ; j++){
+                if (qm.getAllBorrowedBooks().get(i).getBookId() == bookIdList.get(j).getId()) {
+                    countCopies ++;
+                    if(countCopies == bookIdList.size()){
+                    bookIsLent = true;
+                    }
+                }
             }
+            
         }
 
         String type = model.getValueAt(jtableSortiment.getSelectedRow(), 5).toString();
@@ -840,7 +896,20 @@ public class UserView extends javax.swing.JFrame {
                         "Bekräftelse", JOptionPane.YES_NO_OPTION);
 
                 if (input == JOptionPane.YES_OPTION) {
-                    qm.borrowBooks(bookId, libraryCardId);
+                        int countBookCopies = 0;
+
+                        for(int j = 0 ; j < bookIdList.size() ; j++){
+
+                            if(!borrowedBooksId.contains(bookIdList.get(j).getId())){
+                                countBookCopies++;
+
+                                if(countBookCopies == 1){
+                                qm.borrowBooks(bookIdList.get(j).getId(), libraryCardId);
+
+                                }
+                            }
+                        }
+                      
                 }
             }
         }
@@ -853,11 +922,24 @@ public class UserView extends javax.swing.JFrame {
                         "Bekräftelse", JOptionPane.YES_NO_OPTION);
 
                 if (input == JOptionPane.YES_OPTION) {
-                    qm.borrowEBooks(eBookId, libraryCardId);
+                        System.out.println(eBookId +" libraryCard: " +libraryCardId);
+                        boolean matchedEBook = false;
+                    for(int i = 0 ; i < borrowedEBooks.size() ; i++){
+                        if(borrowedEBooks.get(i).geteBookId() == eBookId && borrowedEBooks.get(i).getLibraryCardId() == libraryCardId){
+                            matchedEBook = true;
+                        }                       
+                    }
+                    
+                    if(matchedEBook){
+                        JOptionPane.showMessageDialog(this, "Du har redan lånat E-Boken");
+                    }else{
+                    qm.borrowEBooks(eBookId, libraryCardId);   
+                    }
                 }
             }
 
         }
+        jbtnUpdate.doClick();
     }//GEN-LAST:event_jbtnBorrowActionPerformed
 
     private void jbtnAboutBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAboutBookActionPerformed
