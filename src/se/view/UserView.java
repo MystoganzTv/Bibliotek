@@ -43,7 +43,7 @@ public class UserView extends javax.swing.JFrame {
 
         jTextFieldSearchSortiment.setToolTipText("Skriv titel, författare eller kategori");
 
-        //fillMyBorrowingsTable();
+        fillMyBorrowingsTable();
         fillSeminarsTable();
     }
 
