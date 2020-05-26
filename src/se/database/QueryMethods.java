@@ -748,11 +748,7 @@ public class QueryMethods {
             System.out.println("Executing query");
             stmt.execute("INSERT INTO books(title, author, isbn, publisher, purchase_price, category, placement, description)"
                     + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
-
-                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', '" + b.getDesc()  + "')");
-
-                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', '" + b.getDesc()  + "')");
-
+                    + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', '" + b.getDesc() + "')");
             stmt.close();
             con.close();
 
