@@ -347,8 +347,8 @@ public class AddBook extends javax.swing.JFrame {
         String title = jFieldTitle.getText().replace("'", "´");
         String author = jFieldAuthor.getText();
         String isbn = txtISBN.getText();
-        String desc = jFieldDescription.getText().replaceAll("'", "\\'");
-        String publisher = jFieldPublisher.getText().replaceAll("'", "\\'");
+        String desc = jFieldDescription.getText();//.replaceAll("'", "\\'");
+        String publisher = jFieldPublisher.getText();//.replaceAll("'", "\\'");
         double purchasePrice = Double.parseDouble(jFieldPurchasePrice.getText());
         String bookType = boxType.getSelectedItem().toString().toLowerCase();
         String category = boxCategory.getSelectedItem().toString().trim();
