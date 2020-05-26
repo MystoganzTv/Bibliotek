@@ -58,7 +58,7 @@ public class AdminHomePage extends javax.swing.JFrame {
     
     private ArrayList<Books> books;
     private ArrayList<E_Books> eBooks;
-    private String[] colNamesSort = {"Titel", "Författare", "Kategory", "Pris", "Typ"};
+    private String[] colNamesSort = {"Titel", "Författare", "Kategory", "Pris", "Inläggnings Datum", "Typ"};
     
         
     private PreparedStatement ps;
@@ -172,12 +172,12 @@ public class AdminHomePage extends javax.swing.JFrame {
         
         for (int i = 0; i < books.size(); i++) {            
             model.addRow(new Object[]{ books.get(i).getTitle(), books.get(i).getAuthor(),
-                 books.get(i).getCategory(), books.get(i).getPurchase_price(), bookType});
+                 books.get(i).getCategory(), books.get(i).getPurchase_price(), books.get(i).getDate(), bookType});
         }
         
         for (int i = 0; i < eBooks.size(); i++) {
             model.addRow(new Object[]{eBooks.get(i).getTitle(), eBooks.get(i).getAuthor(),
-                  eBooks.get(i).getCategory(), eBooks.get(i).getPurchase_price(), ebookType });
+                  eBooks.get(i).getCategory(), eBooks.get(i).getPurchase_price(),eBooks.get(i).getDate(), ebookType });
         }
         
         StockTable.setModel(model);

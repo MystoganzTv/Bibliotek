@@ -21,6 +21,8 @@ import se.model.Books;
 import se.model.BorrowEBooks;
 import se.model.BorrowedBooks;
 import se.model.E_Books;
+import se.model.Guest;
+import se.model.Seminar;
 
 /**
  *
@@ -46,7 +48,7 @@ public class UserView extends javax.swing.JFrame {
         jTextFieldSearchSortiment.setToolTipText("Skriv titel, författare eller kategori");
 
         fillMyBorrowingsTable();
-
+        fillSeminarsTable();
     }
 
     public UserView(String guestEmail) {
@@ -54,7 +56,7 @@ public class UserView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         jPanelInvisible.setVisible(false);
         fillSortimentTable();
-
+        fillSeminarsTable();
         jTextFieldSearchSortiment.setToolTipText("Skriv titel, författare eller kategori");
 
         this.guestEmail = guestEmail;
@@ -79,6 +81,30 @@ public class UserView extends javax.swing.JFrame {
         String lastName = guestFullName.substring(indexOfSpace + 1, indexOfSpace + 2).toUpperCase()
                 + guestFullName.substring(indexOfSpace + 2);
         return firstName + " " + lastName;
+    }
+
+    public void fillSeminarsTable() {
+        DefaultTableModel model = (DefaultTableModel) seminarsTable.getModel();
+        model.setRowCount(0);
+        model.setColumnCount(7);
+        ArrayList<Seminar> seminars = qm.findSeminar();
+
+        for (int i = 0; i < seminars.size(); i++) {
+            model.addRow(new Object[]{seminars.get(i).getTitle(), seminars.get(i).getSpeaker(),
+                seminars.get(i).getLocation(), seminars.get(i).getStartDate(),
+                seminars.get(i).getCountVisitor(), seminars.get(i).getSeminariumDescription(),
+                seminars.get(i).getProgramDescription()});
+        }
+        
+        seminarsTable.getColumnModel().getColumn(0).setHeaderValue("Titel");
+        seminarsTable.getColumnModel().getColumn(1).setHeaderValue("Talare");
+        seminarsTable.getColumnModel().getColumn(2).setHeaderValue("Plats");
+        seminarsTable.getColumnModel().getColumn(3).setHeaderValue("Start");
+        seminarsTable.getColumnModel().getColumn(4).setHeaderValue("Platser Kvar");
+        seminarsTable.getColumnModel().getColumn(5).setHeaderValue("Beskrivning");
+        seminarsTable.getColumnModel().getColumn(6).setHeaderValue("Program");
+        
+        seminarsTable.setModel(model);
     }
 
     public void fillSortimentTable() {
@@ -241,7 +267,7 @@ public class UserView extends javax.swing.JFrame {
         jTabbedPaneReport = new javax.swing.JTabbedPane();
         jPanelTabBokaSeminarium = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        BookSeminariumTable = new javax.swing.JTable();
+        seminarsTable = new javax.swing.JTable();
         jbtnReserve = new javax.swing.JButton();
         jPanelTabBookings = new javax.swing.JPanel();
         jLabelSearchBookingsText = new javax.swing.JLabel();
@@ -364,7 +390,7 @@ public class UserView extends javax.swing.JFrame {
         jTabbedPaneReport.setForeground(new java.awt.Color(105, 131, 170));
         jTabbedPaneReport.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
 
-        BookSeminariumTable.setModel(new javax.swing.table.DefaultTableModel(
+        seminarsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -375,7 +401,7 @@ public class UserView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane7.setViewportView(BookSeminariumTable);
+        jScrollPane7.setViewportView(seminarsTable);
 
         jbtnReserve.setText("Boka");
         jbtnReserve.addActionListener(new java.awt.event.ActionListener() {
@@ -626,7 +652,7 @@ public class UserView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTabbedPaneReport)
+                        .addComponent(jTabbedPaneReport, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
                         .addComponent(jPanelInvisible, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabel1))
                 .addGap(109, 109, 109)
@@ -958,7 +984,15 @@ public class UserView extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnEraseMyReservationsActionPerformed
 
     private void jbtnReserveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnReserveActionPerformed
-        // TODO add your handling code here:
+        int selection = seminarsTable.getSelectedRow();
+        String title = seminarsTable.getModel().getValueAt(selection, 0).toString();
+        System.out.println(title);
+
+        Guest g = qm.findGuestByMail(guestEmail);
+        Seminar s = qm.findSeminarByTitle(title);
+
+        qm.bookSeminar(g, s);
+        fillSeminarsTable();
     }//GEN-LAST:event_jbtnReserveActionPerformed
 
     /**
@@ -997,7 +1031,6 @@ public class UserView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable BookSeminariumTable;
     private javax.swing.JTable MyReservationsTable;
     private javax.swing.JButton btnClose;
     private javax.swing.JLabel jLabel1;
@@ -1031,5 +1064,6 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JButton jbtnUpdateMyReservations;
     private javax.swing.JTable jtableMyBorrowings;
     private javax.swing.JTable jtableSortiment;
+    private javax.swing.JTable seminarsTable;
     // End of variables declaration//GEN-END:variables
 }
