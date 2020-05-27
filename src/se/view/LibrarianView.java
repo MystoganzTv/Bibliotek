@@ -34,7 +34,7 @@ import se.model.LibraryCards;
 public class LibrarianView extends javax.swing.JFrame {
 
     private QueryMethods queryMethods;
-    private String[] colNames = {"Id", "Titel", "Författare", "ISBN", "Förlag", "Inköp Pris", "Kategori", "Placering"};
+    private String[] colNames = {"Id", "Titel", "Författare", "ISBN", "Förlag", "Inköp Pris", "Kategori", "Placering", "Typ"};
     private DefaultTableModel model = new DefaultTableModel(colNames, 0);
     private QueryMethods qMethods = new QueryMethods();
     private ArrayList<Books> books;
@@ -114,7 +114,16 @@ public class LibrarianView extends javax.swing.JFrame {
         model.setRowCount(0);
         for (int i = 0; i < books.size(); i++) {
             model.addRow(new Object[]{books.get(i).getId(), books.get(i).getTitle(), books.get(i).getAuthor(),
-                books.get(i).getIsbn(), books.get(i).getPublisher(), books.get(i).getPurchase_price(), books.get(i).getCategory(),books.get(i).getPlacement()});
+                books.get(i).getIsbn(), books.get(i).getPublisher(), books.get(i).getPurchase_price(),
+                books.get(i).getCategory(),books.get(i).getPlacement(), "Bok"});
+        }
+        
+        for (int i = 0; i < queryMethods.getAllEBooks().size(); i++) {
+            model.addRow(new Object[]{queryMethods.getAllEBooks().get(i).getId(),
+                queryMethods.getAllEBooks().get(i).getTitle(), queryMethods.getAllEBooks().get(i).getAuthor(),
+                queryMethods.getAllEBooks().get(i).getIsbn(), queryMethods.getAllEBooks().get(i).getPublisher(),
+                queryMethods.getAllEBooks().get(i).getPurchase_price(),
+                queryMethods.getAllEBooks().get(i).getCategory(), "", "E-Bok"});
         }
         BooksTable.setModel(model);
         BooksTable.setRowSelectionAllowed(true);
