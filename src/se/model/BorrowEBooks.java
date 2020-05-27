@@ -16,12 +16,15 @@ public class BorrowEBooks {
     private int eBookId;
     private int libraryCardId;
     private Date startDate;
+    private Date returnDate;
 
-    public BorrowEBooks(int id, int eBookId, int libraryCardId, Date startDate) {
+   
+    public BorrowEBooks(int id, int eBookId, int libraryCardId, Date startDate, Date returnDate) {
         this.id = id;
         this.eBookId = eBookId;
         this.libraryCardId = libraryCardId;
         this.startDate = startDate;
+        this.returnDate = returnDate;
     }
     
     
@@ -57,6 +60,15 @@ public class BorrowEBooks {
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
+    
+     public Date getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(Date returnDate) {
+        this.returnDate = returnDate;
+    }
+    
     
     
 }

@@ -121,7 +121,8 @@ public class ViewBooks extends javax.swing.JFrame {
                 }}
                
                     
-                }
+
+            }
             
                
         }

@@ -58,7 +58,7 @@ public class AdminHomePage extends javax.swing.JFrame {
     
     private ArrayList<Books> books;
     private ArrayList<E_Books> eBooks;
-    private String[] colNamesSort = {"Titel", "Författare", "Kategory", "Pris"};
+    private String[] colNamesSort = {"Titel", "Författare", "Kategory", "Pris", "Inläggnings Datum", "Typ"};
     
         
     private PreparedStatement ps;
@@ -101,8 +101,8 @@ public class AdminHomePage extends javax.swing.JFrame {
         fillAdminTable();
         showBookType();
         fillBookLogTable();
-        fillBooksTable();
-        //fillEBooksTable();
+        fillBooks_EBooksTable();
+
         
     }
     
@@ -137,6 +137,8 @@ public class AdminHomePage extends javax.swing.JFrame {
         fillAdminTable();
         showBookType();
         fillBookLogTable();
+        fillBooks_EBooksTable();
+
         
         this.adminEmail = adminEmail;
         jLabelTitle.setText("Inloggad Admin: "+ adminFullName());
@@ -159,37 +161,29 @@ public class AdminHomePage extends javax.swing.JFrame {
         return  firstName + " " + lastName ;
     }
        
-      public void fillBooksTable() {
+       public void fillBooks_EBooksTable() {
         //ArrayList<Books> books = qMethods.findBooks();
         books = queryMethods.findBooks();
         eBooks = queryMethods.findEBooks();
-        DefaultTableModel model = new DefaultTableModel(colNamesSort, 0);
-        //model = (DefaultTableModel) BooksTable.getModel();
+        String bookType = "Bok";
+        String ebookType = "E-bok";
+        DefaultTableModel model = new DefaultTableModel(colNamesSort, 0);       
         model.setRowCount(0);
+        
         for (int i = 0; i < books.size(); i++) {            
             model.addRow(new Object[]{ books.get(i).getTitle(), books.get(i).getAuthor(),
-                 books.get(i).getCategory(), books.get(i).getPurchase_price()});
+                 books.get(i).getCategory(), books.get(i).getPurchase_price(), books.get(i).getDate(), bookType});
+        }
+        
+        for (int i = 0; i < eBooks.size(); i++) {
+            model.addRow(new Object[]{eBooks.get(i).getTitle(), eBooks.get(i).getAuthor(),
+                  eBooks.get(i).getCategory(), eBooks.get(i).getPurchase_price(),eBooks.get(i).getDate(), ebookType });
         }
         
         StockTable.setModel(model);
         StockTable.setAutoCreateRowSorter(true);
               
-    }
-      
-    
-     public void fillEBooksTable() {
-        //ArrayList<EBooks> ebooks = qMethods.findEBooks();
-        eBooks = queryMethods.findEBooks();
-        DefaultTableModel model = new DefaultTableModel(colNames, 0);
-        //model = (DefaultTableModel) BooksTable.getModel();
-        model.setRowCount(0);
-        for (int i = 0; i < eBooks.size(); i++) {
-            model.addRow(new Object[]{eBooks.get(i).getId(), eBooks.get(i).getTitle(), eBooks.get(i).getAuthor(),
-                eBooks.get(i).getIsbn(), eBooks.get(i).getPublisher(), eBooks.get(i).getPurchase_price(), eBooks.get(i).getCategory()});
-        }
-        StockTable.setModel(model);
-        
-    }
+    }         
 
 
     public void showBookType() {

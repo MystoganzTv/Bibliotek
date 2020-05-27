@@ -168,12 +168,12 @@ public class LibrarianView extends javax.swing.JFrame {
         UsersTable.getColumnModel().getColumn(0).setHeaderValue("Id");
         UsersTable.getColumnModel().getColumn(1).setHeaderValue("Namn");
         UsersTable.getColumnModel().getColumn(2).setHeaderValue("Spärrad");
-        UsersTable.getColumnModel().getColumn(3).setHeaderValue("Kategori");
+        UsersTable.getColumnModel().getColumn(3).setHeaderValue("Anledning");
 
         UsersTable.getColumn("Id").setPreferredWidth(25);
         UsersTable.getColumn("Namn").setPreferredWidth(100);
         UsersTable.getColumn("Spärrad").setPreferredWidth(60);
-        UsersTable.getColumn("Kategori").setPreferredWidth(150);
+        UsersTable.getColumn("Anledning").setPreferredWidth(150);
 
     }
     
@@ -226,7 +226,7 @@ public class LibrarianView extends javax.swing.JFrame {
         jbtnShowBorrowedBooks = new javax.swing.JButton();
         jbtnBlockedCards = new javax.swing.JButton();
         jbtnManageCards = new javax.swing.JButton();
-        jbtnSave = new javax.swing.JButton();
+        jbtnRestore = new javax.swing.JButton();
         jPanelTabLendings = new javax.swing.JPanel();
         jLabelSearchLendingText = new javax.swing.JLabel();
         Bookstxt = new javax.swing.JTextField();
@@ -286,7 +286,8 @@ public class LibrarianView extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 836, Short.MAX_VALUE)
+
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 829, Short.MAX_VALUE)
                 .addComponent(jLabelTitle)
                 .addGap(38, 38, 38)
                 .addComponent(jLabel5)
@@ -297,7 +298,8 @@ public class LibrarianView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
                     .addGroup(jPanelTitleLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -356,7 +358,7 @@ public class LibrarianView extends javax.swing.JFrame {
 
         jbtnManageCards.setBackground(new java.awt.Color(244, 244, 244));
         jbtnManageCards.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jbtnManageCards.setText("Hantera Lånekort");
+        jbtnManageCards.setText("Spärra Lånekort");
         jbtnManageCards.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
         jbtnManageCards.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -364,13 +366,13 @@ public class LibrarianView extends javax.swing.JFrame {
             }
         });
 
-        jbtnSave.setBackground(new java.awt.Color(244, 244, 244));
-        jbtnSave.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jbtnSave.setText("Spara Ändring");
-        jbtnSave.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
-        jbtnSave.addActionListener(new java.awt.event.ActionListener() {
+        jbtnRestore.setBackground(new java.awt.Color(244, 244, 244));
+        jbtnRestore.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jbtnRestore.setText("Återställa Lånekort");
+        jbtnRestore.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
+        jbtnRestore.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnSaveActionPerformed(evt);
+                jbtnRestoreActionPerformed(evt);
             }
         });
 
@@ -390,14 +392,15 @@ public class LibrarianView extends javax.swing.JFrame {
                     .addGroup(jPanelTabBookings3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanelTabBookings3Layout.createSequentialGroup()
                             .addComponent(jbtnShowBorrowedBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jbtnBlockedCards, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(313, 313, 313)
+
+                            .addGap(115, 115, 115)
                             .addComponent(jbtnManageCards, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jbtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(117, 117, 117)
+                            .addComponent(jbtnBlockedCards, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(117, 117, 117)
+                            .addComponent(jbtnRestore, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 913, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanelTabBookings3Layout.setVerticalGroup(
             jPanelTabBookings3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -410,14 +413,15 @@ public class LibrarianView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanelTabBookings3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelTabBookings3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanelTabBookings3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jbtnShowBorrowedBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbtnBlockedCards, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbtnManageCards, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbtnRestore, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(68, 68, 68))
-                    .addGroup(jPanelTabBookings3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jbtnShowBorrowedBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jbtnBlockedCards, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jbtnManageCards, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jbtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(68, 68, 68))
+                    .addGroup(jPanelTabBookings3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(136, 136, 136))))
         );
 
         returnBooksPanel.addTab("Användare", jPanelTabBookings3);
@@ -477,7 +481,8 @@ public class LibrarianView extends javax.swing.JFrame {
                         .addComponent(NewBookbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(DeleteBookbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 691, Short.MAX_VALUE))
+
+                        .addGap(0, 699, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLendingsLayout.createSequentialGroup()
                         .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING)
@@ -553,7 +558,8 @@ public class LibrarianView extends javax.swing.JFrame {
                         .addComponent(removeFromReturnBooksList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(returnBooksInListButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(373, Short.MAX_VALUE))
+
+                .addContainerGap(391, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -711,45 +717,20 @@ public class LibrarianView extends javax.swing.JFrame {
         addBook.setVisible(true);
     }//GEN-LAST:event_NewBookbtnActionPerformed
 
-    private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
-        // TODO add your handling code here:
-        boolean saved = false;
-
-        for (int i = 0; i < UsersTable.getRowCount(); i++) {
-            if (UsersTable.getValueAt(i, 2).equals("Ja")) {
-                if (UsersTable.getValueAt(i, 3).equals("")) {
-                    JOptionPane.showMessageDialog(this, "Välj kategori för användare Id: " + UsersTable.getValueAt(i, 0)
-                        + " för att kunna spara");
-                    return;
-
-                } else {
-                    qMethods.updateLibraryCards(1, (int) UsersTable.getValueAt(i, 0), UsersTable.getValueAt(i, 3).toString());
-                    saved = true;
-                }
-            } else if (UsersTable.getValueAt(i, 2).equals("Nej")) {
-                qMethods.updateLibraryCards(0, (int) UsersTable.getValueAt(i, 0), UsersTable.getValueAt(i, 3).toString());
-                UsersTable.setValueAt("", i, 3);
-                saved = true;
-
-            }
-        }
-
-        if (saved == true) {
-            JOptionPane.showMessageDialog(this, "Ändringarna har sparats");
-        }
-
-    }//GEN-LAST:event_jbtnSaveActionPerformed
-
     private void jbtnManageCardsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnManageCardsActionPerformed
         // TODO add your handling code here:
-        fillUsersTable();
-        UsersTable.setToolTipText("Du kan nu redigera kolumnera Spärrad och Kategori");
-        String[] blocked = {"Ja", "Nej"};
-        String[] category = {"", "Många sena böcker", "Många försvunna böcker", "Stöld"};
+         UsersTable.setToolTipText("Du kan nu redigera kolumnera Spärrad och Kategori");
+        String[] blocked = { "Många sena böcker", "Många försvunna böcker", "Stöld", "Andra" };
+        String selectedValue = (String)JOptionPane.showInputDialog( null, "Ange Anledning", "Spärra Lånekort",
+        JOptionPane.QUESTION_MESSAGE, null, blocked, blocked[ 3 ] );
+        int userId = (int) UsersTable.getValueAt(UsersTable.getSelectedRow(), 0);
+
         JComboBox blockedBox = new JComboBox(blocked);
-        JComboBox categoryBox = new JComboBox(category);
         UsersTable.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(blockedBox));
-        UsersTable.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(categoryBox));
+        
+        
+   queryMethods.updateLibraryCards(1, userId, selectedValue);
+                    
 
     }//GEN-LAST:event_jbtnManageCardsActionPerformed
 
@@ -767,7 +748,7 @@ public class LibrarianView extends javax.swing.JFrame {
 
         UsersTable.getColumnModel().getColumn(0).setHeaderValue("Id");
         UsersTable.getColumnModel().getColumn(1).setHeaderValue("Namn");
-        UsersTable.getColumnModel().getColumn(2).setHeaderValue("Kategori");
+        UsersTable.getColumnModel().getColumn(2).setHeaderValue("Anledning");
         UsersTable.setToolTipText(null);
     }//GEN-LAST:event_jbtnBlockedCardsActionPerformed
     
@@ -833,12 +814,14 @@ public class LibrarianView extends javax.swing.JFrame {
                  }
                 model.addRow(new Object[]{card.getGuestId(), card.getFullname(), entry, card.getCategory()});
                 }
-                
-                }
-                UsersTable.setModel(model);
-                Usertxt.setText("");
-            } else {
+                 UsersTable.setModel(model);
+                 Usertxt.setText("");
+                }else {
                 JOptionPane.showMessageDialog(this, "Ingen användare kunde hittas");
+            }
+               
+            } else {
+                fillUsersTable();
 
             }
         
@@ -938,6 +921,23 @@ public class LibrarianView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jLabelSearchBooksIconMouseClicked
 
+    private void jbtnRestoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRestoreActionPerformed
+        // TODO add your handling code here:
+        String[] restore = { "Vill du återställa Lånekortet?"  };
+        String selectedValue = (String)JOptionPane.showInputDialog( null, " ", "Återställa Lånekort",
+        JOptionPane.QUESTION_MESSAGE, null, restore, restore[ 0 ] );
+        int userId = (int) UsersTable.getValueAt(UsersTable.getSelectedRow(), 0);
+
+        JComboBox blockedBox = new JComboBox(restore);
+        UsersTable.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(blockedBox));
+        
+        
+   queryMethods.updateLibraryCards(0, userId, selectedValue);
+                    
+
+        
+    }//GEN-LAST:event_jbtnRestoreActionPerformed
+
 
 
     /**
@@ -1011,8 +1011,8 @@ public class LibrarianView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JButton jbtnBlockedCards;
     private javax.swing.JButton jbtnManageCards;
+    private javax.swing.JButton jbtnRestore;
     private javax.swing.JButton jbtnReturn;
-    private javax.swing.JButton jbtnSave;
     private javax.swing.JButton jbtnShowBorrowedBooks;
     private javax.swing.JButton removeFromReturnBooksList;
     private javax.swing.JButton returnBooksInListButton;
