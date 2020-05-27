@@ -68,6 +68,8 @@ public class UserView extends javax.swing.JFrame {
         fillMyBorrowingsTable();
 
         jLabelTitle.setText("Inloggad Gäst: " + guestFullName());
+        jtableSortiment.setAutoCreateRowSorter(true);
+        jtableMyBorrowings.setAutoCreateRowSorter(true);
     }
 
     public String guestFullName() {
