@@ -59,14 +59,15 @@ public class UserView extends javax.swing.JFrame {
         jPanelInvisible.setVisible(false);
         fillSortimentTable();
 
+
         fillSeminarsTable();
         jTextFieldSearchSortiment.setToolTipText("Skriv titel, författare eller kategori");
 
         this.guestEmail = guestEmail;
 
-        fillMyBorrowingsTable();
+        //fillMyBorrowingsTable();
 
-        jLabelTitle.setText("Inloggad Gäst: " + guestFullName());
+        //jLabelTitle.setText("Inloggad Gäst: " + guestFullName());
     }
 
     public String guestFullName() {
