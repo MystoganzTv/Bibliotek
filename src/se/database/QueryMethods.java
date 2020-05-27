@@ -1146,13 +1146,10 @@ public class QueryMethods {
                 books.add(book);
 
             }
-<<<<<<< HEAD
 
             con.close();
             rs.close();
-
-=======
->>>>>>> parent of 9714874... Fixed multiple connections.
+            
             return books;
         } catch (SQLException e) {
 
