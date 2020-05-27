@@ -730,6 +730,7 @@ public class LibrarianView extends javax.swing.JFrame {
 
     private void jbtnManageCardsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnManageCardsActionPerformed
         // TODO add your handling code here:
+        try{
          UsersTable.setToolTipText("Du kan nu redigera kolumnera Spärrad och Kategori");
         String[] blocked = { "Många sena böcker", "Många försvunna böcker", "Stöld", "Andra" };
         String selectedValue = (String)JOptionPane.showInputDialog( null, "Ange Anledning", "Spärra Lånekort",
@@ -741,7 +742,11 @@ public class LibrarianView extends javax.swing.JFrame {
         
         
    queryMethods.updateLibraryCards(1, userId, selectedValue);
-                    
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Vålj Användare");
+        
+        }
 
     }//GEN-LAST:event_jbtnManageCardsActionPerformed
 
