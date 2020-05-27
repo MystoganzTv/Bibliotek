@@ -744,7 +744,7 @@ public class LibrarianView extends javax.swing.JFrame {
    queryMethods.updateLibraryCards(1, userId, selectedValue);
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(this, "Vålj Användare");
+            JOptionPane.showMessageDialog(this, "Välj Användare");
         
         }
 
@@ -939,6 +939,7 @@ public class LibrarianView extends javax.swing.JFrame {
 
     private void jbtnRestoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRestoreActionPerformed
         // TODO add your handling code here:
+        try{
         String[] restore = { "Vill du återställa Lånekortet?"  };
         String selectedValue = (String)JOptionPane.showInputDialog( null, " ", "Återställa Lånekort",
         JOptionPane.QUESTION_MESSAGE, null, restore, restore[ 0 ] );
@@ -950,7 +951,11 @@ public class LibrarianView extends javax.swing.JFrame {
         
    queryMethods.updateLibraryCards(0, userId, selectedValue);
                     
-
+        }
+        catch(Exception e)
+        {
+        JOptionPane.showMessageDialog(this, "Välj Användare");
+        }
         
     }//GEN-LAST:event_jbtnRestoreActionPerformed
 
