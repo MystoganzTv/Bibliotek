@@ -1849,7 +1849,7 @@ public class QueryMethods {
 
     public ArrayList<Books> groupAllBooksByIsbn() {
         String query = "Select title, author, isbn, publisher, purchase_price, category,\n"
-                + " placement, books.desc, count(*) as copies from books group by isbn;";
+                + " placement, books.description, count(*) as copies from books group by isbn;";
 
         ArrayList<Books> borrowedBooks = new ArrayList<Books>();
         Books list;

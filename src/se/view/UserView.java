@@ -65,9 +65,9 @@ public class UserView extends javax.swing.JFrame {
 
         this.guestEmail = guestEmail;
 
-        //fillMyBorrowingsTable();
+        fillMyBorrowingsTable();
 
-        //jLabelTitle.setText("Inloggad Gäst: " + guestFullName());
+        jLabelTitle.setText("Inloggad Gäst: " + guestFullName());
     }
 
     public String guestFullName() {
@@ -117,11 +117,6 @@ public class UserView extends javax.swing.JFrame {
         model.setRowCount(0);
         model.setColumnCount(8);
 
-//        for (int i = 0; i < qm.getAllBooks().size(); i++) {
-//            model.addRow(new Object[]{qm.getAllBooks().get(i).getTitle(), qm.getAllBooks().get(i).getAuthor(),
-//                qm.getAllBooks().get(i).getIsbn(), qm.getAllBooks().get(i).getPublisher(), 
-//                qm.getAllBooks().get(i).getCategory(), "Bok", qm.getAllBooks().get(i).getPlacement(),});
-//        }
         String bookIsAvailable = "";
         ArrayList<Books> books = qm.groupAllBooksByIsbn();
         ArrayList<Books> booksByIsbn;
@@ -139,28 +134,6 @@ public class UserView extends javax.swing.JFrame {
         }
 
 
-//        for (int i = 0; i < model.getRowCount(); i++) {
-//            String isbn = (String) model.getValueAt(i, 2);
-//            booksByIsbn = qm.findBooksByIsbn(isbn);
-//            boolean allIsBorrowed = false;
-//
-//            for (int j = 0; j < booksByIsbn.size(); j++) {
-//
-//                if (!borrowedBooksId.contains(booksByIsbn.get(j).getId())) {
-//                    allIsBorrowed = false;
-//                } else {
-//                    allIsBorrowed = true;
-//                }
-//
-//            }
-//
-//            if (allIsBorrowed) {
-//                bookIsAvailable = "Nej";
-//            } else {
-//                bookIsAvailable = "Ja";
-//            }
-//            model.setValueAt(bookIsAvailable, i, 7);
-//        }
         for (int i = 0 ; i < model.getRowCount() ; i++){
             String isbn = (String) model.getValueAt(i, 2);
             booksByIsbn = qm.findBooksByIsbn(isbn);
