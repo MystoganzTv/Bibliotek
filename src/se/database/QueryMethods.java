@@ -487,7 +487,8 @@ public class QueryMethods {
                         results.getDouble("purchase_price"),
                         results.getString("category"),
                         results.getString("placement"),
-                        results.getString("description"));
+                        results.getString("description"),
+                        results.getDate(10));
                 books.add(currentBooks);
                 currentBooks = null;
             }

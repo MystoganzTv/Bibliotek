@@ -5,7 +5,9 @@
  */
 package se.model;
 
-import java.util.Date;
+import java.sql.Date;
+
+
 
 /**
  *
@@ -57,7 +59,8 @@ public class E_Books {
        
     }
 
-    public E_Books(String title, String author, String isbn, String publisher, double purchase_price, String category, String desc, Date date) {
+    public E_Books(int id, String title, String author, String isbn, String publisher, double purchase_price, String category, String desc, Date date) {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.isbn = isbn;
