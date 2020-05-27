@@ -809,12 +809,14 @@ public class LibrarianView extends javax.swing.JFrame {
                  }
                 model.addRow(new Object[]{card.getGuestId(), card.getFullname(), entry, card.getCategory()});
                 }
-                
-                }
-                UsersTable.setModel(model);
-                Usertxt.setText("");
-            } else {
+                 UsersTable.setModel(model);
+                 Usertxt.setText("");
+                }else {
                 JOptionPane.showMessageDialog(this, "Ingen användare kunde hittas");
+            }
+               
+            } else {
+                fillUsersTable();
 
             }
         
