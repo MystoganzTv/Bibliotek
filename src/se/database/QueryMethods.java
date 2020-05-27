@@ -64,6 +64,7 @@ public class QueryMethods {
 
         } finally {
             try {
+                ps.close();
                 con.close();
             } catch (SQLException ex) {
                 Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
@@ -133,6 +134,7 @@ public class QueryMethods {
             try {
                 if (rs != null) {
                     rs.close();
+                    ps.close();
                     con.close();
                 }
             } catch (SQLException e) {
@@ -173,6 +175,7 @@ public class QueryMethods {
             try {
                 if (rs != null) {
                     rs.close();
+                    ps.close();
                     con.close();
                 }
             } catch (SQLException e) {
@@ -212,6 +215,7 @@ public class QueryMethods {
             try {
                 if (rs != null) {
                     rs.close();
+                    ps.close();
                     con.close();
                 }
             } catch (SQLException e) {
@@ -229,8 +233,8 @@ public class QueryMethods {
             ArrayList<DeletedBook> deletedBooks = new ArrayList<DeletedBook>();
             DeletedBook currentDeletedBooks;
 
-            Connection conn = tryConnect.getConnection();
-            Statement stmt = conn.createStatement();
+            con = MyConnection.getConnection();
+            Statement stmt = con.createStatement();
 
             stmt.executeQuery("SELECT * FROM deleted_books WHERE bookType = 'Book'");
             ResultSet results = stmt.getResultSet();
@@ -251,12 +255,19 @@ public class QueryMethods {
                 currentDeletedBooks = null;
             }
 
-            conn.close();
+            
             stmt.close();
 
             return deletedBooks;
         } catch (SQLException e) {
             System.out.println("Something went wrong: " + e);
+        }finally {
+
+            try {
+                con.close();                
+            } catch (SQLException ex) {
+                Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return null;
     }
@@ -268,8 +279,8 @@ public class QueryMethods {
             ArrayList<DeletedBook> deletedBooks = new ArrayList<DeletedBook>();
             DeletedBook currentDeletedBooks;
 
-            Connection conn = tryConnect.getConnection();
-            Statement stmt = conn.createStatement();
+            con = MyConnection.getConnection();
+            Statement stmt = con.createStatement();
             //     stmt.execute("SELECT * FROM deleted_books");
 
             stmt.executeQuery("SELECT * FROM deleted_books WHERE bookType = 'EBook'");
@@ -289,14 +300,19 @@ public class QueryMethods {
                         results.getString("notes"));
                 deletedBooks.add(currentDeletedBooks);
                 currentDeletedBooks = null;
-            }
-
-            conn.close();
+            }            
             stmt.close();
 
             return deletedBooks;
         } catch (SQLException e) {
             System.out.println("Something went wrong: " + e);
+        }finally {
+
+            try {
+                con.close();                
+            } catch (SQLException ex) {
+                Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return null;
     }
@@ -308,8 +324,8 @@ public class QueryMethods {
             ArrayList<Admin> admins = new ArrayList<Admin>();
             Admin currentAdmin;
 
-            Connection conn = tryConnect.getConnection();
-            Statement stmt = conn.createStatement();
+            con = MyConnection.getConnection();
+            Statement stmt = con.createStatement();
             stmt.execute("SELECT * FROM admins");
 
             ResultSet results = stmt.getResultSet();
@@ -323,13 +339,19 @@ public class QueryMethods {
                 admins.add(currentAdmin);
                 currentAdmin = null;
             }
-
-            conn.close();
+            
             stmt.close();
 
             return admins;
         } catch (SQLException e) {
             System.out.println("Something went wrong: " + e);
+        }finally {
+
+            try {
+                con.close();                
+            } catch (SQLException ex) {
+                Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         return null;
@@ -356,14 +378,19 @@ public class QueryMethods {
                         results.getString("email"));
                 librarians.add(currentLibrarian);
                 currentLibrarian = null;
-            }
-
-            con.close();
+            }            
             stmt.close();
 
             return librarians;
         } catch (SQLException e) {
             System.out.println("Something went wrong: " + e);
+        }finally {
+
+            try {
+                con.close();                
+            } catch (SQLException ex) {
+                Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         return null;
