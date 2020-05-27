@@ -756,6 +756,7 @@ public class LibrarianView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Välj Användare");
         
         }
+        jbtnVisaLånekort.doClick();
 
     }//GEN-LAST:event_jbtnManageCardsActionPerformed
 
@@ -949,22 +950,24 @@ public class LibrarianView extends javax.swing.JFrame {
     private void jbtnRestoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRestoreActionPerformed
         // TODO add your handling code here:
         try{
-        String[] restore = { "Vill du återställa Lånekortet?"  };
-        String selectedValue = (String)JOptionPane.showInputDialog( null, " ", "Återställa Lånekort",
-        JOptionPane.QUESTION_MESSAGE, null, restore, restore[ 0 ] );
-        int userId = (int) UsersTable.getValueAt(UsersTable.getSelectedRow(), 0);
 
-        JComboBox blockedBox = new JComboBox(restore);
-        UsersTable.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(blockedBox));
+        int userId = (int) UsersTable.getValueAt(UsersTable.getSelectedRow(), 0);
+        int input = JOptionPane.showConfirmDialog(null, "Är du säker du vill lösa kortet?",
+                        "Bekräftelse", JOptionPane.YES_NO_OPTION);
+
+                if (input == JOptionPane.YES_OPTION) {
+                    queryMethods.updateLibraryCards(0, userId, "");
+                }
         
         
-   queryMethods.updateLibraryCards(0, userId, selectedValue);
-                    
         }
+                    
+        
         catch(Exception e)
         {
         JOptionPane.showMessageDialog(this, "Välj Användare");
         }
+        jbtnVisaLånekort.doClick();
         
     }//GEN-LAST:event_jbtnRestoreActionPerformed
 
