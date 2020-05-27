@@ -1698,17 +1698,22 @@ public class QueryMethods {
         return book;
     }
 
-    public void readBook(int idEbook) throws FileNotFoundException, IOException {
+    
+    public void readBook(int idEbook) throws FileNotFoundException, IOException, SQLException {
+
         InputStream input = null;
         String query = "SELECT book_file FROM e_books_files where id_e_book =?";
-        con = MyConnection.getConnection();
-
+        PreparedStatement ps;
+      MyConnection tryConnection = new MyConnection();
+      Connection conn = tryConnection.getConnection();
         try {
             ps = con.prepareStatement(query);
             ps.setInt(1, idEbook);
             rs = ps.executeQuery();
 
+
             File bookFile = new File("ebooktest");
+
             FileOutputStream output = new FileOutputStream(bookFile);
 
             if (rs.next()) {
@@ -1722,10 +1727,14 @@ public class QueryMethods {
 
                 }
 
+
             }
 
         } catch (SQLException ex) {
+          
             Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            conn.close();
         }
     }
 }
