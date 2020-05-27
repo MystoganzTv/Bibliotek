@@ -35,6 +35,7 @@ public class UserView extends javax.swing.JFrame {
      */
     QueryMethods qm = new QueryMethods();
     private String guestEmail;
+
     private ArrayList<Integer> borrowedBooksId = new ArrayList<>();
     private ArrayList<BorrowEBooks> borrowedEBooks = new ArrayList<>();
 
@@ -48,6 +49,7 @@ public class UserView extends javax.swing.JFrame {
         jTextFieldSearchSortiment.setToolTipText("Skriv titel, författare eller kategori");
 
         fillMyBorrowingsTable();
+
         fillSeminarsTable();
     }
 
@@ -55,7 +57,9 @@ public class UserView extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         jPanelInvisible.setVisible(false);
-        //fillSortimentTable();
+        fillSortimentTable();
+
+
         fillSeminarsTable();
         jTextFieldSearchSortiment.setToolTipText("Skriv titel, författare eller kategori");
 
@@ -81,6 +85,7 @@ public class UserView extends javax.swing.JFrame {
         String lastName = guestFullName.substring(indexOfSpace + 1, indexOfSpace + 2).toUpperCase()
                 + guestFullName.substring(indexOfSpace + 2);
         return firstName + " " + lastName;
+
     }
 
     public void fillSeminarsTable() {
@@ -132,6 +137,7 @@ public class UserView extends javax.swing.JFrame {
                 books.get(i).getIsbn(), books.get(i).getPublisher(),
                 books.get(i).getCategory(), "Bok", books.get(i).getPlacement()});
         }
+
 
 //        for (int i = 0; i < model.getRowCount(); i++) {
 //            String isbn = (String) model.getValueAt(i, 2);
@@ -229,6 +235,7 @@ public class UserView extends javax.swing.JFrame {
             model.addRow(new Object[]{qm.getBorrowedBooksByCardId(libraryCardId).get(i).getTitle(),
                 qm.getBorrowedBooksByCardId(libraryCardId).get(i).getAuthor(),
                 qm.getBorrowedBooksByCardId(libraryCardId).get(i).getIsbn(),
+
                 "Bok",
                 qm.getAllBorrowedBooks().get(i).getReturnDate() + "  " + returnBookReminder});
 
@@ -304,6 +311,7 @@ public class UserView extends javax.swing.JFrame {
         jTabbedPaneReport = new javax.swing.JTabbedPane();
         jPanelTabBokaSeminarium = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
+
         seminarsTable = new javax.swing.JTable();
         jbtnReserve = new javax.swing.JButton();
         jPanelTabBookings = new javax.swing.JPanel();
@@ -427,6 +435,7 @@ public class UserView extends javax.swing.JFrame {
         jTabbedPaneReport.setForeground(new java.awt.Color(105, 131, 170));
         jTabbedPaneReport.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
 
+
         seminarsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -438,6 +447,7 @@ public class UserView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+
         jScrollPane7.setViewportView(seminarsTable);
 
         jbtnReserve.setText("Boka");
@@ -732,6 +742,7 @@ public class UserView extends javax.swing.JFrame {
         String searchWord = jTextFieldSearchSortiment.getText().toLowerCase();
         String bookIsAvailable = "";
         ArrayList<Books> bookListIsbn = qm.groupAllBooksByIsbn();
+
         ArrayList<Books> booksByIsbn = new ArrayList<>();
 
         ArrayList<Integer> borrowedBooksId = new ArrayList<>();
@@ -757,6 +768,7 @@ public class UserView extends javax.swing.JFrame {
                     foundBooks.get(i).getIsbn(), foundBooks.get(i).getPublisher(),
                     foundBooks.get(i).getCategory(), "Bok", foundBooks.get(i).getPlacement(), bookIsAvailable});
             }
+
 
 //            for (int i = 0; i < model.getRowCount(); i++) {
 //                String isbn = (String) model.getValueAt(i, 2);
@@ -885,6 +897,7 @@ public class UserView extends javax.swing.JFrame {
         ArrayList<Books> bookIdList = new ArrayList<>();
         int eBookId = 0;
 
+
         for (int i = 0 ; i < qm.getAllBorrowedBooks().size() ; i++){
             borrowedBooksId.add(qm.getAllBorrowedBooks().get(i).getBookId());
         }
@@ -906,6 +919,7 @@ public class UserView extends javax.swing.JFrame {
                 cardIsBlocked = true;
             }
         }
+
         int countCopies = 0;
         for (int i = 0; i < qm.getAllBorrowedBooks().size(); i++) {
             for ( int j = 0 ; j < bookIdList.size() ; j++){
@@ -933,6 +947,7 @@ public class UserView extends javax.swing.JFrame {
                         "Bekräftelse", JOptionPane.YES_NO_OPTION);
 
                 if (input == JOptionPane.YES_OPTION) {
+
                         int countBookCopies = 0;
 
                         for(int j = 0 ; j < bookIdList.size() ; j++){
@@ -959,6 +974,7 @@ public class UserView extends javax.swing.JFrame {
                         "Bekräftelse", JOptionPane.YES_NO_OPTION);
 
                 if (input == JOptionPane.YES_OPTION) {
+
                         System.out.println(eBookId +" libraryCard: " +libraryCardId);
                         boolean matchedEBook = false;
                     for(int i = 0 ; i < borrowedEBooks.size() ; i++){
@@ -1021,6 +1037,7 @@ public class UserView extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnEraseMyReservationsActionPerformed
 
     private void jbtnReserveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnReserveActionPerformed
+
         int selection = seminarsTable.getSelectedRow();
         String title = seminarsTable.getModel().getValueAt(selection, 0).toString();
         System.out.println(title);
@@ -1068,6 +1085,7 @@ public class UserView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable BookSeminariumTable;
     private javax.swing.JTable MyReservationsTable;
     private javax.swing.JButton btnClose;
     private javax.swing.JLabel jLabel1;
