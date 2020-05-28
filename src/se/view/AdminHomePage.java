@@ -364,49 +364,39 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabelSearchBookingsText = new javax.swing.JLabel();
         jTextFieldSearchBooking = new javax.swing.JTextField();
         jLabelSearchBookingsIcon = new javax.swing.JLabel();
-        jLabelEditBookingsIcon = new javax.swing.JLabel();
-        jLabelEditBookingsText = new javax.swing.JLabel();
-        jLabelEraseBookingsIcon = new javax.swing.JLabel();
-        jLabelEraseBookingsText = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         BookingsTable = new javax.swing.JTable();
-        jLabelUpdateBookingsIcon = new javax.swing.JLabel();
-        jLabelUpdateBookingsText = new javax.swing.JLabel();
+        jbtnEditBookings = new javax.swing.JButton();
+        jbtnUpdateBookings = new javax.swing.JButton();
+        jbtnEraseBookings = new javax.swing.JButton();
         jPanelTabLendings = new javax.swing.JPanel();
         jLabelSearchLendingText = new javax.swing.JLabel();
         jTextFieldSearchLending = new javax.swing.JTextField();
         jLabelSearchLendingIcon = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         LendingTable = new javax.swing.JTable();
-        jLabelUpdateLendingIcon = new javax.swing.JLabel();
-        jLabelEraseLendingIcon = new javax.swing.JLabel();
-        jLabelEraseLendingText = new javax.swing.JLabel();
-        jLabelUpdateLendingText = new javax.swing.JLabel();
-        jLabelEditLendingText = new javax.swing.JLabel();
-        jLabelEditLendingIcon = new javax.swing.JLabel();
+        jbtnEditBorrowing = new javax.swing.JButton();
+        jbtnUpdateBorrowing = new javax.swing.JButton();
+        jbtnEraseBorrowing = new javax.swing.JButton();
         jPanelTabStock = new javax.swing.JPanel();
         jLabelSearchStockText = new javax.swing.JLabel();
         jTextFieldSearchStock = new javax.swing.JTextField();
         jLabelSearchStockIcon = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         StockTable = new javax.swing.JTable();
-        jLabelEraseStockIcon = new javax.swing.JLabel();
-        jLabelEraseStockText = new javax.swing.JLabel();
-        jLabelUpdateStockText = new javax.swing.JLabel();
-        jLabelUpdateStockIcon = new javax.swing.JLabel();
-        jLabelEditStockIcon = new javax.swing.JLabel();
-        jLabelEditStockText = new javax.swing.JLabel();
+        jbtnEditStock = new javax.swing.JButton();
+        jbtnUpdateStock = new javax.swing.JButton();
+        jbtnEraseStock = new javax.swing.JButton();
         jPanelTabDeletedBooks = new javax.swing.JPanel();
         jLabelSearchText = new javax.swing.JLabel();
         searchDeletedBookText = new javax.swing.JTextField();
         searchRemovedBooks = new javax.swing.JLabel();
-        jLabelRecoveryIcon = new javax.swing.JLabel();
-        jLabelEditText = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
         BookLogTable = new javax.swing.JTable();
-        jLabelEditIcon = new javax.swing.JLabel();
-        jLabelRecoveryText = new javax.swing.JLabel();
         jComboBoxType = new javax.swing.JComboBox<>();
+        jbtnEditDeletedBook = new javax.swing.JButton();
+        jbtnUpdateDeletedBook = new javax.swing.JButton();
+        jbtnEraseDeletedBook = new javax.swing.JButton();
         jPanelAdminToolRegister = new javax.swing.JPanel();
         jPanelAdminTools = new javax.swing.JPanel();
         jLabelEditUsersImg = new javax.swing.JLabel();
@@ -899,39 +889,6 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
         });
 
-        jLabelEditBookingsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/edit_50px.png"))); // NOI18N
-        jLabelEditBookingsIcon.setAlignmentY(1.0F);
-        jLabelEditBookingsIcon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditBookingsIconMouseClicked(evt);
-            }
-        });
-
-        jLabelEditBookingsText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelEditBookingsText.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelEditBookingsText.setText("Redigera");
-        jLabelEditBookingsText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditBookingsTextMouseClicked(evt);
-            }
-        });
-
-        jLabelEraseBookingsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/trash_can_50px.png"))); // NOI18N
-        jLabelEraseBookingsIcon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEraseBookingsIconMouseClicked(evt);
-            }
-        });
-
-        jLabelEraseBookingsText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelEraseBookingsText.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelEraseBookingsText.setText("Ta bort");
-        jLabelEraseBookingsText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEraseBookingsTextMouseClicked(evt);
-            }
-        });
-
         BookingsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -945,50 +902,33 @@ public class AdminHomePage extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(BookingsTable);
 
-        jLabelUpdateBookingsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_50px.png"))); // NOI18N
+        jbtnEditBookings.setText("Redigera");
 
-        jLabelUpdateBookingsText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelUpdateBookingsText.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelUpdateBookingsText.setText("Uppdatera");
-        jLabelUpdateBookingsText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelUpdateBookingsTextMouseClicked(evt);
-            }
-        });
+        jbtnUpdateBookings.setText("Uppdatera");
+
+        jbtnEraseBookings.setText("Ta bort");
 
         javax.swing.GroupLayout jPanelTabBookingsLayout = new javax.swing.GroupLayout(jPanelTabBookings);
         jPanelTabBookings.setLayout(jPanelTabBookingsLayout);
         jPanelTabBookingsLayout.setHorizontalGroup(
             jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
-                        .addGap(445, 445, 445)
-                        .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookingsLayout.createSequentialGroup()
-                                .addComponent(jLabelEditBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18))
-                            .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
-                                .addComponent(jLabelEditBookingsIcon)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
-                                .addComponent(jLabelUpdateBookingsIcon)
-                                .addGap(27, 27, 27)
-                                .addComponent(jLabelEraseBookingsIcon))
-                            .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
-                                .addComponent(jLabelUpdateBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelEraseBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(12, 12, 12))
+                        .addComponent(jbtnEditBookings)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnUpdateBookings)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnEraseBookings))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookingsLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookingsLayout.createSequentialGroup()
                                 .addComponent(jLabelSearchBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextFieldSearchBooking, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldSearchBooking)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabelSearchBookingsIcon)))))
                 .addContainerGap())
@@ -999,22 +939,18 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addContainerGap(27, Short.MAX_VALUE)
                 .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelSearchBookingsIcon, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextFieldSearchBooking, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabelSearchBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jTextFieldSearchBooking, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelSearchBookingsText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelEraseBookingsIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelUpdateBookingsIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelEditBookingsIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(4, 4, 4)
-                .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelEraseBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelUpdateBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEditBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44))
+                .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68))
+                    .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jbtnEditBookings)
+                        .addComponent(jbtnUpdateBookings)
+                        .addComponent(jbtnEraseBookings)))
+                .addGap(68, 68, 68))
         );
 
         jTabbedPaneReport.addTab("Bokningar", jPanelTabBookings);
@@ -1038,49 +974,11 @@ public class AdminHomePage extends javax.swing.JFrame {
         ));
         jScrollPane5.setViewportView(LendingTable);
 
-        jLabelUpdateLendingIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_50px.png"))); // NOI18N
+        jbtnEditBorrowing.setText("Redigera");
 
-        jLabelEraseLendingIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/trash_can_50px.png"))); // NOI18N
-        jLabelEraseLendingIcon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEraseLendingIconMouseClicked(evt);
-            }
-        });
+        jbtnUpdateBorrowing.setText("Uppdatera");
 
-        jLabelEraseLendingText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelEraseLendingText.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelEraseLendingText.setText("Ta bort");
-        jLabelEraseLendingText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEraseLendingTextMouseClicked(evt);
-            }
-        });
-
-        jLabelUpdateLendingText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelUpdateLendingText.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelUpdateLendingText.setText("Uppdatera");
-        jLabelUpdateLendingText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelUpdateLendingTextMouseClicked(evt);
-            }
-        });
-
-        jLabelEditLendingText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelEditLendingText.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelEditLendingText.setText("Redigera");
-        jLabelEditLendingText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditLendingTextMouseClicked(evt);
-            }
-        });
-
-        jLabelEditLendingIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/edit_50px.png"))); // NOI18N
-        jLabelEditLendingIcon.setAlignmentY(1.0F);
-        jLabelEditLendingIcon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditLendingIconMouseClicked(evt);
-            }
-        });
+        jbtnEraseBorrowing.setText("Ta bort");
 
         javax.swing.GroupLayout jPanelTabLendingsLayout = new javax.swing.GroupLayout(jPanelTabLendings);
         jPanelTabLendings.setLayout(jPanelTabLendingsLayout);
@@ -1091,29 +989,19 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
                         .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLendingsLayout.createSequentialGroup()
-                                .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLendingsLayout.createSequentialGroup()
-                                        .addComponent(jLabelEditLendingText, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                                    .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
-                                        .addComponent(jLabelEditLendingIcon)
-                                        .addGap(23, 23, 23)))
-                                .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelUpdateLendingIcon)
-                                    .addComponent(jLabelUpdateLendingText, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelEraseLendingText, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelEraseLendingIcon))
-                                .addGap(11, 11, 11))
+                            .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
+                                .addComponent(jbtnEditBorrowing)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbtnUpdateBorrowing)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbtnEraseBorrowing)
+                                .addGap(12, 12, 12))
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLendingsLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabelSearchLendingText, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextFieldSearchLending, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldSearchLending)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelSearchLendingIcon)))
                 .addContainerGap())
@@ -1129,17 +1017,12 @@ public class AdminHomePage extends javax.swing.JFrame {
                         .addComponent(jLabelSearchLendingText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelEraseLendingIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelUpdateLendingIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelEditLendingIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(44, 44, 44)
                 .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelEraseLendingText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelUpdateLendingText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEditLendingText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42))
+                    .addComponent(jbtnEditBorrowing)
+                    .addComponent(jbtnUpdateBorrowing)
+                    .addComponent(jbtnEraseBorrowing))
+                .addGap(60, 60, 60))
         );
 
         jTabbedPaneReport.addTab("Utlåning", jPanelTabLendings);
@@ -1168,80 +1051,35 @@ public class AdminHomePage extends javax.swing.JFrame {
         ));
         jScrollPane6.setViewportView(StockTable);
 
-        jLabelEraseStockIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/trash_can_50px.png"))); // NOI18N
-        jLabelEraseStockIcon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEraseStockIconMouseClicked(evt);
-            }
-        });
+        jbtnEditStock.setText("Redigera");
 
-        jLabelEraseStockText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelEraseStockText.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelEraseStockText.setText("Ta bort");
-        jLabelEraseStockText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEraseStockTextMouseClicked(evt);
-            }
-        });
+        jbtnUpdateStock.setText("Uppdatera");
 
-        jLabelUpdateStockText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelUpdateStockText.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelUpdateStockText.setText("Uppdatera");
-        jLabelUpdateStockText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelUpdateStockTextMouseClicked(evt);
-            }
-        });
-
-        jLabelUpdateStockIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_50px.png"))); // NOI18N
-
-        jLabelEditStockIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/edit_50px.png"))); // NOI18N
-        jLabelEditStockIcon.setAlignmentY(1.0F);
-        jLabelEditStockIcon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditStockIconMouseClicked(evt);
-            }
-        });
-
-        jLabelEditStockText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelEditStockText.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelEditStockText.setText("Redigera");
-        jLabelEditStockText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditStockTextMouseClicked(evt);
-            }
-        });
+        jbtnEraseStock.setText("Ta bort");
 
         javax.swing.GroupLayout jPanelTabStockLayout = new javax.swing.GroupLayout(jPanelTabStock);
         jPanelTabStock.setLayout(jPanelTabStockLayout);
         jPanelTabStockLayout.setHorizontalGroup(
             jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTabStockLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabStockLayout.createSequentialGroup()
-                        .addGroup(jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabStockLayout.createSequentialGroup()
-                                .addComponent(jLabelEditStockText, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                            .addGroup(jPanelTabStockLayout.createSequentialGroup()
-                                .addComponent(jLabelEditStockIcon)
-                                .addGap(23, 23, 23)))
-                        .addGroup(jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelUpdateStockIcon)
-                            .addComponent(jLabelUpdateStockText, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelEraseStockText, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelEraseStockIcon))
-                        .addGap(11, 11, 11))
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabStockLayout.createSequentialGroup()
                         .addComponent(jLabelSearchStockText, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextFieldSearchStock, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldSearchStock)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelSearchStockIcon)))
+                        .addComponent(jLabelSearchStockIcon))
+                    .addGroup(jPanelTabStockLayout.createSequentialGroup()
+                        .addComponent(jbtnEditStock)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnUpdateStock)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnEraseStock)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelTabStockLayout.setVerticalGroup(
@@ -1250,22 +1088,16 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addContainerGap(27, Short.MAX_VALUE)
                 .addGroup(jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelSearchStockIcon, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextFieldSearchStock, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabelSearchStockText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jTextFieldSearchStock, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelSearchStockText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelEraseStockIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelEditStockIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelUpdateStockIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(40, 40, 40)
                 .addGroup(jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelEraseStockText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelUpdateStockText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEditStockText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42))
+                    .addComponent(jbtnEditStock)
+                    .addComponent(jbtnUpdateStock)
+                    .addComponent(jbtnEraseStock))
+                .addGap(64, 64, 64))
         );
 
         jTabbedPaneReport.addTab("Lager", jPanelTabStock);
@@ -1278,23 +1110,6 @@ public class AdminHomePage extends javax.swing.JFrame {
         searchRemovedBooks.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 searchRemovedBooksMouseClicked(evt);
-            }
-        });
-
-        jLabelRecoveryIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/reset_50px.png"))); // NOI18N
-        jLabelRecoveryIcon.setAlignmentY(1.0F);
-        jLabelRecoveryIcon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelRecoveryIconMouseClicked(evt);
-            }
-        });
-
-        jLabelEditText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelEditText.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelEditText.setText("Redigera");
-        jLabelEditText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditTextMouseClicked(evt);
             }
         });
 
@@ -1311,17 +1126,6 @@ public class AdminHomePage extends javax.swing.JFrame {
         ));
         jScrollPane10.setViewportView(BookLogTable);
 
-        jLabelEditIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/edit_50px.png"))); // NOI18N
-
-        jLabelRecoveryText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelRecoveryText.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelRecoveryText.setText("Återställ");
-        jLabelRecoveryText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelRecoveryTextMouseClicked(evt);
-            }
-        });
-
         jComboBoxType.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBoxTypeItemStateChanged(evt);
@@ -1333,39 +1137,42 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
         });
 
+        jbtnEditDeletedBook.setText("Redigera");
+
+        jbtnUpdateDeletedBook.setText("Uppdatera");
+
+        jbtnEraseDeletedBook.setText("Ta bort");
+
         javax.swing.GroupLayout jPanelTabDeletedBooksLayout = new javax.swing.GroupLayout(jPanelTabDeletedBooks);
         jPanelTabDeletedBooks.setLayout(jPanelTabDeletedBooksLayout);
         jPanelTabDeletedBooksLayout.setHorizontalGroup(
             jPanelTabDeletedBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTabDeletedBooksLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelTabDeletedBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelTabDeletedBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabDeletedBooksLayout.createSequentialGroup()
                         .addComponent(jLabelSearchText, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanelTabDeletedBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBoxType, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabDeletedBooksLayout.createSequentialGroup()
-                                .addComponent(searchDeletedBookText, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(searchRemovedBooks))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabDeletedBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabDeletedBooksLayout.createSequentialGroup()
-                            .addComponent(jLabelEditIcon)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabelRecoveryIcon)
-                            .addGap(11, 11, 11))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabDeletedBooksLayout.createSequentialGroup()
-                            .addComponent(jLabelEditText, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabelRecoveryText, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(searchDeletedBookText)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchRemovedBooks))
+                    .addGroup(jPanelTabDeletedBooksLayout.createSequentialGroup()
+                        .addComponent(jbtnEditDeletedBook)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnUpdateDeletedBook)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnEraseDeletedBook)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabDeletedBooksLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jComboBoxType, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanelTabDeletedBooksLayout.setVerticalGroup(
             jPanelTabDeletedBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabDeletedBooksLayout.createSequentialGroup()
-                .addGap(59, 59, 59)
+                .addGap(19, 19, 19)
                 .addComponent(jComboBoxType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelTabDeletedBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1374,19 +1181,13 @@ public class AdminHomePage extends javax.swing.JFrame {
                         .addComponent(searchDeletedBookText, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabelSearchText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelTabDeletedBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelTabDeletedBooksLayout.createSequentialGroup()
-                        .addComponent(jLabelRecoveryIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelTabDeletedBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelEditText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelRecoveryText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanelTabDeletedBooksLayout.createSequentialGroup()
-                        .addComponent(jLabelEditIcon)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(20, 20, 20))
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addGroup(jPanelTabDeletedBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtnEditDeletedBook)
+                    .addComponent(jbtnUpdateDeletedBook)
+                    .addComponent(jbtnEraseDeletedBook))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         jTabbedPaneReport.addTab("Borttagna Böcker", jPanelTabDeletedBooks);
@@ -1781,54 +1582,6 @@ public class AdminHomePage extends javax.swing.JFrame {
         fillAdminTable();
     }//GEN-LAST:event_jLabelEditUsersImgMouseClicked
 
-    private void jLabelEditBookingsIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditBookingsIconMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEditBookingsIconMouseClicked
-
-    private void jLabelEditBookingsTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditBookingsTextMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEditBookingsTextMouseClicked
-
-    private void jLabelEraseBookingsTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseBookingsTextMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEraseBookingsTextMouseClicked
-
-    private void jLabelUpdateBookingsTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateBookingsTextMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelUpdateBookingsTextMouseClicked
-
-    private void jLabelEraseLendingTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseLendingTextMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEraseLendingTextMouseClicked
-
-    private void jLabelUpdateLendingTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateLendingTextMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelUpdateLendingTextMouseClicked
-
-    private void jLabelEditLendingTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditLendingTextMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEditLendingTextMouseClicked
-
-    private void jLabelEditLendingIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditLendingIconMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEditLendingIconMouseClicked
-
-    private void jLabelEraseStockTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseStockTextMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEraseStockTextMouseClicked
-
-    private void jLabelUpdateStockTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateStockTextMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelUpdateStockTextMouseClicked
-
-    private void jLabelEditStockIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditStockIconMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEditStockIconMouseClicked
-
-    private void jLabelEditStockTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditStockTextMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEditStockTextMouseClicked
-
     private void jLabelEditUserIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUserIconMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabelEditUserIconMouseClicked
@@ -1921,11 +1674,6 @@ public class AdminHomePage extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jLabelLogoMouseClicked
 
-    private void jLabelEraseBookingsIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseBookingsIconMouseClicked
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_jLabelEraseBookingsIconMouseClicked
-
     private void jLabelEraseUserIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseUserIconMouseClicked
         // TODO add your handling code here:
 
@@ -1948,14 +1696,6 @@ public class AdminHomePage extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jLabelEraseUserIconMouseClicked
-
-    private void jLabelEraseLendingIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseLendingIconMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEraseLendingIconMouseClicked
-
-    private void jLabelEraseStockIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseStockIconMouseClicked
-        //TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEraseStockIconMouseClicked
 
     private void jLabelEraseLibrarianIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseLibrarianIconMouseClicked
         // TODO add your handling code here:
@@ -2081,18 +1821,6 @@ public class AdminHomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel1MouseClicked
 
 
-    private void jLabelRecoveryIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelRecoveryIconMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelRecoveryIconMouseClicked
-
-    private void jLabelEditTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditTextMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEditTextMouseClicked
-
-    private void jLabelRecoveryTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelRecoveryTextMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelRecoveryTextMouseClicked
-
     private void jLabelSearchStockIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchStockIconMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabelSearchStockIconMouseClicked
@@ -2210,36 +1938,20 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelBackgroundPhoto;
     private javax.swing.JLabel jLabelEditAdminIcon;
     private javax.swing.JLabel jLabelEditAdminText;
-    private javax.swing.JLabel jLabelEditBookingsIcon;
-    private javax.swing.JLabel jLabelEditBookingsText;
-    private javax.swing.JLabel jLabelEditIcon;
-    private javax.swing.JLabel jLabelEditLendingIcon;
-    private javax.swing.JLabel jLabelEditLendingText;
     private javax.swing.JLabel jLabelEditLibrarianIcon;
     private javax.swing.JLabel jLabelEditLibrarianText;
-    private javax.swing.JLabel jLabelEditStockIcon;
-    private javax.swing.JLabel jLabelEditStockText;
-    private javax.swing.JLabel jLabelEditText;
     private javax.swing.JLabel jLabelEditUserIcon;
     private javax.swing.JLabel jLabelEditUserText;
     private javax.swing.JLabel jLabelEditUsers;
     private javax.swing.JLabel jLabelEditUsersImg;
     private javax.swing.JLabel jLabelEraseAdminIcon;
     private javax.swing.JLabel jLabelEraseAdminText;
-    private javax.swing.JLabel jLabelEraseBookingsIcon;
-    private javax.swing.JLabel jLabelEraseBookingsText;
-    private javax.swing.JLabel jLabelEraseLendingIcon;
-    private javax.swing.JLabel jLabelEraseLendingText;
     private javax.swing.JLabel jLabelEraseLibrarianIcon;
     private javax.swing.JLabel jLabelEraseLibrarianText;
-    private javax.swing.JLabel jLabelEraseStockIcon;
-    private javax.swing.JLabel jLabelEraseStockText;
     private javax.swing.JLabel jLabelEraseUserIcon;
     private javax.swing.JLabel jLabelEraseUserText;
     private javax.swing.JLabel jLabelLogo;
     private javax.swing.JLabel jLabelLogo1;
-    private javax.swing.JLabel jLabelRecoveryIcon;
-    private javax.swing.JLabel jLabelRecoveryText;
     private javax.swing.JLabel jLabelRegister;
     private javax.swing.JLabel jLabelReport;
     private javax.swing.JLabel jLabelSearchAdminIcon;
@@ -2258,14 +1970,8 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JLabel jLabelUpdateAdminIcon;
     private javax.swing.JLabel jLabelUpdateAdminText;
-    private javax.swing.JLabel jLabelUpdateBookingsIcon;
-    private javax.swing.JLabel jLabelUpdateBookingsText;
-    private javax.swing.JLabel jLabelUpdateLendingIcon;
-    private javax.swing.JLabel jLabelUpdateLendingText;
     private javax.swing.JLabel jLabelUpdateLibrarianIcon;
     private javax.swing.JLabel jLabelUpdateLibrarianText;
-    private javax.swing.JLabel jLabelUpdateStockIcon;
-    private javax.swing.JLabel jLabelUpdateStockText;
     private javax.swing.JLabel jLabelUpdateUserIcon;
     private javax.swing.JLabel jLabelUpdateUserText;
     private javax.swing.JLayeredPane jLayeredPaneWorkArea;
@@ -2297,6 +2003,18 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldSearchLibrarian;
     private javax.swing.JTextField jTextFieldSearchStock;
     private javax.swing.JTextField jTextFieldSearchUser;
+    private javax.swing.JButton jbtnEditBookings;
+    private javax.swing.JButton jbtnEditBorrowing;
+    private javax.swing.JButton jbtnEditDeletedBook;
+    private javax.swing.JButton jbtnEditStock;
+    private javax.swing.JButton jbtnEraseBookings;
+    private javax.swing.JButton jbtnEraseBorrowing;
+    private javax.swing.JButton jbtnEraseDeletedBook;
+    private javax.swing.JButton jbtnEraseStock;
+    private javax.swing.JButton jbtnUpdateBookings;
+    private javax.swing.JButton jbtnUpdateBorrowing;
+    private javax.swing.JButton jbtnUpdateDeletedBook;
+    private javax.swing.JButton jbtnUpdateStock;
     private javax.swing.JTable librarianTable;
     private javax.swing.JTextField searchDeletedBookText;
     private javax.swing.JLabel searchRemovedBooks;
