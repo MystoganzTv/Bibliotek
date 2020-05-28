@@ -79,29 +79,7 @@ public class ViewBooks extends javax.swing.JFrame {
                 books.get(i).getCategory(), books.get(i).getPlacement(), bookIsAvailable});
         }
         
-//        
-//        for (int i = 0 ; i < model.getRowCount() ; i++){
-//            String isbn = (String) model.getValueAt(i, 2);
-//            booksByIsbn = queryMethods.findBooksByIsbn(isbn);
-//            boolean allIsBorrowed = false;
-//            
-//            for (int j = 0 ; j < booksByIsbn.size() ; j ++){
-//                
-//                if(!borrowedBooksId.contains(booksByIsbn.get(j).getId())){
-//                    allIsBorrowed = false;
-//                }else{
-//                    allIsBorrowed = true;
-//                }
-//                
-//                }
-//            
-//                if(allIsBorrowed){
-//                bookIsAvailable = "Nej";
-//                }else{
-//                bookIsAvailable = "Ja";
-//                }
-//            model.setValueAt(bookIsAvailable, i, 6);
-//        }
+
         
         for (int i = 0 ; i < model.getRowCount() ; i++){
             String isbn = (String) model.getValueAt(i, 2);
@@ -480,7 +458,7 @@ public class ViewBooks extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanelInvisible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelbackgroundLayout.setVerticalGroup(
             jPanelbackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -534,29 +512,28 @@ public class ViewBooks extends javax.swing.JFrame {
                 foundBooks.get(i).getIsbn(), foundBooks.get(i).getPublisher(), 
                 foundBooks.get(i).getCategory(), foundBooks.get(i).getPlacement(), bookIsAvailable});
             }
-
+            ArrayList<Books> booksByIsbn ;
             for (int i = 0 ; i < model.getRowCount() ; i++){
             String isbn = (String) model.getValueAt(i, 2);
-            boolean allIsBorrowed = false;
-            ArrayList<Books> borrowedBooksListIsbn = queryMethods.findBooksByIsbn(isbn);
-            
-                for (int j = 0 ; j < borrowedBooksListIsbn.size() ; j ++){
-                
-                    if(!borrowedBooksId.contains(borrowedBooksListIsbn.get(j).getId())){
-                    allIsBorrowed = false;
-                    }else{
-                    allIsBorrowed = true;
-                    }
-                
-                }
-            
-            if(allIsBorrowed){
-                bookIsAvailable = "Nej";
-            }else{
-                bookIsAvailable = "Ja";
-            }
+            booksByIsbn = queryMethods.findBooksByIsbn(isbn);
+            bookIsAvailable = "Ja";
             model.setValueAt(bookIsAvailable, i, 6);
-        }
+            int countCopies = 0;
+
+            
+            for (int j = 0 ; j < booksByIsbn.size() ; j ++){
+                if(borrowedBooksId.contains(booksByIsbn.get(j).getId())){
+                    countCopies++;
+                    if(countCopies == booksByIsbn.size()){
+                    bookIsAvailable = "Nej";
+                    model.setValueAt(bookIsAvailable, i, 6); }
+                    
+                }}
+               
+                    
+
+            }
+
  
             BooksTable.setModel(model);
             Bookstxt.setText("");
