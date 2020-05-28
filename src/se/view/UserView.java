@@ -47,11 +47,11 @@ public class UserView extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         jPanelInvisible.setVisible(false);
-        //fillSortimentTable();
+        fillSortimentTable();
 
         jTextFieldSearchSortiment.setToolTipText("Skriv titel, författare eller kategori");
 
-        //fillMyBorrowingsTable();
+        fillMyBorrowingsTable();
 
         fillSeminarsTable();
     }
@@ -68,9 +68,9 @@ public class UserView extends javax.swing.JFrame {
 
         this.guestEmail = guestEmail;
 
-        //fillMyBorrowingsTable();
+        fillMyBorrowingsTable();
 
-        //jLabelTitle.setText("Inloggad Gäst: " + guestFullName());
+        jLabelTitle.setText("Inloggad Gäst: " + guestFullName());
         jtableSortiment.setAutoCreateRowSorter(true);
         jtableMyBorrowings.setAutoCreateRowSorter(true);
     }
@@ -1088,7 +1088,8 @@ public class UserView extends javax.swing.JFrame {
                
              if (bookType.equals("E-Bok")) {
                 try {
-                    DisplayEbook displayebook = new DisplayEbook(id);
+                    DisplayEbook displayebook = new DisplayEbook(id, guestEmail);
+                    
                     displayebook.setVisible(true);
                     this.dispose();
                 } catch (SQLException ex) {

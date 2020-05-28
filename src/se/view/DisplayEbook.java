@@ -30,12 +30,13 @@ public class DisplayEbook extends javax.swing.JFrame {
        
     
     }
-    public DisplayEbook(int idEbook) throws SQLException{
+    public DisplayEbook(int idEbook, String guestEmail) throws SQLException{
         
          initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
         this.idEbook = idEbook;
+        this.guestEmail = guestEmail;
         try {
             
             String bookString = queryMethods.readBook(idEbook);
@@ -45,6 +46,10 @@ public class DisplayEbook extends javax.swing.JFrame {
             Logger.getLogger(DisplayEbook.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+    private String guestEmail;
+    public DisplayEbook(String guestEmail){
+        this.guestEmail = guestEmail;
     }
    
     /**
@@ -186,7 +191,7 @@ public class DisplayEbook extends javax.swing.JFrame {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        UserView userview = new UserView();
+        UserView userview = new UserView(this.guestEmail);
         userview.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
