@@ -6,6 +6,7 @@
 package se.view;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import se.database.QueryMethods;
 import se.model.Librarian;
@@ -20,7 +21,7 @@ public class SeminarView extends javax.swing.JFrame {
     /**
      * Creates new form SeminariumView
      */
-   private QueryMethods qMethods = new QueryMethods();
+    private QueryMethods qMethods = new QueryMethods();
 
     private ArrayList<Seminar> seminar;
 
@@ -429,12 +430,28 @@ public class SeminarView extends javax.swing.JFrame {
         String speaker = txtSpeaker.getText();
         String location = txtLocation.getText();
         String sDate = txtDate.getText();
-        String maxGuests = txtMaxGuests.getText();
+        String maxGuestsInput = txtMaxGuests.getText();
+        int maxGuests = 0;
         String desc = txtDesc.getText();
         String program = txtProgram.getText();
 
+        if (jtfName.getText().equals("") || txtSpeaker.getText().equals("")
+                || txtLocation.getText().equals("") || txtDate.getText().equals("")
+                || txtMaxGuests.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Första 5 raderna får inte vara tomma.");
+            return;
+        }
+
+        try {
+            maxGuests = Integer.parseInt(maxGuestsInput);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Antal gäster måste vara ett tal.");
+            txtMaxGuests.setText("");
+            return;
+        }
+
         QueryMethods qMethods = new QueryMethods();
-        Seminar seminar = new Seminar(name, speaker, location, sDate, Integer.parseInt(maxGuests), desc, program);
+        Seminar seminar = new Seminar(name, speaker, location, sDate, maxGuests, desc, program);
         qMethods.addSeminar(seminar);
         clearInputFields();
         fillSeminarTable();
