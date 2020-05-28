@@ -43,11 +43,11 @@ public class UserView extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         jPanelInvisible.setVisible(false);
-        //fillSortimentTable();
+        fillSortimentTable();
 
         jTextFieldSearchSortiment.setToolTipText("Skriv titel, författare eller kategori");
 
-        //fillMyBorrowingsTable();
+        fillMyBorrowingsTable();
 
         fillSeminarsTable();
     }
@@ -56,16 +56,16 @@ public class UserView extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         jPanelInvisible.setVisible(false);
-        //fillSortimentTable();
+        fillSortimentTable();
 
         fillSeminarsTable();
         jTextFieldSearchSortiment.setToolTipText("Skriv titel, författare eller kategori");
 
         this.guestEmail = guestEmail;
 
-        //fillMyBorrowingsTable();
+        fillMyBorrowingsTable();
 
-        //jLabelTitle.setText("Inloggad Gäst: " + guestFullName());
+        jLabelTitle.setText("Inloggad Gäst: " + guestFullName());
         jtableSortiment.setAutoCreateRowSorter(true);
         jtableMyBorrowings.setAutoCreateRowSorter(true);
     }
