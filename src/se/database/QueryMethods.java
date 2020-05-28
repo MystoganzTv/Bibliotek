@@ -56,6 +56,45 @@ public class QueryMethods {
     public QueryMethods() {
 
     }
+    public boolean isPersonNumberTaken(String personNumber){
+        String adminsIds = "SELECT person_id FROM admins";
+        String librariansIds = "SELECT person_id FROM librarians";
+        String guestsIds = "SELECT person_id FROM guests";
+        con = MyConnection.getConnection();
+        ArrayList<String> personIDs = new ArrayList<>();
+        try{
+         Statement statement = con.createStatement();
+         rs = statement.executeQuery(adminsIds);
+         
+         while(rs.next()){
+             
+         String id = rs.getString(1);
+         personIDs.add(id);
+         }
+         
+         rs = statement.executeQuery(librariansIds);
+         while(rs.next()){
+             String id = rs.getString(1);
+             personIDs.add(id);
+         }
+         
+         rs = statement.executeQuery(guestsIds);
+         
+         while(rs.next()){
+             String id = rs.getString(1);
+             personIDs.add(id);
+         }
+        }catch(SQLException e){
+            
+        }finally{
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return personIDs.contains(personNumber);
+    }
 
     public void insertEmail(String email) {
         con = MyConnection.getConnection();
@@ -134,7 +173,7 @@ public class QueryMethods {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         } finally {
             try {
                 if (rs != null) {
@@ -175,8 +214,9 @@ public class QueryMethods {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
+            
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }finally {
             try {
                 if (rs != null) {
                     rs.close();
@@ -215,7 +255,7 @@ public class QueryMethods {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         } finally {
             try {
                 if (rs != null) {
