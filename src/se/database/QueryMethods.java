@@ -530,7 +530,8 @@ public class QueryMethods {
                         results.getString("publisher"),
                         results.getDouble("purchase_price"),
                         results.getString("category"),
-                        results.getString("desc"));
+                        results.getString("description"),
+                        results.getDate("date"));
                 eBooks.add(currentEBooks);
                 currentEBooks = null;
             }
@@ -678,6 +679,7 @@ public class QueryMethods {
                 book.setPurchase_price(rs.getDouble(6));
                 book.setCategory(rs.getString(7));
                 book.setDesc(rs.getString(9));
+                book.setDate(rs.getDate(10));
                 e_books.add(book);
 
             }
