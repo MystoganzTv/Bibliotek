@@ -1013,6 +1013,7 @@ public class UserView extends javax.swing.JFrame {
 
     private void jbtnReserveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnReserveActionPerformed
 
+        try {
         int selection = seminarsTable.getSelectedRow();
         String title = seminarsTable.getModel().getValueAt(selection, 0).toString();
         System.out.println(title);
@@ -1022,6 +1023,9 @@ public class UserView extends javax.swing.JFrame {
 
         qm.bookSeminar(g, s);
         fillSeminarsTable();
+        }catch(Exception e){
+            System.out.println("du måste välja ett seminarium");
+        }
     }//GEN-LAST:event_jbtnReserveActionPerformed
 
     /**
