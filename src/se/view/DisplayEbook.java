@@ -37,7 +37,9 @@ public class DisplayEbook extends javax.swing.JFrame {
         setResizable(false);
         this.idEbook = idEbook;
         try {
-            queryMethods.readBook(idEbook);
+            
+            String bookString = queryMethods.readBook(idEbook);
+            textArea.setText(bookString);
             
         } catch (IOException ex) {
             Logger.getLogger(DisplayEbook.class.getName()).log(Level.SEVERE, null, ex);
@@ -62,7 +64,7 @@ public class DisplayEbook extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        textArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,9 +121,9 @@ public class DisplayEbook extends javax.swing.JFrame {
                         .addGap(25, 25, 25))))
         );
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        textArea.setColumns(20);
+        textArea.setRows(5);
+        jScrollPane1.setViewportView(textArea);
 
         javax.swing.GroupLayout jPanelbackgroundLayout = new javax.swing.GroupLayout(jPanelbackground);
         jPanelbackground.setLayout(jPanelbackgroundLayout);
@@ -217,6 +219,6 @@ public class DisplayEbook extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelTitle;
     private javax.swing.JPanel jPanelbackground;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea textArea;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,11 +5,15 @@
  */
 package se.database;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -20,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -1968,35 +1973,41 @@ public class QueryMethods {
     }
 
     
-    public void readBook(int idEbook) throws FileNotFoundException, IOException, SQLException {
-
+    public String readBook(int idEbook) throws FileNotFoundException, IOException, SQLException {
         InputStream input = null;
+        String test = "";
         String query = "SELECT book_file FROM e_books_files where id_e_book =?";
         PreparedStatement ps;
       MyConnection tryConnection = new MyConnection();
       Connection conn = tryConnection.getConnection();
         try {
-            ps = con.prepareStatement(query);
+            ps = conn.prepareStatement(query);
             ps.setInt(1, idEbook);
             rs = ps.executeQuery();
 
 
-            File bookFile = new File("ebooktest");
+            File bookFile = new File("C:\\Users\\Erik Ringblom\\Documents\\GitHub\\Bibliotek\\src\\e_books_files\\ebooks.txt");
 
-            FileOutputStream output = new FileOutputStream(bookFile);
-
+          //  FileOutputStream output = new FileOutputStream(bookFile);
+            
             if (rs.next()) {
-                input = rs.getBinaryStream("e_books_files");
-
+                input = rs.getBinaryStream("book_file");
+                       Scanner sc = new Scanner(input);
+                       
+            
+                
                 byte[] buffer = new byte[1024];
 
-                while (input.read(buffer) > 0) {
+                while (sc.hasNext()) {
+                   test = sc.nextLine();
+                   
+                    System.out.println(test);
 
-                    output.write(buffer);
 
                 }
-
-
+                
+                
+            
             }
             
             rs.close();
@@ -2007,10 +2018,12 @@ public class QueryMethods {
             Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-                con.close();
+                conn.close();
             } catch (SQLException ex) {
                 Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        }    return test;
+
+        
     }
 }
