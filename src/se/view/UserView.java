@@ -39,16 +39,15 @@ public class UserView extends javax.swing.JFrame {
     private ArrayList<Integer> borrowedBooksId = new ArrayList<>();
     private ArrayList<BorrowEBooks> borrowedEBooks = new ArrayList<>();
 
-
     public UserView() {
         initComponents();
         setLocationRelativeTo(null);
         jPanelInvisible.setVisible(false);
-        fillSortimentTable();
+        //fillSortimentTable();
 
         jTextFieldSearchSortiment.setToolTipText("Skriv titel, författare eller kategori");
 
-        fillMyBorrowingsTable();
+        //fillMyBorrowingsTable();
 
         fillSeminarsTable();
     }
@@ -57,17 +56,16 @@ public class UserView extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         jPanelInvisible.setVisible(false);
-        fillSortimentTable();
-
+        //fillSortimentTable();
 
         fillSeminarsTable();
         jTextFieldSearchSortiment.setToolTipText("Skriv titel, författare eller kategori");
 
         this.guestEmail = guestEmail;
 
-        fillMyBorrowingsTable();
+        //fillMyBorrowingsTable();
 
-        jLabelTitle.setText("Inloggad Gäst: " + guestFullName());
+        //jLabelTitle.setText("Inloggad Gäst: " + guestFullName());
         jtableSortiment.setAutoCreateRowSorter(true);
         jtableMyBorrowings.setAutoCreateRowSorter(true);
     }
@@ -102,7 +100,7 @@ public class UserView extends javax.swing.JFrame {
                 seminars.get(i).getCountVisitor(), seminars.get(i).getSeminariumDescription(),
                 seminars.get(i).getProgramDescription()});
         }
-        
+
         seminarsTable.getColumnModel().getColumn(0).setHeaderValue("Titel");
         seminarsTable.getColumnModel().getColumn(1).setHeaderValue("Talare");
         seminarsTable.getColumnModel().getColumn(2).setHeaderValue("Plats");
@@ -110,7 +108,7 @@ public class UserView extends javax.swing.JFrame {
         seminarsTable.getColumnModel().getColumn(4).setHeaderValue("Platser Kvar");
         seminarsTable.getColumnModel().getColumn(5).setHeaderValue("Beskrivning");
         seminarsTable.getColumnModel().getColumn(6).setHeaderValue("Program");
-        
+
         seminarsTable.setModel(model);
     }
 
@@ -135,25 +133,24 @@ public class UserView extends javax.swing.JFrame {
                 books.get(i).getCategory(), "Bok", books.get(i).getPlacement()});
         }
 
-
-        for (int i = 0 ; i < model.getRowCount() ; i++){
+        for (int i = 0; i < model.getRowCount(); i++) {
             String isbn = (String) model.getValueAt(i, 2);
             booksByIsbn = qm.findBooksByIsbn(isbn);
             bookIsAvailable = "Ja";
             model.setValueAt(bookIsAvailable, i, 7);
             int countCopies = 0;
 
-            
-            for (int j = 0 ; j < booksByIsbn.size() ; j ++){
-                if(borrowedBooksId.contains(booksByIsbn.get(j).getId())){
+            for (int j = 0; j < booksByIsbn.size(); j++) {
+                if (borrowedBooksId.contains(booksByIsbn.get(j).getId())) {
                     countCopies++;
-                    if(countCopies == booksByIsbn.size()){
-                    bookIsAvailable = "Nej";
-                    model.setValueAt(bookIsAvailable, i, 7); }
-                    
-                }}
-               
-                    
+                    if (countCopies == booksByIsbn.size()) {
+                        bookIsAvailable = "Nej";
+                        model.setValueAt(bookIsAvailable, i, 7);
+                    }
+
+                }
+            }
+
         }
 
         for (int i = 0; i < qm.getAllEBooks().size(); i++) {
@@ -210,52 +207,50 @@ public class UserView extends javax.swing.JFrame {
             model.addRow(new Object[]{qm.getBorrowedBooksByCardId(libraryCardId).get(i).getTitle(),
                 qm.getBorrowedBooksByCardId(libraryCardId).get(i).getAuthor(),
                 qm.getBorrowedBooksByCardId(libraryCardId).get(i).getIsbn(),
-
                 "Bok",
                 qm.getAllBorrowedBooks().get(i).getReturnDate() + "  " + returnBookReminder});
 
         }
-        
+
         // ebooks
         ArrayList<BorrowEBooks> borrowedEBooks = qm.getAllBorrowedEBooks();
         ArrayList<E_Books> allEBooks = qm.findEBooks();
         ArrayList<BorrowEBooks> borrowedEBooksByCardId = new ArrayList<>();
         ArrayList<E_Books> borrowedEBooksByCardIdInfo = new ArrayList<>();
-        for(int i = 0 ; i < borrowedEBooks.size() ; i++){
-            if(borrowedEBooks.get(i).getLibraryCardId() == libraryCardId){
+        for (int i = 0; i < borrowedEBooks.size(); i++) {
+            if (borrowedEBooks.get(i).getLibraryCardId() == libraryCardId) {
                 borrowedEBooksByCardId.add(borrowedEBooks.get(i));
             }
         }
-        for(int i = 0 ; i < allEBooks.size() ; i++){
-            for( int j = 0 ; j < borrowedEBooksByCardId.size() ; j++){
-                if(allEBooks.get(i).getId() == borrowedEBooksByCardId.get(j).geteBookId()){
+        for (int i = 0; i < allEBooks.size(); i++) {
+            for (int j = 0; j < borrowedEBooksByCardId.size(); j++) {
+                if (allEBooks.get(i).getId() == borrowedEBooksByCardId.get(j).geteBookId()) {
                     borrowedEBooksByCardIdInfo.add(allEBooks.get(i));
 
                 }
             }
         }
-        
+
         for (int i = 0; i < borrowedEBooksByCardId.size(); i++) {
             int dayDiff = borrowedEBooksByCardId.get(i).getReturnDate().getDay() - toDayDate.getDay();
             int monthDiff = borrowedEBooksByCardId.get(i).getReturnDate().getMonth() - toDayDate.getMonth();
 
             if (dayDiff == 1 && monthDiff == 0) {
                 returnBookReminder = "1 dag kvar";
-            }else if (dayDiff == 2 && monthDiff == 0) {
+            } else if (dayDiff == 2 && monthDiff == 0) {
                 returnBookReminder = "2 dagar kvar";
-            }else {
+            } else {
                 returnBookReminder = "";
             }
 
             model.addRow(new Object[]{borrowedEBooksByCardIdInfo.get(i).getTitle(),
-                                      borrowedEBooksByCardIdInfo.get(i).getAuthor(),
-                                      borrowedEBooksByCardIdInfo.get(i).getIsbn(),
-                                      "E-Bok",
-                                       borrowedEBooksByCardId.get(i).getReturnDate() +"  "+ returnBookReminder });
+                borrowedEBooksByCardIdInfo.get(i).getAuthor(),
+                borrowedEBooksByCardIdInfo.get(i).getIsbn(),
+                "E-Bok",
+                borrowedEBooksByCardId.get(i).getReturnDate() + "  " + returnBookReminder});
 
         }
 
-       
         jtableMyBorrowings.getColumnModel().getColumn(0).setHeaderValue("Titel");
         jtableMyBorrowings.getColumnModel().getColumn(1).setHeaderValue("Författare");
         jtableMyBorrowings.getColumnModel().getColumn(2).setHeaderValue("ISBN");
@@ -283,10 +278,10 @@ public class UserView extends javax.swing.JFrame {
         jPanelInvisible = new javax.swing.JPanel();
         btnClose = new javax.swing.JButton();
         jLabelAboutBook = new javax.swing.JLabel();
+        lblProgram = new javax.swing.JLabel();
         jTabbedPaneReport = new javax.swing.JTabbedPane();
         jPanelTabBokaSeminarium = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-
         seminarsTable = new javax.swing.JTable();
         jbtnReserve = new javax.swing.JButton();
         jPanelTabBookings = new javax.swing.JPanel();
@@ -389,19 +384,24 @@ public class UserView extends javax.swing.JFrame {
         jPanelInvisibleLayout.setHorizontalGroup(
             jPanelInvisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelInvisibleLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnClose)
-                .addContainerGap())
-            .addGroup(jPanelInvisibleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelAboutBook, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addGroup(jPanelInvisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelInvisibleLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnClose))
+                    .addGroup(jPanelInvisibleLayout.createSequentialGroup()
+                        .addComponent(jLabelAboutBook, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addComponent(lblProgram, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanelInvisibleLayout.setVerticalGroup(
             jPanelInvisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInvisibleLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelAboutBook, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(174, Short.MAX_VALUE)
+                .addGroup(jPanelInvisibleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelAboutBook, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProgram, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(btnClose)
                 .addGap(21, 21, 21))
@@ -409,7 +409,6 @@ public class UserView extends javax.swing.JFrame {
 
         jTabbedPaneReport.setForeground(new java.awt.Color(105, 131, 170));
         jTabbedPaneReport.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-
 
         seminarsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -422,7 +421,11 @@ public class UserView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-
+        seminarsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                seminarsTableMouseClicked(evt);
+            }
+        });
         jScrollPane7.setViewportView(seminarsTable);
 
         jbtnReserve.setText("Boka");
@@ -744,7 +747,6 @@ public class UserView extends javax.swing.JFrame {
                     foundBooks.get(i).getCategory(), "Bok", foundBooks.get(i).getPlacement(), bookIsAvailable});
             }
 
-
 //            for (int i = 0; i < model.getRowCount(); i++) {
 //                String isbn = (String) model.getValueAt(i, 2);
 //                boolean allIsBorrowed = false;
@@ -767,24 +769,24 @@ public class UserView extends javax.swing.JFrame {
 //                }
 //                model.setValueAt(bookIsAvailable, i, 7);
 //            }
-            for (int i = 0 ; i < model.getRowCount() ; i++){
-            String isbn = (String) model.getValueAt(i, 2);
-            booksByIsbn = qm.findBooksByIsbn(isbn);
-            bookIsAvailable = "Ja";
-            model.setValueAt(bookIsAvailable, i, 7);
-            int countCopies = 0;
+            for (int i = 0; i < model.getRowCount(); i++) {
+                String isbn = (String) model.getValueAt(i, 2);
+                booksByIsbn = qm.findBooksByIsbn(isbn);
+                bookIsAvailable = "Ja";
+                model.setValueAt(bookIsAvailable, i, 7);
+                int countCopies = 0;
 
-            
-            for (int j = 0 ; j < booksByIsbn.size() ; j ++){
-                if(borrowedBooksId.contains(booksByIsbn.get(j).getId())){
-                    countCopies++;
-                    if(countCopies == booksByIsbn.size()){
-                    bookIsAvailable = "Nej";
-                    model.setValueAt(bookIsAvailable, i, 7); }
-                    
-                }}
-               
-                    
+                for (int j = 0; j < booksByIsbn.size(); j++) {
+                    if (borrowedBooksId.contains(booksByIsbn.get(j).getId())) {
+                        countCopies++;
+                        if (countCopies == booksByIsbn.size()) {
+                            bookIsAvailable = "Nej";
+                            model.setValueAt(bookIsAvailable, i, 7);
+                        }
+
+                    }
+                }
+
             }
 
             for (E_Books ebook : foundeBooks) {
@@ -872,12 +874,11 @@ public class UserView extends javax.swing.JFrame {
         ArrayList<Books> bookIdList = new ArrayList<>();
         int eBookId = 0;
 
-
-        for (int i = 0 ; i < qm.getAllBorrowedBooks().size() ; i++){
+        for (int i = 0; i < qm.getAllBorrowedBooks().size(); i++) {
             borrowedBooksId.add(qm.getAllBorrowedBooks().get(i).getBookId());
         }
         borrowedEBooks = qm.getAllBorrowedEBooks();
-        
+
         try {
             bookIdList = qm.findBooksByIsbn(bookIsbn);
             eBookId = qm.findEBookByIsbn(bookIsbn).getId();
@@ -897,15 +898,15 @@ public class UserView extends javax.swing.JFrame {
 
         int countCopies = 0;
         for (int i = 0; i < qm.getAllBorrowedBooks().size(); i++) {
-            for ( int j = 0 ; j < bookIdList.size() ; j++){
+            for (int j = 0; j < bookIdList.size(); j++) {
                 if (qm.getAllBorrowedBooks().get(i).getBookId() == bookIdList.get(j).getId()) {
-                    countCopies ++;
-                    if(countCopies == bookIdList.size()){
-                    bookIsLent = true;
+                    countCopies++;
+                    if (countCopies == bookIdList.size()) {
+                        bookIsLent = true;
                     }
                 }
             }
-            
+
         }
 
         String type = model.getValueAt(jtableSortiment.getSelectedRow(), 5).toString();
@@ -923,20 +924,20 @@ public class UserView extends javax.swing.JFrame {
 
                 if (input == JOptionPane.YES_OPTION) {
 
-                        int countBookCopies = 0;
+                    int countBookCopies = 0;
 
-                        for(int j = 0 ; j < bookIdList.size() ; j++){
+                    for (int j = 0; j < bookIdList.size(); j++) {
 
-                            if(!borrowedBooksId.contains(bookIdList.get(j).getId())){
-                                countBookCopies++;
+                        if (!borrowedBooksId.contains(bookIdList.get(j).getId())) {
+                            countBookCopies++;
 
-                                if(countBookCopies == 1){
+                            if (countBookCopies == 1) {
                                 qm.borrowBooks(bookIdList.get(j).getId(), libraryCardId);
 
-                                }
                             }
                         }
-                      
+                    }
+
                 }
             }
         }
@@ -950,18 +951,18 @@ public class UserView extends javax.swing.JFrame {
 
                 if (input == JOptionPane.YES_OPTION) {
 
-                        System.out.println(eBookId +" libraryCard: " +libraryCardId);
-                        boolean matchedEBook = false;
-                    for(int i = 0 ; i < borrowedEBooks.size() ; i++){
-                        if(borrowedEBooks.get(i).geteBookId() == eBookId && borrowedEBooks.get(i).getLibraryCardId() == libraryCardId){
+                    System.out.println(eBookId + " libraryCard: " + libraryCardId);
+                    boolean matchedEBook = false;
+                    for (int i = 0; i < borrowedEBooks.size(); i++) {
+                        if (borrowedEBooks.get(i).geteBookId() == eBookId && borrowedEBooks.get(i).getLibraryCardId() == libraryCardId) {
                             matchedEBook = true;
-                        }                       
+                        }
                     }
-                    
-                    if(matchedEBook){
+
+                    if (matchedEBook) {
                         JOptionPane.showMessageDialog(this, "Du har redan lånat E-Boken");
-                    }else{
-                    qm.borrowEBooks(eBookId, libraryCardId);   
+                    } else {
+                        qm.borrowEBooks(eBookId, libraryCardId);
                     }
                 }
             }
@@ -1014,19 +1015,36 @@ public class UserView extends javax.swing.JFrame {
     private void jbtnReserveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnReserveActionPerformed
 
         try {
-        int selection = seminarsTable.getSelectedRow();
-        String title = seminarsTable.getModel().getValueAt(selection, 0).toString();
-        System.out.println(title);
+            int selection = seminarsTable.getSelectedRow();
+            String title = seminarsTable.getModel().getValueAt(selection, 0).toString();
+            System.out.println(title);
 
-        Guest g = qm.findGuestByMail(guestEmail);
-        Seminar s = qm.findSeminarByTitle(title);
+            Guest g = qm.findGuestByMail(guestEmail);
+            Seminar s = qm.findSeminarByTitle(title);
 
-        qm.bookSeminar(g, s);
-        fillSeminarsTable();
-        }catch(Exception e){
+            qm.bookSeminar(g, s);
+            fillSeminarsTable();
+        } catch (Exception e) {
             System.out.println("du måste välja ett seminarium");
         }
     }//GEN-LAST:event_jbtnReserveActionPerformed
+
+    private void seminarsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seminarsTableMouseClicked
+
+        DefaultTableModel model = (DefaultTableModel) seminarsTable.getModel();
+
+        String seminarDesc = model.getValueAt(seminarsTable.getSelectedRow(), 5).toString().trim();
+        String seminarProgram = model.getValueAt(seminarsTable.getSelectedRow(), 6).toString().trim();
+
+        jPanelInvisible.setVisible(true);
+
+        for (int i = 0; i < qm.findSeminar().size(); i++) {
+            if (qm.findSeminar().get(i).getSeminariumDescription().trim().equals(seminarDesc)) {
+                jLabelAboutBook.setText("<html>Beskrivning: <br>" + qm.findSeminar().get(i).getSeminariumDescription() + "</html>");
+                lblProgram.setText("<html>Program: <br>" + qm.findSeminar().get(i).getProgramDescription() + "</html>");
+            }
+        }
+    }//GEN-LAST:event_seminarsTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1064,7 +1082,6 @@ public class UserView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable BookSeminariumTable;
     private javax.swing.JTable MyReservationsTable;
     private javax.swing.JButton btnClose;
     private javax.swing.JLabel jLabel1;
@@ -1098,6 +1115,7 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JButton jbtnUpdateMyReservations;
     private javax.swing.JTable jtableMyBorrowings;
     private javax.swing.JTable jtableSortiment;
+    private javax.swing.JLabel lblProgram;
     private javax.swing.JTable seminarsTable;
     // End of variables declaration//GEN-END:variables
 }
