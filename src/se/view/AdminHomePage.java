@@ -1525,17 +1525,25 @@ public class AdminHomePage extends javax.swing.JFrame {
         } else if (!Validation.isValidEmail(email)) {
             JOptionPane.showMessageDialog(this, "Felaktig inmatning för email");
         } else {
+           
             switch (userType) {
                 case "Administratör":
+                    
                     queryMethods.insertAdmin(firstName, lastName, PN, password, email);
+                    
                     break;
-                case "Bibliotikarie":
+                case "Bibliotekarie":
+                    
                     queryMethods.insertLibrarian(firstName, lastName, PN, password, email);
+                    
                     break;
                 case "Gäst":
+                   
                     queryMethods.insertGuest(firstName, lastName, PN, password, email);
+                    
                     break;
             }
+            
 
         }
         txtFirstname.setText("");
