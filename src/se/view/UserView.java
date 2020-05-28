@@ -21,11 +21,13 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import se.database.QueryMethods;
+import se.model.Booking;
 import se.model.Books;
 import se.model.BorrowEBooks;
 import se.model.BorrowedBooks;
 import se.model.E_Books;
 import se.model.Guest;
+import se.model.LibraryCards;
 import se.model.Seminar;
 
 /**
@@ -69,6 +71,7 @@ public class UserView extends javax.swing.JFrame {
         this.guestEmail = guestEmail;
 
         fillMyBorrowingsTable();
+        fillMyReservationsTable();
 
         jLabelTitle.setText("Inloggad Gäst: " + guestFullName());
         jtableSortiment.setAutoCreateRowSorter(true);
@@ -262,6 +265,37 @@ public class UserView extends javax.swing.JFrame {
         jtableMyBorrowings.getColumnModel().getColumn(3).setHeaderValue("Typ");
         jtableMyBorrowings.getColumnModel().getColumn(4).setHeaderValue("Återlämning");
 
+    }
+    
+    public void fillMyReservationsTable(){
+        ArrayList<Booking> allBookedSeminars = qm.getAllBookedSeminars();
+        ArrayList<Booking> myBookedSeminars = new ArrayList<>();
+        LibraryCards libraryCardId = qm.findLibrarycardByEmail(this.guestEmail);
+        
+        for(int i = 0 ; i < allBookedSeminars.size(); i++){
+            if(allBookedSeminars.get(i).getLibraryCardId() == libraryCardId.getId()){
+                myBookedSeminars.add(allBookedSeminars.get(i));
+            }
+        }
+        
+        ArrayList<Seminar> allSeminars = qm.findSeminar();
+        DefaultTableModel model = (DefaultTableModel) MyReservationsTable.getModel();
+        model.setColumnCount(4);
+        model.setRowCount(0);
+        
+        for(int i = 0; i < allSeminars.size() ; i++){
+            for(int j = 0 ; j < myBookedSeminars.size() ; j++){
+                if(myBookedSeminars.get(j).getSeminarId() == allSeminars.get(i).getId()){
+                    model.addRow(new Object[]{allSeminars.get(i).getTitle(), allSeminars.get(i).getSpeaker(),
+                                              allSeminars.get(i).getLocation(), allSeminars.get(i).getStartDate()});
+                }
+            }
+        }
+        MyReservationsTable.getColumnModel().getColumn(0).setHeaderValue("Titel");
+        MyReservationsTable.getColumnModel().getColumn(1).setHeaderValue("Föreläsare");
+        MyReservationsTable.getColumnModel().getColumn(2).setHeaderValue("Plats");
+        MyReservationsTable.getColumnModel().getColumn(3).setHeaderValue("Datum");
+        
     }
 
     /**

@@ -30,6 +30,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import se.model.Admin;
+import se.model.Booking;
 import se.model.Books;
 import se.model.BorrowEBooks;
 import se.model.BorrowedBooks;
@@ -2044,4 +2045,39 @@ public class QueryMethods {
 
         
     }
+    
+    public ArrayList<Booking> getAllBookedSeminars() {
+        String query = "select * from bookings;";
+
+        ArrayList<Booking> bookedSeminars = new ArrayList<Booking>();
+        Booking list;
+
+        con = MyConnection.getConnection();
+        PreparedStatement ps;
+
+        try {
+            ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list = new Booking(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3));
+                       bookedSeminars.add(list);
+            }
+            
+            ps.close();
+            rs.close();
+
+        } catch (Exception e) {
+            System.out.println(e.toString() + " getAllBookedSeminars()");
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return bookedSeminars;
+    }
+    
 }
