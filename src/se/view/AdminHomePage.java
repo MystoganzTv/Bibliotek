@@ -1286,7 +1286,9 @@ public class AdminHomePage extends javax.swing.JFrame {
 
         if (queryMethods.isEmailTaken(email)) {
             JOptionPane.showMessageDialog(this, "Upptagen Email");
-        } else if (!Validation.isValidName(firstName)) {
+        }else if (queryMethods.isPersonNumberTaken(PN)){
+            JOptionPane.showMessageDialog(this, "Upptaget Personnummer");
+        }else if (!Validation.isValidName(firstName)) {
             JOptionPane.showMessageDialog(this, "Felaktig inmatning för förnamn");
         } else if (!Validation.isValidName(lastName)) {
             JOptionPane.showMessageDialog(this, "Felaktig inmatning för efternamn");
