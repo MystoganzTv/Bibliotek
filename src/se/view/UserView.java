@@ -60,7 +60,8 @@ public class UserView extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         jPanelInvisible.setVisible(false);
-        //fillSortimentTable();
+
+        fillSortimentTable();
 
         fillSeminarsTable();
         jTextFieldSearchSortiment.setToolTipText("Skriv titel, författare eller kategori");
@@ -1099,6 +1100,7 @@ public class UserView extends javax.swing.JFrame {
                 }
         
     }//GEN-LAST:event_jtableMyBorrowingsMouseClicked
+
 
     /**
      * @param args the command line arguments
