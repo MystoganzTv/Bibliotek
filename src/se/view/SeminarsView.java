@@ -34,6 +34,9 @@ public class SeminarsView extends javax.swing.JFrame {
         seminarList.setModel(model);
         seminarList.setSelectionMode(1);
         
+        seminarDescription.setEditable(false);
+        seminarProgramDescription.setEditable(false);
+        
         fillSeminarList();
     }
     
