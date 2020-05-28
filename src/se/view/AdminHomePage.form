@@ -853,27 +853,15 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jbtnEditBookings" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jbtnUpdateBookings" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jbtnEraseBookings" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jScrollPane4" alignment="1" min="-2" pref="657" max="-2" attributes="0"/>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jScrollPane4" alignment="1" min="-2" pref="657" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="jLabelSearchBookingsText" min="-2" pref="25" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jTextFieldSearchBooking" max="32767" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jLabelSearchBookingsIcon" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                      <Component id="jLabelSearchBookingsText" min="-2" pref="25" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jTextFieldSearchBooking" max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jLabelSearchBookingsIcon" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -883,25 +871,15 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="27" max="32767" attributes="0"/>
+                              <EmptySpace pref="23" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabelSearchBookingsIcon" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="jTextFieldSearchBooking" alignment="1" min="-2" pref="24" max="-2" attributes="0"/>
                                   <Component id="jLabelSearchBookingsText" alignment="1" min="-2" pref="20" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jScrollPane4" min="-2" pref="364" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jbtnEditBookings" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jbtnUpdateBookings" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jbtnEraseBookings" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+                              <Component id="jScrollPane4" min="-2" pref="364" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -951,21 +929,6 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JButton" name="jbtnEditBookings">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Redigera"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jbtnUpdateBookings">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Uppdatera"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jbtnEraseBookings">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Ta bort"/>
-                      </Properties>
-                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanelTabLendings">
@@ -983,19 +946,9 @@
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jbtnEditBorrowing" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jbtnUpdateBorrowing" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jbtnEraseBorrowing" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="jScrollPane5" alignment="1" min="-2" pref="657" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jScrollPane5" min="-2" pref="657" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="jLabelSearchLendingText" min="-2" pref="25" max="-2" attributes="0"/>
@@ -1003,16 +956,16 @@
                                       <Component id="jTextFieldSearchLending" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabelSearchLendingIcon" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="27" max="32767" attributes="0"/>
+                              <EmptySpace pref="32" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabelSearchLendingIcon" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" alignment="1" groupAlignment="3" attributes="0">
@@ -1022,13 +975,7 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jScrollPane5" min="-2" pref="364" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jbtnEditBorrowing" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jbtnUpdateBorrowing" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jbtnEraseBorrowing" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1075,21 +1022,6 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JButton" name="jbtnEditBorrowing">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Redigera"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jbtnUpdateBorrowing">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Uppdatera"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jbtnEraseBorrowing">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Ta bort"/>
-                      </Properties>
-                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanelTabStock">
@@ -1118,14 +1050,6 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabelSearchStockIcon" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jbtnEditStock" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jbtnUpdateStock" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jbtnEraseStock" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -1134,7 +1058,7 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="27" max="32767" attributes="0"/>
+                              <EmptySpace pref="32" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabelSearchStockIcon" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="jTextFieldSearchStock" alignment="1" min="-2" pref="24" max="-2" attributes="0"/>
@@ -1142,13 +1066,7 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jScrollPane6" min="-2" pref="364" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jbtnEditStock" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jbtnUpdateStock" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jbtnEraseStock" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1198,21 +1116,6 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JButton" name="jbtnEditStock">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Redigera"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jbtnUpdateStock">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Uppdatera"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jbtnEraseStock">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Ta bort"/>
-                      </Properties>
-                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanelTabDeletedBooks">
@@ -1237,13 +1140,6 @@
                                       <Component id="searchDeletedBookText" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="searchRemovedBooks" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jbtnEditDeletedBook" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jbtnUpdateDeletedBook" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jbtnEraseDeletedBook" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
@@ -1270,13 +1166,7 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jScrollPane10" min="-2" pref="370" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jbtnEditDeletedBook" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jbtnUpdateDeletedBook" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jbtnEraseDeletedBook" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace pref="32" max="32767" attributes="0"/>
+                              <EmptySpace pref="96" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1339,21 +1229,6 @@
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jbtnEditDeletedBook">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Redigera"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jbtnUpdateDeletedBook">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Uppdatera"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jbtnEraseDeletedBook">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Ta bort"/>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>

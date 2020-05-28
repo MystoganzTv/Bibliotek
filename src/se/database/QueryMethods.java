@@ -191,7 +191,7 @@ public class QueryMethods {
         insertEmail(email);
         int idLibrarian = 0;
         con = MyConnection.getConnection();
-        query = "INSERT INTO librarians (first_name, last_name, person_id, password) VALUES (?,?,?,?,?)";
+        query = "INSERT INTO librarians (first_name, last_name, person_id, password, email) VALUES (?,?,?,?,?)";
 
         try {
             ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);

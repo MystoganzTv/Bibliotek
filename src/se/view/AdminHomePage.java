@@ -58,7 +58,7 @@ public class AdminHomePage extends javax.swing.JFrame {
     
     private ArrayList<Books> books;
     private ArrayList<E_Books> eBooks;
-    private String[] colNamesSort = {"Titel", "Författare", "Kategory", "Pris", "Inläggnings Datum", "Typ"};
+    private String[] colNamesSort = {"ID", "Titel", "Författare", "Kategory", "Pris", "Inläggnings Datum", "Typ"};
     
         
     private PreparedStatement ps;
@@ -171,12 +171,12 @@ public class AdminHomePage extends javax.swing.JFrame {
         model.setRowCount(0);
         
         for (int i = 0; i < books.size(); i++) {            
-            model.addRow(new Object[]{ books.get(i).getTitle(), books.get(i).getAuthor(),
+            model.addRow(new Object[]{ books.get(i).getId(), books.get(i).getTitle(), books.get(i).getAuthor(),
                  books.get(i).getCategory(), books.get(i).getPurchase_price(), books.get(i).getDate(), bookType});
         }
         
         for (int i = 0; i < eBooks.size(); i++) {
-            model.addRow(new Object[]{eBooks.get(i).getTitle(), eBooks.get(i).getAuthor(),
+            model.addRow(new Object[]{eBooks.get(i).getId(), eBooks.get(i).getTitle(), eBooks.get(i).getAuthor(),
                   eBooks.get(i).getCategory(), eBooks.get(i).getPurchase_price(),eBooks.get(i).getDate(), ebookType });
         }
         
@@ -366,27 +366,18 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabelSearchBookingsIcon = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         BookingsTable = new javax.swing.JTable();
-        jbtnEditBookings = new javax.swing.JButton();
-        jbtnUpdateBookings = new javax.swing.JButton();
-        jbtnEraseBookings = new javax.swing.JButton();
         jPanelTabLendings = new javax.swing.JPanel();
         jLabelSearchLendingText = new javax.swing.JLabel();
         jTextFieldSearchLending = new javax.swing.JTextField();
         jLabelSearchLendingIcon = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         LendingTable = new javax.swing.JTable();
-        jbtnEditBorrowing = new javax.swing.JButton();
-        jbtnUpdateBorrowing = new javax.swing.JButton();
-        jbtnEraseBorrowing = new javax.swing.JButton();
         jPanelTabStock = new javax.swing.JPanel();
         jLabelSearchStockText = new javax.swing.JLabel();
         jTextFieldSearchStock = new javax.swing.JTextField();
         jLabelSearchStockIcon = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         StockTable = new javax.swing.JTable();
-        jbtnEditStock = new javax.swing.JButton();
-        jbtnUpdateStock = new javax.swing.JButton();
-        jbtnEraseStock = new javax.swing.JButton();
         jPanelTabDeletedBooks = new javax.swing.JPanel();
         jLabelSearchText = new javax.swing.JLabel();
         searchDeletedBookText = new javax.swing.JTextField();
@@ -394,9 +385,6 @@ public class AdminHomePage extends javax.swing.JFrame {
         jScrollPane10 = new javax.swing.JScrollPane();
         BookLogTable = new javax.swing.JTable();
         jComboBoxType = new javax.swing.JComboBox<>();
-        jbtnEditDeletedBook = new javax.swing.JButton();
-        jbtnUpdateDeletedBook = new javax.swing.JButton();
-        jbtnEraseDeletedBook = new javax.swing.JButton();
         jPanelAdminToolRegister = new javax.swing.JPanel();
         jPanelAdminTools = new javax.swing.JPanel();
         jLabelEditUsersImg = new javax.swing.JLabel();
@@ -902,55 +890,33 @@ public class AdminHomePage extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(BookingsTable);
 
-        jbtnEditBookings.setText("Redigera");
-
-        jbtnUpdateBookings.setText("Uppdatera");
-
-        jbtnEraseBookings.setText("Ta bort");
-
         javax.swing.GroupLayout jPanelTabBookingsLayout = new javax.swing.GroupLayout(jPanelTabBookings);
         jPanelTabBookings.setLayout(jPanelTabBookingsLayout);
         jPanelTabBookingsLayout.setHorizontalGroup(
             jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
-                        .addComponent(jbtnEditBookings)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbtnUpdateBookings)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbtnEraseBookings))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookingsLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookingsLayout.createSequentialGroup()
-                                .addComponent(jLabelSearchBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextFieldSearchBooking)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelSearchBookingsIcon)))))
+                        .addComponent(jLabelSearchBookingsText, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldSearchBooking)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelSearchBookingsIcon)))
                 .addContainerGap())
         );
         jPanelTabBookingsLayout.setVerticalGroup(
             jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabBookingsLayout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelSearchBookingsIcon, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextFieldSearchBooking, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelSearchBookingsText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelTabBookingsLayout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(68, 68, 68))
-                    .addGroup(jPanelTabBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jbtnEditBookings)
-                        .addComponent(jbtnUpdateBookings)
-                        .addComponent(jbtnEraseBookings)))
-                .addGap(68, 68, 68))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(136, 136, 136))
         );
 
         jTabbedPaneReport.addTab("Bokningar", jPanelTabBookings);
@@ -974,12 +940,6 @@ public class AdminHomePage extends javax.swing.JFrame {
         ));
         jScrollPane5.setViewportView(LendingTable);
 
-        jbtnEditBorrowing.setText("Redigera");
-
-        jbtnUpdateBorrowing.setText("Uppdatera");
-
-        jbtnEraseBorrowing.setText("Ta bort");
-
         javax.swing.GroupLayout jPanelTabLendingsLayout = new javax.swing.GroupLayout(jPanelTabLendings);
         jPanelTabLendings.setLayout(jPanelTabLendingsLayout);
         jPanelTabLendingsLayout.setHorizontalGroup(
@@ -988,28 +948,20 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
-                        .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
-                                .addComponent(jbtnEditBorrowing)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbtnUpdateBorrowing)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbtnEraseBorrowing)
-                                .addGap(12, 12, 12))
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLendingsLayout.createSequentialGroup()
                         .addComponent(jLabelSearchLendingText, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldSearchLending)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelSearchLendingIcon)))
-                .addContainerGap())
+                        .addComponent(jLabelSearchLendingIcon)
+                        .addContainerGap())))
         );
         jPanelTabLendingsLayout.setVerticalGroup(
             jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLendingsLayout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addContainerGap(32, Short.MAX_VALUE)
                 .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelSearchLendingIcon, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1017,12 +969,7 @@ public class AdminHomePage extends javax.swing.JFrame {
                         .addComponent(jLabelSearchLendingText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtnEditBorrowing)
-                    .addComponent(jbtnUpdateBorrowing)
-                    .addComponent(jbtnEraseBorrowing))
-                .addGap(60, 60, 60))
+                .addGap(127, 127, 127))
         );
 
         jTabbedPaneReport.addTab("Utlåning", jPanelTabLendings);
@@ -1051,12 +998,6 @@ public class AdminHomePage extends javax.swing.JFrame {
         ));
         jScrollPane6.setViewportView(StockTable);
 
-        jbtnEditStock.setText("Redigera");
-
-        jbtnUpdateStock.setText("Uppdatera");
-
-        jbtnEraseStock.setText("Ta bort");
-
         javax.swing.GroupLayout jPanelTabStockLayout = new javax.swing.GroupLayout(jPanelTabStock);
         jPanelTabStock.setLayout(jPanelTabStockLayout);
         jPanelTabStockLayout.setHorizontalGroup(
@@ -1072,32 +1013,20 @@ public class AdminHomePage extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldSearchStock)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelSearchStockIcon))
-                    .addGroup(jPanelTabStockLayout.createSequentialGroup()
-                        .addComponent(jbtnEditStock)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbtnUpdateStock)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbtnEraseStock)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabelSearchStockIcon)))
                 .addContainerGap())
         );
         jPanelTabStockLayout.setVerticalGroup(
             jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabStockLayout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addContainerGap(32, Short.MAX_VALUE)
                 .addGroup(jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelSearchStockIcon, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextFieldSearchStock, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelSearchStockText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addGroup(jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtnEditStock)
-                    .addComponent(jbtnUpdateStock)
-                    .addComponent(jbtnEraseStock))
-                .addGap(64, 64, 64))
+                .addGap(127, 127, 127))
         );
 
         jTabbedPaneReport.addTab("Lager", jPanelTabStock);
@@ -1137,12 +1066,6 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
         });
 
-        jbtnEditDeletedBook.setText("Redigera");
-
-        jbtnUpdateDeletedBook.setText("Uppdatera");
-
-        jbtnEraseDeletedBook.setText("Ta bort");
-
         javax.swing.GroupLayout jPanelTabDeletedBooksLayout = new javax.swing.GroupLayout(jPanelTabDeletedBooks);
         jPanelTabDeletedBooks.setLayout(jPanelTabDeletedBooksLayout);
         jPanelTabDeletedBooksLayout.setHorizontalGroup(
@@ -1156,13 +1079,7 @@ public class AdminHomePage extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(searchDeletedBookText)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchRemovedBooks))
-                    .addGroup(jPanelTabDeletedBooksLayout.createSequentialGroup()
-                        .addComponent(jbtnEditDeletedBook)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbtnUpdateDeletedBook)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbtnEraseDeletedBook)))
+                        .addComponent(searchRemovedBooks)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabDeletedBooksLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1182,12 +1099,7 @@ public class AdminHomePage extends javax.swing.JFrame {
                         .addComponent(jLabelSearchText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addGroup(jPanelTabDeletedBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtnEditDeletedBook)
-                    .addComponent(jbtnUpdateDeletedBook)
-                    .addComponent(jbtnEraseDeletedBook))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         jTabbedPaneReport.addTab("Borttagna Böcker", jPanelTabDeletedBooks);
@@ -1525,17 +1437,25 @@ public class AdminHomePage extends javax.swing.JFrame {
         } else if (!Validation.isValidEmail(email)) {
             JOptionPane.showMessageDialog(this, "Felaktig inmatning för email");
         } else {
+           
             switch (userType) {
                 case "Administratör":
+                    
                     queryMethods.insertAdmin(firstName, lastName, PN, password, email);
+                    
                     break;
-                case "Bibliotikarie":
+                case "Bibliotekarie":
+                    
                     queryMethods.insertLibrarian(firstName, lastName, PN, password, email);
+                    
                     break;
                 case "Gäst":
+                   
                     queryMethods.insertGuest(firstName, lastName, PN, password, email);
+                    
                     break;
             }
+            
 
         }
         txtFirstname.setText("");
@@ -1592,6 +1512,8 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void jLabelEraseUserTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseUserTextMouseClicked
         // TODO add your handling code here:
+        
+        jLabelEraseUserIconMouseClicked(evt);
     }//GEN-LAST:event_jLabelEraseUserTextMouseClicked
 
     private void jLabelUpdateUserTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateUserTextMouseClicked
@@ -1600,20 +1522,8 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void jLabelEraseLibrarianTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseLibrarianTextMouseClicked
 
-        int selection = librarianTable.getSelectedRow();
-
-        String stringId = librarianTable.getModel().getValueAt(selection, 0).toString();
-
-        int id = Integer.parseInt(stringId);
-
-        for (Librarian l : librarians) {
-            if (l.getId() == id) {
-                System.out.println(l.getFirstName());
-                queryMethods.deleteLibrarian(l);
-
-            }
-            fillLibrarianTable();
-        }
+        jLabelEraseLibrarianIconMouseClicked(evt);
+        
     }//GEN-LAST:event_jLabelEraseLibrarianTextMouseClicked
 
     private void jLabelUpdateLibrarianTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateLibrarianTextMouseClicked
@@ -1630,20 +1540,8 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void jLabelEraseAdminTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseAdminTextMouseClicked
 
-        int selection = adminTable.getSelectedRow();
-
-        String stringId = adminTable.getModel().getValueAt(selection, 0).toString();
-
-        int id = Integer.parseInt(stringId);
-
-        for (Admin a : admins) {
-            if (a.getId() == id) {
-                System.out.println(a.getFirstName());
-                queryMethods.deleteAdmin(a);
-
-            }
-            fillAdminTable();
-        }
+        jLabelEraseAdminIconMouseClicked(evt);
+        
     }//GEN-LAST:event_jLabelEraseAdminTextMouseClicked
 
     private void jLabelUpdateAdminTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateAdminTextMouseClicked
@@ -1687,7 +1585,11 @@ public class AdminHomePage extends javax.swing.JFrame {
             for (Guest g : guests) {
                 if (g.getId() == id) {
                     System.out.println(g.getFirstName());
+                    int reply = JOptionPane.showConfirmDialog(this,"Vill du verkligen ta bort " + g.getFirstName() + " " + g.getLastName());
+                    
+                    if(reply == JOptionPane.YES_OPTION){
                     queryMethods.deleteGuest(g);
+                    }
 
                 }
                 fillGuestTable();
@@ -1708,7 +1610,11 @@ public class AdminHomePage extends javax.swing.JFrame {
         for (Librarian l : librarians) {
             if (l.getId() == id) {
                 System.out.println(l.getFirstName());
+                
+                int reply = JOptionPane.showConfirmDialog(this, "Vill du verkligen ta bort " + l.getFirstName() + " " + l.getLastName());
+                if(reply == JOptionPane.YES_OPTION){
                 queryMethods.deleteLibrarian(l);
+                }
 
             }
             fillLibrarianTable();
@@ -1727,7 +1633,12 @@ public class AdminHomePage extends javax.swing.JFrame {
         for (Admin a : admins) {
             if (a.getId() == id) {
                 System.out.println(a.getFirstName());
+                
+                int reply = JOptionPane.showConfirmDialog(this, "Vill du verkligen ta bort " +a.getFirstName() + " " +a.getLastName());
+                
+                if(reply == JOptionPane.YES_OPTION){
                 queryMethods.deleteAdmin(a);
+                }
 
             }
             fillAdminTable();
@@ -2003,18 +1914,6 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldSearchLibrarian;
     private javax.swing.JTextField jTextFieldSearchStock;
     private javax.swing.JTextField jTextFieldSearchUser;
-    private javax.swing.JButton jbtnEditBookings;
-    private javax.swing.JButton jbtnEditBorrowing;
-    private javax.swing.JButton jbtnEditDeletedBook;
-    private javax.swing.JButton jbtnEditStock;
-    private javax.swing.JButton jbtnEraseBookings;
-    private javax.swing.JButton jbtnEraseBorrowing;
-    private javax.swing.JButton jbtnEraseDeletedBook;
-    private javax.swing.JButton jbtnEraseStock;
-    private javax.swing.JButton jbtnUpdateBookings;
-    private javax.swing.JButton jbtnUpdateBorrowing;
-    private javax.swing.JButton jbtnUpdateDeletedBook;
-    private javax.swing.JButton jbtnUpdateStock;
     private javax.swing.JTable librarianTable;
     private javax.swing.JTextField searchDeletedBookText;
     private javax.swing.JLabel searchRemovedBooks;
