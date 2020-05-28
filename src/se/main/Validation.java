@@ -63,7 +63,7 @@ public class Validation {
         int breakpoint = email.indexOf('@');
         String firstPartOfEmail = email.substring(0,breakpoint);
         
-        if(!firstPartOfEmail.matches("^[a-zA-Z0-9]+$")){
+        if(!firstPartOfEmail.matches("^[a-zA-Z0-9.]+$")){
             
             return false;
         }
