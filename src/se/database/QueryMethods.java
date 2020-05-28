@@ -1867,10 +1867,28 @@ public class QueryMethods {
             con = tryConnection.getConnection();
             Statement stmt = con.createStatement();
 
+            ResultSet rs = stmt.executeQuery("SELECT guest_id FROM bookings WHERE seminar_id = " + s.getId() + "");
+            int guestExists = 0;
+            
+            // checking if guest is already booked in
+            while(rs.next()) {
+                guestExists = rs.getInt("guest_id");
+                System.out.println(guestExists + " = " + g.getId());
+                if(guestExists == g.getId()) {
+                    JOptionPane.showMessageDialog(null, "Du är redan inbokad.");
+                    rs.close();
+                    stmt.close();
+                    con.close();
+                    return;
+                }
+            }
+            rs.close();
+            
             // receiving max num of guests
-            ResultSet rs = stmt.executeQuery("SELECT CountVisitor FROM seminarium WHERE id = " + s.getId() + "");
+            rs = stmt.executeQuery("SELECT CountVisitor FROM seminarium WHERE id = " + s.getId() + "");
             rs.next();
             int nrOfVisitors = rs.getInt("CountVisitor");
+            rs.close();
 
             // checking for available spaces
             if ((nrOfVisitors - 1) >= 0) {

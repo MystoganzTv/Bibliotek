@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import java.util.function.Predicate;
 
@@ -34,6 +35,8 @@ import se.model.Librarian;
 import se.database.QueryMethods;
 import se.main.Validation;
 import se.model.Books;
+import se.model.BorrowEBooks;
+import se.model.BorrowedBooks;
 import se.model.E_Books;
 import se.model.DeletedBook;
 
@@ -102,6 +105,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         showBookType();
         fillBookLogTable();
         fillBooks_EBooksTable();
+        fillLendingTable();
 
         
     }
@@ -138,6 +142,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         showBookType();
         fillBookLogTable();
         fillBooks_EBooksTable();
+        fillLendingTable();
 
         
         this.adminEmail = adminEmail;
@@ -184,6 +189,31 @@ public class AdminHomePage extends javax.swing.JFrame {
         StockTable.setAutoCreateRowSorter(true);
               
     }         
+    
+    public void fillLendingTable(){
+        ArrayList<BorrowedBooks> borrowedBooks = qMethods.getAllBorrowedBooks();
+        ArrayList<BorrowEBooks> borrowedEBooks = qMethods.getAllBorrowedEBooks();
+        DefaultTableModel model = (DefaultTableModel) LendingTable.getModel();
+        model.setColumnCount(5);
+        model.setRowCount(0);
+        for (int i = 0 ; i < borrowedBooks.size() ; i++){
+            model.addRow(new Object[] {borrowedBooks.get(i).getBookId(), borrowedBooks.get(i).getLibraryCardId(),
+                             borrowedBooks.get(i).getStartDate(), borrowedBooks.get(i).getReturnDate(), "Bok"});
+        }
+        for (int i = 0 ; i < borrowedEBooks.size() ; i++){
+            model.addRow(new Object[] {borrowedEBooks.get(i).geteBookId(), borrowedEBooks.get(i).getLibraryCardId(),
+                             borrowedEBooks.get(i).getStartDate(), borrowedEBooks.get(i).getReturnDate(), "E-Bok"});
+        }
+        
+        LendingTable.getColumnModel().getColumn(0).setHeaderValue("Bok Id");
+        LendingTable.getColumnModel().getColumn(1).setHeaderValue("Kort Id");
+        LendingTable.getColumnModel().getColumn(2).setHeaderValue("Utlåningsdatum");
+        LendingTable.getColumnModel().getColumn(3).setHeaderValue("Återlämningsdatum");
+        LendingTable.getColumnModel().getColumn(4).setHeaderValue("Typ");
+
+        
+        
+    }
 
 
     public void showBookType() {
@@ -1560,6 +1590,58 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void jLabelSearchStockIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchStockIconMouseClicked
         // TODO add your handling code here:
+        ArrayList<Books> foundBooks = new ArrayList<>();
+        ArrayList<E_Books> foundeBooks = new ArrayList<>();
+        List<E_Books> eBooks = new ArrayList<>();
+        eBooks = qMethods.getAllEBooks();
+        String searchWord = jTextFieldSearchStock.getText().toLowerCase();
+        String bookIsAvailable = "";
+        List<Books> books = qMethods.findBooks();
+
+
+        ArrayList<Integer> borrowedBooksId = new ArrayList<>();
+        DefaultTableModel model = (DefaultTableModel) StockTable.getModel();
+        model.setRowCount(0);
+        model.setColumnCount(7);
+
+        books.stream().filter((b) -> b.getTitle().toLowerCase().contains(searchWord) || b.getAuthor().toLowerCase().contains(searchWord)
+                || b.getCategory().toLowerCase().equals(searchWord) || b.getIsbn().equals(searchWord)).forEach(foundBooks::add);
+        eBooks.stream().filter((b) -> b.getTitle().toLowerCase().contains(searchWord) || b.getAuthor().toLowerCase().contains(searchWord)
+                || b.getCategory().toLowerCase().equals(searchWord) || b.getIsbn().equals(searchWord)).forEach(foundeBooks::add);
+
+        for (int i = 0; i < qMethods.getAllBorrowedBooks().size(); i++) {
+            borrowedBooksId.add(qMethods.getAllBorrowedBooks().get(i).getBookId());
+        }
+
+        if (!foundBooks.isEmpty()) {
+
+            for (int i = 0; i < foundBooks.size(); i++) {
+
+                model.addRow(new Object[]{foundBooks.get(i).getId(),foundBooks.get(i).getTitle(), foundBooks.get(i).getAuthor(),
+                    foundBooks.get(i).getCategory(),foundBooks.get(i).getPurchase_price(), foundBooks.get(i).getDate()
+                    , "Bok"});
+            }
+
+            for (E_Books ebook : foundeBooks) {
+                model.addRow(new Object[]{ebook.getId(),ebook.getTitle(), ebook.getAuthor(),
+                    ebook.getCategory(),ebook.getPurchase_price(), ebook.getDate(), "E-Bok"});
+            }
+
+            StockTable.setModel(model);
+            jTextFieldSearchStock.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "Ingen bok matchade din sökning");
+        }
+        
+        StockTable.getColumnModel().getColumn(0).setHeaderValue("ID");
+        StockTable.getColumnModel().getColumn(1).setHeaderValue("Titel");
+        StockTable.getColumnModel().getColumn(2).setHeaderValue("Författare");
+        StockTable.getColumnModel().getColumn(3).setHeaderValue("Kategori");
+        StockTable.getColumnModel().getColumn(4).setHeaderValue("Pris");
+        StockTable.getColumnModel().getColumn(5).setHeaderValue("Inläggningsdatum");
+        StockTable.getColumnModel().getColumn(6).setHeaderValue("Typ");
+
+
     }//GEN-LAST:event_jLabelSearchStockIconMouseClicked
 
 
