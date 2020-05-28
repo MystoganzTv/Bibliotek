@@ -1600,6 +1600,8 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void jLabelEraseUserTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseUserTextMouseClicked
         // TODO add your handling code here:
+        
+        jLabelEraseUserIconMouseClicked(evt);
     }//GEN-LAST:event_jLabelEraseUserTextMouseClicked
 
     private void jLabelUpdateUserTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateUserTextMouseClicked
@@ -1608,20 +1610,8 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void jLabelEraseLibrarianTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseLibrarianTextMouseClicked
 
-        int selection = librarianTable.getSelectedRow();
-
-        String stringId = librarianTable.getModel().getValueAt(selection, 0).toString();
-
-        int id = Integer.parseInt(stringId);
-
-        for (Librarian l : librarians) {
-            if (l.getId() == id) {
-                System.out.println(l.getFirstName());
-                queryMethods.deleteLibrarian(l);
-
-            }
-            fillLibrarianTable();
-        }
+        jLabelEraseLibrarianIconMouseClicked(evt);
+        
     }//GEN-LAST:event_jLabelEraseLibrarianTextMouseClicked
 
     private void jLabelUpdateLibrarianTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateLibrarianTextMouseClicked
@@ -1638,20 +1628,8 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void jLabelEraseAdminTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseAdminTextMouseClicked
 
-        int selection = adminTable.getSelectedRow();
-
-        String stringId = adminTable.getModel().getValueAt(selection, 0).toString();
-
-        int id = Integer.parseInt(stringId);
-
-        for (Admin a : admins) {
-            if (a.getId() == id) {
-                System.out.println(a.getFirstName());
-                queryMethods.deleteAdmin(a);
-
-            }
-            fillAdminTable();
-        }
+        jLabelEraseAdminIconMouseClicked(evt);
+        
     }//GEN-LAST:event_jLabelEraseAdminTextMouseClicked
 
     private void jLabelUpdateAdminTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateAdminTextMouseClicked
@@ -1695,7 +1673,11 @@ public class AdminHomePage extends javax.swing.JFrame {
             for (Guest g : guests) {
                 if (g.getId() == id) {
                     System.out.println(g.getFirstName());
+                    int reply = JOptionPane.showConfirmDialog(this,"Vill du verkligen ta bort " + g.getFirstName() + " " + g.getLastName());
+                    
+                    if(reply == JOptionPane.YES_OPTION){
                     queryMethods.deleteGuest(g);
+                    }
 
                 }
                 fillGuestTable();
@@ -1716,7 +1698,11 @@ public class AdminHomePage extends javax.swing.JFrame {
         for (Librarian l : librarians) {
             if (l.getId() == id) {
                 System.out.println(l.getFirstName());
+                
+                int reply = JOptionPane.showConfirmDialog(this, "Vill du verkligen ta bort " + l.getFirstName() + " " + l.getLastName());
+                if(reply == JOptionPane.YES_OPTION){
                 queryMethods.deleteLibrarian(l);
+                }
 
             }
             fillLibrarianTable();
@@ -1735,7 +1721,12 @@ public class AdminHomePage extends javax.swing.JFrame {
         for (Admin a : admins) {
             if (a.getId() == id) {
                 System.out.println(a.getFirstName());
+                
+                int reply = JOptionPane.showConfirmDialog(this, "Vill du verkligen ta bort " +a.getFirstName() + " " +a.getLastName());
+                
+                if(reply == JOptionPane.YES_OPTION){
                 queryMethods.deleteAdmin(a);
+                }
 
             }
             fillAdminTable();
