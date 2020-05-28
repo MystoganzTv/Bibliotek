@@ -327,26 +327,18 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabelSearchUserText = new javax.swing.JLabel();
         jTextFieldSearchUser = new javax.swing.JTextField();
         jLabelSearchUserIcon = new javax.swing.JLabel();
-        jLabelEditUserIcon = new javax.swing.JLabel();
-        jLabelEditUserText = new javax.swing.JLabel();
         jLabelEraseUserIcon = new javax.swing.JLabel();
         jLabelEraseUserText = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
         guestTable = new javax.swing.JTable();
-        jLabelUpdateUserIcon = new javax.swing.JLabel();
-        jLabelUpdateUserText = new javax.swing.JLabel();
         jPanelTabLibrarian = new javax.swing.JPanel();
         jLabelSearchLibrarianText = new javax.swing.JLabel();
         jTextFieldSearchLibrarian = new javax.swing.JTextField();
         jLabelSearchLibrarianIcon = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
         librarianTable = new javax.swing.JTable();
-        jLabelUpdateLibrarianIcon = new javax.swing.JLabel();
         jLabelEraseLibrarianIcon = new javax.swing.JLabel();
         jLabelEraseLibrarianText = new javax.swing.JLabel();
-        jLabelUpdateLibrarianText = new javax.swing.JLabel();
-        jLabelEditLibrarianText = new javax.swing.JLabel();
-        jLabelEditLibrarianIcon = new javax.swing.JLabel();
         jPanelTabAdmin = new javax.swing.JPanel();
         jLabelSearchAdminText = new javax.swing.JLabel();
         jTextFieldSearchAdmin = new javax.swing.JTextField();
@@ -355,10 +347,6 @@ public class AdminHomePage extends javax.swing.JFrame {
         adminTable = new javax.swing.JTable();
         jLabelEraseAdminIcon = new javax.swing.JLabel();
         jLabelEraseAdminText = new javax.swing.JLabel();
-        jLabelUpdateAdminText = new javax.swing.JLabel();
-        jLabelUpdateAdminIcon = new javax.swing.JLabel();
-        jLabelEditAdminIcon = new javax.swing.JLabel();
-        jLabelEditAdminText = new javax.swing.JLabel();
         jTabbedPaneReport = new javax.swing.JTabbedPane();
         jPanelTabBookings = new javax.swing.JPanel();
         jLabelSearchBookingsText = new javax.swing.JLabel();
@@ -484,23 +472,6 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
         });
 
-        jLabelEditUserIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Redigera_80px.png"))); // NOI18N
-        jLabelEditUserIcon.setAlignmentY(1.0F);
-        jLabelEditUserIcon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditUserIconMouseClicked(evt);
-            }
-        });
-
-        jLabelEditUserText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelEditUserText.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelEditUserText.setText("Redigera");
-        jLabelEditUserText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditUserTextMouseClicked(evt);
-            }
-        });
-
         jLabelEraseUserIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/trash_can_80px.png"))); // NOI18N
         jLabelEraseUserIcon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -530,43 +501,24 @@ public class AdminHomePage extends javax.swing.JFrame {
         ));
         jScrollPane7.setViewportView(guestTable);
 
-        jLabelUpdateUserIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_80px.png"))); // NOI18N
-
-        jLabelUpdateUserText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelUpdateUserText.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelUpdateUserText.setText("Uppdatera");
-        jLabelUpdateUserText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelUpdateUserTextMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanelTabUserLayout = new javax.swing.GroupLayout(jPanelTabUser);
         jPanelTabUser.setLayout(jPanelTabUserLayout);
         jPanelTabUserLayout.setHorizontalGroup(
             jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTabUserLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelTabUserLayout.createSequentialGroup()
+                .addGroup(jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabUserLayout.createSequentialGroup()
+                        .addGap(507, 507, 507)
                         .addGroup(jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelEditUserIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanelTabUserLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabelEditUserText, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanelTabUserLayout.createSequentialGroup()
-                                .addComponent(jLabelUpdateUserIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(80, 80, 80)
                                 .addComponent(jLabelEraseUserIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelTabUserLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabelUpdateUserText, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabUserLayout.createSequentialGroup()
                                 .addComponent(jLabelEraseUserText, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(12, 12, 12))))
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabUserLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabUserLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -580,7 +532,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         jPanelTabUserLayout.setVerticalGroup(
             jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabUserLayout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelSearchUserIcon, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -589,15 +541,9 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelEraseUserIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEditUserIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelUpdateUserIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabelEraseUserIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelUpdateUserText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEraseUserText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEditUserText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabelEraseUserText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
         );
 
@@ -627,8 +573,6 @@ public class AdminHomePage extends javax.swing.JFrame {
         ));
         jScrollPane8.setViewportView(librarianTable);
 
-        jLabelUpdateLibrarianIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_80px.png"))); // NOI18N
-
         jLabelEraseLibrarianIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/trash_can_80px.png"))); // NOI18N
         jLabelEraseLibrarianIcon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -645,32 +589,6 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
         });
 
-        jLabelUpdateLibrarianText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelUpdateLibrarianText.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelUpdateLibrarianText.setText("Uppdatera");
-        jLabelUpdateLibrarianText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelUpdateLibrarianTextMouseClicked(evt);
-            }
-        });
-
-        jLabelEditLibrarianText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelEditLibrarianText.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelEditLibrarianText.setText("Redigera");
-        jLabelEditLibrarianText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditLibrarianTextMouseClicked(evt);
-            }
-        });
-
-        jLabelEditLibrarianIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Redigera_80px.png"))); // NOI18N
-        jLabelEditLibrarianIcon.setAlignmentY(1.0F);
-        jLabelEditLibrarianIcon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditLibrarianIconMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanelTabLibrarianLayout = new javax.swing.GroupLayout(jPanelTabLibrarian);
         jPanelTabLibrarian.setLayout(jPanelTabLibrarianLayout);
         jPanelTabLibrarianLayout.setHorizontalGroup(
@@ -678,24 +596,13 @@ public class AdminHomePage extends javax.swing.JFrame {
             .addGroup(jPanelTabLibrarianLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelTabLibrarianLayout.createSequentialGroup()
-                        .addGroup(jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelEditLibrarianIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanelTabLibrarianLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabelEditLibrarianText, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanelTabLibrarianLayout.createSequentialGroup()
-                                .addComponent(jLabelUpdateLibrarianIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelEraseLibrarianIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelTabLibrarianLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabelUpdateLibrarianText, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabelEraseLibrarianText, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12))))
+                    .addGroup(jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelTabLibrarianLayout.createSequentialGroup()
+                            .addGap(80, 80, 80)
+                            .addComponent(jLabelEraseLibrarianIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLibrarianLayout.createSequentialGroup()
+                            .addComponent(jLabelEraseLibrarianText, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(12, 12, 12)))
                     .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLibrarianLayout.createSequentialGroup()
@@ -710,7 +617,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         jPanelTabLibrarianLayout.setVerticalGroup(
             jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLibrarianLayout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelSearchLibrarianIcon, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -719,15 +626,9 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelEraseLibrarianIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEditLibrarianIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelUpdateLibrarianIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabelEraseLibrarianIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelTabLibrarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelUpdateLibrarianText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEraseLibrarianText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEditLibrarianText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabelEraseLibrarianText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
         );
 
@@ -773,60 +674,25 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
         });
 
-        jLabelUpdateAdminText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelUpdateAdminText.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelUpdateAdminText.setText("Uppdatera");
-        jLabelUpdateAdminText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelUpdateAdminTextMouseClicked(evt);
-            }
-        });
-
-        jLabelUpdateAdminIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Update_80px.png"))); // NOI18N
-
-        jLabelEditAdminIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Redigera_80px.png"))); // NOI18N
-        jLabelEditAdminIcon.setAlignmentY(1.0F);
-        jLabelEditAdminIcon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditAdminIconMouseClicked(evt);
-            }
-        });
-
-        jLabelEditAdminText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabelEditAdminText.setForeground(new java.awt.Color(105, 131, 170));
-        jLabelEditAdminText.setText("Redigera");
-        jLabelEditAdminText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelEditAdminTextMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanelTabAdminLayout = new javax.swing.GroupLayout(jPanelTabAdmin);
         jPanelTabAdmin.setLayout(jPanelTabAdminLayout);
         jPanelTabAdminLayout.setHorizontalGroup(
             jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTabAdminLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelTabAdminLayout.createSequentialGroup()
+                .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabAdminLayout.createSequentialGroup()
+                        .addGap(421, 421, 421)
                         .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelEditAdminIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanelTabAdminLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabelEditAdminText, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanelTabAdminLayout.createSequentialGroup()
-                                .addComponent(jLabelUpdateAdminIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(92, 92, 92)
                                 .addComponent(jLabelEraseAdminIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelTabAdminLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabelUpdateAdminText, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabAdminLayout.createSequentialGroup()
+                                .addGap(111, 111, 111)
                                 .addComponent(jLabelEraseAdminText, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(12, 12, 12))))
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabAdminLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabAdminLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -840,7 +706,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         jPanelTabAdminLayout.setVerticalGroup(
             jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabAdminLayout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelSearchAdminIcon, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -849,15 +715,9 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelEraseAdminIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEditAdminIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelUpdateAdminIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabelEraseAdminIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelUpdateAdminText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEraseAdminText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEditAdminText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabelEraseAdminText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
         );
 
@@ -949,14 +809,14 @@ public class AdminHomePage extends javax.swing.JFrame {
                 .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelTabLendingsLayout.createSequentialGroup()
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLendingsLayout.createSequentialGroup()
                         .addComponent(jLabelSearchLendingText, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldSearchLending)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelSearchLendingIcon)
-                        .addContainerGap())))
+                        .addComponent(jLabelSearchLendingIcon)))
+                .addContainerGap())
         );
         jPanelTabLendingsLayout.setVerticalGroup(
             jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1502,23 +1362,11 @@ public class AdminHomePage extends javax.swing.JFrame {
         fillAdminTable();
     }//GEN-LAST:event_jLabelEditUsersImgMouseClicked
 
-    private void jLabelEditUserIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUserIconMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEditUserIconMouseClicked
-
-    private void jLabelEditUserTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUserTextMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEditUserTextMouseClicked
-
     private void jLabelEraseUserTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseUserTextMouseClicked
         // TODO add your handling code here:
         
         jLabelEraseUserIconMouseClicked(evt);
     }//GEN-LAST:event_jLabelEraseUserTextMouseClicked
-
-    private void jLabelUpdateUserTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateUserTextMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelUpdateUserTextMouseClicked
 
     private void jLabelEraseLibrarianTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseLibrarianTextMouseClicked
 
@@ -1526,35 +1374,11 @@ public class AdminHomePage extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jLabelEraseLibrarianTextMouseClicked
 
-    private void jLabelUpdateLibrarianTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateLibrarianTextMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelUpdateLibrarianTextMouseClicked
-
-    private void jLabelEditLibrarianTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditLibrarianTextMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEditLibrarianTextMouseClicked
-
-    private void jLabelEditLibrarianIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditLibrarianIconMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEditLibrarianIconMouseClicked
-
     private void jLabelEraseAdminTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseAdminTextMouseClicked
 
         jLabelEraseAdminIconMouseClicked(evt);
         
     }//GEN-LAST:event_jLabelEraseAdminTextMouseClicked
-
-    private void jLabelUpdateAdminTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpdateAdminTextMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelUpdateAdminTextMouseClicked
-
-    private void jLabelEditAdminIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditAdminIconMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEditAdminIconMouseClicked
-
-    private void jLabelEditAdminTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditAdminTextMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelEditAdminTextMouseClicked
 
     private void jLabelReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelReportMouseClicked
 
@@ -1847,12 +1671,6 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelBackgroundPhoto;
-    private javax.swing.JLabel jLabelEditAdminIcon;
-    private javax.swing.JLabel jLabelEditAdminText;
-    private javax.swing.JLabel jLabelEditLibrarianIcon;
-    private javax.swing.JLabel jLabelEditLibrarianText;
-    private javax.swing.JLabel jLabelEditUserIcon;
-    private javax.swing.JLabel jLabelEditUserText;
     private javax.swing.JLabel jLabelEditUsers;
     private javax.swing.JLabel jLabelEditUsersImg;
     private javax.swing.JLabel jLabelEraseAdminIcon;
@@ -1879,12 +1697,6 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelSearchUserIcon;
     private javax.swing.JLabel jLabelSearchUserText;
     private javax.swing.JLabel jLabelTitle;
-    private javax.swing.JLabel jLabelUpdateAdminIcon;
-    private javax.swing.JLabel jLabelUpdateAdminText;
-    private javax.swing.JLabel jLabelUpdateLibrarianIcon;
-    private javax.swing.JLabel jLabelUpdateLibrarianText;
-    private javax.swing.JLabel jLabelUpdateUserIcon;
-    private javax.swing.JLabel jLabelUpdateUserText;
     private javax.swing.JLayeredPane jLayeredPaneWorkArea;
     private javax.swing.JPanel jPanelAdminToolRegister;
     private javax.swing.JPanel jPanelAdminTools;

@@ -400,14 +400,14 @@ public class StartPage extends javax.swing.JFrame {
 
     private void seminarIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seminarIconMouseClicked
 
-        SeminarsView sm = new SeminarsView();
+        ViewUpcomingSeminarsView sm = new ViewUpcomingSeminarsView();
         sm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_seminarIconMouseClicked
 
     private void seminarTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seminarTextMouseClicked
         
-         SeminarsView sm = new SeminarsView();
+         ViewUpcomingSeminarsView sm = new ViewUpcomingSeminarsView();
         sm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_seminarTextMouseClicked

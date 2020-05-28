@@ -236,33 +236,24 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace min="-2" pref="507" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabelEditUserIcon" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                              <Component id="jLabelEditUserText" min="-2" pref="61" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabelUpdateUserIcon" min="-2" pref="80" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
                                               <Component id="jLabelEraseUserIcon" min="-2" pref="80" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                              <Component id="jLabelUpdateUserText" min="-2" pref="72" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
+                                          <Group type="102" alignment="1" attributes="0">
                                               <Component id="jLabelEraseUserText" min="-2" pref="49" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
-                                  <Component id="jScrollPane7" alignment="1" min="-2" pref="657" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jScrollPane7" min="-2" pref="657" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
@@ -280,7 +271,7 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="27" max="32767" attributes="0"/>
+                              <EmptySpace pref="23" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabelSearchUserIcon" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" alignment="1" groupAlignment="3" attributes="0">
@@ -291,17 +282,9 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jScrollPane7" min="-2" pref="364" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jLabelEraseUserIcon" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
-                                  <Component id="jLabelEditUserIcon" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
-                                  <Component id="jLabelUpdateUserIcon" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabelEraseUserIcon" min="-2" pref="80" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabelUpdateUserText" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Component id="jLabelEraseUserText" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Component id="jLabelEditUserText" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabelEraseUserText" min="-2" pref="20" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -329,31 +312,6 @@
                       </Properties>
                       <Events>
                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelSearchUserIconMouseClicked"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabelEditUserIcon">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/se/image/Redigera_80px.png"/>
-                        </Property>
-                        <Property name="alignmentY" type="float" value="1.0"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelEditUserIconMouseClicked"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabelEditUserText">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Gadugi" size="14" style="1"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="aa" green="83" red="69" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Redigera"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelEditUserTextMouseClicked"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabelEraseUserIcon">
@@ -401,27 +359,6 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JLabel" name="jLabelUpdateUserIcon">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/se/image/Update_80px.png"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabelUpdateUserText">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Gadugi" size="14" style="1"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="aa" green="83" red="69" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Uppdatera"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelUpdateUserTextMouseClicked"/>
-                      </Events>
-                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanelTabLibrarian">
@@ -439,28 +376,14 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabelEditLibrarianIcon" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                              <Component id="jLabelEditLibrarianText" min="-2" pref="61" max="-2" attributes="0"/>
-                                          </Group>
+                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                                          <Component id="jLabelEraseLibrarianIcon" min="-2" pref="80" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabelUpdateLibrarianIcon" min="-2" pref="80" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jLabelEraseLibrarianIcon" min="-2" pref="80" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                              <Component id="jLabelUpdateLibrarianText" min="-2" pref="72" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="jLabelEraseLibrarianText" min="-2" pref="49" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                          </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="jLabelEraseLibrarianText" min="-2" pref="49" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Component id="jScrollPane8" alignment="1" min="-2" pref="657" max="-2" attributes="0"/>
@@ -481,7 +404,7 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="27" max="32767" attributes="0"/>
+                              <EmptySpace pref="23" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabelSearchLibrarianIcon" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" alignment="1" groupAlignment="3" attributes="0">
@@ -492,17 +415,9 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jScrollPane8" min="-2" pref="364" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jLabelEraseLibrarianIcon" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
-                                  <Component id="jLabelEditLibrarianIcon" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
-                                  <Component id="jLabelUpdateLibrarianIcon" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabelEraseLibrarianIcon" min="-2" pref="80" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabelUpdateLibrarianText" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Component id="jLabelEraseLibrarianText" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Component id="jLabelEditLibrarianText" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabelEraseLibrarianText" min="-2" pref="20" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -553,13 +468,6 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JLabel" name="jLabelUpdateLibrarianIcon">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/se/image/Update_80px.png"/>
-                        </Property>
-                      </Properties>
-                    </Component>
                     <Component class="javax.swing.JLabel" name="jLabelEraseLibrarianIcon">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -584,45 +492,6 @@
                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelEraseLibrarianTextMouseClicked"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabelUpdateLibrarianText">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Gadugi" size="14" style="1"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="aa" green="83" red="69" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Uppdatera"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelUpdateLibrarianTextMouseClicked"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabelEditLibrarianText">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Gadugi" size="14" style="1"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="aa" green="83" red="69" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Redigera"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelEditLibrarianTextMouseClicked"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabelEditLibrarianIcon">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/se/image/Redigera_80px.png"/>
-                        </Property>
-                        <Property name="alignmentY" type="float" value="1.0"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelEditLibrarianIconMouseClicked"/>
-                      </Events>
-                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanelTabAdmin">
@@ -638,33 +507,25 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace min="-2" pref="421" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabelEditAdminIcon" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                              <Component id="jLabelEditAdminText" min="-2" pref="61" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabelUpdateAdminIcon" min="-2" pref="80" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                                               <Component id="jLabelEraseAdminIcon" min="-2" pref="80" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                              <Component id="jLabelUpdateAdminText" min="-2" pref="72" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
                                               <Component id="jLabelEraseAdminText" min="-2" pref="49" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
-                                  <Component id="jScrollPane9" alignment="1" min="-2" pref="657" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jScrollPane9" min="-2" pref="657" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
@@ -682,7 +543,7 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="27" max="32767" attributes="0"/>
+                              <EmptySpace pref="23" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabelSearchAdminIcon" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" alignment="1" groupAlignment="3" attributes="0">
@@ -693,17 +554,9 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jScrollPane9" min="-2" pref="364" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jLabelEraseAdminIcon" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
-                                  <Component id="jLabelEditAdminIcon" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
-                                  <Component id="jLabelUpdateAdminIcon" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabelEraseAdminIcon" min="-2" pref="80" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabelUpdateAdminText" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Component id="jLabelEraseAdminText" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Component id="jLabelEditAdminText" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabelEraseAdminText" min="-2" pref="20" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -776,52 +629,6 @@
                       </Properties>
                       <Events>
                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelEraseAdminTextMouseClicked"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabelUpdateAdminText">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Gadugi" size="14" style="1"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="aa" green="83" red="69" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Uppdatera"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelUpdateAdminTextMouseClicked"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabelUpdateAdminIcon">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/se/image/Update_80px.png"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabelEditAdminIcon">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/se/image/Redigera_80px.png"/>
-                        </Property>
-                        <Property name="alignmentY" type="float" value="1.0"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelEditAdminIconMouseClicked"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabelEditAdminText">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Gadugi" size="14" style="1"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="aa" green="83" red="69" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Redigera"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelEditAdminTextMouseClicked"/>
                       </Events>
                     </Component>
                   </SubComponents>
@@ -948,7 +755,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="jScrollPane5" min="-2" pref="657" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="jLabelSearchLendingText" min="-2" pref="25" max="-2" attributes="0"/>
@@ -956,9 +763,9 @@
                                       <Component id="jTextFieldSearchLending" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabelSearchLendingIcon" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
