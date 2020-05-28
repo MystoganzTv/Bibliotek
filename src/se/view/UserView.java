@@ -6,6 +6,8 @@
 package se.view;
 
 import java.awt.Color;
+import java.awt.Point;
+import java.sql.SQLException;
 import java.time.Duration;
 import java.time.Instant;
 import static java.time.Instant.now;
@@ -14,6 +16,8 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import se.database.QueryMethods;
@@ -43,11 +47,11 @@ public class UserView extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         jPanelInvisible.setVisible(false);
-        fillSortimentTable();
+        //fillSortimentTable();
 
         jTextFieldSearchSortiment.setToolTipText("Skriv titel, författare eller kategori");
 
-        fillMyBorrowingsTable();
+        //fillMyBorrowingsTable();
 
         fillSeminarsTable();
     }
@@ -56,6 +60,7 @@ public class UserView extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         jPanelInvisible.setVisible(false);
+
         fillSortimentTable();
 
         fillSeminarsTable();
@@ -63,9 +68,9 @@ public class UserView extends javax.swing.JFrame {
 
         this.guestEmail = guestEmail;
 
-        fillMyBorrowingsTable();
+        //fillMyBorrowingsTable();
 
-        jLabelTitle.setText("Inloggad Gäst: " + guestFullName());
+        //jLabelTitle.setText("Inloggad Gäst: " + guestFullName());
         jtableSortiment.setAutoCreateRowSorter(true);
         jtableMyBorrowings.setAutoCreateRowSorter(true);
     }
@@ -559,6 +564,11 @@ public class UserView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtableMyBorrowings.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtableMyBorrowingsMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(jtableMyBorrowings);
 
         jbtnUpdate1.setText("Uppdatera");
@@ -604,6 +614,11 @@ public class UserView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        MyReservationsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MyReservationsTableMouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(MyReservationsTable);
 
         jbtnUpdateMyReservations.setText("Uppdatera");
@@ -1045,6 +1060,47 @@ public class UserView extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_seminarsTableMouseClicked
+
+    private void MyReservationsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MyReservationsTableMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MyReservationsTableMouseClicked
+
+    private void jtableMyBorrowingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtableMyBorrowingsMouseClicked
+        // TODO add your handling code here:
+        int id;
+                if (jtableMyBorrowings.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Du har inte valt en bok");
+            
+                
+               
+                    
+        } else {
+            DefaultTableModel model = (DefaultTableModel) jtableMyBorrowings.getModel();
+
+            String bookType = model.getValueAt(jtableMyBorrowings.getSelectedRow(), 3).toString();
+            
+            String bookIsbn = model.getValueAt(jtableMyBorrowings.getSelectedRow(), 2).toString().trim();
+            
+            for (int i = 0; i < qm.findEBooks().size(); i++) {
+                if (qm.findEBooks().get(i).getIsbn().trim().equals(bookIsbn)) {
+                    id = qm.findEBooks().get(i).getId();
+               
+               
+             if (bookType.equals("E-Bok")) {
+                try {
+                    DisplayEbook displayebook = new DisplayEbook(id);
+                    displayebook.setVisible(true);
+                    this.dispose();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+            }
+                }
+        
+    }//GEN-LAST:event_jtableMyBorrowingsMouseClicked
+
 
     /**
      * @param args the command line arguments
