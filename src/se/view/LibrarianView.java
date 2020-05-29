@@ -908,10 +908,13 @@ public class LibrarianView extends javax.swing.JFrame {
     }//GEN-LAST:event_returnBooksInListButtonActionPerformed
 
     private void removeFromReturnBooksListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeFromReturnBooksListActionPerformed
-        
+        try{
         int index = returnBooksList.getSelectedIndex();
         
         returnBooksListModel.remove(index);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Du ha inte valt en bok!");
+        }
     }//GEN-LAST:event_removeFromReturnBooksListActionPerformed
 
     private void jLabelSearchBooksIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchBooksIconMouseClicked
