@@ -1061,7 +1061,7 @@ public class UserView extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnUpdateMyReservationActionPerformed
 
     private void jbtnCancelMyReservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelMyReservationActionPerformed
-
+        try{
         int selection = MyReservationsTable.getSelectedRow();
         String title = MyReservationsTable.getModel().getValueAt(selection, 0).toString();
         Guest g = qm.findGuestByMail(guestEmail);
@@ -1070,7 +1070,9 @@ public class UserView extends javax.swing.JFrame {
             qm.cancelSeminarReservation(g, title);
             fillMyReservationsTable();
         }
-        
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Du har inte valt bokning!");
+        }
 
     }//GEN-LAST:event_jbtnCancelMyReservationActionPerformed
 
