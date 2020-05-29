@@ -920,17 +920,21 @@ public class LibrarianView extends javax.swing.JFrame {
         ArrayList<Books> foundBooks = new ArrayList<>();
         ArrayList<E_Books> foundEBooks = new ArrayList<>();
         
-        String searchWord = Bookstxt.getText().toLowerCase();
+        String searchWord = Bookstxt.getText().toLowerCase().trim();
         
-        books.stream().filter((b)-> b.getAuthor().contains(searchWord) || b.getTitle().contains(searchWord)
-                                || b.getCategory().equals(searchWord) || b.getIsbn().equals(searchWord)
+        
+        if(!searchWord.isEmpty()){
+            
+        books.stream().filter((b)-> b.getAuthor().toLowerCase().contains(searchWord) || b.getTitle().toLowerCase().contains(searchWord)
+                                || b.getCategory().toLowerCase().equals(searchWord) || b.getIsbn().equals(searchWord)
                                 ).forEach(foundBooks::add);
        
                                 
-        eBooks.stream().filter((eBook)-> eBook.getAuthor().contains(searchWord) || eBook.getTitle().contains(searchWord)
-                                || eBook.getCategory().equals(searchWord) || eBook.getIsbn().equals(searchWord)
+        eBooks.stream().filter((eBook)-> eBook.getAuthor().toLowerCase().contains(searchWord) || eBook.getTitle().toLowerCase().contains(searchWord)
+                                || eBook.getCategory().toLowerCase().equals(searchWord) || eBook.getIsbn().equals(searchWord)
                                     ).forEach(foundEBooks::add);
         
+        if(!foundBooks.isEmpty() || !foundEBooks.isEmpty()){
         DefaultTableModel searchModel = new DefaultTableModel(colNames, 0);
         
            //private String[] colNames = {"Id", "Titel", "Författare", "ISBN", "Förlag", "Inköp Pris", "Kategori", "Placering"};
@@ -942,6 +946,13 @@ public class LibrarianView extends javax.swing.JFrame {
         }
         
         BooksTable.setModel(searchModel);
+        Bookstxt.setText("");
+        }else {
+            JOptionPane.showMessageDialog(this, "Kunde inte hitta en matchande bok");
+        }
+        }else {
+            fillBooksTable();
+        }
         
 
 
