@@ -1861,19 +1861,19 @@ public class QueryMethods {
         }
     }
 
-    public void bookSeminar(Guest g, Seminar s) {
+    public void bookSeminar(LibraryCards g, Seminar s) {
 
         try {
             MyConnection tryConnection = new MyConnection();
             con = tryConnection.getConnection();
             Statement stmt = con.createStatement();
 
-            ResultSet rs = stmt.executeQuery("SELECT guest_id FROM bookings WHERE seminar_id = " + s.getId() + "");
+            ResultSet rs = stmt.executeQuery("SELECT library_card_id FROM bookings WHERE seminar_id = " + s.getId() + "");
             int guestExists = 0;
             
             // checking if guest is already booked in
             while(rs.next()) {
-                guestExists = rs.getInt("guest_id");
+                guestExists = rs.getInt("library_card_id");
                 System.out.println(guestExists + " = " + g.getId());
                 if(guestExists == g.getId()) {
                     JOptionPane.showMessageDialog(null, "Du är redan inbokad.");
@@ -1894,7 +1894,7 @@ public class QueryMethods {
             // checking for available spaces
             if ((nrOfVisitors - 1) >= 0) {
                 // inserting guest if there are available spaces
-                stmt.execute("INSERT INTO bookings(seminar_id, guest_id) VALUES(" + s.getId() + ", " + g.getId() + ")"); // insert guest into bokings table
+                stmt.execute("INSERT INTO bookings(seminar_id, library_card_id) VALUES(" + s.getId() + ", " + g.getId() + ")"); // insert guest into bokings table
                 stmt.execute("UPDATE seminarium SET CountVisitor = " + (nrOfVisitors - 1) + " WHERE id = " + s.getId() + ""); // update seminarium visitors
                 JOptionPane.showMessageDialog(null, "Bokningen är genomfört!");
             } else {
