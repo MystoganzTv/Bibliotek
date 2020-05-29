@@ -59,7 +59,7 @@ public class UserView extends javax.swing.JFrame {
     }
 
     public UserView(String guestEmail) {
-        initComponents();
+        initComponents();        
         setLocationRelativeTo(null);
         jPanelInvisible.setVisible(false);
 
@@ -95,7 +95,7 @@ public class UserView extends javax.swing.JFrame {
         return firstName + " " + lastName;
 
     }
-
+   
     public void fillSeminarsTable() {
         DefaultTableModel model = (DefaultTableModel) seminarsTable.getModel();
         model.setRowCount(0);
@@ -295,6 +295,8 @@ public class UserView extends javax.swing.JFrame {
         MyReservationsTable.getColumnModel().getColumn(1).setHeaderValue("Föreläsare");
         MyReservationsTable.getColumnModel().getColumn(2).setHeaderValue("Plats");
         MyReservationsTable.getColumnModel().getColumn(3).setHeaderValue("Datum");
+        
+        MyReservationsTable.setModel(model);
         
     }
 
