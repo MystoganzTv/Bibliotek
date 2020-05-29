@@ -935,10 +935,10 @@ public class LibrarianView extends javax.swing.JFrame {
         
            //private String[] colNames = {"Id", "Titel", "Författare", "ISBN", "Förlag", "Inköp Pris", "Kategori", "Placering"};
         for(Books b : foundBooks){
-            searchModel.addRow(new Object[]{b.getId(), b.getTitle(),b.getAuthor(),b.getIsbn(),b.getPublisher(), b.getPurchase_price(), b.getCategory(), b.getPlacement()});
+            searchModel.addRow(new Object[]{b.getId(), b.getTitle(),b.getAuthor(),b.getIsbn(),b.getPublisher(), b.getPurchase_price(), b.getCategory(), b.getPlacement(), "Bok"});
         }
         for(E_Books eBook : foundEBooks){
-            searchModel.addRow(new Object[]{eBook.getId(), eBook.getTitle(),eBook.getAuthor(),eBook.getIsbn(),eBook.getPublisher(), eBook.getPurchase_price(), eBook.getCategory(), "E-Bok"});
+            searchModel.addRow(new Object[]{eBook.getId(), eBook.getTitle(),eBook.getAuthor(),eBook.getIsbn(),eBook.getPublisher(), eBook.getPurchase_price(), eBook.getCategory(),"", "E-Bok"});
         }
         
         BooksTable.setModel(searchModel);
