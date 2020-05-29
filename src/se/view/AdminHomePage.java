@@ -494,6 +494,11 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabelSearchUserText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabelSearchUserText.setForeground(new java.awt.Color(105, 131, 170));
         jLabelSearchUserText.setText("Sök");
+        jLabelSearchUserText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelSearchUserTextMouseClicked(evt);
+            }
+        });
 
         jLabelSearchUserIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
         jLabelSearchUserIcon.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1519,6 +1524,8 @@ public class AdminHomePage extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Ingen användare kunde hittas");
 
             }
+        }else {
+            fillGuestTable();
         }
     }//GEN-LAST:event_jLabelSearchUserIconMouseClicked
 
@@ -1545,6 +1552,8 @@ public class AdminHomePage extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Ingen användare kunde hittas");
             }
+        }else {
+            fillLibrarianTable();
         }
     }//GEN-LAST:event_jLabelSearchLibrarianIconMouseClicked
 
@@ -1572,6 +1581,8 @@ public class AdminHomePage extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Ingen användare kunde hittas");
             }
+        }else {
+            fillAdminTable();
         }
     }//GEN-LAST:event_jLabelSearchAdminIconMouseClicked
 
@@ -1689,6 +1700,10 @@ public class AdminHomePage extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_searchRemovedBooksMouseClicked
+
+    private void jLabelSearchUserTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchUserTextMouseClicked
+ 
+    }//GEN-LAST:event_jLabelSearchUserTextMouseClicked
 
     /**
      * @param args the command line arguments
