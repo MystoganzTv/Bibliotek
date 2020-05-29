@@ -1429,7 +1429,7 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void jLabelEraseUserIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseUserIconMouseClicked
         // TODO add your handling code here:
-
+        try{
         if (jTabbedPaneEdit.isEnabledAt(0)) {
             int selection = guestTable.getSelectedRow();
 
@@ -1451,11 +1451,15 @@ public class AdminHomePage extends javax.swing.JFrame {
 
             }
         }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Du har inte valt någonting!");
+        }
 
     }//GEN-LAST:event_jLabelEraseUserIconMouseClicked
 
     private void jLabelEraseLibrarianIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseLibrarianIconMouseClicked
         // TODO add your handling code here:
+        try{
         int selection = librarianTable.getSelectedRow();
 
         String stringId = librarianTable.getModel().getValueAt(selection, 0).toString();
@@ -1474,11 +1478,15 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
             fillLibrarianTable();
         }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Du har inte valt någonting!");
+        }
 
     }//GEN-LAST:event_jLabelEraseLibrarianIconMouseClicked
 
     private void jLabelEraseAdminIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseAdminIconMouseClicked
         // TODO add your handling code here:
+        try{
         int selection = adminTable.getSelectedRow();
 
         String stringId = adminTable.getModel().getValueAt(selection, 0).toString();
@@ -1497,6 +1505,9 @@ public class AdminHomePage extends javax.swing.JFrame {
 
             }
             fillAdminTable();
+        }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Du har inte valt någonting!");
         }
     }//GEN-LAST:event_jLabelEraseAdminIconMouseClicked
 
