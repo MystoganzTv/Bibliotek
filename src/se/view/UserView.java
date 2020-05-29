@@ -1058,6 +1058,7 @@ public class UserView extends javax.swing.JFrame {
 
     private void jbtnUpdateMyReservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUpdateMyReservationActionPerformed
         // TODO add your handling code here:
+        fillMyReservationsTable();
     }//GEN-LAST:event_jbtnUpdateMyReservationActionPerformed
 
     private void jbtnCancelMyReservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelMyReservationActionPerformed
@@ -1083,7 +1084,7 @@ public class UserView extends javax.swing.JFrame {
             String title = seminarsTable.getModel().getValueAt(selection, 0).toString();
             System.out.println(title);
 
-            Guest g = qm.findGuestByMail(guestEmail);
+            LibraryCards g = qm.findLibrarycardByEmail(guestEmail);
             Seminar s = qm.findSeminarByTitle(title);
 
             qm.bookSeminar(g, s);
