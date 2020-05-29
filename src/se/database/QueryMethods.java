@@ -1913,6 +1913,29 @@ public class QueryMethods {
         }
     }
 
+    public void cancelSeminarReservation (Guest g, String title){
+       LibraryCards libraryCard = findLibrarycardByEmail(g.getEmail());
+       Seminar seminar = findSeminarByTitle(title);
+        String query = "DELETE FROM bookings WHERE library_card_id =" + libraryCard.getId() + " AND seminar_id = " + seminar.getId();
+        
+        con = MyConnection.getConnection();
+        try {
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        finally{
+           try {
+               con.close();
+           } catch (SQLException ex) {
+               Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+           }
+        }
+        
+        
+    }
     public ArrayList<Books> groupAllBooksByIsbn() {
         String query = "Select title, author, isbn, publisher, purchase_price, category,\n"
                 + " placement, books.description, count(*) as copies from books group by isbn;";
