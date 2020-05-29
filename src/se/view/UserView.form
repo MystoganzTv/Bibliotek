@@ -565,9 +565,9 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jbtnUpdateMyReservations" min="-2" pref="91" max="-2" attributes="0"/>
+                                  <Component id="jbtnUpdateMyReservation" min="-2" pref="91" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jbtnEraseMyReservations" min="-2" pref="91" max="-2" attributes="0"/>
+                                  <Component id="jbtnCancelMyReservation" min="-2" pref="91" max="-2" attributes="0"/>
                                   <EmptySpace min="18" pref="729" max="32767" attributes="0"/>
                               </Group>
                               <Component id="jScrollPane6" alignment="1" pref="917" max="32767" attributes="0"/>
@@ -585,8 +585,8 @@
                                   <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                                  <Component id="jbtnUpdateMyReservations" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jbtnEraseMyReservations" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jbtnUpdateMyReservation" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jbtnCancelMyReservation" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
@@ -619,20 +619,20 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JButton" name="jbtnUpdateMyReservations">
+                <Component class="javax.swing.JButton" name="jbtnUpdateMyReservation">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Uppdatera"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnUpdateMyReservationsActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnUpdateMyReservationActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jbtnEraseMyReservations">
+                <Component class="javax.swing.JButton" name="jbtnCancelMyReservation">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Ta bort"/>
+                    <Property name="text" type="java.lang.String" value="Avboka"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnEraseMyReservationsActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnCancelMyReservationActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
