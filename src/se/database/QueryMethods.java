@@ -2041,7 +2041,7 @@ public class QueryMethods {
 
                 while (sc.hasNext()) {
                    test = sc.nextLine();
-                   book.add(sc.nextLine());
+                   book.add(test);
                     System.out.println(book.toString());
 
                     
