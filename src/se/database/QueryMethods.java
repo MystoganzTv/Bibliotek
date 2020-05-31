@@ -890,8 +890,9 @@ public class QueryMethods {
             stmt.close();
 
         } catch (Exception e) {
-            System.out.println("Något gick fel när du har försökt att radera den bok: " + e.getMessage());
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Den bok är utlånat.");
+            //System.out.println("Något gick fel när du har försökt att radera den bok: " + e.getMessage());
+            //e.printStackTrace();
         } finally {
             try {
                 con.close();
