@@ -1153,7 +1153,7 @@ public class UserView extends javax.swing.JFrame {
 
                     if (bookType.equals("E-Bok")) {
                         try {
-                            DisplayEbook displayebook = new DisplayEbook(id);
+                            DisplayEbook displayebook = new DisplayEbook(id, guestEmail);
                             displayebook.setVisible(true);
                             this.setVisible(false);
                         } catch (SQLException ex) {
