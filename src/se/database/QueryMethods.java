@@ -2039,7 +2039,7 @@ public class QueryMethods {
     
     public ArrayList<String> readBook(int idEbook) throws FileNotFoundException, IOException, SQLException {
         InputStream input = null;
-        String test = "";
+        String read = "";
        ArrayList<String> book = new ArrayList<String>();
         String query = "SELECT book_file FROM e_books_files where id_e_book =?";
         PreparedStatement ps;
@@ -2061,9 +2061,9 @@ public class QueryMethods {
                 
 
                 while (sc.hasNext()) {
-                   test = sc.nextLine();
-                   book.add(test);
-                    System.out.println(book.toString());
+                   read = sc.nextLine();
+                   book.add(read);
+                    
 
                     
                 }

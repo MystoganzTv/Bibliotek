@@ -47,10 +47,11 @@ public class DisplayEbook extends javax.swing.JFrame {
         try {
             
             //String bookString = queryMethods.readBook(idEbook);
-            ArrayList <String> test = new ArrayList<>(queryMethods.readBook(idEbook));
-            for(String testing : test){
+            ArrayList <String> readbook = new ArrayList<>(queryMethods.readBook(idEbook));
+            for(String readBook : readbook){
+                
+                sb.append(readBook);
                 sb.append("\n");
-                sb.append(testing);
             }
             //test.add(bookString);
             textArea.append(sb.toString());
