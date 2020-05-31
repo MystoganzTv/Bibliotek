@@ -920,6 +920,7 @@ public class UserView extends javax.swing.JFrame {
 
     private void jbtnBorrowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBorrowActionPerformed
 
+        try {
         DefaultTableModel model = (DefaultTableModel) jtableSortiment.getModel();
         String bookIsbn = model.getValueAt(jtableSortiment.getSelectedRow(), 2).toString();
         ArrayList<Books> bookIdList = new ArrayList<>();
@@ -1020,6 +1021,9 @@ public class UserView extends javax.swing.JFrame {
 
         }
         jbtnUpdate.doClick();
+        }catch(Exception e){
+                
+                }
     }//GEN-LAST:event_jbtnBorrowActionPerformed
 
     private void jbtnAboutBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAboutBookActionPerformed
