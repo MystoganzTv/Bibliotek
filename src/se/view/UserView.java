@@ -1090,7 +1090,7 @@ public class UserView extends javax.swing.JFrame {
                 try {
                     DisplayEbook displayebook = new DisplayEbook(id);
                     displayebook.setVisible(true);
-                    this.dispose();
+                    this.setVisible(false);
                 } catch (SQLException ex) {
                     Logger.getLogger(UserView.class.getName()).log(Level.SEVERE, null, ex);
                 }

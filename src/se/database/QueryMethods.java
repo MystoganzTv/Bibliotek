@@ -1991,9 +1991,10 @@ public class QueryMethods {
     }
 
     
-    public String readBook(int idEbook) throws FileNotFoundException, IOException, SQLException {
+    public ArrayList<String> readBook(int idEbook) throws FileNotFoundException, IOException, SQLException {
         InputStream input = null;
         String test = "";
+       ArrayList<String> book = new ArrayList<String>();
         String query = "SELECT book_file FROM e_books_files where id_e_book =?";
         PreparedStatement ps;
       MyConnection tryConnection = new MyConnection();
@@ -2004,9 +2005,6 @@ public class QueryMethods {
             rs = ps.executeQuery();
 
 
-            File bookFile = new File("C:\\Users\\Erik Ringblom\\Documents\\GitHub\\Bibliotek\\src\\e_books_files\\ebooks.txt");
-
-          //  FileOutputStream output = new FileOutputStream(bookFile);
             
             if (rs.next()) {
                 input = rs.getBinaryStream("book_file");
@@ -2014,16 +2012,16 @@ public class QueryMethods {
                        
             
                 
-                byte[] buffer = new byte[1024];
+                
 
                 while (sc.hasNext()) {
                    test = sc.nextLine();
-                   
-                    System.out.println(test);
+                   book.add(sc.nextLine());
+                    System.out.println(book.toString());
 
-
+                    
                 }
-                
+                return book;
                 
             
             }
@@ -2040,8 +2038,7 @@ public class QueryMethods {
             } catch (SQLException ex) {
                 Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }    return test;
+        }    return book;
 
-        
     }
 }

@@ -7,17 +7,19 @@ package se.view;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import se.database.QueryMethods;
+import se.model.Guest;
 
 /**
  *
  * @author enriq
  */
 public class DisplayEbook extends javax.swing.JFrame {
-    int idEbook = 1;
+    int idEbook;
     QueryMethods queryMethods = new QueryMethods();
     /**
      * Creates new form StartPage1
@@ -38,8 +40,10 @@ public class DisplayEbook extends javax.swing.JFrame {
         this.idEbook = idEbook;
         try {
             
-            String bookString = queryMethods.readBook(idEbook);
-            textArea.setText(bookString);
+            //String bookString = queryMethods.readBook(idEbook);
+            ArrayList <String> test = new ArrayList<>(queryMethods.readBook(idEbook));
+            //test.add(bookString);
+            textArea.append(test.toString());
             
         } catch (IOException ex) {
             Logger.getLogger(DisplayEbook.class.getName()).log(Level.SEVERE, null, ex);
@@ -186,9 +190,9 @@ public class DisplayEbook extends javax.swing.JFrame {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        UserView userview = new UserView();
-        userview.setVisible(true);
-        this.dispose();
+        StartPage startpage = new StartPage();
+        startpage.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
    
     /**
