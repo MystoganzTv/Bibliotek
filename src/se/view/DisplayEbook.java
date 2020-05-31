@@ -5,6 +5,7 @@
  */
 package se.view;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import se.model.Guest;
 public class DisplayEbook extends javax.swing.JFrame {
     int idEbook;
     QueryMethods queryMethods = new QueryMethods();
+    StringBuilder sb = new StringBuilder();
     /**
      * Creates new form StartPage1
      */
@@ -33,7 +35,7 @@ public class DisplayEbook extends javax.swing.JFrame {
        
     
     }
-    public DisplayEbook(int idEbook, String guestEmail) throws SQLException{
+    public DisplayEbook(int idEbook, String guestEmail) {
         
          initComponents();
         setLocationRelativeTo(null);
@@ -41,14 +43,21 @@ public class DisplayEbook extends javax.swing.JFrame {
         this.idEbook = idEbook;
         this.guestEmail = guestEmail;
         textArea.setEditable(false);
+        
         try {
             
             //String bookString = queryMethods.readBook(idEbook);
             ArrayList <String> test = new ArrayList<>(queryMethods.readBook(idEbook));
+            for(String testing : test){
+                sb.append("\n");
+                sb.append(testing);
+            }
             //test.add(bookString);
-            textArea.append(test.toString());
+            textArea.append(sb.toString());
             
         } catch (IOException ex) {
+            Logger.getLogger(DisplayEbook.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(DisplayEbook.class.getName()).log(Level.SEVERE, null, ex);
         }
         
