@@ -23,7 +23,16 @@ public class SeminarView extends javax.swing.JFrame {
      */
     private QueryMethods qMethods = new QueryMethods();
 
+    private String email;
     private ArrayList<Seminar> seminar;
+
+    public SeminarView(String email) {
+        initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
+        fillSeminarTable();
+        this.email = email;
+    }
 
     public SeminarView() {
         initComponents();
@@ -86,6 +95,7 @@ public class SeminarView extends javax.swing.JFrame {
         txtMaxGuests = new javax.swing.JTextField();
         txtDesc = new javax.swing.JTextField();
         txtProgram = new javax.swing.JTextField();
+        jbtnTillbaka = new javax.swing.JButton();
         jPanelCurrentSeminarium = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableSeminarium = new javax.swing.JTable();
@@ -113,6 +123,7 @@ public class SeminarView extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setForeground(new java.awt.Color(64, 186, 213));
         jLabel4.setText("Logga ut");
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -242,6 +253,13 @@ public class SeminarView extends javax.swing.JFrame {
             }
         });
 
+        jbtnTillbaka.setText("Tillbaka");
+        jbtnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnTillbakaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelAddSeminariumLayout = new javax.swing.GroupLayout(jPanelAddSeminarium);
         jPanelAddSeminarium.setLayout(jPanelAddSeminariumLayout);
         jPanelAddSeminariumLayout.setHorizontalGroup(
@@ -254,7 +272,9 @@ public class SeminarView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jtfName))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAddSeminariumLayout.createSequentialGroup()
-                        .addContainerGap(247, Short.MAX_VALUE)
+                        .addContainerGap(167, Short.MAX_VALUE)
+                        .addComponent(jbtnTillbaka)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbtnAdd)
                         .addGap(6, 6, 6)
                         .addComponent(jbtnCancel))
@@ -327,14 +347,16 @@ public class SeminarView extends javax.swing.JFrame {
                 .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
                         .addComponent(jlbProgram)
-                        .addGap(144, 144, 144))
+                        .addGap(182, 182, 182))
                     .addGroup(jPanelAddSeminariumLayout.createSequentialGroup()
                         .addComponent(txtProgram)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbtnAdd)
-                    .addComponent(jbtnCancel))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelAddSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jbtnAdd)
+                                .addComponent(jbtnTillbaka))
+                            .addComponent(jbtnCancel))
+                        .addContainerGap())))
         );
 
         jPanelCurrentSeminarium.setBackground(new java.awt.Color(244, 244, 244));
@@ -482,6 +504,13 @@ public class SeminarView extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jLabel4MouseClicked
 
+    private void jbtnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnTillbakaActionPerformed
+        LibrarianView lv = new LibrarianView(email);
+        lv.setVisible(true);
+        this.setVisible(false);
+
+    }//GEN-LAST:event_jbtnTillbakaActionPerformed
+
     private void clearInputFields() {
         jtfName.setText("");
         txtSpeaker.setText("");
@@ -531,8 +560,6 @@ public class SeminarView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelBackgroundPhoto;
     private javax.swing.JLabel jLabelTitle;
@@ -544,6 +571,7 @@ public class SeminarView extends javax.swing.JFrame {
     private javax.swing.JTable jTableSeminarium;
     private javax.swing.JButton jbtnAdd;
     private javax.swing.JButton jbtnCancel;
+    private javax.swing.JButton jbtnTillbaka;
     private javax.swing.JLabel jlbDate;
     private javax.swing.JLabel jlbDescription;
     private javax.swing.JLabel jlbName;

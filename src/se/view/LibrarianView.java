@@ -44,6 +44,7 @@ public class LibrarianView extends javax.swing.JFrame {
     private ArrayList<DeletedBook> deletedBook;
     private String librarianEmail;
     private DefaultListModel returnBooksListModel = new DefaultListModel();
+
     /**
      * Creates new form StartPage1
      */
@@ -55,7 +56,7 @@ public class LibrarianView extends javax.swing.JFrame {
 
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
-        
+
         queryMethods = new QueryMethods();
         books = qMethods.findBooks();
         eBooks = qMethods.findEBooks();
@@ -65,11 +66,12 @@ public class LibrarianView extends javax.swing.JFrame {
 
         jbtnManageCards.setToolTipText("Tryck här för att redigera lånekort");
         UsersTable.setToolTipText("Tryck på funktionknappen för att redigera");
-        
+
         returnBooksList.setSelectionMode(1);
         returnBooksList.setModel(returnBooksListModel);
 
     }
+
     public LibrarianView(String librarianEmail) {
         initComponents();
         setLocationRelativeTo(null);
@@ -79,7 +81,7 @@ public class LibrarianView extends javax.swing.JFrame {
 
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
-        
+
         queryMethods = new QueryMethods();
         books = qMethods.findBooks();
         eBooks = qMethods.findEBooks();
@@ -89,29 +91,29 @@ public class LibrarianView extends javax.swing.JFrame {
 
         jbtnManageCards.setToolTipText("Tryck här för att redigera lånekort");
         UsersTable.setToolTipText("Tryck på funktionknappen för att redigera");
-        jLabelTitle.setText("Inloggad Bibliotekarie: "+ librarianFullName());
-        
+        jLabelTitle.setText("Inloggad Bibliotekarie: " + librarianFullName());
+
         returnBooksList.setSelectionMode(1);
         returnBooksList.setModel(returnBooksListModel);
 
     }
-    
-    public String librarianFullName(){
+
+    public String librarianFullName() {
         String librarianFirstName = "";
         String librarianLastName = "";
-       
-        for (int i = 0 ; i < qMethods.findLibrarians().size() ; i ++){
-        if ( qMethods.findLibrarians().get(i).getEmail().equals(this.librarianEmail) ){
-            librarianFirstName = qMethods.findLibrarians().get(i).getFirstName();
-            librarianLastName = qMethods.findLibrarians().get(i).getLastName();
+
+        for (int i = 0; i < qMethods.findLibrarians().size(); i++) {
+            if (qMethods.findLibrarians().get(i).getEmail().equals(this.librarianEmail)) {
+                librarianFirstName = qMethods.findLibrarians().get(i).getFirstName();
+                librarianLastName = qMethods.findLibrarians().get(i).getLastName();
+            }
         }
-        }
-        String firstName = librarianFirstName.substring(0, 1).toUpperCase() 
-                            + librarianFirstName.substring(1);
-        
-        String lastName = librarianLastName.substring(0, 1).toUpperCase() 
-                            + librarianLastName.substring(1);
-        return  firstName + " " + lastName ;
+        String firstName = librarianFirstName.substring(0, 1).toUpperCase()
+                + librarianFirstName.substring(1);
+
+        String lastName = librarianLastName.substring(0, 1).toUpperCase()
+                + librarianLastName.substring(1);
+        return firstName + " " + lastName;
     }
 
     public void fillBooksTable() {
@@ -123,9 +125,9 @@ public class LibrarianView extends javax.swing.JFrame {
         for (int i = 0; i < books.size(); i++) {
             model.addRow(new Object[]{books.get(i).getId(), books.get(i).getTitle(), books.get(i).getAuthor(),
                 books.get(i).getIsbn(), books.get(i).getPublisher(), books.get(i).getPurchase_price(),
-                books.get(i).getCategory(),books.get(i).getPlacement(), "Bok"});
+                books.get(i).getCategory(), books.get(i).getPlacement(), "Bok"});
         }
-        
+
         for (int i = 0; i < queryMethods.getAllEBooks().size(); i++) {
             model.addRow(new Object[]{queryMethods.getAllEBooks().get(i).getId(),
                 queryMethods.getAllEBooks().get(i).getTitle(), queryMethods.getAllEBooks().get(i).getAuthor(),
@@ -137,14 +139,11 @@ public class LibrarianView extends javax.swing.JFrame {
         BooksTable.setRowSelectionAllowed(true);
 
     }
+
     public void fillBookLogTable() {
         deletedBook = qMethods.findDeletedBooks();
 
- 
-
         DefaultTableModel defaultModel = new DefaultTableModel(colNames, 0);
-
- 
 
         defaultModel.setRowCount(0);
         for (int i = 0; i < deletedBook.size(); i++) {
@@ -159,8 +158,6 @@ public class LibrarianView extends javax.swing.JFrame {
                 deletedBook.get(i).getPlacement(),
                 deletedBook.get(i).getNotes()});
         }
-
- 
 
         BooksTable.setModel(defaultModel);
         BooksTable.setRowSelectionAllowed(true);
@@ -193,28 +190,27 @@ public class LibrarianView extends javax.swing.JFrame {
         UsersTable.getColumn("Anledning").setPreferredWidth(150);
 
     }
-    
-    public void searchBooksResult(String searchWord){
+
+    public void searchBooksResult(String searchWord) {
         String wordToMatch = searchWord.toLowerCase();
         ArrayList<Books> foundBooks = new ArrayList<>();
-        
+
         books.stream().filter((b) -> b.getTitle().toLowerCase().contains(wordToMatch) || b.getAuthor().toLowerCase().equals(wordToMatch)
-                                || b.getCategory().toLowerCase().equals(wordToMatch)).forEach(foundBooks::add);
-        
-        
-        if(!foundBooks.isEmpty()){
-        DefaultTableModel model = new DefaultTableModel(colNames, 0);
-        
-        for(Books b : foundBooks){
-            model.addRow(new Object[]{b.getTitle(),b.getAuthor(), b.getIsbn(),b.getPublisher(),b.getPurchase_price(),b.getCategory(),b.getPlacement()});
+                || b.getCategory().toLowerCase().equals(wordToMatch)).forEach(foundBooks::add);
+
+        if (!foundBooks.isEmpty()) {
+            DefaultTableModel model = new DefaultTableModel(colNames, 0);
+
+            for (Books b : foundBooks) {
+                model.addRow(new Object[]{b.getTitle(), b.getAuthor(), b.getIsbn(), b.getPublisher(), b.getPurchase_price(), b.getCategory(), b.getPlacement()});
+            }
+            BooksTable.setModel(model);
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Kunde inte hitta bok");
+
         }
-        BooksTable.setModel(model);
-        
-        }else{
-            JOptionPane.showMessageDialog(this,"Kunde inte hitta bok");
-            
-        }
-        
+
     }
 
     /**
@@ -262,6 +258,8 @@ public class LibrarianView extends javax.swing.JFrame {
         addBookToReturnListButton = new javax.swing.JButton();
         returnBooksInListButton = new javax.swing.JButton();
         removeFromReturnBooksList = new javax.swing.JButton();
+        jPanelSeminarium = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         jPanelInvisible = new javax.swing.JPanel();
         btnClose = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -296,6 +294,7 @@ public class LibrarianView extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setForeground(new java.awt.Color(64, 186, 213));
         jLabel3.setText("Logga ut");
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -444,7 +443,7 @@ public class LibrarianView extends javax.swing.JFrame {
                                 .addGap(40, 40, 40)
                                 .addComponent(jbtnRestore, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 913, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanelTabBookings3Layout.setVerticalGroup(
             jPanelTabBookings3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -526,7 +525,7 @@ public class LibrarianView extends javax.swing.JFrame {
                         .addComponent(NewBookbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(DeleteBookbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 710, Short.MAX_VALUE))
+                        .addGap(0, 720, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabLendingsLayout.createSequentialGroup()
                         .addGroup(jPanelTabLendingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING)
@@ -625,6 +624,32 @@ public class LibrarianView extends javax.swing.JFrame {
 
         returnBooksPanel.addTab("Återlämning", jPanel1);
 
+        jButton1.setText("Lägg till seminarium");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelSeminariumLayout = new javax.swing.GroupLayout(jPanelSeminarium);
+        jPanelSeminarium.setLayout(jPanelSeminariumLayout);
+        jPanelSeminariumLayout.setHorizontalGroup(
+            jPanelSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSeminariumLayout.createSequentialGroup()
+                .addGap(139, 139, 139)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(94, Short.MAX_VALUE))
+        );
+        jPanelSeminariumLayout.setVerticalGroup(
+            jPanelSeminariumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSeminariumLayout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(62, Short.MAX_VALUE))
+        );
+
+        returnBooksPanel.addTab("Seminarium", jPanelSeminarium);
+
         btnClose.setText("Stäng");
         btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -700,7 +725,7 @@ public class LibrarianView extends javax.swing.JFrame {
                     .addGroup(jPanelbackgroundLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanelInvisible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(725, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -724,19 +749,18 @@ public class LibrarianView extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
 
-
     private void DeleteBookbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBookbtnActionPerformed
 
         Scanner sc = new Scanner(System.in);
-        
+
         int selection = BooksTable.getSelectedRow();
         String stringId = BooksTable.getModel().getValueAt(selection, 0).toString();
         System.out.println(stringId);
         int id = Integer.parseInt(stringId);
         for (Books b : books) {
             if (b.getId() == id) {
-                
-                String notes = JOptionPane.showInputDialog(null, "Snälla berätta anlädning för att radera bok");                
+
+                String notes = JOptionPane.showInputDialog(null, "Snälla berätta anlädning för att radera bok");
                 queryMethods.deleteBook(b, notes);
                 fillBookLogTable();
 
@@ -754,22 +778,20 @@ public class LibrarianView extends javax.swing.JFrame {
 
     private void jbtnManageCardsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnManageCardsActionPerformed
         // TODO add your handling code here:
-        try{
-         UsersTable.setToolTipText("Du kan nu redigera kolumnera Spärrad och Kategori");
-        String[] blocked = { "Många sena böcker", "Många försvunna böcker", "Stöld", "Andra" };
-        String selectedValue = (String)JOptionPane.showInputDialog( null, "Ange Anledning", "Spärra Lånekort",
-        JOptionPane.QUESTION_MESSAGE, null, blocked, blocked[ 3 ] );
-        int userId = (int) UsersTable.getValueAt(UsersTable.getSelectedRow(), 0);
+        try {
+            UsersTable.setToolTipText("Du kan nu redigera kolumnera Spärrad och Kategori");
+            String[] blocked = {"Många sena böcker", "Många försvunna böcker", "Stöld", "Andra"};
+            String selectedValue = (String) JOptionPane.showInputDialog(null, "Ange Anledning", "Spärra Lånekort",
+                    JOptionPane.QUESTION_MESSAGE, null, blocked, blocked[3]);
+            int userId = (int) UsersTable.getValueAt(UsersTable.getSelectedRow(), 0);
 
-        JComboBox blockedBox = new JComboBox(blocked);
-        UsersTable.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(blockedBox));
-        
-        
-   queryMethods.updateLibraryCards(1, userId, selectedValue);
-        }
-        catch(Exception e){
+            JComboBox blockedBox = new JComboBox(blocked);
+            UsersTable.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(blockedBox));
+
+            queryMethods.updateLibraryCards(1, userId, selectedValue);
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Välj Användare");
-        
+
         }
         jbtnVisaLånekort.doClick();
 
@@ -792,49 +814,47 @@ public class LibrarianView extends javax.swing.JFrame {
         UsersTable.getColumnModel().getColumn(2).setHeaderValue("Anledning");
         UsersTable.setToolTipText(null);
     }//GEN-LAST:event_jbtnBlockedCardsActionPerformed
-    
-   
+
+
     private void jbtnShowBorrowedBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnShowBorrowedBooksActionPerformed
         // TODO add your handling code here:
-        if(UsersTable.getSelectedRow() == -1){
-        JOptionPane.showMessageDialog(this, "Du har inte valt användare");
-        }else{
-        DefaultListModel list = new DefaultListModel();
-        jListBorrowedBooks.setModel(list);
-        String lineDivision = "";
-        
-        int cardID = (int) UsersTable.getValueAt(UsersTable.getSelectedRow(), 0);
-        
-        for (int i = 0; i < qMethods.getBorrowedBooksByCardId(cardID).size(); i++) {
-                            
-                lineDivision = "<html>"+qMethods.getBorrowedBooksByCardId(cardID).get(i).getId()+ ". "
-                        +qMethods.getBorrowedBooksByCardId(cardID).get(i).getTitle() +  "<br>" +
-                     qMethods.getBorrowedBooksByCardId(cardID).get(i).getAuthor() + "<br>" +
-                     "ISBN: "+ qMethods.getBorrowedBooksByCardId(cardID).get(i).getIsbn()+ "<br>" +
-                     "Återlämning: "+qMethods.getAllBorrowedBooks().get(i).getReturnDate().toString()+"<br/>" ;
-                
-            list.addElement(lineDivision) ;
-            
-            
-            
-        }
-            if(list.isEmpty()){
+        if (UsersTable.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Du har inte valt användare");
+        } else {
+            DefaultListModel list = new DefaultListModel();
+            jListBorrowedBooks.setModel(list);
+            String lineDivision = "";
+
+            int cardID = (int) UsersTable.getValueAt(UsersTable.getSelectedRow(), 0);
+
+            for (int i = 0; i < qMethods.getBorrowedBooksByCardId(cardID).size(); i++) {
+
+                lineDivision = "<html>" + qMethods.getBorrowedBooksByCardId(cardID).get(i).getId() + ". "
+                        + qMethods.getBorrowedBooksByCardId(cardID).get(i).getTitle() + "<br>"
+                        + qMethods.getBorrowedBooksByCardId(cardID).get(i).getAuthor() + "<br>"
+                        + "ISBN: " + qMethods.getBorrowedBooksByCardId(cardID).get(i).getIsbn() + "<br>"
+                        + "Återlämning: " + qMethods.getAllBorrowedBooks().get(i).getReturnDate().toString() + "<br/>";
+
+                list.addElement(lineDivision);
+
+            }
+            if (list.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Användare har inga böcker");
                 jPanelInvisible.setVisible(false);
-            }else{
-                  jPanelInvisible.setVisible(true);
+            } else {
+                jPanelInvisible.setVisible(true);
             }
         }
     }//GEN-LAST:event_jbtnShowBorrowedBooksActionPerformed
 
     private void jLabelSearchUsersIcon3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchUsersIcon3MouseClicked
-        
-         ArrayList<Guest> guests = queryMethods.findGuests();
-         String userToFind = Usertxt.getText().toLowerCase().trim();
-         String[] columns = {"ID", "Namn","Spärrad", "category" };
-         ArrayList<LibraryCards> cards = new ArrayList<>();
-         DefaultTableModel model = new DefaultTableModel(columns,0);
-         
+
+        ArrayList<Guest> guests = queryMethods.findGuests();
+        String userToFind = Usertxt.getText().toLowerCase().trim();
+        String[] columns = {"ID", "Namn", "Spärrad", "category"};
+        ArrayList<LibraryCards> cards = new ArrayList<>();
+        DefaultTableModel model = new DefaultTableModel(columns, 0);
+
         if (!userToFind.isEmpty()) {
             ArrayList<Guest> foundGuests = new ArrayList<>();
 
@@ -843,170 +863,8 @@ public class LibrarianView extends javax.swing.JFrame {
                     || g.getPersonId().equals(userToFind)).forEach(foundGuests::add);
 
             if (!foundGuests.isEmpty()) {
-                
+
                 cards = queryMethods.getGuestsLibraryCardsByGuestList(foundGuests);
-                for(LibraryCards card : cards){
-                 String entry = "";
-                 
-                 if(card.getEntry() == 1){
-                     entry = "Ja";
-                 }else {
-                     entry = "Nej";
-                 }
-                model.addRow(new Object[]{card.getGuestId(), card.getFullname(), entry, card.getCategory()});
-                }
-                 UsersTable.setModel(model);
-                 Usertxt.setText("");
-                }else {
-                JOptionPane.showMessageDialog(this, "Ingen användare kunde hittas");
-            }
-               
-            } else {
-                fillUsersTable();
-
-            }
-        
-    }//GEN-LAST:event_jLabelSearchUsersIcon3MouseClicked
-
-    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
-        // TODO add your handling code here:
-    jPanelInvisible.setVisible(false);
-
-    }//GEN-LAST:event_btnCloseActionPerformed
-
-    private void jbtnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnReturnActionPerformed
-        // TODO add your handling code here:
-        if (jListBorrowedBooks.getSelectedValue() == null){
-            JOptionPane.showMessageDialog(this, "Du har inte valt en bok");
-        }else{
-        int indexOfPoint = jListBorrowedBooks.getSelectedValue().indexOf(".");
-        String bookInfo = jListBorrowedBooks.getSelectedValue().substring(6, indexOfPoint);
-        int bookId = Integer.parseInt(bookInfo);
-        queryMethods.returnBook(bookId);
-//        for (int i = 0 ; i < queryMethods.getAllBooks().size() ; i ++){
-//            if(bookInfo.contains(queryMethods.getAllBooks().get(i).getIsbn())){
-//                queryMethods.returnBook(queryMethods.getAllBooks().get(i).getId());
-//            }
-//        }
-        
-        jbtnShowBorrowedBooks.doClick();
-    }
-    }//GEN-LAST:event_jbtnReturnActionPerformed
-
-    private void addBookToReturnListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBookToReturnListButtonActionPerformed
-        // TODO add your handling code here:
-        
-        if(Validation.isValidID(bookIdTextField.getText().trim())){
-            Books book = queryMethods.findBorrowedBookById(Integer.parseInt(bookIdTextField.getText().trim()));
-            if(book.getId() != -1){
-               returnBooksListModel.addElement(book);
-               bookIdTextField.setText("");
-                
-            }else {
-                JOptionPane.showMessageDialog(this, "Kunde inte hitta utlånad bok med id: " +  bookIdTextField.getText());
-            }
-        }else{
-            JOptionPane.showMessageDialog(this, "Vänligen fyll i ett korrekt ID");
-        }
-    }//GEN-LAST:event_addBookToReturnListButtonActionPerformed
-
-    private void returnBooksInListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBooksInListButtonActionPerformed
-        
-        for(int i = 0; i < returnBooksListModel.getSize(); i++){
-           // String element = returnBooksListModel.getElementAt(i).toString();
-           Books book = (Books)returnBooksListModel.getElementAt(i);
-           
-           queryMethods.returnBook(book.getId());
-           
-        }
-        returnBooksListModel.clear();
-    }//GEN-LAST:event_returnBooksInListButtonActionPerformed
-
-    private void removeFromReturnBooksListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeFromReturnBooksListActionPerformed
-        try{
-        int index = returnBooksList.getSelectedIndex();
-        
-        returnBooksListModel.remove(index);
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(this, "Du ha inte valt en bok!");
-        }
-    }//GEN-LAST:event_removeFromReturnBooksListActionPerformed
-
-    private void jLabelSearchBooksIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchBooksIconMouseClicked
-
-       
-        ArrayList<Books> foundBooks = new ArrayList<>();
-        ArrayList<E_Books> foundEBooks = new ArrayList<>();
-        
-        String searchWord = Bookstxt.getText().toLowerCase().trim();
-        
-        
-        if(!searchWord.isEmpty()){
-            
-        books.stream().filter((b)-> b.getAuthor().toLowerCase().contains(searchWord) || b.getTitle().toLowerCase().contains(searchWord)
-                                || b.getCategory().toLowerCase().equals(searchWord) || b.getIsbn().equals(searchWord)
-                                ).forEach(foundBooks::add);
-       
-                                
-        eBooks.stream().filter((eBook)-> eBook.getAuthor().toLowerCase().contains(searchWord) || eBook.getTitle().toLowerCase().contains(searchWord)
-                                || eBook.getCategory().toLowerCase().equals(searchWord) || eBook.getIsbn().equals(searchWord)
-                                    ).forEach(foundEBooks::add);
-        
-        if(!foundBooks.isEmpty() || !foundEBooks.isEmpty()){
-        DefaultTableModel searchModel = new DefaultTableModel(colNames, 0);
-        
-           //private String[] colNames = {"Id", "Titel", "Författare", "ISBN", "Förlag", "Inköp Pris", "Kategori", "Placering"};
-        for(Books b : foundBooks){
-            searchModel.addRow(new Object[]{b.getId(), b.getTitle(),b.getAuthor(),b.getIsbn(),b.getPublisher(), b.getPurchase_price(), b.getCategory(), b.getPlacement(), "Bok"});
-        }
-        for(E_Books eBook : foundEBooks){
-            searchModel.addRow(new Object[]{eBook.getId(), eBook.getTitle(),eBook.getAuthor(),eBook.getIsbn(),eBook.getPublisher(), eBook.getPurchase_price(), eBook.getCategory(),"", "E-Bok"});
-        }
-        
-        BooksTable.setModel(searchModel);
-        Bookstxt.setText("");
-        }else {
-            JOptionPane.showMessageDialog(this, "Kunde inte hitta en matchande bok");
-        }
-        }else {
-            fillBooksTable();
-        }
-        
-
-
-    }//GEN-LAST:event_jLabelSearchBooksIconMouseClicked
-
-    private void jbtnRestoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRestoreActionPerformed
-        // TODO add your handling code here:
-        try{
-
-        int userId = (int) UsersTable.getValueAt(UsersTable.getSelectedRow(), 0);
-        int input = JOptionPane.showConfirmDialog(null, "Är du säker du vill lösa kortet?",
-                        "Bekräftelse", JOptionPane.YES_NO_OPTION);
-
-                if (input == JOptionPane.YES_OPTION) {
-                    queryMethods.updateLibraryCards(0, userId, "");
-                }
-        
-        
-        }
-                    
-        
-        catch(Exception e)
-        {
-        JOptionPane.showMessageDialog(this, "Välj Användare");
-        }
-        jbtnVisaLånekort.doClick();
-        
-    }//GEN-LAST:event_jbtnRestoreActionPerformed
-
-    private void jbtnVisaLånekortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnVisaLånekortActionPerformed
-        // TODO add your handling code here:
-        String[] columns = {"ID", "Namn", "Spärrad", "category"};
-        ArrayList<LibraryCards> cards = new ArrayList<>();
-        DefaultTableModel model = new DefaultTableModel(columns, 0);
-
-
                 for (LibraryCards card : cards) {
                     String entry = "";
 
@@ -1017,8 +875,160 @@ public class LibrarianView extends javax.swing.JFrame {
                     }
                     model.addRow(new Object[]{card.getGuestId(), card.getFullname(), entry, card.getCategory()});
                 }
-//               
+                UsersTable.setModel(model);
+                Usertxt.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Ingen användare kunde hittas");
+            }
+
+        } else {
             fillUsersTable();
+
+        }
+
+    }//GEN-LAST:event_jLabelSearchUsersIcon3MouseClicked
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        // TODO add your handling code here:
+        jPanelInvisible.setVisible(false);
+
+    }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void jbtnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnReturnActionPerformed
+        // TODO add your handling code here:
+        if (jListBorrowedBooks.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(this, "Du har inte valt en bok");
+        } else {
+            int indexOfPoint = jListBorrowedBooks.getSelectedValue().indexOf(".");
+            String bookInfo = jListBorrowedBooks.getSelectedValue().substring(6, indexOfPoint);
+            int bookId = Integer.parseInt(bookInfo);
+            queryMethods.returnBook(bookId);
+//        for (int i = 0 ; i < queryMethods.getAllBooks().size() ; i ++){
+//            if(bookInfo.contains(queryMethods.getAllBooks().get(i).getIsbn())){
+//                queryMethods.returnBook(queryMethods.getAllBooks().get(i).getId());
+//            }
+//        }
+
+            jbtnShowBorrowedBooks.doClick();
+        }
+    }//GEN-LAST:event_jbtnReturnActionPerformed
+
+    private void addBookToReturnListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBookToReturnListButtonActionPerformed
+        // TODO add your handling code here:
+
+        if (Validation.isValidID(bookIdTextField.getText().trim())) {
+            Books book = queryMethods.findBorrowedBookById(Integer.parseInt(bookIdTextField.getText().trim()));
+            if (book.getId() != -1) {
+                returnBooksListModel.addElement(book);
+                bookIdTextField.setText("");
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Kunde inte hitta utlånad bok med id: " + bookIdTextField.getText());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Vänligen fyll i ett korrekt ID");
+        }
+    }//GEN-LAST:event_addBookToReturnListButtonActionPerformed
+
+    private void returnBooksInListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBooksInListButtonActionPerformed
+
+        for (int i = 0; i < returnBooksListModel.getSize(); i++) {
+            // String element = returnBooksListModel.getElementAt(i).toString();
+            Books book = (Books) returnBooksListModel.getElementAt(i);
+
+            queryMethods.returnBook(book.getId());
+
+        }
+        returnBooksListModel.clear();
+    }//GEN-LAST:event_returnBooksInListButtonActionPerformed
+
+    private void removeFromReturnBooksListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeFromReturnBooksListActionPerformed
+        try {
+            int index = returnBooksList.getSelectedIndex();
+
+            returnBooksListModel.remove(index);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Du ha inte valt en bok!");
+        }
+    }//GEN-LAST:event_removeFromReturnBooksListActionPerformed
+
+    private void jLabelSearchBooksIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchBooksIconMouseClicked
+
+        ArrayList<Books> foundBooks = new ArrayList<>();
+        ArrayList<E_Books> foundEBooks = new ArrayList<>();
+
+        String searchWord = Bookstxt.getText().toLowerCase().trim();
+
+        if (!searchWord.isEmpty()) {
+
+            books.stream().filter((b) -> b.getAuthor().toLowerCase().contains(searchWord) || b.getTitle().toLowerCase().contains(searchWord)
+                    || b.getCategory().toLowerCase().equals(searchWord) || b.getIsbn().equals(searchWord)
+            ).forEach(foundBooks::add);
+
+            eBooks.stream().filter((eBook) -> eBook.getAuthor().toLowerCase().contains(searchWord) || eBook.getTitle().toLowerCase().contains(searchWord)
+                    || eBook.getCategory().toLowerCase().equals(searchWord) || eBook.getIsbn().equals(searchWord)
+            ).forEach(foundEBooks::add);
+
+            if (!foundBooks.isEmpty() || !foundEBooks.isEmpty()) {
+                DefaultTableModel searchModel = new DefaultTableModel(colNames, 0);
+
+                //private String[] colNames = {"Id", "Titel", "Författare", "ISBN", "Förlag", "Inköp Pris", "Kategori", "Placering"};
+                for (Books b : foundBooks) {
+                    searchModel.addRow(new Object[]{b.getId(), b.getTitle(), b.getAuthor(), b.getIsbn(), b.getPublisher(), b.getPurchase_price(), b.getCategory(), b.getPlacement(), "Bok"});
+                }
+                for (E_Books eBook : foundEBooks) {
+                    searchModel.addRow(new Object[]{eBook.getId(), eBook.getTitle(), eBook.getAuthor(), eBook.getIsbn(), eBook.getPublisher(), eBook.getPurchase_price(), eBook.getCategory(), "", "E-Bok"});
+                }
+
+                BooksTable.setModel(searchModel);
+                Bookstxt.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Kunde inte hitta en matchande bok");
+            }
+        } else {
+            fillBooksTable();
+        }
+
+
+    }//GEN-LAST:event_jLabelSearchBooksIconMouseClicked
+
+    private void jbtnRestoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRestoreActionPerformed
+        // TODO add your handling code here:
+        try {
+
+            int userId = (int) UsersTable.getValueAt(UsersTable.getSelectedRow(), 0);
+            int input = JOptionPane.showConfirmDialog(null, "Är du säker du vill lösa kortet?",
+                    "Bekräftelse", JOptionPane.YES_NO_OPTION);
+
+            if (input == JOptionPane.YES_OPTION) {
+                queryMethods.updateLibraryCards(0, userId, "");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Välj Användare");
+        }
+        jbtnVisaLånekort.doClick();
+
+    }//GEN-LAST:event_jbtnRestoreActionPerformed
+
+    private void jbtnVisaLånekortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnVisaLånekortActionPerformed
+        // TODO add your handling code here:
+        String[] columns = {"ID", "Namn", "Spärrad", "category"};
+        ArrayList<LibraryCards> cards = new ArrayList<>();
+        DefaultTableModel model = new DefaultTableModel(columns, 0);
+
+        for (LibraryCards card : cards) {
+            String entry = "";
+
+            if (card.getEntry() == 1) {
+                entry = "Ja";
+            } else {
+                entry = "Nej";
+            }
+            model.addRow(new Object[]{card.getGuestId(), card.getFullname(), entry, card.getCategory()});
+        }
+//               
+        fillUsersTable();
     }//GEN-LAST:event_jbtnVisaLånekortActionPerformed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
@@ -1033,7 +1043,11 @@ public class LibrarianView extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jLabel3MouseClicked
 
-
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        SeminarView sv = new SeminarView(librarianEmail);
+        sv.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1083,6 +1097,7 @@ public class LibrarianView extends javax.swing.JFrame {
     private javax.swing.JButton addBookToReturnListButton;
     private javax.swing.JTextField bookIdTextField;
     private javax.swing.JButton btnClose;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -1097,6 +1112,7 @@ public class LibrarianView extends javax.swing.JFrame {
     private javax.swing.JList<String> jListBorrowedBooks;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelInvisible;
+    private javax.swing.JPanel jPanelSeminarium;
     private javax.swing.JPanel jPanelTabBookings3;
     private javax.swing.JPanel jPanelTabLendings;
     private javax.swing.JPanel jPanelTitle;
