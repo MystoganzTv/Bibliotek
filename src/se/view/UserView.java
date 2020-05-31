@@ -59,7 +59,7 @@ public class UserView extends javax.swing.JFrame {
     }
 
     public UserView(String guestEmail) {
-        initComponents();        
+        initComponents();
         setLocationRelativeTo(null);
         jPanelInvisible.setVisible(false);
 
@@ -95,7 +95,7 @@ public class UserView extends javax.swing.JFrame {
         return firstName + " " + lastName;
 
     }
-   
+
     public void fillSeminarsTable() {
         DefaultTableModel model = (DefaultTableModel) seminarsTable.getModel();
         model.setRowCount(0);
@@ -295,7 +295,6 @@ public class UserView extends javax.swing.JFrame {
         MyReservationsTable.getColumnModel().getColumn(1).setHeaderValue("Föreläsare");
         MyReservationsTable.getColumnModel().getColumn(2).setHeaderValue("Plats");
         MyReservationsTable.getColumnModel().getColumn(3).setHeaderValue("Datum");
-
 
         MyReservationsTable.setModel(model);
 
@@ -1062,16 +1061,16 @@ public class UserView extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnUpdateMyReservationActionPerformed
 
     private void jbtnCancelMyReservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelMyReservationActionPerformed
-        try{
-        int selection = MyReservationsTable.getSelectedRow();
-        String title = MyReservationsTable.getModel().getValueAt(selection, 0).toString();
-        Guest g = qm.findGuestByMail(guestEmail);
-        int option = JOptionPane.showConfirmDialog(this, "Vill du avboka seminariet?");
-        if (option == JOptionPane.YES_OPTION) {
-            qm.cancelSeminarReservation(g, title);
-            fillMyReservationsTable();
-        }
-        }catch(Exception e){
+        try {
+            int selection = MyReservationsTable.getSelectedRow();
+            String title = MyReservationsTable.getModel().getValueAt(selection, 0).toString();
+            Guest g = qm.findGuestByMail(guestEmail);
+            int option = JOptionPane.showConfirmDialog(this, "Vill du avboka seminariet?");
+            if (option == JOptionPane.YES_OPTION) {
+                qm.cancelSeminarReservation(g, title);
+                fillMyReservationsTable();
+            }
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Du har inte valt bokning!");
         }
 
@@ -1131,16 +1130,17 @@ public class UserView extends javax.swing.JFrame {
             for (int i = 0; i < qm.findEBooks().size(); i++) {
                 if (qm.findEBooks().get(i).getIsbn().trim().equals(bookIsbn)) {
                     id = qm.findEBooks().get(i).getId();
-               
-               
-             if (bookType.equals("E-Bok")) {
-                try {
-                    DisplayEbook displayebook = new DisplayEbook(id);
-                    displayebook.setVisible(true);
-                    this.setVisible(false);
-                } catch (SQLException ex) {
-                    Logger.getLogger(UserView.class.getName()).log(Level.SEVERE, null, ex);
 
+                    if (bookType.equals("E-Bok")) {
+                        try {
+                            DisplayEbook displayebook = new DisplayEbook(id);
+                            displayebook.setVisible(true);
+                            this.setVisible(false);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(UserView.class.getName()).log(Level.SEVERE, null, ex);
+
+                        }
+                    }
                 }
             }
         }
