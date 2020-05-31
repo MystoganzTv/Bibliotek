@@ -5,6 +5,8 @@
  */
 package se.view;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +53,9 @@ public class LibrarianView extends javax.swing.JFrame {
         setResizable(false);
         jPanelInvisible.setVisible(false);
 
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+        
         queryMethods = new QueryMethods();
         books = qMethods.findBooks();
         eBooks = qMethods.findEBooks();
@@ -72,6 +77,9 @@ public class LibrarianView extends javax.swing.JFrame {
         setResizable(false);
         this.librarianEmail = librarianEmail;
 
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+        
         queryMethods = new QueryMethods();
         books = qMethods.findBooks();
         eBooks = qMethods.findEBooks();
