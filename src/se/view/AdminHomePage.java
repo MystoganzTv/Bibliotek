@@ -494,6 +494,11 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabelSearchUserText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
         jLabelSearchUserText.setForeground(new java.awt.Color(105, 131, 170));
         jLabelSearchUserText.setText("Sök");
+        jLabelSearchUserText.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelSearchUserTextMouseClicked(evt);
+            }
+        });
 
         jLabelSearchUserIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/search_24px.png"))); // NOI18N
         jLabelSearchUserIcon.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -536,19 +541,16 @@ public class AdminHomePage extends javax.swing.JFrame {
         jPanelTabUserLayout.setHorizontalGroup(
             jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTabUserLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabUserLayout.createSequentialGroup()
-                        .addGap(507, 507, 507)
-                        .addGroup(jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelTabUserLayout.createSequentialGroup()
-                                .addGap(80, 80, 80)
-                                .addComponent(jLabelEraseUserIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabUserLayout.createSequentialGroup()
-                                .addComponent(jLabelEraseUserText, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabUserLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelTabUserLayout.createSequentialGroup()
+                            .addGap(80, 80, 80)
+                            .addComponent(jLabelEraseUserIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabUserLayout.createSequentialGroup()
+                            .addComponent(jLabelEraseUserText, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(12, 12, 12)))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabUserLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -709,20 +711,17 @@ public class AdminHomePage extends javax.swing.JFrame {
         jPanelTabAdminLayout.setHorizontalGroup(
             jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTabAdminLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabAdminLayout.createSequentialGroup()
-                        .addGap(421, 421, 421)
-                        .addGroup(jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelTabAdminLayout.createSequentialGroup()
-                                .addGap(92, 92, 92)
-                                .addComponent(jLabelEraseAdminIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabAdminLayout.createSequentialGroup()
-                                .addGap(111, 111, 111)
-                                .addComponent(jLabelEraseAdminText, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabAdminLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelTabAdminLayout.createSequentialGroup()
+                            .addGap(92, 92, 92)
+                            .addComponent(jLabelEraseAdminIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabAdminLayout.createSequentialGroup()
+                            .addGap(111, 111, 111)
+                            .addComponent(jLabelEraseAdminText, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(12, 12, 12)))
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabAdminLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1430,7 +1429,7 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void jLabelEraseUserIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseUserIconMouseClicked
         // TODO add your handling code here:
-
+        try{
         if (jTabbedPaneEdit.isEnabledAt(0)) {
             int selection = guestTable.getSelectedRow();
 
@@ -1452,11 +1451,15 @@ public class AdminHomePage extends javax.swing.JFrame {
 
             }
         }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Du har inte valt någonting!");
+        }
 
     }//GEN-LAST:event_jLabelEraseUserIconMouseClicked
 
     private void jLabelEraseLibrarianIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseLibrarianIconMouseClicked
         // TODO add your handling code here:
+        try{
         int selection = librarianTable.getSelectedRow();
 
         String stringId = librarianTable.getModel().getValueAt(selection, 0).toString();
@@ -1475,11 +1478,15 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
             fillLibrarianTable();
         }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Du har inte valt någonting!");
+        }
 
     }//GEN-LAST:event_jLabelEraseLibrarianIconMouseClicked
 
     private void jLabelEraseAdminIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEraseAdminIconMouseClicked
         // TODO add your handling code here:
+        try{
         int selection = adminTable.getSelectedRow();
 
         String stringId = adminTable.getModel().getValueAt(selection, 0).toString();
@@ -1498,6 +1505,9 @@ public class AdminHomePage extends javax.swing.JFrame {
 
             }
             fillAdminTable();
+        }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Du har inte valt någonting!");
         }
     }//GEN-LAST:event_jLabelEraseAdminIconMouseClicked
 
@@ -1525,6 +1535,8 @@ public class AdminHomePage extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Ingen användare kunde hittas");
 
             }
+        }else {
+            fillGuestTable();
         }
     }//GEN-LAST:event_jLabelSearchUserIconMouseClicked
 
@@ -1551,6 +1563,8 @@ public class AdminHomePage extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Ingen användare kunde hittas");
             }
+        }else {
+            fillLibrarianTable();
         }
     }//GEN-LAST:event_jLabelSearchLibrarianIconMouseClicked
 
@@ -1578,6 +1592,8 @@ public class AdminHomePage extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Ingen användare kunde hittas");
             }
+        }else {
+            fillAdminTable();
         }
     }//GEN-LAST:event_jLabelSearchAdminIconMouseClicked
 
@@ -1695,6 +1711,10 @@ public class AdminHomePage extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_searchRemovedBooksMouseClicked
+
+    private void jLabelSearchUserTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchUserTextMouseClicked
+ 
+    }//GEN-LAST:event_jLabelSearchUserTextMouseClicked
 
     /**
      * @param args the command line arguments

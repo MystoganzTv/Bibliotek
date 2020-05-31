@@ -30,6 +30,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import se.model.Admin;
+import se.model.Booking;
 import se.model.Books;
 import se.model.BorrowEBooks;
 import se.model.BorrowedBooks;
@@ -1860,19 +1861,19 @@ public class QueryMethods {
         }
     }
 
-    public void bookSeminar(Guest g, Seminar s) {
+    public void bookSeminar(LibraryCards g, Seminar s) {
 
         try {
             MyConnection tryConnection = new MyConnection();
             con = tryConnection.getConnection();
             Statement stmt = con.createStatement();
 
-            ResultSet rs = stmt.executeQuery("SELECT guest_id FROM bookings WHERE seminar_id = " + s.getId() + "");
+            ResultSet rs = stmt.executeQuery("SELECT library_card_id FROM bookings WHERE seminar_id = " + s.getId() + "");
             int guestExists = 0;
             
             // checking if guest is already booked in
             while(rs.next()) {
-                guestExists = rs.getInt("guest_id");
+                guestExists = rs.getInt("library_card_id");
                 System.out.println(guestExists + " = " + g.getId());
                 if(guestExists == g.getId()) {
                     JOptionPane.showMessageDialog(null, "Du är redan inbokad.");
@@ -1893,7 +1894,7 @@ public class QueryMethods {
             // checking for available spaces
             if ((nrOfVisitors - 1) >= 0) {
                 // inserting guest if there are available spaces
-                stmt.execute("INSERT INTO bookings(seminar_id, guest_id) VALUES(" + s.getId() + ", " + g.getId() + ")"); // insert guest into bokings table
+                stmt.execute("INSERT INTO bookings(seminar_id, library_card_id) VALUES(" + s.getId() + ", " + g.getId() + ")"); // insert guest into bokings table
                 stmt.execute("UPDATE seminarium SET CountVisitor = " + (nrOfVisitors - 1) + " WHERE id = " + s.getId() + ""); // update seminarium visitors
                 JOptionPane.showMessageDialog(null, "Bokningen är genomfört!");
             } else {
@@ -1912,6 +1913,29 @@ public class QueryMethods {
         }
     }
 
+    public void cancelSeminarReservation (Guest g, String title){
+       LibraryCards libraryCard = findLibrarycardByEmail(g.getEmail());
+       Seminar seminar = findSeminarByTitle(title);
+        String query = "DELETE FROM bookings WHERE library_card_id =" + libraryCard.getId() + " AND seminar_id = " + seminar.getId();
+        
+        con = MyConnection.getConnection();
+        try {
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        finally{
+           try {
+               con.close();
+           } catch (SQLException ex) {
+               Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+           }
+        }
+        
+        
+    }
     public ArrayList<Books> groupAllBooksByIsbn() {
         String query = "Select title, author, isbn, publisher, purchase_price, category,\n"
                 + " placement, books.description, count(*) as copies from books group by isbn;";
@@ -2041,4 +2065,39 @@ public class QueryMethods {
         }    return book;
 
     }
+    
+    public ArrayList<Booking> getAllBookedSeminars() {
+        String query = "select * from bookings;";
+
+        ArrayList<Booking> bookedSeminars = new ArrayList<Booking>();
+        Booking list;
+
+        con = MyConnection.getConnection();
+        PreparedStatement ps;
+
+        try {
+            ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list = new Booking(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3));
+                       bookedSeminars.add(list);
+            }
+            
+            ps.close();
+            rs.close();
+
+        } catch (Exception e) {
+            System.out.println(e.toString() + " getAllBookedSeminars()");
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(QueryMethods.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return bookedSeminars;
+    }
+    
 }
