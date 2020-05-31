@@ -21,11 +21,13 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import se.database.QueryMethods;
+import se.model.Booking;
 import se.model.Books;
 import se.model.BorrowEBooks;
 import se.model.BorrowedBooks;
 import se.model.E_Books;
 import se.model.Guest;
+import se.model.LibraryCards;
 import se.model.Seminar;
 
 /**
@@ -47,17 +49,17 @@ public class UserView extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         jPanelInvisible.setVisible(false);
-        //fillSortimentTable();
+        fillSortimentTable();
 
         jTextFieldSearchSortiment.setToolTipText("Skriv titel, författare eller kategori");
 
-        //fillMyBorrowingsTable();
+        fillMyBorrowingsTable();
 
         fillSeminarsTable();
     }
 
     public UserView(String guestEmail) {
-        initComponents();
+        initComponents();        
         setLocationRelativeTo(null);
         jPanelInvisible.setVisible(false);
 
@@ -68,9 +70,10 @@ public class UserView extends javax.swing.JFrame {
 
         this.guestEmail = guestEmail;
 
-        //fillMyBorrowingsTable();
+        fillMyBorrowingsTable();
+        fillMyReservationsTable();
 
-        //jLabelTitle.setText("Inloggad Gäst: " + guestFullName());
+        jLabelTitle.setText("Inloggad Gäst: " + guestFullName());
         jtableSortiment.setAutoCreateRowSorter(true);
         jtableMyBorrowings.setAutoCreateRowSorter(true);
     }
@@ -92,7 +95,7 @@ public class UserView extends javax.swing.JFrame {
         return firstName + " " + lastName;
 
     }
-
+   
     public void fillSeminarsTable() {
         DefaultTableModel model = (DefaultTableModel) seminarsTable.getModel();
         model.setRowCount(0);
@@ -264,6 +267,40 @@ public class UserView extends javax.swing.JFrame {
 
     }
 
+    public void fillMyReservationsTable() {
+        ArrayList<Booking> allBookedSeminars = qm.getAllBookedSeminars();
+        ArrayList<Booking> myBookedSeminars = new ArrayList<>();
+        LibraryCards libraryCardId = qm.findLibrarycardByEmail(this.guestEmail);
+
+        for (int i = 0; i < allBookedSeminars.size(); i++) {
+            if (allBookedSeminars.get(i).getLibraryCardId() == libraryCardId.getId()) {
+                myBookedSeminars.add(allBookedSeminars.get(i));
+            }
+        }
+
+        ArrayList<Seminar> allSeminars = qm.findSeminar();
+        DefaultTableModel model = (DefaultTableModel) MyReservationsTable.getModel();
+        model.setColumnCount(4);
+        model.setRowCount(0);
+
+        for (int i = 0; i < allSeminars.size(); i++) {
+            for (int j = 0; j < myBookedSeminars.size(); j++) {
+                if (myBookedSeminars.get(j).getSeminarId() == allSeminars.get(i).getId()) {
+                    model.addRow(new Object[]{allSeminars.get(i).getTitle(), allSeminars.get(i).getSpeaker(),
+                        allSeminars.get(i).getLocation(), allSeminars.get(i).getStartDate()});
+                }
+            }
+        }
+        MyReservationsTable.getColumnModel().getColumn(0).setHeaderValue("Titel");
+        MyReservationsTable.getColumnModel().getColumn(1).setHeaderValue("Föreläsare");
+        MyReservationsTable.getColumnModel().getColumn(2).setHeaderValue("Plats");
+        MyReservationsTable.getColumnModel().getColumn(3).setHeaderValue("Datum");
+
+
+        MyReservationsTable.setModel(model);
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -305,8 +342,8 @@ public class UserView extends javax.swing.JFrame {
         jPanelTabStock = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         MyReservationsTable = new javax.swing.JTable();
-        jbtnUpdateMyReservations = new javax.swing.JButton();
-        jbtnEraseMyReservations = new javax.swing.JButton();
+        jbtnUpdateMyReservation = new javax.swing.JButton();
+        jbtnCancelMyReservation = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -621,17 +658,17 @@ public class UserView extends javax.swing.JFrame {
         });
         jScrollPane6.setViewportView(MyReservationsTable);
 
-        jbtnUpdateMyReservations.setText("Uppdatera");
-        jbtnUpdateMyReservations.addActionListener(new java.awt.event.ActionListener() {
+        jbtnUpdateMyReservation.setText("Uppdatera");
+        jbtnUpdateMyReservation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnUpdateMyReservationsActionPerformed(evt);
+                jbtnUpdateMyReservationActionPerformed(evt);
             }
         });
 
-        jbtnEraseMyReservations.setText("Ta bort");
-        jbtnEraseMyReservations.addActionListener(new java.awt.event.ActionListener() {
+        jbtnCancelMyReservation.setText("Avboka");
+        jbtnCancelMyReservation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnEraseMyReservationsActionPerformed(evt);
+                jbtnCancelMyReservationActionPerformed(evt);
             }
         });
 
@@ -643,9 +680,9 @@ public class UserView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelTabStockLayout.createSequentialGroup()
-                        .addComponent(jbtnUpdateMyReservations, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbtnUpdateMyReservation, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbtnEraseMyReservations, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbtnCancelMyReservation, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 729, Short.MAX_VALUE))
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 917, Short.MAX_VALUE)))
         );
@@ -658,8 +695,8 @@ public class UserView extends javax.swing.JFrame {
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(68, 68, 68))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTabStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jbtnUpdateMyReservations)
-                        .addComponent(jbtnEraseMyReservations)))
+                        .addComponent(jbtnUpdateMyReservation)
+                        .addComponent(jbtnCancelMyReservation)))
                 .addGap(68, 68, 68))
         );
 
@@ -1019,13 +1056,26 @@ public class UserView extends javax.swing.JFrame {
         fillMyBorrowingsTable();
     }//GEN-LAST:event_jbtnUpdate1ActionPerformed
 
-    private void jbtnUpdateMyReservationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUpdateMyReservationsActionPerformed
+    private void jbtnUpdateMyReservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUpdateMyReservationActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jbtnUpdateMyReservationsActionPerformed
+        fillMyReservationsTable();
+    }//GEN-LAST:event_jbtnUpdateMyReservationActionPerformed
 
-    private void jbtnEraseMyReservationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEraseMyReservationsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbtnEraseMyReservationsActionPerformed
+    private void jbtnCancelMyReservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelMyReservationActionPerformed
+        try{
+        int selection = MyReservationsTable.getSelectedRow();
+        String title = MyReservationsTable.getModel().getValueAt(selection, 0).toString();
+        Guest g = qm.findGuestByMail(guestEmail);
+        int option = JOptionPane.showConfirmDialog(this, "Vill du avboka seminariet?");
+        if (option == JOptionPane.YES_OPTION) {
+            qm.cancelSeminarReservation(g, title);
+            fillMyReservationsTable();
+        }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Du har inte valt bokning!");
+        }
+
+    }//GEN-LAST:event_jbtnCancelMyReservationActionPerformed
 
     private void jbtnReserveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnReserveActionPerformed
 
@@ -1034,7 +1084,7 @@ public class UserView extends javax.swing.JFrame {
             String title = seminarsTable.getModel().getValueAt(selection, 0).toString();
             System.out.println(title);
 
-            Guest g = qm.findGuestByMail(guestEmail);
+            LibraryCards g = qm.findLibrarycardByEmail(guestEmail);
             Seminar s = qm.findSeminarByTitle(title);
 
             qm.bookSeminar(g, s);
@@ -1068,19 +1118,16 @@ public class UserView extends javax.swing.JFrame {
     private void jtableMyBorrowingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtableMyBorrowingsMouseClicked
         // TODO add your handling code here:
         int id;
-                if (jtableMyBorrowings.getSelectedRow() == -1) {
+        if (jtableMyBorrowings.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Du har inte valt en bok");
-            
-                
-               
-                    
+
         } else {
             DefaultTableModel model = (DefaultTableModel) jtableMyBorrowings.getModel();
 
             String bookType = model.getValueAt(jtableMyBorrowings.getSelectedRow(), 3).toString();
-            
+
             String bookIsbn = model.getValueAt(jtableMyBorrowings.getSelectedRow(), 2).toString().trim();
-            
+
             for (int i = 0; i < qm.findEBooks().size(); i++) {
                 if (qm.findEBooks().get(i).getIsbn().trim().equals(bookIsbn)) {
                     id = qm.findEBooks().get(i).getId();
@@ -1093,14 +1140,12 @@ public class UserView extends javax.swing.JFrame {
                     this.setVisible(false);
                 } catch (SQLException ex) {
                     Logger.getLogger(UserView.class.getName()).log(Level.SEVERE, null, ex);
+
                 }
             }
         }
-            }
-                }
-        
-    }//GEN-LAST:event_jtableMyBorrowingsMouseClicked
 
+    }//GEN-LAST:event_jtableMyBorrowingsMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1164,11 +1209,11 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldSearchSortiment;
     private javax.swing.JButton jbtnAboutBook;
     private javax.swing.JButton jbtnBorrow;
-    private javax.swing.JButton jbtnEraseMyReservations;
+    private javax.swing.JButton jbtnCancelMyReservation;
     private javax.swing.JButton jbtnReserve;
     private javax.swing.JButton jbtnUpdate;
     private javax.swing.JButton jbtnUpdate1;
-    private javax.swing.JButton jbtnUpdateMyReservations;
+    private javax.swing.JButton jbtnUpdateMyReservation;
     private javax.swing.JTable jtableMyBorrowings;
     private javax.swing.JTable jtableSortiment;
     private javax.swing.JLabel lblProgram;
