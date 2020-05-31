@@ -186,19 +186,32 @@ public class UserView extends javax.swing.JFrame {
         model.setRowCount(0);
         model.setColumnCount(5);
         int libraryCardId = qm.findLibrarycardByEmail(this.guestEmail).getId();
-        ArrayList<Date> borrowedBooksDates = new ArrayList<>();
         Date toDayDate = new Date();
         String returnBookReminder = "";
+        
+        // books
+        ArrayList<BorrowedBooks> borrowedBooks = qm.getAllBorrowedBooks();
+        ArrayList<Books> allBooks = qm.findBooks();
+        ArrayList<BorrowedBooks> borrowedBooksByCardId = new ArrayList<>();
+        ArrayList<Books> borrowedBooksByCardIdInfo = new ArrayList<>();
+        
+        for (int i = 0; i < borrowedBooks.size(); i++) {
+            if (borrowedBooks.get(i).getLibraryCardId() == libraryCardId) {
+                borrowedBooksByCardId.add(borrowedBooks.get(i));
+            }
+        }
+        for (int i = 0; i < allBooks.size(); i++) {
+            for (int j = 0; j < borrowedBooksByCardId.size(); j++) {
+                if (allBooks.get(i).getId() == borrowedBooksByCardId.get(j).getBookId()) {
+                    borrowedBooksByCardIdInfo.add(allBooks.get(i));
 
-        for (int i = 0; i < qm.getAllBorrowedBooks().size(); i++) {
-            if (qm.getAllBorrowedBooks().get(i).getLibraryCardId() == libraryCardId) {
-                borrowedBooksDates.add(qm.getAllBorrowedBooks().get(i).getReturnDate());
+                }
             }
         }
 
-        for (int i = 0; i < qm.getBorrowedBooksByCardId(libraryCardId).size(); i++) {
-            int dayDiff = borrowedBooksDates.get(i).getDay() - toDayDate.getDay();
-            int monthDiff = borrowedBooksDates.get(i).getMonth() - toDayDate.getMonth();
+        for (int i = 0; i < borrowedBooksByCardIdInfo.size(); i++) {
+            int dayDiff = borrowedBooksByCardId.get(i).getReturnDate().getDay() - toDayDate.getDay();
+            int monthDiff = borrowedBooksByCardId.get(i).getReturnDate().getMonth() - toDayDate.getMonth();
 
             if (dayDiff <= 0 && monthDiff <= 0) {
                 returnBookReminder = "Försenad";
@@ -212,11 +225,11 @@ public class UserView extends javax.swing.JFrame {
                 returnBookReminder = "";
             }
 
-            model.addRow(new Object[]{qm.getBorrowedBooksByCardId(libraryCardId).get(i).getTitle(),
-                qm.getBorrowedBooksByCardId(libraryCardId).get(i).getAuthor(),
-                qm.getBorrowedBooksByCardId(libraryCardId).get(i).getIsbn(),
+            model.addRow(new Object[]{borrowedBooksByCardIdInfo.get(i).getTitle(),
+                borrowedBooksByCardIdInfo.get(i).getAuthor(),
+                borrowedBooksByCardIdInfo.get(i).getIsbn(),
                 "Bok",
-                qm.getAllBorrowedBooks().get(i).getReturnDate() + "  " + returnBookReminder});
+                borrowedBooksByCardId.get(i).getReturnDate() + "  " + returnBookReminder});
 
         }
 
