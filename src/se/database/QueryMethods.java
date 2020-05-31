@@ -170,6 +170,7 @@ public class QueryMethods {
                 if (rs.next()) {
                     idGuest = rs.getInt(1);
                     JOptionPane.showMessageDialog(null, firstName + " " + lastName + " har registrerats!");
+                    createLibraryCard(idGuest);
                 }
             }
 
@@ -186,6 +187,7 @@ public class QueryMethods {
                 System.out.println(e.getMessage());
             }
         }
+        
         return idGuest;
 
     }
@@ -1108,6 +1110,25 @@ public class QueryMethods {
 
         }
         return cards;
+    }
+    
+    public void createLibraryCard(int guestId){
+        System.out.println(guestId);
+        con = MyConnection.getConnection();
+        try {
+            PreparedStatement ps  = con.prepareStatement("INSERT INTO librarycards(guests_id) VALUES(?)");
+            ps.setInt(1, guestId);
+            
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            
+        }finally{
+            try {
+                con.close();
+            } catch (SQLException ex) {
+               
+            }
+        }
     }
 
     // entry is a boolean type in database,where 0 = false which means unblocked card 
