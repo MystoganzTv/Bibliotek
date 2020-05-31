@@ -231,6 +231,7 @@ public class ViewBooks extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setForeground(new java.awt.Color(64, 186, 213));
         jLabel4.setText("Logga ut");
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
