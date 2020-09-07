@@ -300,11 +300,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Uppdatera"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnUpdateActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbtnCancel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Avbryt"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnCancelActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -7,7 +7,7 @@ package se.view;
 
 /**
  *
- * @author enriq
+ * @author enrique
  */
 public class AdminUpdate extends javax.swing.JFrame {
 
@@ -117,8 +117,18 @@ public class AdminUpdate extends javax.swing.JFrame {
         );
 
         jbtnUpdate.setText("Uppdatera");
+        jbtnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnUpdateActionPerformed(evt);
+            }
+        });
 
         jbtnCancel.setText("Avbryt");
+        jbtnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelWorkingAreaLayout = new javax.swing.GroupLayout(jPanelWorkingArea);
         jPanelWorkingArea.setLayout(jPanelWorkingAreaLayout);
@@ -207,6 +217,14 @@ public class AdminUpdate extends javax.swing.JFrame {
     private void pwFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pwFieldActionPerformed
+
+    private void jbtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUpdateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnUpdateActionPerformed
+
+    private void jbtnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnCancelActionPerformed
 
     /**
      * @param args the command line arguments

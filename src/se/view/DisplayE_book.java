@@ -5,37 +5,37 @@
  */
 package se.view;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.BorderFactory;
 import se.database.QueryMethods;
-import se.model.Guest;
 
 /**
  *
- * @author enriq
+ * @author enrique
  */
-public class DisplayEbook extends javax.swing.JFrame {
+public class DisplayE_book extends javax.swing.JFrame {
+    private String guestEmail;
     int idEbook;
     QueryMethods queryMethods = new QueryMethods();
-    StringBuilder sb = new StringBuilder();
+    StringBuilder stringbuilder = new StringBuilder();
     /**
      * Creates new form StartPage1
      */
-    public DisplayEbook() {
+    public DisplayE_book() {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
         textArea.setEditable(false);
-
-       
-    
     }
-    public DisplayEbook(int idEbook, String guestEmail) {
+    
+    public DisplayE_book(String guestEmail){
+        this.guestEmail = guestEmail;
+    }
+    
+    public DisplayE_book(int idEbook, String guestEmail) {
         
          initComponents();
         setLocationRelativeTo(null);
@@ -46,28 +46,21 @@ public class DisplayEbook extends javax.swing.JFrame {
         
         try {
             
-            //String bookString = queryMethods.readBook(idEbook);
             ArrayList <String> readbook = new ArrayList<>(queryMethods.readBook(idEbook));
             for(String readBook : readbook){
                 
-                sb.append(readBook);
-                sb.append("\n");
+                stringbuilder.append(readBook);
+                stringbuilder.append("\n");
             }
-            //test.add(bookString);
-            textArea.append(sb.toString());
+            textArea.append(stringbuilder.toString());
             
         } catch (IOException ex) {
-            Logger.getLogger(DisplayEbook.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DisplayE_book.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(DisplayEbook.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DisplayE_book.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
-    private String guestEmail;
-    public DisplayEbook(String guestEmail){
-        this.guestEmail = guestEmail;
-    }
-   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -230,14 +223,22 @@ public class DisplayEbook extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DisplayEbook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DisplayE_book.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DisplayEbook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DisplayE_book.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DisplayEbook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DisplayE_book.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DisplayEbook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DisplayE_book.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -250,7 +251,7 @@ public class DisplayEbook extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DisplayEbook().setVisible(true);
+                new DisplayE_book().setVisible(true);
             }
         });
     }

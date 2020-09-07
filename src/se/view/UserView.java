@@ -1165,7 +1165,7 @@ public class UserView extends javax.swing.JFrame {
                     id = qm.getAllEBooks().get(i).getId();
 
                     if (bookType.equals("E-Bok")) {
-                        DisplayEbook displayebook = new DisplayEbook(id, guestEmail);
+                        DisplayE_book displayebook = new DisplayE_book(id, guestEmail);
                         displayebook.setVisible(true);
                         this.setVisible(false);
                     }
