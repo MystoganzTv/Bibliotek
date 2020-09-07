@@ -6,7 +6,6 @@
 package se.view;
 
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 import se.database.QueryMethods;
 import se.model.Books;
 import se.model.Category;
@@ -68,9 +67,9 @@ public class AddBook extends javax.swing.JFrame {
         jbtnCancel = new javax.swing.JButton();
         jPanelTitle = new javax.swing.JPanel();
         jLabelTitle = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelLogoIcon = new javax.swing.JLabel();
+        jLabelLogoText = new javax.swing.JLabel();
+        jLabelHome = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -240,14 +239,14 @@ public class AddBook extends javax.swing.JFrame {
         jLabelTitle.setForeground(new java.awt.Color(64, 186, 213));
         jLabelTitle.setText("Lägg till bok  ");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Logo libro.png"))); // NOI18N
+        jLabelLogoIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Logo libro.png"))); // NOI18N
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Logo letras libro.png"))); // NOI18N
+        jLabelLogoText.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/Logo letras libro.png"))); // NOI18N
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/home_80px.png"))); // NOI18N
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/home_80px.png"))); // NOI18N
+        jLabelHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
+                jLabelHomeMouseClicked(evt);
             }
         });
 
@@ -256,24 +255,24 @@ public class AddBook extends javax.swing.JFrame {
         jPanelTitleLayout.setHorizontalGroup(
             jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
-                .addComponent(jLabel2)
+                .addComponent(jLabelLogoIcon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10)
+                .addComponent(jLabelLogoText)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
+                .addComponent(jLabelHome)
                 .addContainerGap())
         );
         jPanelTitleLayout.setVerticalGroup(
             jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+            .addComponent(jLabelLogoIcon, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
+                    .addComponent(jLabelHome)
                     .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelLogoText, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -326,11 +325,11 @@ public class AddBook extends javax.swing.JFrame {
 
  
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+    private void jLabelHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelHomeMouseClicked
         StartPage sp = new StartPage();
         sp.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jLabel4MouseClicked
+    }//GEN-LAST:event_jLabelHomeMouseClicked
 
     private void boxTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxTypeItemStateChanged
         
@@ -354,8 +353,6 @@ public class AddBook extends javax.swing.JFrame {
         String category = boxCategory.getSelectedItem().toString().trim();
         String placement = jFieldPlacement.getText();
 
-    
-        
 
         if (bookType.equals("bok")) {
             Books b = new Books(title, author, isbn, publisher, purchasePrice, category, placement,  desc);
@@ -381,7 +378,10 @@ public class AddBook extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnAcceptActionPerformed
 
     private void jbtnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelActionPerformed
-        // TODO add your handling code here:
+        LibrarianView lv = new LibrarianView();
+        lv.setVisible(true);
+        this.setVisible(false);
+        
     }//GEN-LAST:event_jbtnCancelActionPerformed
 
     /**
@@ -428,14 +428,14 @@ public class AddBook extends javax.swing.JFrame {
     private javax.swing.JTextField jFieldPublisher;
     private javax.swing.JTextField jFieldPurchasePrice;
     private javax.swing.JTextField jFieldTitle;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelAuthor;
     private javax.swing.JLabel jLabelBackgroundPhoto;
     private javax.swing.JLabel jLabelDescription;
+    private javax.swing.JLabel jLabelHome;
     private javax.swing.JLabel jLabelISBN;
     private javax.swing.JLabel jLabelLocation;
+    private javax.swing.JLabel jLabelLogoIcon;
+    private javax.swing.JLabel jLabelLogoText;
     private javax.swing.JLabel jLabelPublisher;
     private javax.swing.JLabel jLabelPurchaseprice;
     private javax.swing.JLabel jLabelTitel;

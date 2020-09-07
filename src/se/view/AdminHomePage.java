@@ -13,21 +13,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import java.util.function.Predicate;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javafx.scene.control.SelectionMode;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 import se.database.MyConnection;
-import se.database.QueryMethods;
 import se.model.ComboItem;
 import se.model.Admin;
 import se.model.Guest;
@@ -39,28 +30,28 @@ import se.model.BorrowEBooks;
 import se.model.BorrowedBooks;
 import se.model.E_Books;
 import se.model.DeletedBook;
+import se.model.Seminar;
 
 //tadevos test
 /**
  *
- * @author enriq
+ * @author Enrique
  */
 public class AdminHomePage extends javax.swing.JFrame {
 
-    private QueryMethods queryMethods;
     private String[] colNames = {"ID", "Förnamn", "Efternamn", "Personnummer", "Email"};
     private String query = null;
     private QueryMethods qMethods = new QueryMethods();
     private ArrayList<Guest> guests;
     private ArrayList<Librarian> librarians;
     private ArrayList<Admin> admins;
-
-    private ArrayList<String> choiceList;
+    
+    private ArrayList<String> bookTypeList;
     private ArrayList<DeletedBook> deletedBook;
     private ArrayList<DeletedBook> deletedEBook;
     
-    private ArrayList<Books> books;
-    private ArrayList<E_Books> eBooks;
+    private ArrayList<Books> book;
+    private ArrayList<E_Books> e_Book;
     private String[] colNamesSort = {"ID", "Titel", "Författare", "Kategory", "Pris", "Inläggnings Datum", "Typ"};
     
         
@@ -76,10 +67,10 @@ public class AdminHomePage extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
-        queryMethods = new QueryMethods();
+        qMethods = new QueryMethods();
         guests = qMethods.findGuests();
-        books = qMethods.getAllBooks();
-        eBooks = qMethods.getAllEBooks();
+        book = qMethods.getAllBooks();
+        e_Book = qMethods.getAllEBooks();
 
         jTabbedPaneEdit.setVisible(false);
         jTabbedPaneReport.setVisible(false);
@@ -89,22 +80,16 @@ public class AdminHomePage extends javax.swing.JFrame {
         boxUsers.addItem(new ComboItem("Bibliotekarie", "2"));
         boxUsers.addItem(new ComboItem("Gäst", "3"));
 
-        this.choiceList = new ArrayList<>();
+        this.bookTypeList = new ArrayList<>();
         this.deletedBook = new ArrayList<>();
         this.deletedEBook = new ArrayList<>();
-
-        //basic setup
-//        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-//        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
-//        btnRegister.setBackground(new java.awt.Color(142, 198, 197));
-//        btnClose.setBackground(new java.awt.Color(142, 198, 197));
-
+        
         fillGuestTable();
         fillLibrarianTable();
         fillAdminTable();
         showBookType();
         fillBookLogTable();
-        fillBooks_EBooksTable();
+        fillTableE_book();
         fillLendingTable();
 
         
@@ -115,7 +100,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
-        queryMethods = new QueryMethods();
+        qMethods = new QueryMethods();
         guests = qMethods.findGuests();
 
         jTabbedPaneEdit.setVisible(false);
@@ -126,7 +111,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         boxUsers.addItem(new ComboItem("Bibliotekarie", "2"));
         boxUsers.addItem(new ComboItem("Gäst", "3"));
 
-        this.choiceList = new ArrayList<>();
+        this.bookTypeList = new ArrayList<>();
         this.deletedBook = new ArrayList<>();
         this.deletedEBook = new ArrayList<>();
 
@@ -141,7 +126,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         fillAdminTable();
         showBookType();
         fillBookLogTable();
-        fillBooks_EBooksTable();
+        fillTableE_book();
         fillLendingTable();
 
         
@@ -166,23 +151,22 @@ public class AdminHomePage extends javax.swing.JFrame {
         return  firstName + " " + lastName ;
     }
        
-       public void fillBooks_EBooksTable() {
-        //ArrayList<Books> books = qMethods.findBooks();
-        books = queryMethods.getAllBooks();
-        eBooks = queryMethods.getAllEBooks();
+       public void fillTableE_book() {
+        book = qMethods.getAllBooks();
+        e_Book = qMethods.getAllEBooks();
         String bookType = "Bok";
         String ebookType = "E-bok";
         DefaultTableModel model = new DefaultTableModel(colNamesSort, 0);       
         model.setRowCount(0);
         
-        for (int i = 0; i < books.size(); i++) {            
-            model.addRow(new Object[]{ books.get(i).getId(), books.get(i).getTitle(), books.get(i).getAuthor(),
-                 books.get(i).getCategory(), books.get(i).getPurchase_price(), books.get(i).getDate(), bookType});
+        for (int i = 0; i < book.size(); i++) {            
+            model.addRow(new Object[]{ book.get(i).getId(), book.get(i).getTitle(), book.get(i).getAuthor(),
+                 book.get(i).getCategory(), book.get(i).getPurchase_price(), book.get(i).getDate(), bookType});
         }
         
-        for (int i = 0; i < eBooks.size(); i++) {
-            model.addRow(new Object[]{eBooks.get(i).getId(), eBooks.get(i).getTitle(), eBooks.get(i).getAuthor(),
-                  eBooks.get(i).getCategory(), eBooks.get(i).getPurchase_price(),eBooks.get(i).getDate(), ebookType });
+        for (int i = 0; i < e_Book.size(); i++) {
+            model.addRow(new Object[]{e_Book.get(i).getId(), e_Book.get(i).getTitle(), e_Book.get(i).getAuthor(),
+                  e_Book.get(i).getCategory(), e_Book.get(i).getPurchase_price(),e_Book.get(i).getDate(), ebookType });
         }
         
         StockTable.setModel(model);
@@ -231,11 +215,11 @@ public class AdminHomePage extends javax.swing.JFrame {
 
                 String choise = rs.getString("bookType");
                 if (choise != null) {
-                    choiceList.add(choise);
+                    bookTypeList.add(choise);
                 }
             }
 
-            jComboBoxType.setModel(new DefaultComboBoxModel<>(choiceList.toArray(new String[0])));
+            jComboBoxType.setModel(new DefaultComboBoxModel<>(bookTypeList.toArray(new String[0])));
 
         } catch (SQLException ex) {
             Logger.getLogger(AdminHomePage.class.getName()).log(Level.SEVERE, null, ex);
@@ -267,11 +251,11 @@ public class AdminHomePage extends javax.swing.JFrame {
                 deletedBook.get(i).getNotes()});
         }
 
-        BookLogTable.setModel(defaultModel);
-        BookLogTable.setRowSelectionAllowed(true);
+        bookLogTable.setModel(defaultModel);
+        bookLogTable.setRowSelectionAllowed(true);
     }
 
-    public void fillEBookLogTable() {
+    public void fillE_BookLogTable() {
         deletedEBook = qMethods.findDeletedEBooks();
         String[] colname = {"id", "Titel", "Förfatare", "ISBN", "Inköpspris", "Förlag", "Anlädning"};
         DefaultTableModel defaultModel = new DefaultTableModel(colname, 0);
@@ -287,8 +271,8 @@ public class AdminHomePage extends javax.swing.JFrame {
                 deletedEBook.get(i).getNotes()});
         }
 
-        BookLogTable.setModel(defaultModel);
-        BookLogTable.setRowSelectionAllowed(true);
+        bookLogTable.setModel(defaultModel);
+        bookLogTable.setRowSelectionAllowed(true);
     }
 
     public void fillAdminTable() {
@@ -308,7 +292,7 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     public void fillGuestTable() {
 
-        guests = queryMethods.findGuests();
+        guests = qMethods.findGuests();
         DefaultTableModel model = new DefaultTableModel(colNames, 0);
 
         model.setRowCount(0);
@@ -350,8 +334,8 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabelTitle = new javax.swing.JLabel();
         jLabelLogo1 = new javax.swing.JLabel();
         jLabelLogo = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelHome = new javax.swing.JLabel();
+        jLabelHomeText = new javax.swing.JLabel();
         jLayeredPaneWorkArea = new javax.swing.JLayeredPane();
         jTabbedPaneEdit = new javax.swing.JTabbedPane();
         jPanelTabUser = new javax.swing.JPanel();
@@ -402,7 +386,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         searchDeletedBookText = new javax.swing.JTextField();
         searchRemovedBooks = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
-        BookLogTable = new javax.swing.JTable();
+        bookLogTable = new javax.swing.JTable();
         jComboBoxType = new javax.swing.JComboBox<>();
         jPanelAdminToolRegister = new javax.swing.JPanel();
         jPanelAdminTools = new javax.swing.JPanel();
@@ -410,8 +394,8 @@ public class AdminHomePage extends javax.swing.JFrame {
         jLabelRegister = new javax.swing.JLabel();
         jLabelReport = new javax.swing.JLabel();
         jLabelEditUsers = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelRegisterText = new javax.swing.JLabel();
+        jLabelReportText = new javax.swing.JLabel();
         jPanelRegister = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         boxUsers = new javax.swing.JComboBox();
@@ -451,18 +435,18 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/home_50px.png"))); // NOI18N
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/se/image/home_50px.png"))); // NOI18N
+        jLabelHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel7MouseClicked(evt);
+                jLabelHomeMouseClicked(evt);
             }
         });
 
-        jLabel4.setForeground(new java.awt.Color(64, 186, 213));
-        jLabel4.setText("Logga ut");
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelHomeText.setForeground(new java.awt.Color(64, 186, 213));
+        jLabelHomeText.setText("Logga ut");
+        jLabelHomeText.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
+                jLabelHomeTextMouseClicked(evt);
             }
         });
 
@@ -480,8 +464,8 @@ public class AdminHomePage extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTitleLayout.createSequentialGroup()
                         .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel7))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(jLabelHome))
+                    .addComponent(jLabelHomeText, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         jPanelTitleLayout.setVerticalGroup(
@@ -495,10 +479,10 @@ public class AdminHomePage extends javax.swing.JFrame {
                     .addGroup(jPanelTitleLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelHome, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabelTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)))
+                        .addComponent(jLabelHomeText)))
                 .addContainerGap())
         );
 
@@ -945,7 +929,7 @@ public class AdminHomePage extends javax.swing.JFrame {
             }
         });
 
-        BookLogTable.setModel(new javax.swing.table.DefaultTableModel(
+        bookLogTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -956,7 +940,7 @@ public class AdminHomePage extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane10.setViewportView(BookLogTable);
+        jScrollPane10.setViewportView(bookLogTable);
 
         jComboBoxType.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -966,6 +950,11 @@ public class AdminHomePage extends javax.swing.JFrame {
         jComboBoxType.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jComboBoxTypeMouseClicked(evt);
+            }
+        });
+        jComboBoxType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTypeActionPerformed(evt);
             }
         });
 
@@ -1102,12 +1091,12 @@ public class AdminHomePage extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(12, 18, 35, 0);
         jPanelAdminTools.add(jLabelEditUsers, gridBagConstraints);
 
-        jLabel2.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(105, 131, 170));
-        jLabel2.setText("Registrera");
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelRegisterText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelRegisterText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelRegisterText.setText("Registrera");
+        jLabelRegisterText.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                jLabelRegisterTextMouseClicked(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1115,14 +1104,14 @@ public class AdminHomePage extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 17, 35, 0);
-        jPanelAdminTools.add(jLabel2, gridBagConstraints);
+        jPanelAdminTools.add(jLabelRegisterText, gridBagConstraints);
 
-        jLabel3.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(105, 131, 170));
-        jLabel3.setText("Rapportering");
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelReportText.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabelReportText.setForeground(new java.awt.Color(105, 131, 170));
+        jLabelReportText.setText("Rapportering");
+        jLabelReportText.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
+                jLabelReportTextMouseClicked(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1130,7 +1119,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 18, 35, 30);
-        jPanelAdminTools.add(jLabel3, gridBagConstraints);
+        jPanelAdminTools.add(jLabelReportText, gridBagConstraints);
 
         jPanelAdminToolRegister.add(jPanelAdminTools, java.awt.BorderLayout.PAGE_START);
 
@@ -1327,9 +1316,9 @@ public class AdminHomePage extends javax.swing.JFrame {
         String password = jPasswordField1.getText();
         String email = txtEmail.getText();
 
-        if (queryMethods.isEmailTaken(email)) {
+        if (qMethods.isEmailTaken(email)) {
             JOptionPane.showMessageDialog(this, "Upptagen Email");
-        }else if (queryMethods.isPersonNumberTaken(PN)){
+        }else if (qMethods.isPersonNumberTaken(PN)){
             JOptionPane.showMessageDialog(this, "Upptaget Personnummer");
         }else if (!Validation.isValidName(firstName)) {
             JOptionPane.showMessageDialog(this, "Felaktig inmatning för förnamn");
@@ -1346,28 +1335,24 @@ public class AdminHomePage extends javax.swing.JFrame {
             switch (userType) {
                 case "Administratör":
                     
-                    queryMethods.insertAdmin(firstName, lastName, PN, password, email);
-                    
+                    qMethods.insertAdmin(firstName, lastName, PN, password, email);
+                     emptyRegisterForm();
                     break;
                 case "Bibliotekarie":
                     
-                    queryMethods.insertLibrarian(firstName, lastName, PN, password, email);
-                    
+                    qMethods.insertLibrarian(firstName, lastName, PN, password, email);
+                     emptyRegisterForm();
                     break;
                 case "Gäst":
-                   
-                    queryMethods.insertGuest(firstName, lastName, PN, password, email);
+                    emptyRegisterForm();
+                    qMethods.insertGuest(firstName, lastName, PN, password, email);
                     
                     break;
             }
             
 
         }
-        txtFirstname.setText("");
-        txtLastname.setText("");
-        txtPN.setText("");
-        jPasswordField1.setText("");
-        txtEmail.setText("");
+     
 
         fillGuestTable();
         fillLibrarianTable();
@@ -1375,20 +1360,27 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnRegisterActionPerformed
 
+    private void emptyRegisterForm(){
+        txtFirstname.setText("");
+        txtLastname.setText("");
+        txtPN.setText("");
+        jPasswordField1.setText("");
+        txtEmail.setText("");
+    }
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
 
         jPanelRegister.setVisible(false);
     }//GEN-LAST:event_btnCloseActionPerformed
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+    private void jLabelRegisterTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelRegisterTextMouseClicked
         jPanelRegister.setVisible(true);
-    }//GEN-LAST:event_jLabel2MouseClicked
+    }//GEN-LAST:event_jLabelRegisterTextMouseClicked
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+    private void jLabelReportTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelReportTextMouseClicked
 
         jTabbedPaneReport.setVisible(true);
         jTabbedPaneEdit.setVisible(false);
-    }//GEN-LAST:event_jLabel3MouseClicked
+    }//GEN-LAST:event_jLabelReportTextMouseClicked
 
     private void jLabelEditUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditUsersMouseClicked
         jTabbedPaneEdit.setVisible(true);
@@ -1458,7 +1450,7 @@ public class AdminHomePage extends javax.swing.JFrame {
                     
                     if(reply == JOptionPane.YES_OPTION){
                        
-                    if(queryMethods.deleteGuest(g)){
+                    if(qMethods.deleteGuest(g)){
                          JOptionPane.showMessageDialog(this, g.getFirstName() + " Är nu borttagen!");
                     
                     }else{
@@ -1493,7 +1485,7 @@ public class AdminHomePage extends javax.swing.JFrame {
                 
                 int reply = JOptionPane.showConfirmDialog(this, "Vill du verkligen ta bort " + l.getFirstName() + " " + l.getLastName());
                 if(reply == JOptionPane.YES_OPTION){
-                queryMethods.deleteLibrarian(l);
+                qMethods.deleteLibrarian(l);
                 }
 
             }
@@ -1521,7 +1513,7 @@ public class AdminHomePage extends javax.swing.JFrame {
                 int reply = JOptionPane.showConfirmDialog(this, "Vill du verkligen ta bort " +a.getFirstName() + " " +a.getLastName());
                 
                 if(reply == JOptionPane.YES_OPTION){
-                queryMethods.deleteAdmin(a);
+                qMethods.deleteAdmin(a);
                 }
 
             }
@@ -1626,7 +1618,6 @@ public class AdminHomePage extends javax.swing.JFrame {
         List<E_Books> eBooks = new ArrayList<>();
         eBooks = qMethods.getAllEBooks();
         String searchWord = jTextFieldSearchStock.getText().toLowerCase();
-        String bookIsAvailable = "";
         List<Books> books = qMethods.getAllBooks();
 
 
@@ -1675,9 +1666,42 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jLabelSearchStockIconMouseClicked
 
-
+    //TODO: Doubbel kolla om det funkar
     private void jLabelSearchBookingsIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchBookingsIconMouseClicked
-        // TODO add your handling code here:
+        ArrayList<Seminar> seminar = new ArrayList<>();
+        ArrayList<Integer> seminarId = new ArrayList<>();
+        seminar = qMethods.findSeminar();
+        String searchWord = jTextFieldSearchBooking.getText().toLowerCase();
+        
+        DefaultTableModel model = (DefaultTableModel) BookingsTable.getModel();
+        model.setRowCount(0);
+        model.setColumnCount(4);
+
+        seminar.stream().filter((b) -> b.getTitle().toLowerCase().contains(searchWord) || b.getSpeaker().toLowerCase().equals(searchWord)
+                || b.getLocation().equals(searchWord));
+        
+        for (int i = 0; i < qMethods.findSeminar().size(); i++) {
+            seminarId.add(qMethods.getAllBorrowedBooks().get(i).getBookId());
+        }
+
+        if (!seminar.isEmpty()) {
+
+            for (int i = 0; i < seminar.size(); i++) {
+
+                model.addRow(new Object[]{seminar.get(i).getId(),seminar.get(i).getTitle(), seminar.get(i).getSpeaker(),
+                    seminar.get(i).getLocation()});
+            }
+
+            BookingsTable.setModel(model);
+            jTextFieldSearchBooking.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "Ingen seminar matchade din sökning");
+        }
+        
+        BookingsTable.getColumnModel().getColumn(0).setHeaderValue("ID");
+        BookingsTable.getColumnModel().getColumn(1).setHeaderValue("Titel");
+        BookingsTable.getColumnModel().getColumn(2).setHeaderValue("Speaker");
+        BookingsTable.getColumnModel().getColumn(3).setHeaderValue("Location");
     }//GEN-LAST:event_jLabelSearchBookingsIconMouseClicked
 
     private void jComboBoxTypeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxTypeMouseClicked
@@ -1690,7 +1714,7 @@ public class AdminHomePage extends javax.swing.JFrame {
             fillBookLogTable();
         } else {
             System.out.println("Ebook received");
-            fillEBookLogTable();
+            fillE_BookLogTable();
         }
     }//GEN-LAST:event_jComboBoxTypeItemStateChanged
 
@@ -1698,7 +1722,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         
         String removedBookToFind = searchDeletedBookText.getText().toLowerCase();
         
-        ArrayList<DeletedBook> deletedBooks = queryMethods.findDeletedBooks();
+        ArrayList<DeletedBook> deletedBooks = qMethods.findDeletedBooks();
         
         if(!removedBookToFind.isEmpty()){
             ArrayList<DeletedBook> foundDeletedBooks = new ArrayList<>();
@@ -1717,8 +1741,7 @@ public class AdminHomePage extends javax.swing.JFrame {
                    defaultModel.addRow(new Object[]{deletedBook.getId(), deletedBook.getTitle(), deletedBook.getAuthor(), deletedBook.getIsbn()
                    ,deletedBook.getPurchasePrice(), deletedBook.getCategory(), deletedBook.getPublisher(), deletedBook.getDesc()});
                }
-               BookLogTable.setModel(defaultModel);
-               searchDeletedBookText.setText("");
+               bookLogTable.setModel(defaultModel);
             }else {
                 JOptionPane.showMessageDialog(this, "Kunde inte hitta ett objekt som matchar din sökning");
             }
@@ -1731,17 +1754,21 @@ public class AdminHomePage extends javax.swing.JFrame {
  
     }//GEN-LAST:event_jLabelSearchUserTextMouseClicked
 
-    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+    private void jLabelHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelHomeMouseClicked
         StartPage sp = new StartPage();
         sp.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jLabel7MouseClicked
+    }//GEN-LAST:event_jLabelHomeMouseClicked
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+    private void jLabelHomeTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelHomeTextMouseClicked
         StartPage sp = new StartPage();
         sp.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jLabel4MouseClicked
+    }//GEN-LAST:event_jLabelHomeTextMouseClicked
+
+    private void jComboBoxTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxTypeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1782,11 +1809,11 @@ public class AdminHomePage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable BookLogTable;
     private javax.swing.JTable BookingsTable;
     private javax.swing.JTable LendingTable;
     private javax.swing.JTable StockTable;
     private javax.swing.JTable adminTable;
+    private javax.swing.JTable bookLogTable;
     private javax.swing.JComboBox boxUsers;
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnRegister;
@@ -1798,12 +1825,6 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabelBackgroundPhoto;
     private javax.swing.JLabel jLabelEditUsers;
     private javax.swing.JLabel jLabelEditUsersImg;
@@ -1813,10 +1834,14 @@ public class AdminHomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelEraseLibrarianText;
     private javax.swing.JLabel jLabelEraseUserIcon;
     private javax.swing.JLabel jLabelEraseUserText;
+    private javax.swing.JLabel jLabelHome;
+    private javax.swing.JLabel jLabelHomeText;
     private javax.swing.JLabel jLabelLogo;
     private javax.swing.JLabel jLabelLogo1;
     private javax.swing.JLabel jLabelRegister;
+    private javax.swing.JLabel jLabelRegisterText;
     private javax.swing.JLabel jLabelReport;
+    private javax.swing.JLabel jLabelReportText;
     private javax.swing.JLabel jLabelSearchAdminIcon;
     private javax.swing.JLabel jLabelSearchAdminText;
     private javax.swing.JLabel jLabelSearchBookingsIcon;
