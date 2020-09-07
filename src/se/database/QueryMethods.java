@@ -57,6 +57,8 @@ public class QueryMethods {
     public QueryMethods() {
 
     }
+    
+    // TODO: dela upp qeuryn i tre delar
     public boolean isPersonNumberTaken(String personNumber){
         String adminsIds = "SELECT person_id FROM admins";
         String librariansIds = "SELECT person_id FROM librarians";
@@ -147,7 +149,7 @@ public class QueryMethods {
         }
         return check;
     }
-
+    // TODO: kolla parametrar där metoden används
     public int insertGuest(String firstName, String lastName, String socialNumber, String password, String email) {
         int idGuest = 0;
 
@@ -191,7 +193,8 @@ public class QueryMethods {
         return idGuest;
 
     }
-
+    
+    // TODO: kolla parametrar där metoden används
     public int insertAdmin(String firstName, String lastName, String socialNumber, String password, String email) {
 
         insertEmail(email);
@@ -233,7 +236,8 @@ public class QueryMethods {
         return idAdmin;
 
     }
-
+    
+    // TODO: kolla parametrar där metoden används
     public int insertLibrarian(String firstName, String lastName, String socialNumber, String password, String email) {
 
         insertEmail(email);
@@ -273,7 +277,7 @@ public class QueryMethods {
         return idLibrarian;
 
     }
-
+    
     public ArrayList<DeletedBook> findDeletedBooks() {
 
         try {
@@ -300,7 +304,7 @@ public class QueryMethods {
                         results.getString("placement"),
                         results.getString("notes"));
                 deletedBooks.add(currentDeletedBooks);
-                currentDeletedBooks = null;
+                currentDeletedBooks = null;                      // behövs??
             }
 
             
@@ -347,7 +351,7 @@ public class QueryMethods {
                         results.getString("placement"),
                         results.getString("notes"));
                 deletedBooks.add(currentDeletedBooks);
-                currentDeletedBooks = null;
+                currentDeletedBooks = null;                         //   behövs??
             }            
             stmt.close();
 
@@ -445,7 +449,7 @@ public class QueryMethods {
     }
 
     public Guest findGuestByMail(String email) {
-        Guest g = new Guest();
+        Guest guest = new Guest();
 
         try {
 
@@ -455,7 +459,7 @@ public class QueryMethods {
 
             ResultSet results = stmt.getResultSet();
             while (results.next()) {
-                g = new Guest(Integer.parseInt(results.getString("id")),
+                guest = new Guest(Integer.parseInt(results.getString("id")),
                         results.getString("first_name"),
                         results.getString("last_name"),
                         results.getString("person_id"),
@@ -466,7 +470,7 @@ public class QueryMethods {
             con.close();
             stmt.close();
 
-            return g;
+            return guest;
         } catch (SQLException e) {
             System.out.println("Something went wrong in findGuestByMail(): " + e);
         }
@@ -513,7 +517,7 @@ public class QueryMethods {
 
         return null;
     }
-
+    
     public ArrayList<Books> findBooks() {
 
         try {
@@ -635,7 +639,7 @@ public class QueryMethods {
 
         return null;
     }
-
+    // fundera på ett annat metodnamn
     public String loginChecker(String user, String username, String password) {
         String exist = " select email, password from " + user + " where email = '" + username + "'"
                 + "and password = '" + password + "';";
@@ -665,7 +669,8 @@ public class QueryMethods {
         return email;
 
     }
-
+    // en dublett
+    // TODO: Refactor så vi bara använder en
     public List<Books> getAllBooks() {
 
         try {
@@ -705,7 +710,8 @@ public class QueryMethods {
         return null;
 
     }
-
+    // en dublett
+    // TODO: Refactor så vi bara använder en
     public List<E_Books> getAllEBooks() {
 
         try {
@@ -748,7 +754,7 @@ public class QueryMethods {
         return null;
 
     }
-
+    // TODO: kolla om det går att dela upp metoden i delar
     public void deleteGuest(Guest guest) {
 
         con = MyConnection.getConnection();
@@ -783,7 +789,7 @@ public class QueryMethods {
 
         }
     }
-
+    // TODO: kontrollera om det går att dela metoden i delar
     public void deleteAdmin(Admin admin) {
 
         con = MyConnection.getConnection();
@@ -812,7 +818,8 @@ public class QueryMethods {
 
         }
     }
-
+    
+    // TODO: kontrollera om det går att dela metoden i delar
     public void deleteLibrarian(Librarian librarian) {
 
         con = MyConnection.getConnection();
@@ -841,7 +848,7 @@ public class QueryMethods {
 
         }
     }
-
+    
     public void addBook(Books b) {
 
         con = MyConnection.getConnection();
@@ -867,7 +874,7 @@ public class QueryMethods {
             }
         }
     }
-
+    
     public void deleteBook(Books b, String notes) {
 
         con = MyConnection.getConnection();
@@ -892,7 +899,7 @@ public class QueryMethods {
             stmt.close();
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Den bok är utlånat.");
+            JOptionPane.showMessageDialog(null, "Den bok är utlånad.");
             //System.out.println("Något gick fel när du har försökt att radera den bok: " + e.getMessage());
             //e.printStackTrace();
         } finally {
@@ -904,11 +911,13 @@ public class QueryMethods {
         }
 
     }
-
+    
+    // TODO: kontrollera om system out behövs
     public void addEBook(E_Books b) {
 
         MyConnection tryConnect = new MyConnection();
         con = MyConnection.getConnection();
+
         System.out.println("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category, descript) "
                 + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
                 + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getDesc() + "')");
@@ -932,7 +941,7 @@ public class QueryMethods {
             }
         }
     }
-
+    
     public void deleteE_Book(E_Books b) {
 
         con = MyConnection.getConnection();
@@ -955,7 +964,7 @@ public class QueryMethods {
         }
 
     }
-
+    // TODO: refactorera namnet till ex. findBlockedCards()
     public ArrayList<LibraryCards> blockedCards() {
 
         String blockedListQuery = "select concat( first_name,\" \", last_name)as fullname, "
@@ -997,7 +1006,7 @@ public class QueryMethods {
         return blockedCards;
 
     }
-
+    // en dublett ?
     // All elements of librarycards table in database are included 
     public ArrayList<LibraryCards> getBlockedCards() {
 
@@ -1039,7 +1048,7 @@ public class QueryMethods {
         return blockedCards;
 
     }
-
+    
     public ArrayList<LibraryCards> getAllCards() {
         String query = "select guests_id, concat(first_name, ' ', last_name)as fullname,\n"
                 + "entry, category from librarycards join guests on guests_id = guests.id;";
@@ -1074,7 +1083,7 @@ public class QueryMethods {
         }
         return allCardsList;
     }
-
+    // TODO: kontrollera metodens användande
     public ArrayList<LibraryCards> getGuestsLibraryCardsByGuestList(ArrayList<Guest> guests) {
 
         ArrayList<LibraryCards> cards = new ArrayList<>();
@@ -1160,6 +1169,7 @@ public class QueryMethods {
     }
 
     //returning Arraylist of books, might be empty if no match!
+    // TODO: kolla om man kan slå ihop alla findBooksBy*()
     public ArrayList<Books> findBooksByTitle(String title) {
         ArrayList<Books> foundBooks = new ArrayList<>();
 
@@ -1315,6 +1325,7 @@ public class QueryMethods {
     }
 
     // Returning NULL if no book found, Catch nullpointer when trying to find book!
+    // TODO: fundera på ett tydligare namn ex. findAllBooksByIsbn()
     public ArrayList<Books> findBooksByIsbn(String isbn) {
         String query = "SELECT * FROM books WHERE isbn = '" + isbn + "'";
         ArrayList<Books> books = new ArrayList<Books>();
@@ -1360,6 +1371,8 @@ public class QueryMethods {
     }
 
     // Returning NULL if no book found, Catch nullpointer when trying to find book!
+    // TODO: kolla om man kan slå ihop alla findEBookBy*() metoder
+    // TODO: Refactor så att alla E_Books har samma benämning ex. (E_Books)
     public E_Books findEBookByIsbn(String isbn) {
         String query = "SELECT * FROM e_books WHERE isbn = '" + isbn + "'";
 
@@ -1543,7 +1556,7 @@ public class QueryMethods {
         }
         return null;
     }
-
+    // TODO: Refactor till borrowBook
     public void borrowBooks(int bookId, int libraryCardId) {
 
         String query = "insert into borrowed_books(book_id, librarycard_id,"
@@ -1567,7 +1580,7 @@ public class QueryMethods {
         }
 
     }
-
+    // TODO: Refactor till borrowE_Book
     public void borrowEBooks(int eBookId, int libraryCardId) {
 
         String query = "insert into borrowed_ebooks(ebook_id, librarycard_id,"
@@ -1814,7 +1827,7 @@ public class QueryMethods {
         }
         return seminar;
     }
-
+    // TODO: kolla om man kan slå ihop alla findSeminarBy*() metoder
     public Seminar findSeminarByTitle(String title) {
         Seminar s = new Seminar();
 
@@ -2000,7 +2013,7 @@ public class QueryMethods {
         }
         return borrowedBooks;
     }
-
+    // TODO: Refactor till findBorrowedBooksByBookId(int bookId)
     public Books findBorrowedBookById(int id) {
         con = MyConnection.getConnection();
 

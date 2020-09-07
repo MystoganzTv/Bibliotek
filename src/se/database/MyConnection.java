@@ -29,7 +29,7 @@ public class MyConnection {
 
         Class.forName("com.mysql.jdbc.Driver");
 
-        String url = "jdbc:mysql://localhost/libsys?autoReconnect=true&useSSL=false";
+        String url = "jdbc:mysql://localhost/library?autoReconnect=true&useSSL=false";
         myDbConn = DriverManager.getConnection(url, "root", "root");
          return myDbConn;
         
