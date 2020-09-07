@@ -191,7 +191,7 @@ public class UserView extends javax.swing.JFrame {
         
         // books
         ArrayList<BorrowedBooks> borrowedBooks = qm.getAllBorrowedBooks();
-        ArrayList<Books> allBooks = qm.findBooks();
+        ArrayList<Books> allBooks = qm.getAllBooks();
         ArrayList<BorrowedBooks> borrowedBooksByCardId = new ArrayList<>();
         ArrayList<Books> borrowedBooksByCardIdInfo = new ArrayList<>();
         
@@ -235,7 +235,7 @@ public class UserView extends javax.swing.JFrame {
 
         // ebooks
         ArrayList<BorrowEBooks> borrowedEBooks = qm.getAllBorrowedEBooks();
-        ArrayList<E_Books> allEBooks = qm.findEBooks();
+        ArrayList<E_Books> allEBooks = qm.getAllEBooks();
         ArrayList<BorrowEBooks> borrowedEBooksByCardId = new ArrayList<>();
         ArrayList<E_Books> borrowedEBooksByCardIdInfo = new ArrayList<>();
         for (int i = 0; i < borrowedEBooks.size(); i++) {
@@ -1066,9 +1066,9 @@ public class UserView extends javax.swing.JFrame {
 
             jPanelInvisible.setVisible(true);
 
-            for (int i = 0; i < qm.findBooks().size(); i++) {
-                if (qm.findBooks().get(i).getIsbn().trim().equals(bookIsbn)) {
-                    jLabelAboutBook.setText("<html>" + qm.findBooks().get(i).getDesc() + "</html>");
+            for (int i = 0; i < qm.getAllBooks().size(); i++) {
+                if (qm.getAllBooks().get(i).getIsbn().trim().equals(bookIsbn)) {
+                    jLabelAboutBook.setText("<html>" + qm.getAllBooks().get(i).getDesc() + "</html>");
                 }
             }
 
@@ -1160,9 +1160,9 @@ public class UserView extends javax.swing.JFrame {
 
             String bookIsbn = model.getValueAt(jtableMyBorrowings.getSelectedRow(), 2).toString().trim();
 
-            for (int i = 0; i < qm.findEBooks().size(); i++) {
-                if (qm.findEBooks().get(i).getIsbn().trim().equals(bookIsbn)) {
-                    id = qm.findEBooks().get(i).getId();
+            for (int i = 0; i < qm.getAllEBooks().size(); i++) {
+                if (qm.getAllEBooks().get(i).getIsbn().trim().equals(bookIsbn)) {
+                    id = qm.getAllEBooks().get(i).getId();
 
                     if (bookType.equals("E-Bok")) {
                         DisplayEbook displayebook = new DisplayEbook(id, guestEmail);
