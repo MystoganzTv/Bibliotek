@@ -963,7 +963,7 @@ public class UserView extends javax.swing.JFrame {
         try {
             bookIdList = qm.findBooksByIsbn(bookIsbn);
             eBookId = qm.findEBookByField("Isbn", bookIsbn).getId();
-
+            
         } catch (Exception e) {
         }
 
