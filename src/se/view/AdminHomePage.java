@@ -78,8 +78,8 @@ public class AdminHomePage extends javax.swing.JFrame {
         setResizable(false);
         queryMethods = new QueryMethods();
         guests = qMethods.findGuests();
-        books = qMethods.findBooks();
-        eBooks = qMethods.findEBooks();
+        books = qMethods.getAllBooks();
+        eBooks = qMethods.getAllEBooks();
 
         jTabbedPaneEdit.setVisible(false);
         jTabbedPaneReport.setVisible(false);
@@ -168,8 +168,8 @@ public class AdminHomePage extends javax.swing.JFrame {
        
        public void fillBooks_EBooksTable() {
         //ArrayList<Books> books = qMethods.findBooks();
-        books = queryMethods.findBooks();
-        eBooks = queryMethods.findEBooks();
+        books = queryMethods.getAllBooks();
+        eBooks = queryMethods.getAllEBooks();
         String bookType = "Bok";
         String ebookType = "E-bok";
         DefaultTableModel model = new DefaultTableModel(colNamesSort, 0);       
@@ -1457,7 +1457,14 @@ public class AdminHomePage extends javax.swing.JFrame {
                     int reply = JOptionPane.showConfirmDialog(this,"Vill du verkligen ta bort " + g.getFirstName() + " " + g.getLastName());
                     
                     if(reply == JOptionPane.YES_OPTION){
-                    queryMethods.deleteGuest(g);
+                       
+                    if(queryMethods.deleteGuest(g)){
+                         JOptionPane.showMessageDialog(this, g.getFirstName() + " Är nu borttagen!");
+                    
+                    }else{
+                         JOptionPane.showMessageDialog(this, " Du kan inte ta bort medlemmen pga lånade böcker vänligen kontrollera");
+                    }
+                    
                     }
 
                 }
@@ -1620,7 +1627,7 @@ public class AdminHomePage extends javax.swing.JFrame {
         eBooks = qMethods.getAllEBooks();
         String searchWord = jTextFieldSearchStock.getText().toLowerCase();
         String bookIsAvailable = "";
-        List<Books> books = qMethods.findBooks();
+        List<Books> books = qMethods.getAllBooks();
 
 
         ArrayList<Integer> borrowedBooksId = new ArrayList<>();

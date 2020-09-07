@@ -227,7 +227,7 @@ public class QueryMethodsTest {
         System.out.println("findEBooks");
         QueryMethods instance = new QueryMethods();
         ArrayList<E_Books> expResult = null;
-        ArrayList<E_Books> result = instance.findEBooks();
+        ArrayList<E_Books> result = instance.getAllEBooks();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

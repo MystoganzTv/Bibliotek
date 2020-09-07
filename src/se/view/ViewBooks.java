@@ -569,9 +569,9 @@ public class ViewBooks extends javax.swing.JFrame {
 
             jPanelInvisible.setVisible(true);
 
-            for (int i = 0 ; i < queryMethods.findBooks().size() ; i++){
-                if(queryMethods.findBooks().get(i).getIsbn().trim().equals(bookIsbn)){
-                    jLabelAboutBook.setText("<html>"+queryMethods.findBooks().get(i).getDesc()+"</html>");
+            for (int i = 0 ; i < queryMethods.getAllBooks().size() ; i++){
+                if(queryMethods.getAllBooks().get(i).getIsbn().trim().equals(bookIsbn)){
+                    jLabelAboutBook.setText("<html>"+queryMethods.getAllBooks().get(i).getDesc()+"</html>");
                 }
             }
 

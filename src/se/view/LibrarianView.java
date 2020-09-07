@@ -58,8 +58,8 @@ public class LibrarianView extends javax.swing.JFrame {
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 
         queryMethods = new QueryMethods();
-        books = qMethods.findBooks();
-        eBooks = qMethods.findEBooks();
+        books = qMethods.getAllBooks();
+        eBooks = qMethods.getAllEBooks();
 
         fillBooksTable();
         fillUsersTable();
@@ -83,8 +83,8 @@ public class LibrarianView extends javax.swing.JFrame {
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 
         queryMethods = new QueryMethods();
-        books = qMethods.findBooks();
-        eBooks = qMethods.findEBooks();
+        books = qMethods.getAllBooks();
+        eBooks = qMethods.getAllEBooks();
 
         fillBooksTable();
         fillUsersTable();
@@ -118,7 +118,7 @@ public class LibrarianView extends javax.swing.JFrame {
 
     public void fillBooksTable() {
         //ArrayList<Books> books = qMethods.findBooks();
-        books = queryMethods.findBooks();
+        books = queryMethods.getAllBooks();
         DefaultTableModel model = new DefaultTableModel(colNames, 0);
         //model = (DefaultTableModel) BooksTable.getModel();
         model.setRowCount(0);
