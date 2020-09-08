@@ -1810,11 +1810,12 @@ public class QueryMethods {
         }
         return borrowedBooks;
     }
-    // TODO: Refactor till findBorrowedBooksByBookId(int bookId)
-    public Books findBorrowedBookById(int id) {
+    
+    public Books findBorrowedBookByBookId(int bookId) {
         con = MyConnection.getConnection();
 
-        String query = "SELECT book_id, title, author  FROM borrowed_books INNER JOIN books ON borrowed_books.book_id = books.id WHERE book_id =" + id;
+        String query = "SELECT book_id, title, author  FROM borrowed_books INNER "
+                + "JOIN books ON borrowed_books.book_id = books.id WHERE book_id =" + bookId;
         Books book = new Books();
         try {
             Statement statement = con.createStatement();
