@@ -746,7 +746,7 @@ public class QueryMethodsTest {
     }
 
     /**
-     * Test of findBorrowedBookById method, of class QueryMethods.
+     * Test of findBorrowedBookByBookId method, of class QueryMethods.
      */
     @Test
     public void testFindBorrowedBookById() {
@@ -754,7 +754,7 @@ public class QueryMethodsTest {
         int id = 0;
         QueryMethods instance = new QueryMethods();
         Books expResult = null;
-        Books result = instance.findBorrowedBookById(id);
+        Books result = instance.findBorrowedBookByBookId(id);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

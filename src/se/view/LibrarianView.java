@@ -917,7 +917,7 @@ public class LibrarianView extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         if (Validation.isValidID(bookIdTextField.getText().trim())) {
-            Books book = queryMethods.findBorrowedBookById(Integer.parseInt(bookIdTextField.getText().trim()));
+            Books book = queryMethods.findBorrowedBookByBookId(Integer.parseInt(bookIdTextField.getText().trim()));
             if (book.getId() != -1) {
                 returnBooksListModel.addElement(book);
                 bookIdTextField.setText("");
