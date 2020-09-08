@@ -170,6 +170,11 @@ public class NewUserView extends javax.swing.JFrame {
         Savebtn.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         Savebtn.setText("Spara");
         Savebtn.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(142, 198, 197)));
+        Savebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SavebtnActionPerformed(evt);
+            }
+        });
 
         passwordField.setText("jPasswordField1");
 
@@ -307,6 +312,11 @@ public class NewUserView extends javax.swing.JFrame {
         } else {
             queryMethods.insertGuest(firstName, lastName, PN, password, email);
         }
+        
+        StartPage sp = new StartPage();
+        sp.setVisible(true);
+        this.setVisible(false);
+        
     }//GEN-LAST:event_SavebtnActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked

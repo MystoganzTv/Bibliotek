@@ -1669,7 +1669,7 @@ public class AdminHomePage extends javax.swing.JFrame {
     //TODO: Doubbel kolla om det funkar
     private void jLabelSearchBookingsIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSearchBookingsIconMouseClicked
         ArrayList<Seminar> seminar = new ArrayList<>();
-        ArrayList<Integer> seminarId = new ArrayList<>();
+        ArrayList<Seminar> foundSeminar = new ArrayList<>();
         seminar = qMethods.findSeminar();
         String searchWord = jTextFieldSearchBooking.getText().toLowerCase();
         
@@ -1678,22 +1678,17 @@ public class AdminHomePage extends javax.swing.JFrame {
         model.setColumnCount(4);
 
         seminar.stream().filter((b) -> b.getTitle().toLowerCase().contains(searchWord) || b.getSpeaker().toLowerCase().equals(searchWord)
-                || b.getLocation().equals(searchWord));
+                || b.getLocation().equals(searchWord)).forEach(foundSeminar::add);
         
-        for (int i = 0; i < qMethods.findSeminar().size(); i++) {
-            seminarId.add(qMethods.getAllBorrowedBooks().get(i).getBookId());
-        }
+        if (!foundSeminar.isEmpty()) {
 
-        if (!seminar.isEmpty()) {
+            for (int i = 0; i < foundSeminar.size(); i++) {
 
-            for (int i = 0; i < seminar.size(); i++) {
-
-                model.addRow(new Object[]{seminar.get(i).getId(),seminar.get(i).getTitle(), seminar.get(i).getSpeaker(),
-                    seminar.get(i).getLocation()});
+                model.addRow(new Object[]{foundSeminar.get(i).getId(),foundSeminar.get(i).getTitle(), foundSeminar.get(i).getSpeaker(),
+                    foundSeminar.get(i).getLocation()});
             }
 
             BookingsTable.setModel(model);
-            jTextFieldSearchBooking.setText("");
         } else {
             JOptionPane.showMessageDialog(this, "Ingen seminar matchade din sökning");
         }
