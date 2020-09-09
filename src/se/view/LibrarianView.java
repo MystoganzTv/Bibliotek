@@ -892,7 +892,9 @@ public class LibrarianView extends javax.swing.JFrame {
     private void addBookToReturnListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBookToReturnListButtonActionPerformed
 
         if (Validation.isValidID(bookIdTextField.getText().trim())) {
+
             Books book = qMethods.findBorrowedBookById(Integer.parseInt(bookIdTextField.getText().trim()));
+
             if (book.getId() != -1) {
                 returnBooksListModel.addElement(book);
                 bookIdTextField.setText("");

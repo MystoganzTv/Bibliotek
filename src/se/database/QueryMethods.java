@@ -607,7 +607,7 @@ public class QueryMethods {
 
         return null;
     }
-    // fundera på ett annat metodnamn
+    // TODO: fundera på ett annat metodnamn
     public String loginChecker(String user, String username, String password) {
         String exist = " select email, password from " + user + " where email = '" + username + "'"
                 + "and password = '" + password + "';";
@@ -856,9 +856,7 @@ public class QueryMethods {
         con = MyConnection.getConnection();
 
         try {
-            System.out.println("Creating statement");
             Statement stmt = con.createStatement();
-            System.out.println("Executing query");
             stmt.execute("INSERT INTO books(title, author, isbn, publisher, purchase_price, category, placement, description)"
                     + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
                     + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getPlacement() + "', '" + b.getDesc() + "')");
@@ -914,15 +912,11 @@ public class QueryMethods {
 
     }
     
-    // TODO: kontrollera om system out behövs
     public void addEBook(E_Books b) {
 
         MyConnection tryConnect = new MyConnection();
         con = MyConnection.getConnection();
 
-        System.out.println("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category, descript) "
-                + " VALUES('" + b.getTitle() + "', '" + b.getAuthor() + "', '" + b.getIsbn() + "', '"
-                + b.getPublisher() + "', " + b.getPurchase_price() + ", '" + b.getCategory() + "', '" + b.getDesc() + "')");
         try {
             Statement stmt = con.createStatement();
             stmt.execute("INSERT INTO e_books(title, author, isbn, publisher, purchase_price, category, descript) "
@@ -1147,7 +1141,6 @@ public class QueryMethods {
     }
 
     public void createLibraryCard(int guestId) {
-        System.out.println(guestId);
         con = MyConnection.getConnection();
         try {
             PreparedStatement ps = con.prepareStatement("INSERT INTO librarycards(guests_id) VALUES(?)");
@@ -1580,7 +1573,6 @@ public class QueryMethods {
             Statement stmt = con.createStatement();
 
             stmt.execute("DELETE FROM borrowed_books WHERE book_id = " + bookId + "");
-            System.out.println("Book Removed from borrowed_books");
 
             stmt.close();
         } catch (Exception e) {
@@ -1818,11 +1810,12 @@ public class QueryMethods {
         }
         return borrowedBooks;
     }
-    // TODO: Refactor till findBorrowedBooksByBookId(int bookId)
-    public Books findBorrowedBookById(int id) {
+    
+    public Books findBorrowedBookByBookId(int bookId) {
         con = MyConnection.getConnection();
 
-        String query = "SELECT book_id, title, author  FROM borrowed_books INNER JOIN books ON borrowed_books.book_id = books.id WHERE book_id =" + id;
+        String query = "SELECT book_id, title, author  FROM borrowed_books INNER "
+                + "JOIN books ON borrowed_books.book_id = books.id WHERE book_id =" + bookId;
         Books book = new Books();
         try {
             Statement statement = con.createStatement();
