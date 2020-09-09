@@ -257,7 +257,7 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     public void fillE_BookLogTable() {
         deletedEBook = qMethods.findDeletedEBooks();
-        String[] colname = {"id", "Titel", "Förfatare", "ISBN", "Inköpspris", "Förlag", "Anlädning"};
+        String[] colname = {"id", "Titel", "Förfatare", "ISBN", "Inköpspris", "Förlag", "Anledning"};
         DefaultTableModel defaultModel = new DefaultTableModel(colname, 0);
 
         defaultModel.setRowCount(0);
@@ -1705,10 +1705,8 @@ public class AdminHomePage extends javax.swing.JFrame {
 
     private void jComboBoxTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxTypeItemStateChanged
         if (jComboBoxType.getSelectedItem().toString().equals("Book")) {
-            System.out.println("Book received");
             fillBookLogTable();
         } else {
-            System.out.println("Ebook received");
             fillE_BookLogTable();
         }
     }//GEN-LAST:event_jComboBoxTypeItemStateChanged
