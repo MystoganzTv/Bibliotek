@@ -30,3 +30,4 @@
 /dist/
 .DS_Store
 !/test/
+src/se/database/MyConnection.java

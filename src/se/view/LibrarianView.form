@@ -231,7 +231,7 @@
                                       <Group type="102" attributes="0">
                                           <Component id="jbtnShowBorrowedBooks" min="-2" pref="141" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="jbtnVisaLånekort" min="-2" pref="141" max="-2" attributes="0"/>
+                                          <Component id="jbtnShowAllCard" min="-2" pref="141" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                                           <Component id="jbtnManageCards" min="-2" pref="141" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
@@ -264,7 +264,7 @@
                                       <Component id="jbtnManageCards" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                                       <Component id="jbtnRestore" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                                       <Component id="jbtnBlockedCards" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                                      <Component id="jbtnVisaLånekort" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                                      <Component id="jbtnShowAllCard" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                               </Group>
@@ -406,7 +406,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnRestoreActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jbtnVisaL&#xe5;nekort">
+                <Component class="javax.swing.JButton" name="jbtnShowAllCard">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f4" green="f4" red="f4" type="rgb"/>
@@ -414,7 +414,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Verdana" size="12" style="0"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Visa L&#xe5;nekort"/>
+                    <Property name="text" type="java.lang.String" value="Visa alla L&#xe5;nekort"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
                         <MatteColorBorder>
@@ -424,7 +424,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnVisaL&#xe5;nekortActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnShowAllCardActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -456,7 +456,7 @@
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="jLabelSearchLendingText" min="-2" pref="25" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="Bookstxt" max="32767" attributes="0"/>
+                                          <Component id="Booktxt" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -473,7 +473,7 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabelSearchBooksIcon" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="Bookstxt" alignment="1" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="Booktxt" alignment="1" min="-2" pref="24" max="-2" attributes="0"/>
                               <Component id="jLabelSearchLendingText" alignment="1" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -504,7 +504,7 @@
                     <Property name="text" type="java.lang.String" value="S&#xf6;k"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="Bookstxt">
+                <Component class="javax.swing.JTextField" name="Booktxt">
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelSearchBooksIcon">
                   <Properties>
