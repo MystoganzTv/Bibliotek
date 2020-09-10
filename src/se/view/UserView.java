@@ -80,9 +80,9 @@ public class UserView extends javax.swing.JFrame {
 
     public String guestFullName() {
         String guestFullName = "";
-        int guestId = qm.findLibrarycardByEmail(this.guestEmail).getId();
+        Guest guest = qm.findGuestByMail(this.guestEmail);
         for (int i = 0; i < qm.getAllCards().size(); i++) {
-            if (qm.getAllCards().get(i).getGuestId() == guestId) {
+            if (qm.getAllCards().get(i).getGuestId() == guest.getId()) {
                 guestFullName = qm.getAllCards().get(i).getFullname();
             }
         }

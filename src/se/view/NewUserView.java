@@ -8,6 +8,7 @@ package se.view;
 import javax.swing.JOptionPane;
 import se.database.QueryMethods;
 import se.main.Validation;
+import se.model.Guest;
 
 /**
  *
@@ -310,7 +311,10 @@ public class NewUserView extends javax.swing.JFrame {
         } else if (!Validation.isValidEmail(email)) {
             JOptionPane.showMessageDialog(this, "Felaktig inmatning för email");
         } else {
-            queryMethods.insertGuest(firstName, lastName, PN, password, email);         
+            queryMethods.insertGuest(firstName, lastName, PN, password, email);
+            Guest guest = queryMethods.findGuestByMail(email);
+            int guestId = guest.getId();
+            queryMethods.createLibraryCard(guestId);
             StartPage sp = new StartPage();
             sp.setVisible(true);
             this.setVisible(false);
