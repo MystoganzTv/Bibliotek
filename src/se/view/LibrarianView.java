@@ -1028,7 +1028,7 @@ public class LibrarianView extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        SeminarView sv = new SeminarView(librarianEmail);
+        AddSeminar sv = new AddSeminar(librarianEmail);
         sv.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed

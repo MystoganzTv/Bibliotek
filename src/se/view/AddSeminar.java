@@ -9,14 +9,13 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import se.database.QueryMethods;
-import se.model.Librarian;
 import se.model.Seminar;
 
 /**
  *
  * @author enrique & simon
  */
-public class SeminarView extends javax.swing.JFrame {
+public class AddSeminar extends javax.swing.JFrame {
 
     /**
      * Creates new form SeminariumView
@@ -26,7 +25,7 @@ public class SeminarView extends javax.swing.JFrame {
     private String email;
     private ArrayList<Seminar> seminar;
 
-    public SeminarView(String email) {
+    public AddSeminar(String email) {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
@@ -34,7 +33,7 @@ public class SeminarView extends javax.swing.JFrame {
         this.email = email;
     }
 
-    public SeminarView() {
+    public AddSeminar() {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
@@ -226,11 +225,6 @@ public class SeminarView extends javax.swing.JFrame {
         });
 
         txtDate.setToolTipText("MM-DD");
-        txtDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDateActionPerformed(evt);
-            }
-        });
 
         txtMaxGuests.setToolTipText("");
         txtMaxGuests.addActionListener(new java.awt.event.ActionListener() {
@@ -481,16 +475,12 @@ public class SeminarView extends javax.swing.JFrame {
             return;
         }
 
-        QueryMethods qMethods = new QueryMethods();
+        qMethods = new QueryMethods();
         Seminar seminar = new Seminar(name, speaker, location, sDate, maxGuests, desc, program);
         qMethods.addSeminar(seminar);
         clearInputFields();
         fillSeminarTable();
     }//GEN-LAST:event_jbtnAddActionPerformed
-
-    private void txtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDateActionPerformed
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
         StartPage sp = new StartPage();
@@ -538,20 +528,21 @@ public class SeminarView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SeminarView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddSeminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SeminarView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddSeminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SeminarView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddSeminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SeminarView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddSeminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SeminarView().setVisible(true);
+                new AddSeminar().setVisible(true);
             }
         });
     }
