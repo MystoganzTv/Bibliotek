@@ -310,13 +310,11 @@ public class NewUserView extends javax.swing.JFrame {
         } else if (!Validation.isValidEmail(email)) {
             JOptionPane.showMessageDialog(this, "Felaktig inmatning för email");
         } else {
-            queryMethods.insertGuest(firstName, lastName, PN, password, email);
-        }
-        
-        StartPage sp = new StartPage();
-        sp.setVisible(true);
-        this.setVisible(false);
-        
+            queryMethods.insertGuest(firstName, lastName, PN, password, email);         
+            StartPage sp = new StartPage();
+            sp.setVisible(true);
+            this.setVisible(false);
+        }  
     }//GEN-LAST:event_SavebtnActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
