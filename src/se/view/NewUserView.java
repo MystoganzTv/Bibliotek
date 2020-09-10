@@ -298,7 +298,7 @@ public class NewUserView extends javax.swing.JFrame {
 
         if(queryMethods.isEmailTaken(email)){
             JOptionPane.showMessageDialog(this, "Upptagen Email");
-        }
+        } 
         else if (!Validation.isValidName(firstName)) {
             JOptionPane.showMessageDialog(this, "Felaktig inmatning för förnamn");
         } else if (!Validation.isValidName(lastName)) {
