@@ -723,7 +723,7 @@ public class QueryMethodsTest {
     @Test
     public void testBookSeminar() {
         System.out.println("bookSeminar");
-        Guest g = new Guest();
+        LibraryCards g = new LibraryCards();
         g.setId(1);
         Seminar s = new Seminar();
         s.setId(2);
