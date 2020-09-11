@@ -5,11 +5,6 @@
  */
 package se.main;
 
-import java.util.ArrayList;
-import java.util.List;
-import se.database.QueryMethods;
-import se.model.Books;
-import se.model.E_Books;
 import se.view.StartPage;
 
 /**
