@@ -5,6 +5,7 @@
  */
 package Services;
 
+import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -12,6 +13,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.mockito.Mockito;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import se.database.QueryMethods;
 
 /**
@@ -20,7 +23,8 @@ import se.database.QueryMethods;
  */
 public class JDBCDatabaseServiceImpIT {
     
-    DatabaseService mock = Mockito.mock(DatabaseService.class);
+    DatabaseService databaseServiceMock = Mockito.mock(DatabaseService.class);
+    JDBCDatabaseServiceImp databaseServiceImp = new JDBCDatabaseServiceImp(databaseServiceMock);
     
     public JDBCDatabaseServiceImpIT() {
     }
@@ -44,7 +48,17 @@ public class JDBCDatabaseServiceImpIT {
     @Test
     public void testSomeMethod() {
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    }
+    
+    @Test
+    public void testIsPersonNumberTaken(){
+        String personNumber = "200501155434";
+        
+        when(databaseServiceMock.isPersonNumberTaken(personNumber)).thenReturn(true);
+        
+        boolean actual = databaseServiceImp.isPersonNumberTaken(personNumber);
+        
+        assertTrue(actual);
     }
     
 }

@@ -5,6 +5,7 @@
  */
 package Services;
 
+import java.util.ArrayList;
 import java.util.List;
 import se.database.QueryMethods;
 import se.model.Books;
@@ -16,11 +17,23 @@ import se.model.Books;
 public class JDBCDatabaseServiceImp implements DatabaseService{
 
     QueryMethods queryMethods = new QueryMethods();
+    
+    private DatabaseService databaseService;
+    
+    public JDBCDatabaseServiceImp(DatabaseService databaseDervice){
+        this.databaseService = databaseService;
+    }
+    
     @Override
     public boolean isPersonNumberTaken(String personalNumber) {
       return  queryMethods.isPersonNumberTaken(personalNumber);     
     }
 
+    @Override
+    public ArrayList<String> getAllAdminPersonIds() {
+        return queryMethods.getAllAdminPersonIds();
+    }
+    
     @Override
     public List<Books> getAllBooks() {
         return queryMethods.getAllBooks();

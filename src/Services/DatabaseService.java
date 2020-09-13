@@ -5,6 +5,7 @@
  */
 package Services;
 
+import java.util.ArrayList;
 import java.util.List;
 import se.model.Books;
 
@@ -15,6 +16,7 @@ import se.model.Books;
 public interface DatabaseService {
     
     boolean isPersonNumberTaken(String personalNumber);
+    ArrayList<String> getAllAdminPersonIds();
     List<Books> getAllBooks();
     
 }
