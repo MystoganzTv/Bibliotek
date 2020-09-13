@@ -11,12 +11,16 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.mockito.Mockito;
+import se.database.QueryMethods;
 
 /**
  *
  * @author danny
  */
 public class JDBCDatabaseServiceImpIT {
+    
+    DatabaseService mock = Mockito.mock(DatabaseService.class);
     
     public JDBCDatabaseServiceImpIT() {
     }
