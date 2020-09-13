@@ -52,7 +52,7 @@ public class QueryMethods {
 
         
         ArrayList<String> personIDs = new ArrayList<>();
-        personIDs.addAll(getAllAdminIds());
+        personIDs.addAll(getAllAdminPersonIds());
         personIDs.addAll(getAllLibrariansIds());
 
         personIDs.addAll(getAllGuestsIds());
@@ -61,7 +61,7 @@ public class QueryMethods {
     }
     
 
-    public ArrayList<String> getAllAdminIds() {
+    public ArrayList<String> getAllAdminPersonIds() {
 
         String adminsIds = "SELECT person_id FROM admins";
         con = MyConnection.getConnection();
