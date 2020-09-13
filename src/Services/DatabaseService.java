@@ -5,10 +5,16 @@
  */
 package Services;
 
+import java.util.List;
+import se.model.Books;
+
 /**
  *
  * @author danny
  */
-public class DatabaseService {
+public interface DatabaseService {
+    
+    boolean isPersonNumberTaken(String personalNumber);
+    List<Books> getAllBooks();
     
 }
