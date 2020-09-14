@@ -15,6 +15,8 @@ import static org.junit.Assert.*;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import se.model.DeletedBook;
 
 /**
  *
@@ -75,4 +77,57 @@ public class JDBCDatabaseServiceImpIT {
         
     }
     
+    @Test
+    public void testGetAllLibrariansIds(){
+        ArrayList<String> value = new ArrayList<>();
+        value.add("");
+        value.add("XXXXXXXXXXXX");
+        
+        when(databaseServiceMock.getAllLibrariansIds()).thenReturn(value);
+            
+        ArrayList<String> actual = databaseServiceImp.getAllLibrariansIds();
+        
+        assertEquals(value, actual);
+        
+    }
+            
+    @Test
+    public void testGetAllGuestsIds(){
+        ArrayList<String> value = new ArrayList<>();
+        value.add("");
+        value.add("XXXXXXXXXXXX");
+        
+        when(databaseServiceMock.getAllGuestsIds()).thenReturn(value);
+            
+        ArrayList<String> actual = databaseServiceImp.getAllGuestsIds();
+        
+        assertEquals(value, actual);
+        
+    }
+            
+    @Test
+    public void testIsEmailTaken(){
+        String email = "alfons.bolt@libsys.se";
+        
+        when(databaseServiceMock.isEmailTaken(email)).thenReturn(true);
+        
+        boolean actual = databaseServiceImp.isEmailTaken(email);
+        
+        assertTrue(actual);
+        
+    }
+    /*
+    @Test
+    public void testfindDeletedBooks(){
+        ArrayList<DeletedBook> value = new ArrayList<>();
+        value.add(0, e);
+        value.add(DeletedBook);
+        
+        when(databaseServiceMock.findDeletedBooks()).thenReturn(value);
+            
+        ArrayList<DeletedBook> actual = databaseServiceImp.findDeletedBooks();
+        
+        assertEquals(value, actual);
+        
+    }*/
 }

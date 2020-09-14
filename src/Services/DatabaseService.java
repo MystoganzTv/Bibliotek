@@ -8,6 +8,7 @@ package Services;
 import java.util.ArrayList;
 import java.util.List;
 import se.model.Books;
+import se.model.DeletedBook;
 
 /**
  *
@@ -18,5 +19,9 @@ public interface DatabaseService {
     boolean isPersonNumberTaken(String personalNumber);
     ArrayList<String> getAllAdminPersonIds();
     List<Books> getAllBooks();
-    
+    ArrayList<String>getAllLibrariansIds();
+    ArrayList<String>getAllGuestsIds();
+    boolean isEmailTaken(String email);
+    ArrayList<DeletedBook>findDeletedBooks();
+
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import se.database.QueryMethods;
 import se.model.Books;
+import se.model.DeletedBook;
 
 /**
  *
@@ -35,8 +36,27 @@ public class JDBCDatabaseServiceImp implements DatabaseService{
     }
     
     @Override
+    public ArrayList<String> getAllLibrariansIds() {
+        return queryMethods.getAllLibrariansIds();
+    }
+    
+    @Override
+    public ArrayList<String> getAllGuestsIds() {
+        return queryMethods.getAllGuestsIds();
+    }
+    
+    @Override
     public List<Books> getAllBooks() {
         return queryMethods.getAllBooks();
     }
     
+    @Override
+    public boolean isEmailTaken(String email) {
+      return  queryMethods.isEmailTaken(email);     
+    }
+            
+    @Override
+    public ArrayList<DeletedBook> findDeletedBooks() {
+        return queryMethods.findDeletedBooks();
+    }
 }
