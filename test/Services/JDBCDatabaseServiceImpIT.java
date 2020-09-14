@@ -15,7 +15,6 @@ import static org.junit.Assert.*;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import se.database.QueryMethods;
 
 /**
  *
@@ -59,6 +58,21 @@ public class JDBCDatabaseServiceImpIT {
         boolean actual = databaseServiceImp.isPersonNumberTaken(personNumber);
         
         assertTrue(actual);
+        
+    }
+    
+    @Test
+    public void testGetAllAdminPersonIds(){
+        ArrayList<String> value = new ArrayList<>();
+        value.add("");
+        value.add("XXXXXXXXXXXX");
+        
+        when(databaseServiceMock.getAllAdminPersonIds()).thenReturn(value);
+            
+        ArrayList<String> actual = databaseServiceImp.getAllAdminPersonIds();
+        
+        assertEquals(value, actual);
+        
     }
     
 }
