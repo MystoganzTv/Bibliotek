@@ -1836,7 +1836,7 @@ public class QueryMethods {
         return book;
     }
 
-    public ArrayList<String> readBook(int idEbook) throws FileNotFoundException, IOException, SQLException {
+    public ArrayList<String> readBook(int idEbook)  {
         InputStream input = null;
         String read = "";
         ArrayList<String> book = new ArrayList<String>();
