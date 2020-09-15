@@ -7,8 +7,18 @@ package Services;
 
 import java.util.ArrayList;
 import java.util.List;
+import se.model.Admin;
+import se.model.Booking;
 import se.model.Books;
+import se.model.BorrowEBooks;
+import se.model.BorrowedBooks;
+import se.model.Category;
 import se.model.DeletedBook;
+import se.model.E_Books;
+import se.model.Guest;
+import se.model.Librarian;
+import se.model.LibraryCards;
+import se.model.Seminar;
 
 /**
  *
@@ -23,5 +33,46 @@ public interface DatabaseService {
     ArrayList<String>getAllGuestsIds();
     boolean isEmailTaken(String email);
     ArrayList<DeletedBook>findDeletedBooks();
+    ArrayList<DeletedBook>findDeletedEboks();
+    ArrayList<Admin> findAdmins();
+    ArrayList<Librarian> findLibrarians();
+    Guest findGuestByMail(String email);
+    ArrayList<Guest> findGuests();
+    ArrayList<Category> findCategories();
+    String loginChecker(String user, String username, String password);
+    boolean deleteGuest(Guest guest);
+    void deleteAdmin(Admin admin);
+    void deleteLibrarian(Librarian librarian);
+    void addBook(Books b);
+    void deleteBook(Books b, String notes);
+    void addEBook(E_Books b);
+    void deleteE_Book(E_Books b);
+    ArrayList<LibraryCards> blockedCards();
+    ArrayList<LibraryCards> getBlockedCards();
+    int getLibaryCardIdByGuestId(int guestId);
+    ArrayList<LibraryCards> getAllCards();
+    ArrayList<LibraryCards> getGuestsLibraryCardsByGuestList(ArrayList<Guest> guests);
+    void createLibraryCard(int guestId);
+    void updateLibraryCards(int entry, int userId, String category);
+    ArrayList<Books> findBooksByField(String field, String input);
+    ArrayList<Books> findBooksByIsbn(String isbn);
+    E_Books findEBookByField(String field, String input);
+     ArrayList<DeletedBook> getRemovedBooks();
+     void borrowBooks(int bookId, int libraryCardId);
+     void borrowEBooks(int eBookId, int libraryCardId);
+     LibraryCards findLibrarycardByEmail(String guestEmail);
+      ArrayList<BorrowedBooks> getAllBorrowedBooks();
+      ArrayList<BorrowEBooks> getAllBorrowedEBooks();
+      ArrayList<Books> getBorrowedBooksByCardId(int libraryCardId);
+      void returnBook(int bookId);
+      ArrayList<Seminar> findSeminar();
+      Seminar findSeminarByTitle(String title);
+      void addSeminar(Seminar seminar);
+      void bookSeminar(LibraryCards g, Seminar s);
+      void cancelSeminarReservation(Guest g, String title);
+      ArrayList<Books> groupAllBooksByIsbn();
+      Books findBorrowedBookByBookId(int bookId);
+      ArrayList<String> readBook(int idEbook);
+      ArrayList<Booking> getAllBookedSeminars();
 
 }
