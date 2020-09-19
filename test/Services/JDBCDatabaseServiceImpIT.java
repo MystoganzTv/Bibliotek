@@ -116,18 +116,29 @@ public class JDBCDatabaseServiceImpIT {
         assertTrue(actual);
         
     }
-    /*
+    
     @Test
     public void testfindDeletedBooks(){
-        ArrayList<DeletedBook> value = new ArrayList<>();
-        value.add(0, e);
-        value.add(DeletedBook);
-        
-        when(databaseServiceMock.findDeletedBooks()).thenReturn(value);
-            
+        ArrayList<DeletedBook> value = new ArrayList<DeletedBook>();
         ArrayList<DeletedBook> actual = databaseServiceImp.findDeletedBooks();
         
-        assertEquals(value, actual);
+        value.add(new DeletedBook(5, "The talented Mr. Ripley", "Patricia Highsmith", "Book",
+                "123414123123",400, 
+              "Kriminalroman", "Coward-McCann (United States)", 
+           "", "försavnn"));
+        when(databaseServiceMock.findDeletedBooks()).thenReturn(databaseServiceImp.findDeletedBooks());
         
-    }*/
+        assertEquals(value.get(0).getIsbn(), actual.get(1).getIsbn());
+        
+    }
+    
+    @Test
+    public void testLoginChecker(){
+        String value = "johan.viktor@libsys.se";
+        String actual = databaseServiceImp.loginChecker("admins", "johan.viktor@libsys.se", "1234");
+        
+        when(databaseServiceMock.loginChecker(value, actual, actual)).
+                thenReturn(databaseServiceImp.loginChecker(value, actual, actual));
+        assertEquals(value, actual);
+    }
 }
