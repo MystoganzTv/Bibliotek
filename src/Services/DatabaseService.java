@@ -30,6 +30,7 @@ public interface DatabaseService {
     //Anna Add
     //Tadevos update
     //Erik Librarycards
+    //Danny Books
     
     boolean isPersonNumberTaken(String personalNumber);//färdig
     ArrayList<String> getAllAdminPersonIds();//färdig
