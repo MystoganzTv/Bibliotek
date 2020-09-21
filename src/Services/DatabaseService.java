@@ -34,7 +34,7 @@ public interface DatabaseService {
     
     boolean isPersonNumberTaken(String personalNumber);//färdig
     ArrayList<String> getAllAdminPersonIds();//färdig
-    List<Books> getAllBooks();
+    List<Books> getAllBooks();// färdigt testat
     ArrayList<String>getAllLibrariansIds();//färdig
     ArrayList<String>getAllGuestsIds();//färdig
     boolean isEmailTaken(String email);//färdig
