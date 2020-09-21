@@ -60,8 +60,8 @@ public interface DatabaseService {
     ArrayList<LibraryCards> getGuestsLibraryCardsByGuestList(ArrayList<Guest> guests);
     void createLibraryCard(int guestId);
     void updateLibraryCards(int entry, int userId, String category);
-    ArrayList<Books> findBooksByField(String field, String input);
-    ArrayList<Books> findBooksByIsbn(String isbn);
+    ArrayList<Books> findBooksByField(String field, String input);// oanvänd metod
+    ArrayList<Books> findBooksByIsbn(String isbn);// färdig
     E_Books findEBookByField(String field, String input);
      ArrayList<DeletedBook> getRemovedBooks();
      void borrowBooks(int bookId, int libraryCardId);

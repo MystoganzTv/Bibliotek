@@ -1174,7 +1174,7 @@ public class QueryMethods {
         }
 
     }
-
+    // oanvänd metod
     //returning Arraylist of books, might be empty if no match!
     public ArrayList<Books> findBooksByField(String field, String input) {
 
