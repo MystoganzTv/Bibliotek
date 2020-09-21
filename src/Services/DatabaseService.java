@@ -26,20 +26,25 @@ import se.model.Seminar;
  */
 public interface DatabaseService {
     
-    boolean isPersonNumberTaken(String personalNumber);
-    ArrayList<String> getAllAdminPersonIds();
+    //Enrique Delete
+    //Anna Add
+    //Tadevos update
+    //Erik Librarycards
+    
+    boolean isPersonNumberTaken(String personalNumber);//färdig
+    ArrayList<String> getAllAdminPersonIds();//färdig
     List<Books> getAllBooks();
-    ArrayList<String>getAllLibrariansIds();
-    ArrayList<String>getAllGuestsIds();
-    boolean isEmailTaken(String email);
-    ArrayList<DeletedBook>findDeletedBooks();
+    ArrayList<String>getAllLibrariansIds();//färdig
+    ArrayList<String>getAllGuestsIds();//färdig
+    boolean isEmailTaken(String email);//färdig
+    ArrayList<DeletedBook>findDeletedBooks();//färdig
     ArrayList<DeletedBook>findDeletedEboks();
     ArrayList<Admin> findAdmins();
     ArrayList<Librarian> findLibrarians();
     Guest findGuestByMail(String email);
     ArrayList<Guest> findGuests();
     ArrayList<Category> findCategories();
-    String loginChecker(String user, String username, String password);
+    String loginChecker(String user, String username, String password);//färdig
     boolean deleteGuest(Guest guest);
     void deleteAdmin(Admin admin);
     void deleteLibrarian(Librarian librarian);
