@@ -138,9 +138,7 @@ public class JDBCDatabaseServiceImpIT {
     public void testLoginChecker(){
         String value = "johan.viktor@libsys.se";
         String actual = databaseServiceImp.loginChecker("admins", "johan.viktor@libsys.se", "1234");
-        
-        when(databaseServiceMock.loginChecker(value, actual, actual)).
-                thenReturn(databaseServiceImp.loginChecker(value, actual, actual));
+
         assertEquals(value, actual);
     }
     
@@ -150,12 +148,28 @@ public class JDBCDatabaseServiceImpIT {
         List<Books> actual = databaseServiceImp.getAllBooks();
         
         value.add(new Books(5, "The talented Mr. Ripley", "Patricia Highsmith",
-               "123414123123", "Coward-McCann (United States)", 400,"Kriminalroman", "GF4", "The Talented Mr. Ripley (1999) In late 1950s"
+               "123414123123", "Coward-McCann (United States)", 400,"Kriminalroman", "GF4",
+                "The Talented Mr. Ripley (1999) In late 1950s"
                 + "New York, Tom Ripley, a young underachiever, is sent to Italy to retrieve Dickie "
                 + "  Greenleaf, a rich and spoiled millionaire playboy " 
                 + " But when the errand fails, Ripley takes extreme measures"));
         when(databaseServiceMock.getAllBooks()).thenReturn(databaseServiceImp.getAllBooks());
         
         assertEquals(value.get(0).getIsbn(), actual.get(3).getIsbn());
+    }
+    
+    @Test
+    public void testFindBooksByIsbn(){
+        List<Books> value = new ArrayList<>();
+        List<Books> actual = databaseServiceImp.findBooksByIsbn("123414123123");
+        
+        value.add(new Books(5, "The talented Mr. Ripley", "Patricia Highsmith",
+               "123414123123", "Coward-McCann (United States)", 400,"Kriminalroman", "GF4",
+                "The Talented Mr. Ripley (1999) In late 1950s"
+                + "New York, Tom Ripley, a young underachiever, is sent to Italy to retrieve Dickie "
+                + "  Greenleaf, a rich and spoiled millionaire playboy " 
+                + " But when the errand fails, Ripley takes extreme measures"));
+           
+        assertEquals(value.get(0).getAuthor(), actual.get(0).getAuthor());
     }
 }
