@@ -6,6 +6,7 @@
 package Services;
 
 import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,6 +17,7 @@ import org.mockito.Mockito;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.*;
+import se.model.Books;
 import se.model.DeletedBook;
 
 /**
@@ -140,5 +142,20 @@ public class JDBCDatabaseServiceImpIT {
         when(databaseServiceMock.loginChecker(value, actual, actual)).
                 thenReturn(databaseServiceImp.loginChecker(value, actual, actual));
         assertEquals(value, actual);
+    }
+    
+    @Test
+    public void testGetAllBooks(){
+        List<Books> value = new ArrayList<>();
+        List<Books> actual = databaseServiceImp.getAllBooks();
+        
+        value.add(new Books(5, "The talented Mr. Ripley", "Patricia Highsmith",
+               "123414123123", "Coward-McCann (United States)", 400,"Kriminalroman", "GF4", "The Talented Mr. Ripley (1999) In late 1950s"
+                + "New York, Tom Ripley, a young underachiever, is sent to Italy to retrieve Dickie "
+                + "  Greenleaf, a rich and spoiled millionaire playboy " 
+                + " But when the errand fails, Ripley takes extreme measures"));
+        when(databaseServiceMock.getAllBooks()).thenReturn(databaseServiceImp.getAllBooks());
+        
+        assertEquals(value.get(0).getIsbn(), actual.get(3).getIsbn());
     }
 }
