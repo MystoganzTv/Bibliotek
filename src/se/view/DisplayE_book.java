@@ -44,7 +44,6 @@ public class DisplayE_book extends javax.swing.JFrame {
         this.guestEmail = guestEmail;
         textArea.setEditable(false);
         
-        try {
             
             ArrayList <String> readbook = new ArrayList<>(queryMethods.readBook(idEbook));
             for(String readBook : readbook){
@@ -54,11 +53,7 @@ public class DisplayE_book extends javax.swing.JFrame {
             }
             textArea.append(stringbuilder.toString());
             
-        } catch (IOException ex) {
-            Logger.getLogger(DisplayE_book.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(DisplayE_book.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
         
     }
     /**
