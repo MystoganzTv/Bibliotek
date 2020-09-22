@@ -63,22 +63,22 @@ public interface DatabaseService {
     ArrayList<Books> findBooksByField(String field, String input);// oanvänd metod
     ArrayList<Books> findBooksByIsbn(String isbn);// färdig
     E_Books findEBookByField(String field, String input);
-     ArrayList<DeletedBook> getRemovedBooks();
-     void borrowBooks(int bookId, int libraryCardId);
-     void borrowEBooks(int eBookId, int libraryCardId);
-     LibraryCards findLibrarycardByEmail(String guestEmail);
-      ArrayList<BorrowedBooks> getAllBorrowedBooks();
-      ArrayList<BorrowEBooks> getAllBorrowedEBooks();
-      ArrayList<Books> getBorrowedBooksByCardId(int libraryCardId);
-      void returnBook(int bookId);
-      ArrayList<Seminar> findSeminar();
-      Seminar findSeminarByTitle(String title);
-      void addSeminar(Seminar seminar);
-      void bookSeminar(LibraryCards g, Seminar s);
-      void cancelSeminarReservation(Guest g, String title);
-      ArrayList<Books> groupAllBooksByIsbn();
-      Books findBorrowedBookByBookId(int bookId);
-      ArrayList<String> readBook(int idEbook);
-      ArrayList<Booking> getAllBookedSeminars();
+    ArrayList<DeletedBook> getRemovedBooks();
+    void borrowBooks(int bookId, int libraryCardId);
+    void borrowEBooks(int eBookId, int libraryCardId);
+    LibraryCards findLibrarycardByEmail(String guestEmail);
+    ArrayList<BorrowedBooks> getAllBorrowedBooks();
+    ArrayList<BorrowEBooks> getAllBorrowedEBooks();
+    ArrayList<Books> getBorrowedBooksByCardId(int libraryCardId);//färdig
+    void returnBook(int bookId);
+    ArrayList<Seminar> findSeminar();
+    Seminar findSeminarByTitle(String title);
+    void addSeminar(Seminar seminar);
+    void bookSeminar(LibraryCards g, Seminar s);
+    void cancelSeminarReservation(Guest g, String title);
+    ArrayList<Books> groupAllBooksByIsbn();
+    Books findBorrowedBookByBookId(int bookId);
+    ArrayList<String> readBook(int idEbook);
+    ArrayList<Booking> getAllBookedSeminars();
 
 }
