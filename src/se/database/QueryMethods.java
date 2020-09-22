@@ -89,7 +89,7 @@ public class QueryMethods {
     }
     
     
-      public ArrayList<String> getAllLibrariansIds() {
+        public ArrayList<String> getAllLibrariansIds() {
         String adminsIds = "SELECT person_id FROM librarians";
         con = MyConnection.getConnection();
         ArrayList<String> librariansIds = new ArrayList<>();

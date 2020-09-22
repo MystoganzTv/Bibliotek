@@ -172,4 +172,20 @@ public class JDBCDatabaseServiceImpIT {
            
         assertEquals(value.get(0).getAuthor(), actual.get(0).getAuthor());
     }
+    
+    @Test
+    public void testGetBorrowedBooksByCardId(){
+        List<Books> value = new ArrayList<>();
+        List<Books> actual = databaseServiceImp.getBorrowedBooksByCardId(2);
+        
+         value.add(new Books(3, "Le Malade Imaginaire", "Moliere",
+               "9788853607881", "Raben & Sjögren", 300,"Klassiker", "HD3",
+                "Le Malade imaginaire est la dernière \n" +
+                " comédie écrite par Molière. Argan, le « malade imaginaire », est veuf, \n" +
+                " il s'est remarié avec Béline qui simule des soins attentifs, mais\n" +
+                "  n'attend en réalité que la mort de son mari pour pouvoir hérite"));
+           
+        assertEquals(value.get(0).getAuthor(), actual.get(0).getAuthor());
+    }
+    
 }
