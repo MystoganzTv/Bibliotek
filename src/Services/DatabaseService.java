@@ -51,9 +51,9 @@ public interface DatabaseService {
     void deleteAdmin(Admin admin); //färdig på Andreas Sätt
     void deleteLibrarian(Librarian librarian);//färdig på Andreas Sätt
     void addBook(Books b);
-    void deleteBook(Books b, String notes);
+    void deleteBook(Books b, String notes);//färdig på Andreas Sätt
     void addEBook(E_Books b);
-    void deleteE_Book(E_Books b);
+    void deleteE_Book(E_Books b);//färdig på Andreas Sätt
     ArrayList<LibraryCards> blockedCards();
     ArrayList<LibraryCards> getBlockedCards();
     int getLibaryCardIdByGuestId(int guestId);

@@ -232,7 +232,12 @@ public class JDBCDatabaseServiceImpIT {
         verify(qm, times(1)).deleteBook(book,"PEPE");
     
     }
+        public void deleteE_Book(){
     
+        E_Books e_book = new E_Books();
+        databaseServiceImp.deleteE_Book(e_book);
+        verify(qm, times(1)).deleteE_Book(e_book);
+    }
     @Test
     public void findEBookByField(){
         
