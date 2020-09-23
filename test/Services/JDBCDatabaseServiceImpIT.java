@@ -27,8 +27,14 @@ import se.model.Category;
 import se.model.DeletedBook;
 import se.model.E_Books;
 import se.model.Guest;
-import se.model.Librarian;
 import se.model.LibraryCards;
+import se.model.Librarian;
+
+import se.model.LibraryCards;
+
+import se.model.Seminar;
+
+
 
 /**
  *
@@ -189,6 +195,14 @@ public class JDBCDatabaseServiceImpIT {
     }
     
     @Test
+    public void addEBook() {
+        
+        E_Books b = new E_Books();
+        databaseServiceImp.addEBook(b);
+        verify(qm, times(1)).addBook(any());
+    }
+    
+    @Test
     public void findGuestByMail() {
         
         Guest guest = new Guest();
@@ -255,7 +269,14 @@ public class JDBCDatabaseServiceImpIT {
         verify(qm, times(1)).deleteBook(book,"PEPE");
     
     }
+
+        public void deleteE_Book(){
     
+        E_Books e_book = new E_Books();
+        databaseServiceImp.deleteE_Book(e_book);
+        verify(qm, times(1)).deleteE_Book(e_book);
+    }
+
     @Test
     public void findEBookByField(){
         
@@ -267,6 +288,18 @@ public class JDBCDatabaseServiceImpIT {
         assertEquals(eb.getId(), e_book.getId());
         verify(qm, times(1)).findEBookByField(anyString(), anyString());
         
+    }
+    @Test
+    public void  findSeminarByTitle(){
+        
+        Seminar seminar = new Seminar();
+        seminar.setId(2);
+        
+        when(qm.findSeminarByTitle(anyString())).thenReturn(seminar);
+        Seminar sm = databaseServiceImp.findSeminarByTitle(anyString());
+        assertEquals(sm.getId(), seminar.getId());
+        verify(qm, times(1)).findSeminarByTitle(anyString());
+    
     }
     @Test
     public void findAdmins(){
@@ -359,6 +392,29 @@ public class JDBCDatabaseServiceImpIT {
                 "  n'attend en réalité que la mort de son mari pour pouvoir hérite"));
            
         assertEquals(value.get(0).getAuthor(), actual.get(0).getAuthor());
+    }
+    @Test
+    public void getAllCards(){
+        ArrayList<LibraryCards> libraryCards = new ArrayList<LibraryCards>();
+        libraryCards.add(new LibraryCards(1,1,"test","test",1));
+        libraryCards.add(new LibraryCards(2,1,"test","test",0));
+        when(qm.getAllCards()).thenReturn(libraryCards);
+        ArrayList<LibraryCards> retrieveList = databaseServiceImp.getAllCards();
+        assertEquals(libraryCards.size(), retrieveList.size());
+        assertEquals(1, retrieveList.get(0).getId());
+         verify(qm, times(1)).getAllCards();
+        
+        
+    }
+    @Test
+    public void getGuestsLibraryCardsByGuestList(){
+        ArrayList<Guest> guests = new ArrayList<Guest>();
+        ArrayList<LibraryCards> librarycards = new ArrayList<LibraryCards>();
+        guests.add(new Guest(1,"erik","ringbolm","1998050555","test","test"));
+        librarycards.add(new LibraryCards(1,1,"test","test",1));
+        when(qm.getGuestsLibraryCardsByGuestList(guests)).thenReturn(librarycards);
+        assertEquals(guests.get(0).getId(), librarycards.get(0).getGuestId());
+      
     }
     
 }
