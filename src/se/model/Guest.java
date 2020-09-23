@@ -44,6 +44,10 @@ public class Guest {
        
     }
 
+    public Guest(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
