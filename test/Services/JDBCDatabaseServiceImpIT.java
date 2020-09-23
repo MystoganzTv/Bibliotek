@@ -28,6 +28,7 @@ import se.model.DeletedBook;
 import se.model.E_Books;
 import se.model.Guest;
 import se.model.Librarian;
+import se.model.Seminar;
 
 /**
  *
@@ -245,6 +246,18 @@ public class JDBCDatabaseServiceImpIT {
         assertEquals(eb.getId(), e_book.getId());
         verify(qm, times(1)).findEBookByField(anyString(), anyString());
         
+    }
+    @Test
+    public void  findSeminarByTitle(){
+        
+        Seminar seminar = new Seminar();
+        seminar.setId(2);
+        
+        when(qm.findSeminarByTitle(anyString())).thenReturn(seminar);
+        Seminar sm = databaseServiceImp.findSeminarByTitle(anyString());
+        assertEquals(sm.getId(), seminar.getId());
+        verify(qm, times(1)).findSeminarByTitle(anyString());
+    
     }
     @Test
     public void findAdmins(){
