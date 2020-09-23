@@ -29,7 +29,11 @@ import se.model.E_Books;
 import se.model.Guest;
 import se.model.LibraryCards;
 import se.model.Librarian;
+
+import se.model.LibraryCards;
+
 import se.model.Seminar;
+
 
 
 /**
@@ -211,6 +215,19 @@ public class JDBCDatabaseServiceImpIT {
     }
     
     @Test
+    public void getBlockedCards() {
+        
+        ArrayList<LibraryCards> blockedTest = new ArrayList<LibraryCards>();
+        blockedTest.add(new LibraryCards(1, 1, "asd", "asd", 1));
+        blockedTest.add(new LibraryCards(2, 2, "asd", "asd", 1));
+        when(qm.getBlockedCards()).thenReturn(blockedTest);
+        ArrayList<LibraryCards> retrieveList = databaseServiceImp.getBlockedCards();
+        assertEquals(blockedTest.size(), retrieveList.size());
+        assertEquals(1, retrieveList.get(0).getEntry());
+        verify(qm, times(1)).getBlockedCards();
+    }
+    
+    @Test
     public void findGuests() {
         
         ArrayList<Guest> guestTest = new ArrayList<Guest>();
@@ -252,12 +269,14 @@ public class JDBCDatabaseServiceImpIT {
         verify(qm, times(1)).deleteBook(book,"PEPE");
     
     }
+
         public void deleteE_Book(){
     
         E_Books e_book = new E_Books();
         databaseServiceImp.deleteE_Book(e_book);
         verify(qm, times(1)).deleteE_Book(e_book);
     }
+
     @Test
     public void findEBookByField(){
         
