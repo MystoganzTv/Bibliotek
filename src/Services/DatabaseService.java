@@ -80,6 +80,6 @@ public interface DatabaseService {
     ArrayList<Books> groupAllBooksByIsbn();
     Books findBorrowedBookByBookId(int bookId);
     ArrayList<String> readBook(int idEbook);
-    ArrayList<Booking> getAllBookedSeminars();//färdig
+    ArrayList<Booking> getAllBookedSeminars();//färdig på Andreas Sätt
     int insertGuest(String firstName, String lastName, String socialNumber, String password, String email);//färdig på Andreas Sätt
 }
