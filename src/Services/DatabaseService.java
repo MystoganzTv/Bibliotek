@@ -56,7 +56,7 @@ public interface DatabaseService {
     ArrayList<LibraryCards> blockedCards();
     ArrayList<LibraryCards> getBlockedCards();
     int getLibaryCardIdByGuestId(int guestId);
-    ArrayList<LibraryCards> getAllCards();
+    ArrayList<LibraryCards> getAllCards();//färdig på andreas sätt
     ArrayList<LibraryCards> getGuestsLibraryCardsByGuestList(ArrayList<Guest> guests);
     void createLibraryCard(int guestId);
     void updateLibraryCards(int entry, int userId, String category);
