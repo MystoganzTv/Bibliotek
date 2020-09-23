@@ -26,6 +26,8 @@ public class Seminar {
     private String seminariumDescription;
     
     private String programDescription;
+    
+    
 
     public Seminar(int id, String title, String Speaker, String location, String startDate, int countVisitor, String seminariumDescription, String programDescription) {
         this.id = id;
@@ -36,7 +38,10 @@ public class Seminar {
         this.countVisitor = countVisitor;
         this.seminariumDescription = seminariumDescription;
         this.programDescription = programDescription;
+        
     }
+
+   
 
     public Seminar(String title, String speaker, String location, String startDate, int countVisitor, String seminariumDescription, String programDescription) {
         this.title = title;
@@ -46,6 +51,9 @@ public class Seminar {
         this.countVisitor = countVisitor;
         this.seminariumDescription = seminariumDescription;
         this.programDescription = programDescription;
+    }
+     public Seminar(int id) {
+        this.id = id;
     }
 
     public Seminar() {

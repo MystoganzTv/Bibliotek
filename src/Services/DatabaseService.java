@@ -73,7 +73,7 @@ public interface DatabaseService {
     ArrayList<Books> getBorrowedBooksByCardId(int libraryCardId);//färdig
     void returnBook(int bookId);
     ArrayList<Seminar> findSeminar();
-    Seminar findSeminarByTitle(String title);
+    Seminar findSeminarByTitle(String title);//färdig på Andreas Sätt
     void addSeminar(Seminar seminar);
     void bookSeminar(LibraryCards g, Seminar s);
     void cancelSeminarReservation(Guest g, String title);
