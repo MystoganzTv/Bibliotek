@@ -52,9 +52,9 @@ public interface DatabaseService {
     void deleteLibrarian(Librarian librarian);//färdig på Andreas Sätt
     void addBook(Books b); //färdig på Andreas Sätt
     void deleteBook(Books b, String notes); // färdig på Andreas Sätt
-    void addEBook(E_Books b);
-    void deleteE_Book(E_Books b);
-    ArrayList<LibraryCards> blockedCards();//färdig på andreas sätt
+    void addEBook(E_Books b);// färdig på Andreas Sätt
+    void deleteE_Book(E_Books b);//färdig på Andreas Sätt
+    ArrayList<LibraryCards> blockedCards();
     ArrayList<LibraryCards> getBlockedCards();
     int getLibaryCardIdByGuestId(int guestId);//färdig på andreas sätt
     ArrayList<LibraryCards> getAllCards();//färdig på andreas sätt
@@ -80,6 +80,6 @@ public interface DatabaseService {
     ArrayList<Books> groupAllBooksByIsbn();
     Books findBorrowedBookByBookId(int bookId);
     ArrayList<String> readBook(int idEbook);
-    ArrayList<Booking> getAllBookedSeminars();//färdig
+    ArrayList<Booking> getAllBookedSeminars();//färdig på Andreas Sätt
     int insertGuest(String firstName, String lastName, String socialNumber, String password, String email);//färdig på Andreas Sätt
 }
