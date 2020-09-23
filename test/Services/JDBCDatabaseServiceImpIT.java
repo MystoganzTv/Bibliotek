@@ -283,6 +283,18 @@ public class JDBCDatabaseServiceImpIT {
     
     }
     @Test
+    public void findSeminar(){
+        ArrayList<Seminar> seminarTest = new ArrayList<Seminar>();
+        seminarTest.add(new Seminar(1));
+        when(qm.findSeminar()).thenReturn(seminarTest);
+        ArrayList<Seminar> retrieveList = databaseServiceImp.findSeminar();
+        assertEquals(seminarTest.size(), retrieveList.size());
+        assertEquals(1, retrieveList.get(0).getId());
+        verify(qm, times(1)).findSeminar();
+        
+        
+    }
+    @Test
     public void findAdmins(){
         ArrayList<Admin> adminTest = new ArrayList<Admin>();
         adminTest.add(new Admin(1));
