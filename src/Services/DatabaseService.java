@@ -57,7 +57,7 @@ public interface DatabaseService {
     ArrayList<LibraryCards> blockedCards();
     ArrayList<LibraryCards> getBlockedCards();
     int getLibaryCardIdByGuestId(int guestId);
-    ArrayList<LibraryCards> getAllCards();
+    ArrayList<LibraryCards> getAllCards();//färdig på andreas sätt
     ArrayList<LibraryCards> getGuestsLibraryCardsByGuestList(ArrayList<Guest> guests);
     void createLibraryCard(int guestId);
     void updateLibraryCards(int entry, int userId, String category); //färdig på Andreas Sätt
@@ -80,6 +80,6 @@ public interface DatabaseService {
     ArrayList<Books> groupAllBooksByIsbn();
     Books findBorrowedBookByBookId(int bookId);
     ArrayList<String> readBook(int idEbook);
-    ArrayList<Booking> getAllBookedSeminars();
+    ArrayList<Booking> getAllBookedSeminars();//färdig
     int insertGuest(String firstName, String lastName, String socialNumber, String password, String email);//färdig på Andreas Sätt
 }
