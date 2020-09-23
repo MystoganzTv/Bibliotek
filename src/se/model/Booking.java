@@ -19,6 +19,10 @@ public class Booking {
         this.libraryCardId = libraryCardId;
         this.id = id;
     }
+
+    public Booking(int i) {
+        this.id = i;
+    }
     
     
     
