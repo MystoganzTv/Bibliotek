@@ -40,7 +40,7 @@ public interface DatabaseService {
     boolean isEmailTaken(String email);//färdig
     ArrayList<DeletedBook>findDeletedBooks();//färdig
     ArrayList<DeletedBook>findDeletedEboks();
-    ArrayList<Admin> findAdmins();
+    ArrayList<Admin> findAdmins();    //färdig på Andreas Sätt
     ArrayList<Librarian> findLibrarians();
     Guest findGuestByMail(String email);
     ArrayList<Guest> findGuests();

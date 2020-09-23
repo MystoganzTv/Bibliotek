@@ -20,6 +20,7 @@ import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
 import se.database.QueryMethods;
 import se.database.QueryMethodsTest;
+import se.model.Admin;
 import se.model.Books;
 import se.model.DeletedBook;
 import se.model.E_Books;
@@ -31,9 +32,7 @@ import se.model.Guest;
  */
 public class JDBCDatabaseServiceImpIT {
     
-// Kommentera bort mocks för att testa på Andreas sätt. 
-
-    
+// Kommentera bort mocks för att testa på Andreas sätt.    
 //    DatabaseService databaseServiceMock = Mockito.mock(DatabaseService.class);
 //    JDBCDatabaseServiceImp databaseServiceImp = new JDBCDatabaseServiceImp(databaseServiceMock);
 
@@ -143,7 +142,7 @@ public class JDBCDatabaseServiceImpIT {
     public void insertGuest(){
          
         when(qm.insertGuest(anyString(),anyString() , anyString(), anyString(), anyString())).thenReturn(2);
-        int returnInt = qm.insertGuest(anyString(), anyString(),anyString(), anyString(), anyString());
+        int returnInt = databaseServiceImp.insertGuest(anyString(), anyString(),anyString(), anyString(), anyString());
         assertEquals(2, returnInt);
         verify(qm, times(1)).insertGuest(anyString(), anyString(),anyString(), anyString(), anyString());
     }
@@ -160,6 +159,17 @@ public class JDBCDatabaseServiceImpIT {
         assertEquals(eb.getId(), e_book.getId());
         verify(qm, times(1)).findEBookByField(anyString(), anyString());
         
+    }
+    @Test
+    public void findAdmins(){
+        ArrayList<Admin> adminTest = new ArrayList<Admin>();
+        adminTest.add(new Admin(1));
+        adminTest.add(new Admin(2));
+        when(qm.findAdmins()).thenReturn(adminTest);
+        ArrayList<Admin> retrieveList = databaseServiceImp.findAdmins();
+        assertEquals(adminTest.size(), retrieveList.size());
+        assertEquals(1, retrieveList.get(0).getId());
+        verify(qm, times(1)).findAdmins();
     }
     
     @Test
