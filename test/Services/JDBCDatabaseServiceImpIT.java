@@ -174,6 +174,15 @@ public class JDBCDatabaseServiceImpIT {
     }
     
     @Test
+    public void deleteBook(){
+    
+        Books book = new Books();
+        databaseServiceImp.deleteBook(book,"PEPE");
+        verify(qm, times(1)).deleteBook(book,"PEPE");
+    
+    }
+    
+    @Test
     public void findEBookByField(){
         
         E_Books e_book = new E_Books();
