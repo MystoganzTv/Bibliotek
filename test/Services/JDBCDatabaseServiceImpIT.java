@@ -21,11 +21,15 @@ import org.mockito.MockitoAnnotations;
 import se.database.QueryMethods;
 import se.database.QueryMethodsTest;
 import se.model.Admin;
+import se.model.Booking;
 import se.model.Books;
+import se.model.Category;
 import se.model.DeletedBook;
 import se.model.E_Books;
 import se.model.Guest;
 import se.model.LibraryCards;
+import se.model.Librarian;
+
 
 /**
  *
@@ -148,6 +152,89 @@ public class JDBCDatabaseServiceImpIT {
         verify(qm, times(1)).insertGuest(anyString(), anyString(),anyString(), anyString(), anyString());
     }
     
+    @Test
+    public void updateLibraryCards(){
+        
+        databaseServiceImp.updateLibraryCards(anyInt(), anyInt(), anyString());
+        verify(qm, times(1)).updateLibraryCards(anyInt(), anyInt(), anyString());
+        
+    }
+    
+    @Test
+    public void deleteAdmin(){
+        
+        Admin admin1 = new Admin();
+        databaseServiceImp.deleteAdmin(admin1);
+        verify(qm, times(1)).deleteAdmin(any());
+    }
+    
+    @Test
+    public void findLibrarians() {
+        
+        ArrayList<Librarian> librarianTest = new ArrayList<Librarian>();
+        librarianTest.add(new Librarian(1));
+        librarianTest.add(new Librarian(2));
+        when(qm.findLibrarians()).thenReturn(librarianTest);
+        ArrayList<Librarian> retrieveList = databaseServiceImp.findLibrarians();
+        assertEquals(librarianTest.size(), retrieveList.size());
+        assertEquals(1, retrieveList.get(0).getId());
+        verify(qm, times(1)).findLibrarians();
+    }
+    
+    @Test
+    public void findGuestByMail() {
+        
+        Guest guest = new Guest();
+        guest.setEmail("email@mail.com");
+        
+        when(qm.findGuestByMail(anyString())).thenReturn(guest);
+        Guest g = databaseServiceImp.findGuestByMail(anyString());
+        assertEquals(g.getId(), guest.getId());
+        verify(qm, times(1)).findGuestByMail(anyString());
+    }
+    
+    @Test
+    public void findGuests() {
+        
+        ArrayList<Guest> guestTest = new ArrayList<Guest>();
+        guestTest.add(new Guest(1));
+        guestTest.add(new Guest(2));
+        when(qm.findGuests()).thenReturn(guestTest);
+        ArrayList<Guest> retrieveList = databaseServiceImp.findGuests();
+        assertEquals(guestTest.size(), retrieveList.size());
+        assertEquals(1, retrieveList.get(0).getId());
+        verify(qm, times(1)).findGuests();
+    }
+    
+    @Test
+    public void findCategories() {
+        
+        ArrayList<Category> categoryTest = new ArrayList<Category>();
+        categoryTest.add(new Category("matte"));
+        categoryTest.add(new Category("fysik"));
+        when(qm.findCategories()).thenReturn(categoryTest);
+        ArrayList<Category> retrieveList = databaseServiceImp.findCategories();
+        assertEquals(categoryTest.size(), retrieveList.size());
+        assertEquals("matte", retrieveList.get(0).getCategory());
+        verify(qm, times(1)).findCategories();
+    }
+    
+    @Test
+    public void deleteLibrarian(){
+        
+        Librarian lb = new Librarian();
+        databaseServiceImp.deleteLibrarian(lb);
+        verify(qm, times(1)).deleteLibrarian(any());
+    }
+    
+    @Test
+    public void deleteBook(){
+    
+        Books book = new Books();
+        databaseServiceImp.deleteBook(book,"PEPE");
+        verify(qm, times(1)).deleteBook(book,"PEPE");
+    
+    }
     
     @Test
     public void findEBookByField(){
@@ -171,6 +258,18 @@ public class JDBCDatabaseServiceImpIT {
         assertEquals(adminTest.size(), retrieveList.size());
         assertEquals(1, retrieveList.get(0).getId());
         verify(qm, times(1)).findAdmins();
+    }
+    @Test
+    public void getAllBookedSeminars(){
+        ArrayList<Booking> bookingTest = new ArrayList<Booking>();
+        bookingTest.add(new Booking(1));
+        when(qm.getAllBookedSeminars()).thenReturn(bookingTest);
+        ArrayList<Booking>retrieveList = databaseServiceImp.getAllBookedSeminars();
+        assertEquals(bookingTest.size(), retrieveList.size());
+        assertEquals(1, retrieveList.get(0).getId());
+        verify(qm, times(1)).getAllBookedSeminars();
+
+    
     }
     
     @Test

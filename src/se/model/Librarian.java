@@ -33,6 +33,14 @@ public class Librarian {
                
     }
 
+    public Librarian() {
+
+    }
+
+    public Librarian(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
