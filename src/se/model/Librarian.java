@@ -33,6 +33,10 @@ public class Librarian {
                
     }
 
+    public Librarian() {
+
+    }
+
     public int getId() {
         return id;
     }

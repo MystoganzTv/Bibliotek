@@ -31,6 +31,7 @@ public interface DatabaseService {
     //Tadevos update
     //Erik Librarycards
     //Danny Books
+    //Simon Resten
     
     boolean isPersonNumberTaken(String personalNumber);//färdig
     ArrayList<String> getAllAdminPersonIds();//färdig
@@ -47,8 +48,8 @@ public interface DatabaseService {
     ArrayList<Category> findCategories();
     String loginChecker(String user, String username, String password);//färdig
     boolean deleteGuest(Guest guest);//färdig på Andreas Sätt
-    void deleteAdmin(Admin admin);
-    void deleteLibrarian(Librarian librarian);
+    void deleteAdmin(Admin admin); //färdig på Andreas Sätt
+    void deleteLibrarian(Librarian librarian);//färdig på Andreas Sätt
     void addBook(Books b);
     void deleteBook(Books b, String notes);
     void addEBook(E_Books b);
@@ -59,7 +60,7 @@ public interface DatabaseService {
     ArrayList<LibraryCards> getAllCards();
     ArrayList<LibraryCards> getGuestsLibraryCardsByGuestList(ArrayList<Guest> guests);
     void createLibraryCard(int guestId);
-    void updateLibraryCards(int entry, int userId, String category);
+    void updateLibraryCards(int entry, int userId, String category); //färdig på Andreas Sätt
     ArrayList<Books> findBooksByField(String field, String input);// oanvänd metod
     ArrayList<Books> findBooksByIsbn(String isbn);// färdig
     E_Books findEBookByField(String field, String input);//färdig på Andreas Sätt

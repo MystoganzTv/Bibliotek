@@ -25,6 +25,7 @@ import se.model.Books;
 import se.model.DeletedBook;
 import se.model.E_Books;
 import se.model.Guest;
+import se.model.Librarian;
 
 /**
  *
@@ -147,6 +148,30 @@ public class JDBCDatabaseServiceImpIT {
         verify(qm, times(1)).insertGuest(anyString(), anyString(),anyString(), anyString(), anyString());
     }
     
+    @Test
+    public void updateLibraryCards(){
+        
+        databaseServiceImp.updateLibraryCards(anyInt(), anyInt(), anyString());
+        verify(qm, times(1)).updateLibraryCards(anyInt(), anyInt(), anyString());
+        
+    }
+    
+    @Test
+    public void deleteAdmin(){
+        
+        Admin admin1 = new Admin();
+        databaseServiceImp.deleteAdmin(admin1);
+        verify(qm, times(1)).deleteAdmin(any());
+    }
+    
+        
+    @Test
+    public void deleteLibrarian(){
+        
+        Librarian lb = new Librarian();
+        databaseServiceImp.deleteLibrarian(lb);
+        verify(qm, times(1)).deleteLibrarian(any());
+    }
     
     @Test
     public void findEBookByField(){
