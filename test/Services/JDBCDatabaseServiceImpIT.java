@@ -190,6 +190,14 @@ public class JDBCDatabaseServiceImpIT {
     }
     
     @Test
+    public void addEBook() {
+        
+        E_Books b = new E_Books();
+        databaseServiceImp.addEBook(b);
+        verify(qm, times(1)).addBook(any());
+    }
+    
+    @Test
     public void findGuestByMail() {
         
         Guest guest = new Guest();
