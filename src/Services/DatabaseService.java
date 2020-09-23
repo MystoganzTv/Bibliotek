@@ -43,9 +43,9 @@ public interface DatabaseService {
     ArrayList<DeletedBook>findDeletedEboks();
     ArrayList<Admin> findAdmins();    //färdig på Andreas Sätt
     ArrayList<Librarian> findLibrarians(); // färdig på Andreas Sätt
-    Guest findGuestByMail(String email);
-    ArrayList<Guest> findGuests();
-    ArrayList<Category> findCategories();
+    Guest findGuestByMail(String email); // färdig på Andreas Sätt
+    ArrayList<Guest> findGuests(); // färdig på Andreas Sätt
+    ArrayList<Category> findCategories(); // färdig på Andreas Sätt
     String loginChecker(String user, String username, String password);//färdig
     boolean deleteGuest(Guest guest);//färdig på Andreas Sätt
     void deleteAdmin(Admin admin); //färdig på Andreas Sätt

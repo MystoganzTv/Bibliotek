@@ -22,6 +22,7 @@ import se.database.QueryMethods;
 import se.database.QueryMethodsTest;
 import se.model.Admin;
 import se.model.Books;
+import se.model.Category;
 import se.model.DeletedBook;
 import se.model.E_Books;
 import se.model.Guest;
@@ -175,6 +176,44 @@ public class JDBCDatabaseServiceImpIT {
         assertEquals(librarianTest.size(), retrieveList.size());
         assertEquals(1, retrieveList.get(0).getId());
         verify(qm, times(1)).findLibrarians();
+    }
+    
+    @Test
+    public void findGuestByMail() {
+        
+        Guest guest = new Guest();
+        guest.setEmail("email@mail.com");
+        
+        when(qm.findGuestByMail(anyString())).thenReturn(guest);
+        Guest g = databaseServiceImp.findGuestByMail(anyString());
+        assertEquals(g.getId(), guest.getId());
+        verify(qm, times(1)).findGuestByMail(anyString());
+    }
+    
+    @Test
+    public void findGuests() {
+        
+        ArrayList<Guest> guestTest = new ArrayList<Guest>();
+        guestTest.add(new Guest(1));
+        guestTest.add(new Guest(2));
+        when(qm.findGuests()).thenReturn(guestTest);
+        ArrayList<Guest> retrieveList = databaseServiceImp.findGuests();
+        assertEquals(guestTest.size(), retrieveList.size());
+        assertEquals(1, retrieveList.get(0).getId());
+        verify(qm, times(1)).findGuests();
+    }
+    
+    @Test
+    public void findCategories() {
+        
+        ArrayList<Category> categoryTest = new ArrayList<Category>();
+        categoryTest.add(new Category("matte"));
+        categoryTest.add(new Category("fysik"));
+        when(qm.findCategories()).thenReturn(categoryTest);
+        ArrayList<Category> retrieveList = databaseServiceImp.findCategories();
+        assertEquals(categoryTest.size(), retrieveList.size());
+        assertEquals("matte", retrieveList.get(0).getCategory());
+        verify(qm, times(1)).findCategories();
     }
     
     @Test
