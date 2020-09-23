@@ -164,7 +164,19 @@ public class JDBCDatabaseServiceImpIT {
         verify(qm, times(1)).deleteAdmin(any());
     }
     
+    @Test
+    public void findLibrarians() {
         
+        ArrayList<Librarian> librarianTest = new ArrayList<Librarian>();
+        librarianTest.add(new Librarian(1));
+        librarianTest.add(new Librarian(2));
+        when(qm.findLibrarians()).thenReturn(librarianTest);
+        ArrayList<Librarian> retrieveList = databaseServiceImp.findLibrarians();
+        assertEquals(librarianTest.size(), retrieveList.size());
+        assertEquals(1, retrieveList.get(0).getId());
+        verify(qm, times(1)).findLibrarians();
+    }
+    
     @Test
     public void deleteLibrarian(){
         

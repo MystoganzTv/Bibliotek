@@ -42,7 +42,7 @@ public interface DatabaseService {
     ArrayList<DeletedBook>findDeletedBooks();//färdig
     ArrayList<DeletedBook>findDeletedEboks();
     ArrayList<Admin> findAdmins();    //färdig på Andreas Sätt
-    ArrayList<Librarian> findLibrarians();
+    ArrayList<Librarian> findLibrarians(); // färdig på Andreas Sätt
     Guest findGuestByMail(String email);
     ArrayList<Guest> findGuests();
     ArrayList<Category> findCategories();
