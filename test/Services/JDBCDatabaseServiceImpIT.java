@@ -21,6 +21,7 @@ import org.mockito.MockitoAnnotations;
 import se.database.QueryMethods;
 import se.database.QueryMethodsTest;
 import se.model.Admin;
+import se.model.Booking;
 import se.model.Books;
 import se.model.Category;
 import se.model.DeletedBook;
@@ -233,6 +234,15 @@ public class JDBCDatabaseServiceImpIT {
     }
     
     @Test
+    public void deleteBook(){
+    
+        Books book = new Books();
+        databaseServiceImp.deleteBook(book,"PEPE");
+        verify(qm, times(1)).deleteBook(book,"PEPE");
+    
+    }
+    
+    @Test
     public void findEBookByField(){
         
         E_Books e_book = new E_Books();
@@ -254,6 +264,18 @@ public class JDBCDatabaseServiceImpIT {
         assertEquals(adminTest.size(), retrieveList.size());
         assertEquals(1, retrieveList.get(0).getId());
         verify(qm, times(1)).findAdmins();
+    }
+    @Test
+    public void getAllBookedSeminars(){
+        ArrayList<Booking> bookingTest = new ArrayList<Booking>();
+        bookingTest.add(new Booking(1));
+        when(qm.getAllBookedSeminars()).thenReturn(bookingTest);
+        ArrayList<Booking>retrieveList = databaseServiceImp.getAllBookedSeminars();
+        assertEquals(bookingTest.size(), retrieveList.size());
+        assertEquals(1, retrieveList.get(0).getId());
+        verify(qm, times(1)).getAllBookedSeminars();
+
+    
     }
     
     @Test
