@@ -53,7 +53,7 @@ public interface DatabaseService {
     void addBook(Books b); //färdig på Andreas Sätt
     void deleteBook(Books b, String notes); // färdig på Andreas Sätt
     void addEBook(E_Books b);
-    void deleteE_Book(E_Books b);
+    void deleteE_Book(E_Books b);//färdig på Andreas Sätt
     ArrayList<LibraryCards> blockedCards();
     ArrayList<LibraryCards> getBlockedCards();
     int getLibaryCardIdByGuestId(int guestId);
