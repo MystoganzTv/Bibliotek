@@ -371,5 +371,16 @@ public class JDBCDatabaseServiceImpIT {
         assertEquals(guests.get(0).getId(), librarycards.get(0).getGuestId());
       
     }
+    @Test
+    public void blockedCards(){
+        ArrayList<LibraryCards> libraryCards = new ArrayList<LibraryCards>();
+        libraryCards.add(new LibraryCards(1,1,"test","test",0));
+        libraryCards.add(new LibraryCards(2,2,"test","test",0));
+        when(qm.blockedCards()).thenReturn(libraryCards);
+        ArrayList<LibraryCards> retrieveList = databaseServiceImp.blockedCards();
+        assertEquals(libraryCards.size(), retrieveList.size());
+        assertEquals(1, retrieveList.get(0).getId());
+        verify(qm, times(1)).blockedCards();
+    }
     
 }
