@@ -27,12 +27,12 @@ import se.model.Seminar;
  */
 public class JDBCDatabaseServiceImp implements DatabaseService{
 
-    QueryMethods queryMethods = new QueryMethods();
+    QueryMethods queryMethods;
     
     private DatabaseService databaseService;
     
-    public JDBCDatabaseServiceImp(DatabaseService databaseDervice){
-        this.databaseService = databaseService;
+    public JDBCDatabaseServiceImp(QueryMethods queryMethods){
+          this.queryMethods = queryMethods;
     }
     
     @Override
@@ -275,5 +275,10 @@ public class JDBCDatabaseServiceImp implements DatabaseService{
     @Override
     public ArrayList<Booking> getAllBookedSeminars() {
         return queryMethods.getAllBookedSeminars();
+    }
+
+    @Override
+    public int insertGuest(String firstName, String lastName, String socialNumber, String password, String email) {
+       return queryMethods.insertGuest(firstName, lastName, socialNumber, password, email);
     }
 }

@@ -46,7 +46,7 @@ public interface DatabaseService {
     ArrayList<Guest> findGuests();
     ArrayList<Category> findCategories();
     String loginChecker(String user, String username, String password);//färdig
-    boolean deleteGuest(Guest guest);
+    boolean deleteGuest(Guest guest);//färdig på Andreas Sätt
     void deleteAdmin(Admin admin);
     void deleteLibrarian(Librarian librarian);
     void addBook(Books b);
@@ -62,7 +62,7 @@ public interface DatabaseService {
     void updateLibraryCards(int entry, int userId, String category);
     ArrayList<Books> findBooksByField(String field, String input);// oanvänd metod
     ArrayList<Books> findBooksByIsbn(String isbn);// färdig
-    E_Books findEBookByField(String field, String input);
+    E_Books findEBookByField(String field, String input);//färdig på Andreas Sätt
     ArrayList<DeletedBook> getRemovedBooks();
     void borrowBooks(int bookId, int libraryCardId);
     void borrowEBooks(int eBookId, int libraryCardId);
@@ -80,5 +80,5 @@ public interface DatabaseService {
     Books findBorrowedBookByBookId(int bookId);
     ArrayList<String> readBook(int idEbook);
     ArrayList<Booking> getAllBookedSeminars();
-
+    int insertGuest(String firstName, String lastName, String socialNumber, String password, String email);//färdig på Andreas Sätt
 }

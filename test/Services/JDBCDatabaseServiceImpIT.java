@@ -17,8 +17,13 @@ import org.mockito.Mockito;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.*;
+import org.mockito.MockitoAnnotations;
+import se.database.QueryMethods;
+import se.database.QueryMethodsTest;
 import se.model.Books;
 import se.model.DeletedBook;
+import se.model.E_Books;
+import se.model.Guest;
 
 /**
  *
@@ -26,8 +31,14 @@ import se.model.DeletedBook;
  */
 public class JDBCDatabaseServiceImpIT {
     
-    DatabaseService databaseServiceMock = Mockito.mock(DatabaseService.class);
-    JDBCDatabaseServiceImp databaseServiceImp = new JDBCDatabaseServiceImp(databaseServiceMock);
+// Kommentera bort mocks för att testa på Andreas sätt. 
+
+    
+//    DatabaseService databaseServiceMock = Mockito.mock(DatabaseService.class);
+//    JDBCDatabaseServiceImp databaseServiceImp = new JDBCDatabaseServiceImp(databaseServiceMock);
+
+    JDBCDatabaseServiceImp databaseServiceImp; 
+    QueryMethods qm = Mockito.mock(QueryMethods.class);
     
     public JDBCDatabaseServiceImpIT() {
     }
@@ -42,6 +53,8 @@ public class JDBCDatabaseServiceImpIT {
     
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        databaseServiceImp = new JDBCDatabaseServiceImp(qm);
     }
     
     @After
@@ -110,12 +123,42 @@ public class JDBCDatabaseServiceImpIT {
     @Test
     public void testIsEmailTaken(){
         String email = "alfons.bolt@libsys.se";
-        
         when(databaseServiceMock.isEmailTaken(email)).thenReturn(true);
         
         boolean actual = databaseServiceImp.isEmailTaken(email);
         
         assertTrue(actual);
+        
+    }
+    
+    @Test
+    public void deletedGuest(){
+        
+       Guest guest1 = new Guest();
+       databaseServiceImp.deleteGuest(guest1);
+       verify(qm, times(1)).deleteGuest(any()); 
+    }
+    
+    @Test
+    public void insertGuest(){
+         
+        when(qm.insertGuest(anyString(),anyString() , anyString(), anyString(), anyString())).thenReturn(2);
+        int returnInt = qm.insertGuest(anyString(), anyString(),anyString(), anyString(), anyString());
+        assertEquals(2, returnInt);
+        verify(qm, times(1)).insertGuest(anyString(), anyString(),anyString(), anyString(), anyString());
+    }
+    
+    
+    @Test
+    public void findEBookByField(){
+        
+        E_Books e_book = new E_Books();
+        e_book.setId(54);
+        
+        when(qm.findEBookByField(anyString(),anyString())).thenReturn(e_book);
+        E_Books eb = databaseServiceImp.findEBookByField(anyString(), anyString());
+        assertEquals(eb.getId(), e_book.getId());
+        verify(qm, times(1)).findEBookByField(anyString(), anyString());
         
     }
     

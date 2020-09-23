@@ -718,8 +718,8 @@ public class QueryMethods {
         
         if(borrowedBooks.isEmpty()){
             deleteEmail(guest.getEmail());
-        deleteLibraryCard(guest.getId());
-        deleteGuest(guest.getId());
+            deleteLibraryCard(guest.getId());
+            deleteGuest(guest.getId());
         return true;
         }
        
