@@ -55,7 +55,7 @@ public interface DatabaseService {
     void addEBook(E_Books b);
     void deleteE_Book(E_Books b);
     ArrayList<LibraryCards> blockedCards();
-    ArrayList<LibraryCards> getBlockedCards();
+    ArrayList<LibraryCards> getBlockedCards(); // färdig på Andreas Sätt
     int getLibaryCardIdByGuestId(int guestId);
     ArrayList<LibraryCards> getAllCards();
     ArrayList<LibraryCards> getGuestsLibraryCardsByGuestList(ArrayList<Guest> guests);
