@@ -127,10 +127,24 @@ public class JDBCDatabaseServiceImpIT {
         
         assertEquals(value, actual);
         
-    }
-            
+    } 
+    
     @Test
-    public void testIsEmailTaken(){
+    public void testGetRemovedBooks(){
+        List<DeletedBook> value = new ArrayList<>();
+        List<DeletedBook> actual = databaseServiceImp.getRemovedBooks();
+        value.add(new DeletedBook(5, "The talented Mr. Ripley", "Patricia Highsmith", "Book",
+                "123414123123",400, 
+              "Kriminalroman", "Coward-McCann (United States)", 
+           "", "försavnn"));
+        when(qm.getRemovedBooks()).thenReturn(databaseServiceImp.getRemovedBooks());
+        
+        assertEquals(value.get(0).getIsbn(), actual.get(1).getIsbn());
+        
+    }        
+    
+    @Test
+    public void testGetRemoved(){
         String email = "alfons.bolt@libsys.se";
         when(qm.isEmailTaken(email)).thenReturn(true);
         
@@ -200,8 +214,8 @@ public class JDBCDatabaseServiceImpIT {
         E_Books b = new E_Books();
         databaseServiceImp.addEBook(b);
         verify(qm, times(1)).addBook(any());
-    }
-    
+    }    
+       
     @Test
     public void findGuestByMail() {
         
@@ -346,7 +360,7 @@ public class JDBCDatabaseServiceImpIT {
                 "123414123123",400, 
               "Kriminalroman", "Coward-McCann (United States)", 
            "", "försavnn"));
-        when(databaseServiceMock.findDeletedBooks()).thenReturn(databaseServiceImp.findDeletedBooks());
+        when(qm.findDeletedBooks()).thenReturn(databaseServiceImp.findDeletedBooks());
         
         assertEquals(value.get(0).getIsbn(), actual.get(1).getIsbn());
         
