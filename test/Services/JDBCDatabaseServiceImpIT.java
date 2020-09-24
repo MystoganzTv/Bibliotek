@@ -214,6 +214,14 @@ public class JDBCDatabaseServiceImpIT {
         E_Books b = new E_Books();
         databaseServiceImp.addEBook(b);
         verify(qm, times(1)).addBook(any());
+    } 
+    
+    @Test
+    public void createLibraryCard() {
+        
+        databaseServiceImp.createLibraryCard(anyInt());
+        verify(qm, times(1)).createLibraryCard(1);
+        
     }    
        
     @Test
@@ -235,6 +243,7 @@ public class JDBCDatabaseServiceImpIT {
         databaseServiceImp.addSeminar(seminar);
         verify(qm, times(1)).addSeminar(any());
     }
+    
     @Test
     public void getBlockedCards() {
         

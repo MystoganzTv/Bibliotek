@@ -74,7 +74,7 @@ public interface DatabaseService {
     void returnBook(int bookId);
     ArrayList<Seminar> findSeminar();
     Seminar findSeminarByTitle(String title);//färdig på Andreas Sätt
-    void addSeminar(Seminar seminar);
+    void addSeminar(Seminar seminar);//färdig
     void bookSeminar(LibraryCards g, Seminar s);
     void cancelSeminarReservation(Guest g, String title);
     ArrayList<Books> groupAllBooksByIsbn();
