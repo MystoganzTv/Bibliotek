@@ -64,7 +64,7 @@ public interface DatabaseService {
     ArrayList<Books> findBooksByField(String field, String input);// oanvänd metod
     ArrayList<Books> findBooksByIsbn(String isbn);// färdig
     E_Books findEBookByField(String field, String input);//färdig på Andreas Sätt
-    ArrayList<DeletedBook> getRemovedBooks();
+    ArrayList<DeletedBook> getRemovedBooks();//färdig
     void borrowBooks(int bookId, int libraryCardId);
     void borrowEBooks(int eBookId, int libraryCardId);
     LibraryCards findLibrarycardByEmail(String guestEmail);

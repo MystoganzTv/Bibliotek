@@ -134,8 +134,8 @@ public class JDBCDatabaseServiceImpIT {
         List<DeletedBook> value = new ArrayList<>();
         List<DeletedBook> actual = databaseServiceImp.getRemovedBooks();
         value.add(new DeletedBook(5, "The talented Mr. Ripley", "Patricia Highsmith", "Book",
-                "123414123123",400, 
-              "Kriminalroman", "Coward-McCann (United States)", 
+                "123414123123",
+                400, "Kriminalroman", "Coward-McCann (United States)", 
            "", "försavnn"));
         when(qm.getRemovedBooks()).thenReturn(databaseServiceImp.getRemovedBooks());
         
@@ -226,8 +226,15 @@ public class JDBCDatabaseServiceImpIT {
         Guest g = databaseServiceImp.findGuestByMail(anyString());
         assertEquals(g.getId(), guest.getId());
         verify(qm, times(1)).findGuestByMail(anyString());
-    }
+    }    
     
+    @Test
+    public void addSeminar() {
+        
+        Seminar seminar = new Seminar();
+        databaseServiceImp.addSeminar(seminar);
+        verify(qm, times(1)).addSeminar(any());
+    }
     @Test
     public void getBlockedCards() {
         
@@ -253,6 +260,7 @@ public class JDBCDatabaseServiceImpIT {
         assertEquals(1, retrieveList.get(0).getId());
         verify(qm, times(1)).findGuests();
     }
+    
     
     @Test
     public void findCategories() {
