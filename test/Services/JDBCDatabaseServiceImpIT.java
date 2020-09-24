@@ -79,7 +79,7 @@ public class JDBCDatabaseServiceImpIT {
     public void testIsPersonNumberTaken(){
         String personNumber = "200501155434";
         
-        when(databaseServiceMock.isPersonNumberTaken(personNumber)).thenReturn(true);
+        when(qm.isPersonNumberTaken(personNumber)).thenReturn(true);
         
         boolean actual = databaseServiceImp.isPersonNumberTaken(personNumber);
         
@@ -93,7 +93,7 @@ public class JDBCDatabaseServiceImpIT {
         value.add("");
         value.add("XXXXXXXXXXXX");
         
-        when(databaseServiceMock.getAllAdminPersonIds()).thenReturn(value);
+        when(qm.getAllAdminPersonIds()).thenReturn(value);
             
         ArrayList<String> actual = databaseServiceImp.getAllAdminPersonIds();
         
@@ -107,7 +107,7 @@ public class JDBCDatabaseServiceImpIT {
         value.add("");
         value.add("XXXXXXXXXXXX");
         
-        when(databaseServiceMock.getAllLibrariansIds()).thenReturn(value);
+        when(qm.getAllLibrariansIds()).thenReturn(value);
             
         ArrayList<String> actual = databaseServiceImp.getAllLibrariansIds();
         
@@ -121,7 +121,7 @@ public class JDBCDatabaseServiceImpIT {
         value.add("");
         value.add("XXXXXXXXXXXX");
         
-        when(databaseServiceMock.getAllGuestsIds()).thenReturn(value);
+        when(qm.getAllGuestsIds()).thenReturn(value);
             
         ArrayList<String> actual = databaseServiceImp.getAllGuestsIds();
         
@@ -132,7 +132,7 @@ public class JDBCDatabaseServiceImpIT {
     @Test
     public void testIsEmailTaken(){
         String email = "alfons.bolt@libsys.se";
-        when(databaseServiceMock.isEmailTaken(email)).thenReturn(true);
+        when(qm.isEmailTaken(email)).thenReturn(true);
         
         boolean actual = databaseServiceImp.isEmailTaken(email);
         
